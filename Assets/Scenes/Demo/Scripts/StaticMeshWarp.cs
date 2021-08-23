@@ -39,7 +39,7 @@ public class StaticMeshWarp : MonoBehaviour {
             1,
             2 * Mathf.PI / 10
             );
-        Debug.Log("tempPeriod: " + tempPeriod);
+        
         Vector3 tempWaveOffset = new Vector3(
                 tempPeriod.x / 2,
                 tempPeriod.y / 2,

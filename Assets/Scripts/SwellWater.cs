@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -14,145 +15,178 @@ public class Wave
     public float waveSpeedMultiplier = 1;
 }
 
-public class SwellWater : MonoBehaviour {
-
-    public List<MeshFilter> meshFilters = new List<MeshFilter>();
+public class SwellWater : MonoBehaviour
+{
+    public GameObject meshFilterGrid;
     public bool combineMeshes = false;
-    public List<MeshFilter> meshFiltersLowPoly = new List<MeshFilter>();
-    public MeshFilter mergedMeshFilter;
-
+    public List<MeshFilter> meshFiltersLowPoly;
+    private MeshFilter mergedMeshFilter;
+    public MeshFilter meshFilterPrefab;
+    public GameObject waterHorizon;
+    public bool usePositionAnchor = false;
     public GameObject positionAnchor;
     public Vector2 positionStep = Vector2.one;
-
     public bool animate = true;
-
     public Wave wave1;
     public Wave wave2;
-    
     public bool noise = false;
     public Vector2 noiseSpeed = Vector2.one;
     public Vector3 noiseScale = Vector3.one;
-
     public bool interpolate;
     public float interpolateSpeed = 1;
-    
-    // public algorythmMethod collisionMeshGeneration = algorythmMethod.fast;
-    // public float collisionMeshGenerationFrequency = 1; //in seconds
-    // float lastCollisionMeshGenerationTime = 0;
-
     public bool lowPolyNormals = false;
     public bool calculateNormals = false;
     public float calculateNormalsFrequency = 1; //in seconds
-    float lastCalculateNormalsTime = 0;
-    float[][] waterVertices;
-    float meshSize = 10;
-
-    float radius = 1.5f;
-
+    private float lastCalculateNormalsTime = 0;
+    public float gridDensity = 1;
+    private Dictionary<long, float> heightMapDict = new Dictionary<long, float>();
+    private float[][] heightMapArray;
+    private bool heightMapInitialized = false;
+    private List<MeshFilter> meshFilters;
     private List<List<int>> overlappingVectors;
-
-    // Use this for initialization
+    private float periodX;
+    private float periodY;
+    private Bounds meshBounds;
+    private Vector3 meshPosition;
+    private bool meshMoved = true;
+    private Vector3 currentPosition;
+    
     void Start ()
     {
-        int vertWidth = 11;
-        waterVertices = new float[meshFilters.Count * vertWidth][];
-        for (int i = 0; i < waterVertices.Length; i++)
+        meshFilters = meshFilterGrid.GetComponentsInChildren<MeshFilter>().ToList();
+
+        if (meshFilters.Count == 0 && meshFilterPrefab != null)
         {
-            waterVertices[i] = new float[meshFilters.Count * vertWidth];
+            int size = 10;
+            float extent = size / 2f;
+
+            Transform parrent = meshFilterGrid.transform;
+            for (float ix = -extent; ix < extent; ix++)
+            {
+                for (float iy = -extent; iy < extent; iy++)
+                { 
+                    MeshFilter meshFilter = Instantiate(meshFilterPrefab, parrent);
+                    meshFilter.gameObject.name = meshFilterPrefab.name;
+                    float width = meshFilter.mesh.bounds.size.x;
+                    float centerOffset = size % 2 == 0 ? width / 2 : width;
+                    meshFilter.transform.position = new Vector3(
+                        ix * width + centerOffset,
+                        0,
+                        iy * width + centerOffset
+                    );
+                    meshFilters.Add(meshFilter);
+                }
+            }
         }
+
+        StaticMeshWarp staticMeshWarp = waterHorizon.GetComponentInChildren<StaticMeshWarp>();
+        if (staticMeshWarp != null)
+        {
+            MeshFilter newMeshFilter = Instantiate(meshFilterPrefab, staticMeshWarp.transform.parent);
+            newMeshFilter.name = staticMeshWarp.name;
+            newMeshFilter.transform.position = staticMeshWarp.transform.position;
+            newMeshFilter.transform.rotation = staticMeshWarp.transform.rotation;
+            newMeshFilter.transform.localScale = staticMeshWarp.transform.localScale;
+            StaticMeshWarp newStaticMeshWarp = newMeshFilter.gameObject.AddComponent<StaticMeshWarp>();
+            newStaticMeshWarp.meshFilter = newMeshFilter;
+            newStaticMeshWarp.scale = staticMeshWarp.scale;
+            newStaticMeshWarp.offset = staticMeshWarp.offset;
+            
+            Destroy(staticMeshWarp.gameObject);
+        }
+        
+        int vertWidth = 11;
+        heightMapArray = new float[meshFilters.Count * vertWidth][];
+        for (int i = 0; i < heightMapArray.Length; i++)
+        {
+            heightMapArray[i] = new float[meshFilters.Count * vertWidth];
+        }
+        
+        periodX = (2 * Mathf.PI / (10 * transform.lossyScale.x));
+        periodY = (2 * Mathf.PI / (10 * transform.lossyScale.z));
 
         if (combineMeshes)
         {
-            CombineMeshes(); //Needs work. Messes up the texture and animations
-
-            // for (int j = 0; j < meshFilters.Count; ++j)
-            // {
-            //     if (calculateNormals)
-            //     {
-            //         MeshFilter filter = meshFilters[j];
-            //         Mesh mesh = filter.mesh;
-            //
-            //         Vector3[] oldVerts = mesh.vertices;
-            //         int[] triangles = mesh.triangles;
-            //         Vector3[] vertices = new Vector3[triangles.Length];
-            //         for (int i = 0; i < triangles.Length; i++)
-            //         {
-            //             vertices[i] = oldVerts[triangles[i]];
-            //             triangles[i] = i;
-            //         }
-            //         mesh.vertices = vertices;
-            //         mesh.triangles = triangles;
-            //     }
-            // }
+            CombineMeshes();
         }
 
-        if (calculateNormals && lowPolyNormals)
+        if (calculateNormals && lowPolyNormals && meshFilters.Count > 0)
         {
             meshFiltersLowPoly = new List<MeshFilter>(meshFilters);
-            
+
+            Transform parrent = meshFilterGrid.transform;
             for (int i = 0; i < meshFilters.Count; ++i)
             {
-                meshFiltersLowPoly[i] = Instantiate(meshFilters[i], transform);
+                meshFiltersLowPoly[i] = Instantiate(meshFilters[i], parrent);
+                meshFiltersLowPoly[i].gameObject.name = meshFilters[i].name;
                 meshFiltersLowPoly[i].transform.position = meshFilters[i].transform.position;
                 meshFilters[i].GetComponent<MeshRenderer>().enabled = false;
-                // meshFilters[i].gameObject.SetActive(false);
                 Destroy(meshFilters[i].gameObject);
-                // meshFilters[i] = meshFiltersLowPoly[i];
             }
 
             meshFilters = meshFiltersLowPoly;
-            // meshFiltersLowPoly = meshFilters;
         }
     }
 
     void Update()
     {
-        if (positionAnchor)
+        if (usePositionAnchor && positionAnchor)
         {
-            //Cant do this because of wave interpolation. Need to move edge meshes around instead
-            Vector3 newPosition = positionAnchor.transform.position;
-            newPosition.y = transform.position.y;
-            newPosition.x = newPosition.x - newPosition.x % 10 - 50;
-            newPosition.z = newPosition.z - newPosition.z % 10 - 50;
-            transform.position = newPosition;
-        }
-        
-        Vector3 lockedPosition = transform.position;
+            Vector3 anchor = positionAnchor.transform.position;
 
-        if (lockedPosition.x % positionStep.x != 0 || lockedPosition.z % positionStep.y != 0)
-        {
-            Debug.Log("Position updated");
-        
-            lockedPosition.x = lockedPosition.x - lockedPosition.x % positionStep.x;
-            lockedPosition.z = lockedPosition.z - lockedPosition.z % positionStep.y;
-
-            transform.position = lockedPosition;
+            Vector3 newWaterPosition = new Vector3(
+                anchor.x - anchor.x % 10 - 50,
+                transform.position.y,
+                anchor.z - anchor.z % 10 - 50
+            );
+            if (transform.position != newWaterPosition)
+            {               
+                transform.position = newWaterPosition;
+                meshMoved = true;
+                UpdateWater();
+                UpdateMeshBoundsAndNormals();
+            }
             
-            if (animate)
+            if (waterHorizon)
             {
-                bool savedInterpolate = interpolate;
-                interpolate = false;
-                AddWaves();
-                interpolate = savedInterpolate;
+                waterHorizon.transform.position = new Vector3(
+                    anchor.x,
+                    waterHorizon.transform.position.y,
+                    anchor.z
+                ); 
             }
         }
+        
+        UpdateWater();
     }
 	
-	// Update is called once per frame
 	void FixedUpdate ()
     {
+        currentPosition = transform.position;
+
+        UpdateWater();
+    }
+
+    void UpdateWater()
+    {   
         if (animate)
         {
-            AddWaves();
+            UpdateWaves();
+            UpdateHeightMap();
+            UpdateMeshes();
+            UpdateMeshBoundsAndNormals();
         }
     }
 
     void CombineMeshes()
     {
         GameObject mergedMeshFilterGameObject;
-        if (mergedMeshFilter)
+        if (meshFilterPrefab != null)
         {
+            mergedMeshFilter = Instantiate(meshFilterPrefab);
+            mergedMeshFilter.gameObject.name = meshFilterPrefab.name;
             mergedMeshFilterGameObject = mergedMeshFilter.gameObject;
+            mergedMeshFilterGameObject.transform.SetParent(transform);
             mergedMeshFilterGameObject.SetActive(true);
         }
         else
@@ -160,8 +194,8 @@ public class SwellWater : MonoBehaviour {
             mergedMeshFilterGameObject = new GameObject("Merged Water Mesh", typeof(MeshFilter), typeof(MeshRenderer));
             mergedMeshFilterGameObject.transform.SetParent(gameObject.transform);
             mergedMeshFilterGameObject.GetComponent<MeshRenderer>().material = meshFilters[0].gameObject.GetComponent<MeshRenderer>().material;
+            mergedMeshFilter = mergedMeshFilterGameObject.GetComponent<MeshFilter>();
         }
-        mergedMeshFilter = mergedMeshFilterGameObject.GetComponent<MeshFilter>();
         mergedMeshFilter.mesh.Clear();
 
         CombineInstance[] combine = new CombineInstance[meshFilters.Count];
@@ -170,35 +204,23 @@ public class SwellWater : MonoBehaviour {
         {
             combine[meshIndex].mesh = meshFilters[meshIndex].sharedMesh;
             combine[meshIndex].transform = meshFilters[meshIndex].transform.localToWorldMatrix;
-            //meshFilters[meshIndex].gameObject.SetActive(false);
             Destroy(meshFilters[meshIndex].gameObject);
             meshIndex--;
         }
         meshFilters.Clear();
         meshFilters.Add(mergedMeshFilter);
 
-        mergedMeshFilter.mesh.CombineMeshes(combine, true, true, false);
-        // mergedMeshFilter.mesh.CombineMeshes(combine, false, false);
-        // triMeshMerged.mesh.CombineMeshes(combine, true, true, false);
-        // triMeshSplit.mesh.CombineMeshes(combine, true, true, false);
+        mergedMeshFilter.mesh.CombineMeshes(combine);
 
         Vector3[] verts = mergedMeshFilter.mesh.vertices;
-        int[] tris = mergedMeshFilter.mesh.triangles;
-        Vector2[] uvs = mergedMeshFilter.mesh.uv;
-        Vector3[] normals = mergedMeshFilter.mesh.normals;
 
         bool[] vertOverlaps = new bool[verts.Length];
-        
-        // AutoWeld(mergedMeshFilter.mesh, .1f);
-        
-        // int[,] overlappingVectors = new int[verts.Length, 4];
         overlappingVectors = new List<List<int>>();
 
         for (int vertIndex1 = 0; vertIndex1 < verts.Length; vertIndex1++)
         {
             Vector3 vert1 = verts[vertIndex1];
             List<int> tempOverlappingVectors = new List<int>();
-            // for (int vertIndex2 = 0; vertIndex2 < verts.Length; vertIndex2++)
             for (int vertIndex2 = vertIndex1 + 1; vertIndex2 < verts.Length; vertIndex2++)
             {
                 Vector3 vert2 = verts[vertIndex2];
@@ -213,169 +235,22 @@ public class SwellWater : MonoBehaviour {
                         }
                         tempOverlappingVectors.Add(vertIndex2);
                         vertOverlaps[vertIndex2] = true;
-                        
-                        for (int triIndex = 0; triIndex < tris.Length; triIndex++)
-                        {
-                            int triVertIndex = tris[triIndex];
-
-                            if (triVertIndex == vertIndex2)
-                            {
-                                // tris[triIndex] = vertIndex1;
-                            }
-                        }
-
-                        // verts[vertIndex2] = verts[vertIndex1];
                     }
                 }
             }
             
             overlappingVectors.Add(tempOverlappingVectors);
         }
-
-        // triMeshMerged.mesh.triangles = tris;
-        // triMeshSplit.mesh.triangles = mergedMeshFilter.mesh.triangles;
-
-        // mergedMeshFilter.mesh.vertices = verts;
-        
-        // mergedMeshFilter.mesh.triangles = triMeshMerged.mesh.triangles;
-        
-        mergedMeshFilter.mesh.RecalculateBounds();
-        mergedMeshFilter.mesh.RecalculateNormals();
-        
-        Vector3[] tempNormals = mergedMeshFilter.mesh.normals;
-        foreach (List<int> overlappingVector in overlappingVectors)
-        {
-            // Vector3[] overlappingNormals = new Vector3[overlappingVector.Count];
-            Vector3 normalsAveraged = new Vector3();
-            for (int i = 0; i < overlappingVector.Count; i++)
-            {
-                int vectorIndex = overlappingVector[i];
-                // overlappingNormals[i] = mergedMeshFilter.mesh.normals[vectorIndex];
-                normalsAveraged += tempNormals[vectorIndex];
-            }
-            normalsAveraged /= overlappingVector.Count;
-            
-            for (int i = 0; i < overlappingVector.Count; i++)
-            {
-                int vectorIndex = overlappingVector[i];
-                tempNormals[vectorIndex] = normalsAveraged;
-            }
-        }
-        mergedMeshFilter.mesh.normals = tempNormals;
-
-        // mergedMeshFilter.mesh.triangles = triMeshSplit.mesh.triangles;
-
-        // Vector3[] oldVerts = mergedMeshFilter.mesh.vertices;
-        // int[] oldTris = mergedMeshFilter.mesh.triangles;
-        // Vector2[] oldUvs = mergedMeshFilter.mesh.uv;
-        //
-        // int[] indexMap = new int[oldVerts.Length];
-        //
-        // int[] newVerts = new int[oldVerts.Length];
-        // int[] newTris = new int[oldTris.Length];
-        // // Vector2[] uvs = mergedMeshFilter.mesh.uv;
-
-        // AutoWeld(mergedMeshFilter.mesh, .1f);
-
-        // int newVertIndex = 0;
-        // for (int vertIndex1 = 0; vertIndex1 < oldVerts.Length; vertIndex1++)
-        // {
-        //     Vector3 oldVert1 = oldVerts[vertIndex1];
-        //     for (int vertIndex2 = vertIndex1 + 1; vertIndex2 < oldVerts.Length; vertIndex2++)
-        //         // for (int vertIndex2 = vertIndex1 + 1; vertIndex2 < verts.Length; vertIndex2++)
-        //     {
-        //         Vector3 oldVert2 = oldVerts[vertIndex2];
-        //
-        //         if (oldVert1.x == oldVert2.x &&
-        //             //vert1.y == vert2.y &&
-        //             oldVert1.z == oldVert2.z)
-        //         {
-        //             if (!vertUsed[vertIndex1] && !vertUsed[vertIndex2])
-        //             {
-        //                 newVerts[newVertIndex] = oldVerts[vertIndex1];
-        //                 indexMap[vertIndex1] = newVertIndex;
-        //                 indexMap[vertIndex2] = newVertIndex;
-        //                 // uvs[vertIndex2] = uvs[vertIndex1];
-        //
-        //                 newVertIndex++;
-        //
-        //                 vertUsed[vertIndex2] = true;
-        //             }
-        //         }
-        //     }
-        //     
-        //     for (int triIndex = 0; triIndex < oldTris.Length; triIndex++)
-        //     {
-        //         int triOldVertIndex = oldTris[triIndex];
-        //         
-        //         newTris[triIndex] = indexMap[triOldVertIndex];
-        //
-        //         // if (triOldVertIndex == vertIndex2)
-        //         // {
-        //         //     tris[triIndex] = vertIndex1;
-        //         // }
-        //     }
-        // }
-        //
-        // mergedMeshFilter.mesh.triangles = newTris;
-        // mergedMeshFilter.mesh.vertices = newVerts;
-        // // mergedMeshFilter.mesh.uv = uvs;
-        // mergedMeshFilter.mesh.RecalculateBounds();
-        // mergedMeshFilter.mesh.RecalculateNormals();
-    }
-    
-    private void AutoWeld(Mesh mesh, float threshold) {
-        Vector3[] verts = mesh.vertices;
-         
-        // Build new vertex buffer and remove "duplicate" verticies
-        // that are within the given threshold.
-        List<Vector3> newVerts = new List<Vector3>();
-        List<Vector2> newUVs = new List<Vector2>();
-         
-        int k = 0;
-         
-        foreach (Vector3 vert in verts) {
-            // Has vertex already been added to newVerts list?
-            foreach (Vector3 newVert in newVerts)
-                if (Vector3.Distance(newVert, vert) <= threshold)
-                    goto skipToNext;
-             
-            // Accept new vertex!
-            newVerts.Add(vert);
-            newUVs.Add(mesh.uv[k]);
-             
-            skipToNext:;
-            ++k;
-        }
-         
-        // Rebuild triangles using new verticies
-        int[] tris = mesh.triangles;
-        for (int i = 0; i < tris.Length; ++i) {
-            // Find new vertex point from buffer
-            for (int j = 0; j < newVerts.Count; ++j) {
-                if (Vector3.Distance(newVerts[j], verts[ tris[i] ]) <= threshold) {
-                    tris[i] = j;
-                    break;
-                }
-            }
-        }
-         
-        // Update mesh!
-        mesh.Clear();
-        mesh.vertices = newVerts.ToArray();
-        mesh.triangles = tris;
-        mesh.uv = newUVs.ToArray();
-        mesh.RecalculateBounds();
     }
 
     public float GetWaterHeight(Vector3 position)
     {
-        Vector3 positionOffset = position - transform.position;
+        Vector3 positionOffset = position - currentPosition;
 
-        float cc = waterVertices[Mathf.CeilToInt(positionOffset.x)][Mathf.CeilToInt(positionOffset.z)];
-        float ff = waterVertices[Mathf.FloorToInt(positionOffset.x)][Mathf.FloorToInt(positionOffset.z)];
-        float cf = waterVertices[Mathf.CeilToInt(positionOffset.x)][Mathf.FloorToInt(positionOffset.z)];
-        float fc = waterVertices[Mathf.FloorToInt(positionOffset.x)][Mathf.CeilToInt(positionOffset.z)];
+        float cc = GetHeight(Mathf.CeilToInt(position.x), Mathf.CeilToInt(position.z));
+        float ff = GetHeight(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.z));
+        float cf = GetHeight(Mathf.CeilToInt(position.x), Mathf.FloorToInt(position.z));
+        float fc = GetHeight(Mathf.FloorToInt(position.x), Mathf.CeilToInt(position.z));
 
         float ratioX = positionOffset.x - Mathf.FloorToInt(positionOffset.x);
         float ratioZ = positionOffset.z - Mathf.FloorToInt(positionOffset.z);
@@ -389,76 +264,205 @@ public class SwellWater : MonoBehaviour {
 
     public float GetWaterHeightOptimized(Vector3 position)
     {
-        Vector3 positionOffset = position - transform.position;
-
-        float waterHeight = waterVertices[Mathf.CeilToInt(positionOffset.x)][Mathf.CeilToInt(positionOffset.z)];
-        
-        return waterHeight;
+        return GetHeight(Mathf.CeilToInt(position.x), Mathf.CeilToInt(position.z));
     }
 
-    void AddWaves()
+    public float GetHeight(float xPosition, float yPosition, bool calculate=true)
     {
+        float height = 0;
+        
+        int xi = (int)((xPosition - currentPosition.x) * gridDensity + 1);
+        int yi = (int)((yPosition - currentPosition.z) * gridDensity + 1);
+
+        if (xi > 0 && xi < heightMapArray.Length && yi > 0 && yi < heightMapArray[xi].Length)
+        {
+            height = heightMapArray[xi][yi];
+        }
+        else
+        {
+            //Debug.LogWarning(xi + ", " + yi + " out of bounds of heightMapArray.");
+
+            if (calculate)
+            {
+                var key = PositionToHeightKey(xPosition, yPosition);
+                
+                if (!heightMapDict.TryGetValue(key, out height))
+                {
+                    if (calculate)
+                    {
+                        height = CalculateHeight(xPosition, yPosition);
+                    } 
+                    else 
+                    {
+                        height = 0;
+                    }
+                }
+            }
+        }
+        
+        // Coded to use height map for everything! TIS TOO SLOW!
+        // if (!heightMapInitialized)
+        // {
+        //     return 0;
+        // }
+        //
+        // var key = PositionToHeightKey(xPosition, yPosition);
+
+        //return heightMapDict[key];
+
+        // DIS SLOW :(
+        // if (!heightMapDict.TryGetValue(key, out float height))
+        // {
+        //     if (calculate)
+        //     {
+        //         height = CalculateHeight(xPosition, yPosition);
+        //     } 
+        //     else 
+        //     {
+        //         height = 0;
+        //     }
+        // }
+        
+        return height;
+    }
+
+    public void SetHeight(float xPosition, float yPosition, float height)
+    {
+        // Coded to use height map for everything! TIS TOO SLOW!
+        // var key = PositionToHeightKey(xPosition, yPosition);
+        // heightMapDict[key] = height;
+
+        int xi = PositionToIndex(xPosition, currentPosition.x);
+        int yi = PositionToIndex(yPosition, currentPosition.z);
+        heightMapArray[xi][yi] = height;
+    }
+
+    long PositionToHeightKey(float xPosition, float yPosition)
+    {
+        //Szudzik's pairing function
+        //https://stackoverflow.com/questions/919612/mapping-two-integers-to-one-in-a-unique-and-deterministic-way
+
+        int x = PositionToGrid(xPosition);
+        int y = PositionToGrid(yPosition);
+        
+        var A = (ulong)(x >= 0 ? 2 * (long)x : -2 * (long)x - 1);
+        var B = (ulong)(y >= 0 ? 2 * (long)y : -2 * (long)y - 1);
+        var C = (long)((A >= B ? A * A + A + B : A + B * B) / 2);
+        return x < 0 && y < 0 || x >= 0 && y >= 0 ? C : -C - 1;
+        
+        // return (int)(xPosition * gridDensity + 1) + 1000 * (int)(yPosition * gridDensity + 1);
+    }
+
+    int PositionToIndex(float position, float parrentPosition)
+    {
+        return (int) ((position - parrentPosition) * gridDensity + 1);
+    }
+    
+    int PositionToGrid(float value)
+    {
+        return (int)(value * gridDensity) + 1;
+    }
+
+    float CalculateHeight(float xPosition, float yPosition, float previousHeight = float.NaN)
+    {
+        int x = PositionToGrid(xPosition);
+        int y = PositionToGrid(yPosition);
+        
+        Vector2 noiseSpeedByTime = Time.time * noiseSpeed;
+        Vector3 noiseScaleMultiplier = new Vector3(
+            .1f * noiseScale.x,
+            .1f * noiseScale.y,
+            noiseScale.z 
+        );
+        float noiseOffset = Mathf.PerlinNoise(
+            x * noiseScaleMultiplier.x + noiseSpeedByTime.x, 
+            y * noiseScaleMultiplier.y + noiseSpeedByTime.y
+        ) * noiseScaleMultiplier.z;
+
+        if (!noise)
+        {
+            noiseOffset = 0;
+        }
+
+        float wave1Height = (
+            Mathf.Sin((x * wave1.waveScale.x + wave1.waveOffset.x) * periodX) *
+            Mathf.Sin((y * wave1.waveScale.z + wave1.waveOffset.z) * periodY)
+        ) * (wave1.enabled ? wave1.waveScale.y : 0) + wave1.waveOffset.y;
+
+        float wave2Height = (
+            Mathf.Sin((x * wave2.waveScale.x + wave2.waveOffset.x) * periodX) *
+            Mathf.Sin((y * wave2.waveScale.z + wave2.waveOffset.z) * periodY)
+        ) * (wave2.enabled ? wave2.waveScale.y : 0) + wave2.waveOffset.y;
+
+        float combinedHeight = wave1Height + wave2Height + noiseOffset;
+
+        float waveHeight = combinedHeight;
+        if (interpolate && previousHeight != float.NaN)
+        {
+            float change = Mathf.Abs(previousHeight - combinedHeight);
+            float interpolatedHeight = Mathf.MoveTowards(previousHeight, combinedHeight, Time.deltaTime * change * interpolateSpeed);
+            waveHeight = interpolatedHeight;
+        }
+
+        return waveHeight;
+    }
+
+    void UpdateWaves()
+    {
+        wave1.waveOffset = new Vector3(Time.time * wave1.waveSpeedMultiplier, 0, Time.time * wave1.waveSpeedMultiplier);
+        wave2.waveOffset = new Vector3(Time.time * wave2.waveSpeedMultiplier, 0, Time.time * wave2.waveSpeedMultiplier);
+    }
+
+    void UpdateHeightMap()
+    {
+        if (meshFilters.Count > 0)
+        {
+            if (meshMoved)
+            {
+                meshPosition = currentPosition + new Vector3(50, 0, 50);
+                meshBounds = meshFilters[0].mesh.bounds;
+                for (int i = 0; i < meshFilters.Count; ++i)
+                {
+                    Bounds singleMeshBounds = meshFilters[i].mesh.bounds;
+                    singleMeshBounds.center = meshFilters[i].transform.position;
+                    meshBounds.Encapsulate(singleMeshBounds);
+                }
+            }
+
+            for (float x = meshBounds.min.x + meshPosition.x; x <= meshBounds.max.x + meshPosition.x; x += 1 / gridDensity)
+            {
+                for (float z = meshBounds.min.z + meshPosition.z; z <= meshBounds.max.z + meshPosition.z; z += 1 / gridDensity)
+                {
+                    // float currentHeight = GetHeight(x, z, false);
+                    // float newHeight = CalculateHeight(x, z, currentHeight);
+                    float newHeight = CalculateHeight(x, z);
+                    SetHeight(x, z, newHeight);
+                }
+            }
+        }
+        
+        heightMapInitialized = true;
+    }
+
+    void UpdateMeshes()
+    {
+        // Alternative to calling transformPoint on ever point. This only works without scale
+        // Vector3 startPosition = meshFilters[0].mesh.vertices[0];
+        // Vector3 positionChange = startPosition - transform.TransformPoint(startPosition);
+        
         for (int j = 0; j < meshFilters.Count; ++j)
         {
             MeshFilter filter = meshFilters[j];
             Mesh mesh = filter.mesh;
             Vector3[] vertices = mesh.vertices;
-
-            wave1.waveOffset = new Vector3(Time.time * wave1.waveSpeedMultiplier, 0, Time.time * wave1.waveSpeedMultiplier);
-            wave2.waveOffset = new Vector3(Time.time * wave2.waveSpeedMultiplier, 0, Time.time * wave2.waveSpeedMultiplier);
-            float periodX = (2 * Mathf.PI / (10 * transform.lossyScale.x));
-            float periodY = (2 * Mathf.PI / (10 * transform.lossyScale.z));
-
-            if (!wave1.enabled)
-            {
-                wave1.waveScale.y = 0;
-            }
-
-            if (!wave2.enabled)
-            {
-                wave2.waveScale.y = 0;
-            }
-
+            
             for (int i = 0; i < vertices.Length; ++i)
             {
                 Vector3 v = filter.transform.TransformPoint(vertices[i]);
+                // Vector3 v = vertices[i] - currentPosition;
 
-                Vector2 noiseSpeedByTime = Time.time * noiseSpeed;
-                Vector3 noiseScaleMultiplier = new Vector3(
-                    .1f * noiseScale.x,
-                    .1f * noiseScale.y,
-                    noiseScale.z 
-                    );
-                float noiseOffset = Mathf.PerlinNoise(
-                    v.x * noiseScaleMultiplier.x + noiseSpeedByTime.x, 
-                    v.z * noiseScaleMultiplier.y + noiseSpeedByTime.y
-                ) * noiseScaleMultiplier.z;
-
-                if (!noise)
-                {
-                    noiseOffset = 0;
-                }
-
-                float wave1Height = (
-                    Mathf.Sin((v.x * wave1.waveScale.x + wave1.waveOffset.x) * periodX) *
-                    Mathf.Sin((v.z * wave1.waveScale.z + wave1.waveOffset.z) * periodY)
-                    ) * wave1.waveScale.y + wave1.waveOffset.y;
-
-                float wave2Height = (
-                    Mathf.Sin((v.x * wave2.waveScale.x + wave2.waveOffset.x) * periodX) *
-                    Mathf.Sin((v.z * wave2.waveScale.z + wave2.waveOffset.z) * periodY)
-                    ) * wave2.waveScale.y + wave2.waveOffset.y;
-
-                float combinedHeight = wave1Height + wave2Height + noiseOffset;
-
-
-                float waveHeight = combinedHeight;
-                if (interpolate)
-                {
-                    float change = Mathf.Abs(vertices[i].y - combinedHeight);
-                    float interpolatedHeight = Mathf.MoveTowards(vertices[i].y, combinedHeight, Time.deltaTime * change * interpolateSpeed);
-                    waveHeight = interpolatedHeight;
-                }
+                // float waveHeight = CalculateHeight(v.x, v.z, vertices[i].y);
+                float waveHeight = GetHeight(v.x, v.z, false);
 
                 vertices[i] = new Vector3(
                     vertices[i].x,
@@ -466,13 +470,23 @@ public class SwellWater : MonoBehaviour {
                     vertices[i].z
                 );
 
-                int meshIndexX = Mathf.CeilToInt(filter.transform.position.x - transform.position.x);
-                int meshIndexZ = Mathf.CeilToInt(filter.transform.position.z - transform.position.z);
-
-                int vertXi = Mathf.CeilToInt(meshIndexX + vertices[i].x);
-                int vertZi = Mathf.CeilToInt(meshIndexZ + vertices[i].z);
-
-                waterVertices[vertXi][vertZi] = waveHeight;
+                // int meshIndexX = Mathf.CeilToInt(filter.transform.position.x - transform.position.x);
+                // int meshIndexZ = Mathf.CeilToInt(filter.transform.position.z - transform.position.z);
+                //
+                // int vertXi = Mathf.CeilToInt(meshIndexX + vertices[i].x);
+                // int vertZi = Mathf.CeilToInt(meshIndexZ + vertices[i].z);
+                //
+                // waterVertices[vertXi][vertZi] = waveHeight;
+                
+                // int meshIndexX = Mathf.CeilToInt(filter.transform.position.x - transform.position.x);
+                // int meshIndexZ = Mathf.CeilToInt(filter.transform.position.z - transform.position.z);
+                //
+                // int vertXi = meshIndexX + (int)vertices[i].x;
+                // int vertZi = meshIndexZ + (int)vertices[i].x;
+                //
+                // waterVertices[vertXi][vertZi] = waveHeight;
+                
+                // SetHeight(vertices[i].x, vertices[i].z, waveHeight);
             }
 
             mesh.vertices = vertices;
@@ -541,12 +555,12 @@ public class SwellWater : MonoBehaviour {
                             }
 
                             meshLowPoly.vertices = verts2;
-                            // meshLowPoly.uv = uv2;
+                            meshLowPoly.uv = uv2;
                             meshLowPoly.tangents = tang2;
                             meshLowPoly.normals = normal2;
                             meshLowPoly.triangles = tris2;
 
-                            meshLowPoly.RecalculateBounds();
+                            // meshLowPoly.RecalculateBounds();
 
                             // Begin Function CalculateSurfaceNormal (Input Triangle) Returns Vector
                             //
@@ -559,77 +573,125 @@ public class SwellWater : MonoBehaviour {
                             //
                             // Returning Normal
                         }
-                        
-                        meshLowPoly.RecalculateNormals();
                     }
                     else
                     {
-                        // mergedMeshFilter.mesh.triangles = triMeshMerged.mesh.triangles;
-                        mergedMeshFilter.mesh.RecalculateBounds();
-                        mergedMeshFilter.mesh.RecalculateNormals();
-                        // mergedMeshFilter.mesh.triangles = triMeshSplit.mesh.triangles;
-                        
-                        Vector3[] tempNormals = mergedMeshFilter.mesh.normals;
-                        foreach (List<int> overlappingVector in overlappingVectors)
+                        if (overlappingVectors != null && overlappingVectors.Count > 0)
                         {
-                            // Vector3[] overlappingNormals = new Vector3[overlappingVector.Count];
-                            Vector3 normalsAveraged = new Vector3();
-                            for (int i = 0; i < overlappingVector.Count; i++)
+                            Vector3[] tempNormals = mergedMeshFilter.mesh.normals;
+                            foreach (List<int> overlappingVector in overlappingVectors)
                             {
-                                int vectorIndex = overlappingVector[i];
-                                // overlappingNormals[i] = mergedMeshFilter.mesh.normals[vectorIndex];
-                                normalsAveraged += tempNormals[vectorIndex];
+                                Vector3 normalsAveraged = new Vector3();
+                                for (int i = 0; i < overlappingVector.Count; i++)
+                                {
+                                    int vectorIndex = overlappingVector[i];
+                                    normalsAveraged += tempNormals[vectorIndex];
+                                }
+
+                                normalsAveraged /= overlappingVector.Count;
+
+                                for (int i = 0; i < overlappingVector.Count; i++)
+                                {
+                                    int vectorIndex = overlappingVector[i];
+                                    tempNormals[vectorIndex] = normalsAveraged;
+                                }
                             }
-                            normalsAveraged /= overlappingVector.Count;
-            
-                            for (int i = 0; i < overlappingVector.Count; i++)
-                            {
-                                int vectorIndex = overlappingVector[i];
-                                tempNormals[vectorIndex] = normalsAveraged;
-                            }
+
+                            mergedMeshFilter.mesh.normals = tempNormals;
                         }
-                        mergedMeshFilter.mesh.normals = tempNormals;
                     }
                 }
             }
         }
-
-        //transform.gameObject.active = true;
     }
-
-    void ModifyMesh(Vector3 displacement, Vector3 center)
+    
+    void UpdateMeshBoundsAndNormals()
     {
-        foreach (var filter in meshFilters)
+        if (mergedMeshFilter && combineMeshes)
         {
-            Mesh mesh = filter.mesh;
-            Vector3[] vertices = mesh.vertices;
-
-            for (int i = 0; i < vertices.Length; ++i)
+            mergedMeshFilter.mesh.RecalculateBounds();
+            if (calculateNormals)
             {
-                Vector3 v = filter.transform.TransformPoint(vertices[i]);
-                vertices[i] = vertices[i] + displacement * Gaussian(v, center, radius);
+                mergedMeshFilter.mesh.RecalculateNormals();
+                
+                // For all overlapping edges take the normals and average them together
+                Vector3[] tempNormals = mergedMeshFilter.mesh.normals;
+                foreach (List<int> overlappingVector in overlappingVectors)
+                {
+                    Vector3 normalsAveraged = new Vector3();
+                    for (int i = 0; i < overlappingVector.Count; i++)
+                    {
+                        int vectorIndex = overlappingVector[i];
+                        normalsAveraged += tempNormals[vectorIndex];
+                    }
+                    normalsAveraged /= overlappingVector.Count;
+            
+                    for (int i = 0; i < overlappingVector.Count; i++)
+                    {
+                        int vectorIndex = overlappingVector[i];
+                        tempNormals[vectorIndex] = normalsAveraged;
+                    }
+                }
+                mergedMeshFilter.mesh.normals = tempNormals;
             }
-
-            mesh.vertices = vertices;
-            mesh.RecalculateBounds();
-
-            // var col = filter.GetComponent<MeshCollider>();
-            // if (col != null)
-            // {
-            //     var colliMesh = new Mesh();
-            //     colliMesh.vertices = mesh.vertices;
-            //     colliMesh.triangles = mesh.triangles;
-            //     col.sharedMesh = colliMesh;
-            // }
+        }
+        else if (meshFiltersLowPoly != null && meshFiltersLowPoly.Count > 0 && lowPolyNormals)
+        {
+            foreach (MeshFilter meshFilter in meshFiltersLowPoly)
+            {
+                meshFilter.mesh.RecalculateBounds();
+                if (calculateNormals)
+                {
+                    meshFilter.mesh.RecalculateNormals();
+                }
+            }
+        }
+        else
+        {
+            foreach (MeshFilter meshFilter in meshFilters)
+            {
+                meshFilter.mesh.RecalculateBounds();
+                if (calculateNormals)
+                {
+                    meshFilter.mesh.RecalculateNormals();
+                }
+            }
         }
     }
-
-    static float Gaussian(Vector3 pos, Vector3 mean, float dev)
+    
+    void OnDrawGizmos()
     {
-        float x = pos.x - mean.x;
-        float y = pos.y - mean.y;
-        float z = pos.z - mean.z;
-        float n = 1.0f / (2.0f * Mathf.PI * dev * dev);
-        return n * Mathf.Pow(2.718281828f, -(x * x + y * y + z * z) / (2.0f * dev * dev));
+        // float maxHeight = 4;
+        // float padingRatio = 1;
+        
+        // for (int ix = 0; ix < heightMapArray.Length; ix++)
+        // {
+        //     for (int iy = 0; iy < heightMapArray[ix].Length; iy++)
+        //     {
+        //         float height = heightMapArray[ix][iy];
+        //         float heightRatio = Mathf.Clamp(height / maxHeight, 0, 1);
+        //         Gizmos.color = new Color(
+        //             1 - heightRatio,
+        //             heightRatio,
+        //             0 
+        //         );
+        //         Gizmos.DrawSphere(new Vector3(ix, height, iy), .1f);
+        //     }
+        // }
+        
+        // for (float x = meshBounds.min.x + meshPosition.x; x <= meshBounds.max.x + meshPosition.x; x += 1 / gridDensity)
+        // {
+        //     for (float z = meshBounds.min.z + meshPosition.z; z <= meshBounds.max.z + meshPosition.z; z += 1 / gridDensity)
+        //     {
+        //         float height = GetHeight(x, z, false);
+        //         float heightRatio = Mathf.Clamp(height / maxHeight, 0, 1);
+        //         Gizmos.color = new Color(
+        //             1 - heightRatio,
+        //             heightRatio,
+        //             0
+        //         );
+        //         Gizmos.DrawSphere(new Vector3(x, height, z), .1f);
+        //     }
+        // }
     }
 }
