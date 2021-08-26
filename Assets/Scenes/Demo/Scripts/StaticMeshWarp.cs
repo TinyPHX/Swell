@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class StaticMeshWarp : MonoBehaviour {
 
     public MeshFilter meshFilter;
@@ -31,7 +30,7 @@ public class StaticMeshWarp : MonoBehaviour {
 
     void UpdateWarp()
     {
-        Mesh mesh = meshFilter.sharedMesh;
+        Mesh mesh = meshFilter.mesh;
         Vector3[] vertices = mesh.vertices;
 
         Vector3 tempPeriod = new Vector3(

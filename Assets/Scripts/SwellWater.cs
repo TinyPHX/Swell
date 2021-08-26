@@ -10,8 +10,9 @@ using Random = UnityEngine.Random;
 public class Wave
 {
     public bool enabled = true;
-    public Vector3 waveScale = new Vector3(1, 1, 1);
-    public Vector3 waveOffset = new Vector3(0, 0, 0);
+    public Vector2 waveScale = Vector2.one;
+    public Vector2 waveOffset = Vector2.one;
+    public float waveHeight;
     public float waveSpeedMultiplier = 1;
 }
 
@@ -26,12 +27,12 @@ public class SwellWater : MonoBehaviour
     public bool usePositionAnchor = false;
     public GameObject positionAnchor;
     public Vector2 positionStep = Vector2.one;
-    public bool animate = true;
     public Wave wave1;
     public Wave wave2;
     public bool noise = false;
     public Vector2 noiseSpeed = Vector2.one;
-    public Vector3 noiseScale = Vector3.one;
+    public Vector2 noiseScale = Vector3.one;
+    public float noiseHeight = 1;
     public bool interpolate;
     public float interpolateSpeed = 1;
     public bool lowPolyNormals = false;
@@ -40,6 +41,7 @@ public class SwellWater : MonoBehaviour
     private float lastCalculateNormalsTime = 0;
     public float gridDensity = 1;
     private Dictionary<long, float> heightMapDict = new Dictionary<long, float>();
+    public bool useHeightMapArray = true;
     private float[][] heightMapArray;
     private bool heightMapInitialized = false;
     private List<MeshFilter> meshFilters;
@@ -50,6 +52,10 @@ public class SwellWater : MonoBehaviour
     private Vector3 meshPosition;
     private bool meshMoved = true;
     private Vector3 currentPosition;
+
+    private int size = 10;
+    private int tileWidth = 10;
+    private float centerOffset;
     
     void Start ()
     {
@@ -67,8 +73,9 @@ public class SwellWater : MonoBehaviour
                 { 
                     MeshFilter meshFilter = Instantiate(meshFilterPrefab, parrent);
                     meshFilter.gameObject.name = meshFilterPrefab.name;
-                    float width = meshFilter.mesh.bounds.size.x;
-                    float centerOffset = size % 2 == 0 ? width / 2 : width;
+                    // float width = meshFilter.mesh.bounds.size.x;
+                    float width = tileWidth;
+                    centerOffset = size % 2 == 0 ? width / 2 : width;
                     meshFilter.transform.position = new Vector3(
                         ix * width + centerOffset,
                         0,
@@ -91,7 +98,10 @@ public class SwellWater : MonoBehaviour
             newStaticMeshWarp.meshFilter = newMeshFilter;
             newStaticMeshWarp.scale = staticMeshWarp.scale;
             newStaticMeshWarp.offset = staticMeshWarp.offset;
-            
+            // This is updating the shared materail for some reason :(
+            // Material staticMeshWarpMaterial = staticMeshWarp.GetComponent<MeshRenderer>().material;
+            // staticMeshWarpMaterial.mainTextureScale = new Vector2(100f, 100f);
+                
             Destroy(staticMeshWarp.gameObject);
         }
         
@@ -135,16 +145,14 @@ public class SwellWater : MonoBehaviour
             Vector3 anchor = positionAnchor.transform.position;
 
             Vector3 newWaterPosition = new Vector3(
-                anchor.x - anchor.x % 10 - 50,
+                anchor.x - anchor.x % 10,
                 transform.position.y,
-                anchor.z - anchor.z % 10 - 50
+                anchor.z - anchor.z % 10
             );
             if (transform.position != newWaterPosition)
             {               
                 transform.position = newWaterPosition;
                 meshMoved = true;
-                UpdateWater();
-                UpdateMeshBoundsAndNormals();
             }
             
             if (waterHorizon)
@@ -157,25 +165,17 @@ public class SwellWater : MonoBehaviour
             }
         }
         
-        UpdateWater();
-    }
-	
-	void FixedUpdate ()
-    {
         currentPosition = transform.position;
-
+        
         UpdateWater();
     }
-
+    
     void UpdateWater()
     {   
-        if (animate)
-        {
-            UpdateWaves();
-            UpdateHeightMap();
-            UpdateMeshes();
-            UpdateMeshBoundsAndNormals();
-        }
+        UpdateWaves();
+        UpdateHeightMap();
+        UpdateMeshes();
+        UpdateMeshBoundsAndNormals();
     }
 
     void CombineMeshes()
@@ -202,7 +202,7 @@ public class SwellWater : MonoBehaviour
         int meshIndex = meshFilters.Count -1;
         while (meshIndex >= 0)
         {
-            combine[meshIndex].mesh = meshFilters[meshIndex].sharedMesh;
+            combine[meshIndex].mesh = meshFilters[meshIndex].mesh;
             combine[meshIndex].transform = meshFilters[meshIndex].transform.localToWorldMatrix;
             Destroy(meshFilters[meshIndex].gameObject);
             meshIndex--;
@@ -270,71 +270,57 @@ public class SwellWater : MonoBehaviour
     public float GetHeight(float xPosition, float yPosition, bool calculate=true)
     {
         float height = 0;
-        
-        int xi = (int)((xPosition - currentPosition.x) * gridDensity + 1);
-        int yi = (int)((yPosition - currentPosition.z) * gridDensity + 1);
 
-        if (xi > 0 && xi < heightMapArray.Length && yi > 0 && yi < heightMapArray[xi].Length)
+        if (useHeightMapArray)
         {
-            height = heightMapArray[xi][yi];
-        }
-        else
-        {
-            //Debug.LogWarning(xi + ", " + yi + " out of bounds of heightMapArray.");
+            // Get height from height map array but fall back to calculating height and storing it in dictionary if 
+            // it's not in the bounds of the array. 
+            int xi = PositionToIndexX(xPosition);
+            int yi = PositionToIndexY(yPosition);
 
-            if (calculate)
+            if (xi >= 0 && xi < heightMapArray.Length && yi >= 0 && yi < heightMapArray[xi].Length)
+            {
+                height = heightMapArray[xi][yi];
+            }
+            else if (calculate)
             {
                 var key = PositionToHeightKey(xPosition, yPosition);
-                
+
                 if (!heightMapDict.TryGetValue(key, out height))
                 {
-                    if (calculate)
-                    {
-                        height = CalculateHeight(xPosition, yPosition);
-                    } 
-                    else 
-                    {
-                        height = 0;
-                    }
+                    height = CalculateHeight(xPosition, yPosition);
                 }
             }
         }
-        
-        // Coded to use height map for everything! TIS TOO SLOW!
-        // if (!heightMapInitialized)
-        // {
-        //     return 0;
-        // }
-        //
-        // var key = PositionToHeightKey(xPosition, yPosition);
+        else
+        {
+            var key = PositionToHeightKey(xPosition, yPosition);
 
-        //return heightMapDict[key];
-
-        // DIS SLOW :(
-        // if (!heightMapDict.TryGetValue(key, out float height))
-        // {
-        //     if (calculate)
-        //     {
-        //         height = CalculateHeight(xPosition, yPosition);
-        //     } 
-        //     else 
-        //     {
-        //         height = 0;
-        //     }
-        // }
+            if (!heightMapDict.TryGetValue(key, out height) && calculate)
+            {
+                height = CalculateHeight(xPosition, yPosition);
+            }
+        }
         
         return height;
     }
 
     public void SetHeight(float xPosition, float yPosition, float height)
     {
-        // Coded to use height map for everything! TIS TOO SLOW!
-        // var key = PositionToHeightKey(xPosition, yPosition);
-        // heightMapDict[key] = height;
-
-        int xi = PositionToIndex(xPosition, currentPosition.x);
-        int yi = PositionToIndex(yPosition, currentPosition.z);
-        heightMapArray[xi][yi] = height;
+        if (useHeightMapArray)
+        {
+            
+            int xi = PositionToIndexX(xPosition);
+            int yi = PositionToIndexY(yPosition);
+            
+            heightMapArray[xi][yi] = height;
+        }
+        else
+        {
+            var key = PositionToHeightKey(xPosition, yPosition);
+            heightMapDict[key] = height;
+        }
+        
     }
 
     long PositionToHeightKey(float xPosition, float yPosition)
@@ -342,28 +328,56 @@ public class SwellWater : MonoBehaviour
         //Szudzik's pairing function
         //https://stackoverflow.com/questions/919612/mapping-two-integers-to-one-in-a-unique-and-deterministic-way
 
-        int x = PositionToGrid(xPosition);
-        int y = PositionToGrid(yPosition);
+        int x = PositionToIndexX(xPosition);
+        int y = PositionToIndexY(yPosition);
         
         var A = (ulong)(x >= 0 ? 2 * (long)x : -2 * (long)x - 1);
         var B = (ulong)(y >= 0 ? 2 * (long)y : -2 * (long)y - 1);
         var C = (long)((A >= B ? A * A + A + B : A + B * B) / 2);
         return x < 0 && y < 0 || x >= 0 && y >= 0 ? C : -C - 1;
         
+        // Used this to debug optimizations. Can be deleted if you see it in the future and shit aint slow.
         // return (int)(xPosition * gridDensity + 1) + 1000 * (int)(yPosition * gridDensity + 1);
+    }
+
+    int PositionToIndexX(float positionX)
+    {
+        return PositionToIndex(positionX, currentPosition.x);
+    }
+
+    int PositionToIndexY(float positionY)
+    {
+        return PositionToIndex(positionY, currentPosition.z);
     }
 
     int PositionToIndex(float position, float parrentPosition)
     {
-        return (int) ((position - parrentPosition) * gridDensity + 1);
-    }
-    
-    int PositionToGrid(float value)
-    {
-        return (int)(value * gridDensity) + 1;
+        // return Mathf.RoundToInt((position + centerOffset * size - parrentPosition) * gridDensity + 1);
+        return (int) ((position + centerOffset * size - parrentPosition) * gridDensity + .5f);
     }
 
-    float CalculateHeight(float xPosition, float yPosition, float previousHeight = float.NaN)
+    float IndexToPositionX(int index)
+    {
+        return IndexToPosition(index, currentPosition.x);
+    }
+    
+    float IndexToPositionY(int index)
+    {
+        return IndexToPosition(index, currentPosition.z);
+    }
+    
+    float IndexToPosition(int index, float parrentPosition)
+    {
+        return (index - .5f) / gridDensity - centerOffset * size + parrentPosition;
+    }
+    
+    int PositionToGrid(float position)
+    {
+        // return (int)(value * gridDensity) + 1;
+        return (int)(position * gridDensity + 1);
+    }
+
+    float CalculateHeight(float xPosition, float yPosition)
     {
         int x = PositionToGrid(xPosition);
         int y = PositionToGrid(yPosition);
@@ -372,12 +386,12 @@ public class SwellWater : MonoBehaviour
         Vector3 noiseScaleMultiplier = new Vector3(
             .1f * noiseScale.x,
             .1f * noiseScale.y,
-            noiseScale.z 
+            noiseHeight
         );
         float noiseOffset = Mathf.PerlinNoise(
             x * noiseScaleMultiplier.x + noiseSpeedByTime.x, 
             y * noiseScaleMultiplier.y + noiseSpeedByTime.y
-        ) * noiseScaleMultiplier.z;
+        ) * noiseHeight;
 
         if (!noise)
         {
@@ -386,19 +400,20 @@ public class SwellWater : MonoBehaviour
 
         float wave1Height = (
             Mathf.Sin((x * wave1.waveScale.x + wave1.waveOffset.x) * periodX) *
-            Mathf.Sin((y * wave1.waveScale.z + wave1.waveOffset.z) * periodY)
-        ) * (wave1.enabled ? wave1.waveScale.y : 0) + wave1.waveOffset.y;
+            Mathf.Sin((y * wave1.waveScale.y + wave1.waveOffset.y) * periodY)
+        ) * (wave1.enabled ? wave1.waveHeight : 0);
 
         float wave2Height = (
             Mathf.Sin((x * wave2.waveScale.x + wave2.waveOffset.x) * periodX) *
-            Mathf.Sin((y * wave2.waveScale.z + wave2.waveOffset.z) * periodY)
-        ) * (wave2.enabled ? wave2.waveScale.y : 0) + wave2.waveOffset.y;
+            Mathf.Sin((y * wave2.waveScale.y + wave2.waveOffset.y) * periodY)
+        ) * (wave2.enabled ? wave2.waveHeight : 0);
 
         float combinedHeight = wave1Height + wave2Height + noiseOffset;
 
         float waveHeight = combinedHeight;
-        if (interpolate && previousHeight != float.NaN)
+        if (interpolate)
         {
+            float previousHeight = GetHeight(x, y, false);
             float change = Mathf.Abs(previousHeight - combinedHeight);
             float interpolatedHeight = Mathf.MoveTowards(previousHeight, combinedHeight, Time.deltaTime * change * interpolateSpeed);
             waveHeight = interpolatedHeight;
@@ -409,8 +424,8 @@ public class SwellWater : MonoBehaviour
 
     void UpdateWaves()
     {
-        wave1.waveOffset = new Vector3(Time.time * wave1.waveSpeedMultiplier, 0, Time.time * wave1.waveSpeedMultiplier);
-        wave2.waveOffset = new Vector3(Time.time * wave2.waveSpeedMultiplier, 0, Time.time * wave2.waveSpeedMultiplier);
+        wave1.waveOffset = new Vector2(Time.time * wave1.waveSpeedMultiplier, Time.time * wave1.waveSpeedMultiplier);
+        wave2.waveOffset = new Vector2(Time.time * wave2.waveSpeedMultiplier, Time.time * wave2.waveSpeedMultiplier);
     }
 
     void UpdateHeightMap()
@@ -419,8 +434,10 @@ public class SwellWater : MonoBehaviour
         {
             if (meshMoved)
             {
-                meshPosition = currentPosition + new Vector3(50, 0, 50);
+                //meshPosition = currentPosition + new Vector3(50, 0, 50);
+                meshPosition = currentPosition;
                 meshBounds = meshFilters[0].mesh.bounds;
+                meshBounds.center = meshFilters[0].transform.position;
                 for (int i = 0; i < meshFilters.Count; ++i)
                 {
                     Bounds singleMeshBounds = meshFilters[i].mesh.bounds;
@@ -429,14 +446,26 @@ public class SwellWater : MonoBehaviour
                 }
             }
 
-            for (float x = meshBounds.min.x + meshPosition.x; x <= meshBounds.max.x + meshPosition.x; x += 1 / gridDensity)
+            // Slower than below for some reason. 
+            // for (int xi = 0; xi < heightMapArray.Length; xi++)
+            // {
+            //     for (int yi = 0; yi < heightMapArray[xi].Length; yi++)
+            //     {
+            //         float x = IndexToPositionX(xi);
+            //         float y = IndexToPositionY(yi);
+            //         float newHeight = CalculateHeight(x, y);
+            //         SetHeight(x, y, newHeight);
+            //     }
+            // }
+
+            for (float x = meshBounds.min.x; x <= meshBounds.max.x; x += 1 / gridDensity)
             {
-                for (float z = meshBounds.min.z + meshPosition.z; z <= meshBounds.max.z + meshPosition.z; z += 1 / gridDensity)
+                for (float y = meshBounds.min.z; y <= meshBounds.max.z; y += 1 / gridDensity)
                 {
                     // float currentHeight = GetHeight(x, z, false);
                     // float newHeight = CalculateHeight(x, z, currentHeight);
-                    float newHeight = CalculateHeight(x, z);
-                    SetHeight(x, z, newHeight);
+                    float newHeight = CalculateHeight(x, y);
+                    SetHeight(x, y, newHeight);
                 }
             }
         }

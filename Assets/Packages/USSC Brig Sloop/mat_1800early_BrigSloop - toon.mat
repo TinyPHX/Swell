@@ -4,12 +4,12 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: mat_1800early_BrigSloop - toon
-  m_Shader: {fileID: 4800000, guid: fdcc1f820770fb24da5893988fbe0a8d, type: 3}
-  m_ShaderKeywords: OUTLINES TCP2_OUTLINE_CONST_SIZE TCP2_RAMPTEXT TCP2_SPEC _EMISSION
-    _METALLICGLOSSMAP
+  m_Shader: {fileID: 4800000, guid: 9ec7ccbd4289d0543939f61121224d93, type: 3}
+  m_ShaderKeywords: TCP2_OUTLINE_CONST_SIZE TCP2_RAMPTEXT TCP2_SPEC _EMISSION _METALLICGLOSSMAP
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
