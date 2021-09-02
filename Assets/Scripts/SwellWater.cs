@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -9,62 +10,199 @@ using Random = UnityEngine.Random;
 [System.Serializable]
 public class Wave
 {
+    public enum Type {
+        sin = 1,
+        radial = 3,
+        perlin = 2
+    }
+
+    public string name = "New Wave";
     public bool enabled = true;
     public Vector2 waveScale = Vector2.one;
     public Vector2 waveOffset = Vector2.one;
+    public Vector2 waveSpeed = Vector2.zero;
     public float waveHeight;
-    public float waveSpeedMultiplier = 1;
+    public Type waveType = Type.sin;
+
+    public float GetHeight(float x, float y)
+    {
+        float height = 0;
+
+        if (!enabled)
+        {
+            return height;
+        }
+
+        if (waveType == Type.sin)
+        {
+            Vector2 adjustedOffset = waveOffset + waveSpeed * Time.time;
+            
+            // height = Mathf.Sin(
+            //     (x * waveScale.x + adjustedOffset.x) * periodX + 
+            //     (y * waveScale.y + adjustedOffset.y) * periodY
+            // ) * (enabled ? waveHeight : 0);
+        
+            // height = Mathf.Sin((x * waveScale.x + adjustedOffset.x) + periodX) *
+            // Mathf.Sin((y * waveScale.y + adjustedOffset.y) + periodY) * 
+            // (enabled ? waveHeight : 0);
+        
+            height = Mathf.Sin((x * waveScale.x / 10 + adjustedOffset.x) * Mathf.PI + 1) *
+                Mathf.Sin((y * waveScale.y / 10 + adjustedOffset.y) * Mathf.PI + 1) * 
+                waveHeight;
+        
+            // height = Mathf.Sin((x * waveScale.x + adjustedOffset.x) * periodX) *
+            // Mathf.Sin((y * waveScale.y + adjustedOffset.y) * periodY) * 
+            // (enabled ? waveHeight : 0);
+        
+            // height = Mathf.Sin(((x + adjustedOffset.x) * waveScale.x) * periodX) *
+            // Mathf.Sin(((y + adjustedOffset.y) * waveScale.y) * periodY) * 
+            // (enabled ? waveHeight : 0);   
+        }
+        else if (waveType == Type.radial)
+        {
+            // Vector2 offset = Time.time * waveSpeed + waveOffset;
+            // Vector2 delta = new Vector2(
+            //     x * waveScale.x + offset.x,
+            //     y * waveScale.y + offset.y
+            // );
+            // //Math.abs((Math.sin(WAVE_COUNT * (Math.sqrt((x) * (x) + (y) * (y)) / WIDTH) * RAD + phaseShift) + 1)
+            // height = Mathf.Sin(3 * (Mathf.Sqrt(delta.x * delta.x + delta.y * delta.y) / 10) * Mathf.PI * 2 + 1);
+
+            //float distance = 5;
+            // float fade = Mathf.Pow(Mathf.Sqrt(2 * Mathf.PI), -Mathf.Pow(y / distance, 2) / 2) * 10;
+
+            Vector2 fadeScale = new Vector2(5, 40);
+            float slope = 1 + 1 / fadeScale.x;
+            float distance = fadeScale.y  / 10;
+            float fade = Mathf.Pow(slope, - x * x / (2 * distance * distance) - y * y / (2 * distance * distance));
+
+            // float fade = 
+            //     (Mathf.Pow(Mathf.Sqrt(2 * Mathf.PI), -Mathf.Pow(x / distance, 2) / 2)
+            //      + Mathf.Pow(Mathf.Sqrt(2 * Mathf.PI), -Mathf.Pow(y / distance, 2) / 2))
+            //     / waveScale.y;
+
+            // height = fade * waveHeight; 
+
+            Vector2 offset = Time.time * waveSpeed + waveOffset;
+            Vector2 delta = new Vector2(
+                x * waveScale.x,
+                y * waveScale.x
+            );
+            //Math.abs((Math.sin(WAVE_COUNT * (Math.sqrt((x) * (x) + (y) * (y)) / WIDTH) * RAD + phaseShift) + 1)
+            height = Mathf.Sin(offset.y * (Mathf.Sqrt(delta.x * delta.x + delta.y * delta.y) / waveScale.y) * Mathf.PI * 2 + offset.x);
+            
+            height = height * waveHeight * fade;
+        }
+        else if (waveType == Type.perlin)
+        {
+            Vector2 offset = Time.time * waveSpeed + waveOffset;
+            Vector3 delta = new Vector2(
+                x * .1f * waveScale.x + offset.x,
+                y * .1f * waveScale.y + offset.y
+            );
+            height = Mathf.PerlinNoise(
+                delta.x, 
+                delta.y
+            );
+
+            height = height * 2 * waveHeight - waveHeight;
+        }
+
+        return height;
+    }
 }
 
 public class SwellWater : MonoBehaviour
 {
-    public GameObject meshFilterGrid;
-    public bool combineMeshes = false;
-    public List<MeshFilter> meshFiltersLowPoly;
-    private MeshFilter mergedMeshFilter;
+    [Header("Mesh")]
     public MeshFilter meshFilterPrefab;
+    private GameObject meshFilterGrid;
+    private bool combineMeshes = true;
+    private List<MeshFilter> meshFiltersLowPoly;
+    private MeshFilter mergedMeshFilter;
+    private List<MeshFilter> meshFilters;
+    private List<List<int>> overlappingVectors;
+    private Bounds meshBounds;
+    private bool meshMoved = true;
+    private Vector3 currentPosition;
+    
+    [Header("Mesh Grid Sizing")]
+    public float gridDensity = 1;
+    public int gridSize = 10;
+    public int tileWidth = 10;
+    private float centerOffset;
+
+    [Header("Water Horizon")]
+    public bool showWaterHorizon;
     public GameObject waterHorizon;
+    
+    [Header("Position Anchoring")]
     public bool usePositionAnchor = false;
     public GameObject positionAnchor;
     public Vector2 positionStep = Vector2.one;
-    public Wave wave1;
-    public Wave wave2;
-    public bool noise = false;
-    public Vector2 noiseSpeed = Vector2.one;
-    public Vector2 noiseScale = Vector3.one;
-    public float noiseHeight = 1;
+    
+    [Header("Wave Control")]
+    public List<Wave> waves = new List<Wave>();
     public bool interpolate;
     public float interpolateSpeed = 1;
+    
+    [Header("Normals")]
     public bool lowPolyNormals = false;
     public bool calculateNormals = false;
     public float calculateNormalsFrequency = 1; //in seconds
     private float lastCalculateNormalsTime = 0;
-    public float gridDensity = 1;
-    private Dictionary<long, float> heightMapDict = new Dictionary<long, float>();
-    public bool useHeightMapArray = true;
+    
+    [Header("Height Map")]
+    private Dictionary<long, float> heightMapDict;
+    private bool useHeightMapArray = true; // This was created for debugging and is almost always faster to be set to true.
     private float[][] heightMapArray;
     private bool heightMapInitialized = false;
-    private List<MeshFilter> meshFilters;
-    private List<List<int>> overlappingVectors;
-    private float periodX;
-    private float periodY;
-    private Bounds meshBounds;
-    private Vector3 meshPosition;
-    private bool meshMoved = true;
-    private Vector3 currentPosition;
 
-    private int size = 10;
-    private int tileWidth = 10;
-    private float centerOffset;
-    
-    void Start ()
+    private List<GameObject> instantiatedList = new List<GameObject>();
+
+    public void Reset()
     {
-        meshFilters = meshFilterGrid.GetComponentsInChildren<MeshFilter>().ToList();
+        Clear();
+        Start();
+    }
+
+    void Clear()
+    {
+        foreach (GameObject gameObject in instantiatedList)
+        {
+            DestroyImmediate(gameObject);
+        }
+    }
+    
+    void Start()
+    {
+        if (!meshFilterGrid)
+        {
+            meshFilterGrid = new GameObject("Mesh Filter Grid");
+            instantiatedList.Add(meshFilterGrid);
+            meshFilterGrid.transform.parent = transform;
+        }
+        
+        if (meshFilterPrefab == null)
+        {
+            GameObject meshFilterPrefabGameObject = GameObject.CreatePrimitive(PrimitiveType.Plane);
+            instantiatedList.Add(meshFilterPrefabGameObject);
+            meshFilterPrefabGameObject.name = "Mesh Filter Prefab";
+            meshFilterPrefabGameObject.transform.SetParent(meshFilterGrid.transform);
+            meshFilterPrefabGameObject.SetActive(false);
+            meshFilterPrefab = meshFilterPrefabGameObject.GetComponent<MeshFilter>();
+        }
+        
+        // meshFilters = meshFilterGrid.GetComponentsInChildren<MeshFilter>().ToList();
+        if (meshFilters != null)
+        {
+            meshFilters.Clear();
+        }
+        meshFilters = new List<MeshFilter>();
 
         if (meshFilters.Count == 0 && meshFilterPrefab != null)
         {
-            int size = 10;
-            float extent = size / 2f;
+            float extent = gridSize / 2f;
 
             Transform parrent = meshFilterGrid.transform;
             for (float ix = -extent; ix < extent; ix++)
@@ -72,10 +210,13 @@ public class SwellWater : MonoBehaviour
                 for (float iy = -extent; iy < extent; iy++)
                 { 
                     MeshFilter meshFilter = Instantiate(meshFilterPrefab, parrent);
+                    instantiatedList.Add(meshFilter.gameObject);
                     meshFilter.gameObject.name = meshFilterPrefab.name;
                     // float width = meshFilter.mesh.bounds.size.x;
                     float width = tileWidth;
-                    centerOffset = size % 2 == 0 ? width / 2 : width;
+                    // centerOffset = gridSize % 2 == 0 ? width / 2 : width;
+                    centerOffset = width / 2;
+                    meshFilter.transform.parent = meshFilterGrid.transform;
                     meshFilter.transform.position = new Vector3(
                         ix * width + centerOffset,
                         0,
@@ -90,6 +231,7 @@ public class SwellWater : MonoBehaviour
         if (staticMeshWarp != null)
         {
             MeshFilter newMeshFilter = Instantiate(meshFilterPrefab, staticMeshWarp.transform.parent);
+            instantiatedList.Add(newMeshFilter.gameObject);
             newMeshFilter.name = staticMeshWarp.name;
             newMeshFilter.transform.position = staticMeshWarp.transform.position;
             newMeshFilter.transform.rotation = staticMeshWarp.transform.rotation;
@@ -105,15 +247,19 @@ public class SwellWater : MonoBehaviour
             Destroy(staticMeshWarp.gameObject);
         }
         
+        if (!showWaterHorizon && waterHorizon)
+        {
+            waterHorizon.SetActive(false);
+        }
+
+        heightMapDict = new Dictionary<long, float>();
+        
         int vertWidth = 11;
         heightMapArray = new float[meshFilters.Count * vertWidth][];
         for (int i = 0; i < heightMapArray.Length; i++)
         {
             heightMapArray[i] = new float[meshFilters.Count * vertWidth];
         }
-        
-        periodX = (2 * Mathf.PI / (10 * transform.lossyScale.x));
-        periodY = (2 * Mathf.PI / (10 * transform.lossyScale.z));
 
         if (combineMeshes)
         {
@@ -128,6 +274,7 @@ public class SwellWater : MonoBehaviour
             for (int i = 0; i < meshFilters.Count; ++i)
             {
                 meshFiltersLowPoly[i] = Instantiate(meshFilters[i], parrent);
+                instantiatedList.Add(meshFiltersLowPoly[i].gameObject);
                 meshFiltersLowPoly[i].gameObject.name = meshFilters[i].name;
                 meshFiltersLowPoly[i].transform.position = meshFilters[i].transform.position;
                 meshFilters[i].GetComponent<MeshRenderer>().enabled = false;
@@ -145,9 +292,9 @@ public class SwellWater : MonoBehaviour
             Vector3 anchor = positionAnchor.transform.position;
 
             Vector3 newWaterPosition = new Vector3(
-                anchor.x - anchor.x % 10,
+                anchor.x - anchor.x % positionStep.x,
                 transform.position.y,
-                anchor.z - anchor.z % 10
+                anchor.z - anchor.z % positionStep.y
             );
             if (transform.position != newWaterPosition)
             {               
@@ -172,7 +319,6 @@ public class SwellWater : MonoBehaviour
     
     void UpdateWater()
     {   
-        UpdateWaves();
         UpdateHeightMap();
         UpdateMeshes();
         UpdateMeshBoundsAndNormals();
@@ -183,16 +329,17 @@ public class SwellWater : MonoBehaviour
         GameObject mergedMeshFilterGameObject;
         if (meshFilterPrefab != null)
         {
-            mergedMeshFilter = Instantiate(meshFilterPrefab);
+            mergedMeshFilter = Instantiate(meshFilterPrefab, meshFilterGrid.transform);
+            instantiatedList.Add(mergedMeshFilter.gameObject);
             mergedMeshFilter.gameObject.name = meshFilterPrefab.name;
             mergedMeshFilterGameObject = mergedMeshFilter.gameObject;
-            mergedMeshFilterGameObject.transform.SetParent(transform);
             mergedMeshFilterGameObject.SetActive(true);
         }
         else
         {
             mergedMeshFilterGameObject = new GameObject("Merged Water Mesh", typeof(MeshFilter), typeof(MeshRenderer));
-            mergedMeshFilterGameObject.transform.SetParent(gameObject.transform);
+            instantiatedList.Add(mergedMeshFilterGameObject);
+            mergedMeshFilterGameObject.transform.SetParent(meshFilterGrid.transform);
             mergedMeshFilterGameObject.GetComponent<MeshRenderer>().material = meshFilters[0].gameObject.GetComponent<MeshRenderer>().material;
             mergedMeshFilter = mergedMeshFilterGameObject.GetComponent<MeshFilter>();
         }
@@ -353,7 +500,7 @@ public class SwellWater : MonoBehaviour
     int PositionToIndex(float position, float parrentPosition)
     {
         // return Mathf.RoundToInt((position + centerOffset * size - parrentPosition) * gridDensity + 1);
-        return (int) ((position + centerOffset * size - parrentPosition) * gridDensity + .5f);
+        return (int) ((position + centerOffset * gridSize - parrentPosition) * gridDensity + .5f);
     }
 
     float IndexToPositionX(int index)
@@ -368,12 +515,11 @@ public class SwellWater : MonoBehaviour
     
     float IndexToPosition(int index, float parrentPosition)
     {
-        return (index - .5f) / gridDensity - centerOffset * size + parrentPosition;
+        return (index - .5f) / gridDensity - centerOffset * gridSize + parrentPosition;
     }
     
     int PositionToGrid(float position)
     {
-        // return (int)(value * gridDensity) + 1;
         return (int)(position * gridDensity + 1);
     }
 
@@ -381,51 +527,22 @@ public class SwellWater : MonoBehaviour
     {
         int x = PositionToGrid(xPosition);
         int y = PositionToGrid(yPosition);
-        
-        Vector2 noiseSpeedByTime = Time.time * noiseSpeed;
-        Vector3 noiseScaleMultiplier = new Vector3(
-            .1f * noiseScale.x,
-            .1f * noiseScale.y,
-            noiseHeight
-        );
-        float noiseOffset = Mathf.PerlinNoise(
-            x * noiseScaleMultiplier.x + noiseSpeedByTime.x, 
-            y * noiseScaleMultiplier.y + noiseSpeedByTime.y
-        ) * noiseHeight;
 
-        if (!noise)
+        float totalHeight = 0;
+        foreach (Wave wave in waves)
         {
-            noiseOffset = 0;
+            totalHeight += wave.GetHeight(x, y);
         }
-
-        float wave1Height = (
-            Mathf.Sin((x * wave1.waveScale.x + wave1.waveOffset.x) * periodX) *
-            Mathf.Sin((y * wave1.waveScale.y + wave1.waveOffset.y) * periodY)
-        ) * (wave1.enabled ? wave1.waveHeight : 0);
-
-        float wave2Height = (
-            Mathf.Sin((x * wave2.waveScale.x + wave2.waveOffset.x) * periodX) *
-            Mathf.Sin((y * wave2.waveScale.y + wave2.waveOffset.y) * periodY)
-        ) * (wave2.enabled ? wave2.waveHeight : 0);
-
-        float combinedHeight = wave1Height + wave2Height + noiseOffset;
-
-        float waveHeight = combinedHeight;
+        
         if (interpolate)
         {
             float previousHeight = GetHeight(x, y, false);
-            float change = Mathf.Abs(previousHeight - combinedHeight);
-            float interpolatedHeight = Mathf.MoveTowards(previousHeight, combinedHeight, Time.deltaTime * change * interpolateSpeed);
-            waveHeight = interpolatedHeight;
+            float change = Mathf.Abs(previousHeight - totalHeight);
+            float interpolatedHeight = Mathf.MoveTowards(previousHeight, totalHeight, Time.deltaTime * change * interpolateSpeed);
+            totalHeight = interpolatedHeight;
         }
 
-        return waveHeight;
-    }
-
-    void UpdateWaves()
-    {
-        wave1.waveOffset = new Vector2(Time.time * wave1.waveSpeedMultiplier, Time.time * wave1.waveSpeedMultiplier);
-        wave2.waveOffset = new Vector2(Time.time * wave2.waveSpeedMultiplier, Time.time * wave2.waveSpeedMultiplier);
+        return totalHeight;
     }
 
     void UpdateHeightMap()
@@ -434,8 +551,6 @@ public class SwellWater : MonoBehaviour
         {
             if (meshMoved)
             {
-                //meshPosition = currentPosition + new Vector3(50, 0, 50);
-                meshPosition = currentPosition;
                 meshBounds = meshFilters[0].mesh.bounds;
                 meshBounds.center = meshFilters[0].transform.position;
                 for (int i = 0; i < meshFilters.Count; ++i)
