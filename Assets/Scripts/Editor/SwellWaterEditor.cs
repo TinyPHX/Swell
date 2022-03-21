@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(SwellWater))]
+[CustomEditor(typeof(SwellWater)), CanEditMultipleObjects]
 public class SwellWaterEditor : Editor
 {
     public override void OnInspectorGUI()
