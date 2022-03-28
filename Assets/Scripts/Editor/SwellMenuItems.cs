@@ -46,6 +46,13 @@ public class SwellMenuItems
         wave.WaveType = SwellWave.Type.ripple;
     }
     
+    [MenuItem("GameObject/Swell/Wave (Custom)", false, 40)]
+    public static void CreateWavCustom()
+    {
+        SwellWave wave = CreateNew<SwellWave>("Swell Wave (Custom)");
+        wave.WaveType = SwellWave.Type.custom;
+    }
+    
     [MenuItem("GameObject/Swell/Floater", false, 40)]
     public static void CreateFloater()
     {

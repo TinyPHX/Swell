@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4699921572385240372}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -60, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -44,11 +44,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meshFilterPrefab: {fileID: 0}
-  material: {fileID: 2100000, guid: 564f3c1a4644a3d4f9fd9cdaf8e1ddff, type: 2}
+  material: {fileID: 2100000, guid: f4e990d727300eb479c13a8a96c796a4, type: 2}
   shadowCastingMode: 0
   receiveShadows: 0
   gridSize: 4
+  remapUvs: 0
   showWaterHorizon: 0
+  horizonMaterial: {fileID: 0}
   waterHorizon: {fileID: 0}
   usePositionAnchor: 0
   positionAnchor: {fileID: 0}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TP.ExtensionMethods;
+using UnityEngine;
 
 public class SwellWave : MonoBehaviour
 {
@@ -7,18 +8,28 @@ public class SwellWave : MonoBehaviour
         pointed = 5, //square root sin curve 
         ripple = 3, //radial sin curve
         bell = 4, //gaussian curve
-        random = 2 //perlin noise
+        random = 2, //perlin noise
+        custom = 6
     }
     
-    [Header("Basic Settings")]
+    private const string H1 = " ";
+    [Header(H1+"Basic Settings"+H1)]
     [SerializeField] private bool waveEnabled = true;
     [SerializeField] private Type waveType = Type.rounded;
+    [SerializeField] private AnimationCurve customWave = new AnimationCurve(new Keyframe[]
+    {
+        new Keyframe(0,0,0,0,0,0),
+        new Keyframe(.25f,-1,0,0,.5f,.5f),
+        new Keyframe(.5f,0,0,0,0,0),
+        new Keyframe(.75f,1,0,0,.5f,.5f),
+        new Keyframe(1,0,0,0,0,0),
+    });
     [SerializeField] private float waveHeight = 1;
     [SerializeField] private Vector2 waveScale = Vector2.one;
     [SerializeField] private Vector2 waveOffset = Vector2.one;
     [SerializeField] private Vector2 waveSpeed = Vector2.zero;
     [SerializeField, Range(0, 360)] private float waveRotation = 0;
-    [Header("Spread")]
+    [Header(H1+"Spread"+H1)]
     [SerializeField] private float spread = 0;
     [SerializeField] private AnimationCurve spreadCurve = new AnimationCurve(new Keyframe[]
     {
@@ -26,7 +37,7 @@ public class SwellWave : MonoBehaviour
         new Keyframe(1,0,0,0,.5f,.5f),
     });
     
-    [Header("Interpolate")]
+    [Header(H1+"Interpolate"+H1)]
     [SerializeField] private bool interpolate = true;
     [SerializeField] private float interpolationTime = 10;
     [SerializeField] private AnimationCurve interpolationCurve = new AnimationCurve(new Keyframe[]
@@ -34,7 +45,7 @@ public class SwellWave : MonoBehaviour
         new Keyframe(0,0,0,0,.5f,.5f),
         new Keyframe(1,1,0,0,.5f,.5f),
     });
-    [Header("Fluctuate")]
+    [Header(H1+"Fluctuate"+H1)]
     [SerializeField] private bool fluctuate = false;
     [SerializeField] private float fluctuatePeriodTime = 10;
     [SerializeField, Range(0, 1)] private float fluctuateOffset = 0;
@@ -50,6 +61,8 @@ public class SwellWave : MonoBehaviour
     private bool previousInterpolate;
     private float interpolateStartTime;
     private Vector3 position; //optimize access of transform;
+    private Vector2 adjustedOffset;
+    private Vector2 adjustedPosition;
     
     void Start()
     {
@@ -131,7 +144,7 @@ public class SwellWave : MonoBehaviour
         if (interpolate)
         {
             float timeSinceStart = Time.time - interpolateStartTime;
-            float curveRatio = timeSinceStart / interpolationTime; 
+            float curveRatio = interpolationTime == 0 ? 1 : timeSinceStart / interpolationTime; 
             curveRatio = waveEnabled ? curveRatio : 1 - curveRatio; 
             interpolateRatio = interpolationCurve.Evaluate(curveRatio);
         }
@@ -163,6 +176,9 @@ public class SwellWave : MonoBehaviour
         else if (waveType == Type.random)
         {
         }
+        else if (waveType == Type.custom)
+        {
+        }
 
         return normal;
     }
@@ -186,8 +202,13 @@ public class SwellWave : MonoBehaviour
     
     //Possible optimization: If for each wave we figured out the phase we can calculate the height only across the
     //phase once then use mod to lookup the height on repeated patterns. Still would have to calculate spread.  
-    public float GetHeight(float x, float y)
+    public float GetHeight(float x, float y, bool ignoreInterpolation=false)
     {
+        if (!isActiveAndEnabled)
+        {
+            return 0;
+        }
+        
         //  https://www.wolframalpha.com/input/?i=2%5E%28-+%28x%5E2+%2F+%282*2%5E2%29%29+-+%28y%5E2+%2F+%282*2%5E2%29%29%29+++++++x%3D-5+to+5+y%3D-5+to5
         //  https://www.wolframalpha.com/input/?i=Gaussian+Distribution
         float spreadMultiplier = 1;
@@ -197,7 +218,6 @@ public class SwellWave : MonoBehaviour
             float spreadPositionX = x - position.x;
             float spreadPositionY = y - position.z;
             spreadMultiplier = GetSpread(spreadPositionX, spreadPositionY);
-        
         }
 
         if (waveRotation != 0)
@@ -217,7 +237,7 @@ public class SwellWave : MonoBehaviour
                 //https://www.wolframalpha.com/input/?i=sin%28x%29%2C+x%3D-5+to+5+y%3D-5+to+5
                 
                 // Vector2 adjustedOffset = waveOffset + waveSpeed * Time.time;
-                Vector2 adjustedOffset = new Vector2(
+                adjustedOffset = new Vector2(
                     waveOffset.x + waveSpeed.x * Time.time,
                     waveOffset.y + waveSpeed.y * Time.time
                 );
@@ -232,8 +252,7 @@ public class SwellWave : MonoBehaviour
                 // (enabled ? WaveHeight : 0);  
 
                 height = Mathf.Sin((x * waveScale.x / 10 + adjustedOffset.x) * Mathf.PI + 1) *
-                         Mathf.Sin((y * waveScale.y / 10 + adjustedOffset.y) * Mathf.PI + 1) *
-                         adjustedWaveHeight;
+                         Mathf.Sin((y * waveScale.y / 10 + adjustedOffset.y) * Mathf.PI + 1);
 
                 // height = Mathf.Sin((x * waveScale.x + adjustedOffset.x) * periodX) *
                 // Mathf.Sin((y * waveScale.y + adjustedOffset.y) * periodY) * 
@@ -246,7 +265,7 @@ public class SwellWave : MonoBehaviour
             else if (waveType == Type.pointed)
             {
                 // Vector2 adjustedOffset = waveOffset + waveSpeed * Time.time;
-                Vector2 adjustedOffset = new Vector2(
+                adjustedOffset = new Vector2(
                     waveOffset.x + waveSpeed.x * Time.time,
                     waveOffset.y + waveSpeed.y * Time.time
                 );
@@ -256,16 +275,11 @@ public class SwellWave : MonoBehaviour
 
                 float maxHeight = Mathf.Sqrt(Mathf.PI + Mathf.PI) / 2 + Mathf.Sqrt(Mathf.PI + Mathf.PI) / 2;
                 
-                height = -1 *
-                         (
-                             (
-                                 Mathf.Sqrt(Mathf.Sin(x * waveScale.x * 2 * Mathf.PI / 10 + adjustedOffset.x) * Mathf.PI + Mathf.PI) +
-                                 Mathf.Sqrt(Mathf.Sin(y * waveScale.y * 2 * Mathf.PI / 10 + adjustedOffset.y) * Mathf.PI + Mathf.PI)
-                             ) / maxHeight - 1
-                         ) * 
-                         adjustedWaveHeight;
-                
-                
+                height = -1 * (
+                    (
+                        Mathf.Sqrt(Mathf.Sin(x * waveScale.x * 2 * Mathf.PI / 10 + adjustedOffset.x) * Mathf.PI + Mathf.PI) +
+                        Mathf.Sqrt(Mathf.Sin(y * waveScale.y * 2 * Mathf.PI / 10 + adjustedOffset.y) * Mathf.PI + Mathf.PI)
+                    ) / maxHeight - 1 );
             }
             else if (waveType == Type.ripple)
             {
@@ -295,7 +309,7 @@ public class SwellWave : MonoBehaviour
                 waveSpeed.y = waveSpeed.x;
                 waveOffset.y = waveOffset.x;
 
-                Vector2 offset = new Vector2(
+                adjustedOffset = new Vector2(
                     waveOffset.x + waveSpeed.x * Time.time,
                     waveOffset.y + waveSpeed.y * Time.time
                 );
@@ -305,9 +319,7 @@ public class SwellWave : MonoBehaviour
                 );
                 
                 //Formula: Math.abs((Math.sin(WAVE_COUNT * (Math.sqrt((x) * (x) + (y) * (y)) / WIDTH) * RAD + phaseShift) + 1)
-                height = Mathf.Sin(Mathf.Sqrt(delta.x * delta.x + delta.y * delta.y) / 10 * Mathf.PI * 2 + offset.x);
-
-                height = height * adjustedWaveHeight;
+                height = Mathf.Sin(Mathf.Sqrt(delta.x * delta.x + delta.y * delta.y) / 10 * Mathf.PI * 2 + adjustedOffset.x);
             }
             else if (waveType == Type.bell)
             {
@@ -324,25 +336,41 @@ public class SwellWave : MonoBehaviour
                 height = Mathf.Pow(slope,
                     - delta.x * delta.x / (2 * distance * distance)
                     - delta.y * delta.y / (2 * distance * distance));
-
-                height = height * adjustedWaveHeight;
             }
             else if (waveType == Type.random)
             {
-                Vector2 offset = Time.time * waveSpeed + waveOffset;
+                Vector2 offset = Time.time * waveSpeed + waveOffset;;
+                //Noise reflects at 0 so we offset as much as possible. 
+                float reflectionOffset = 50000; 
                 Vector3 delta = new Vector2(
-                    x * .1f * waveScale.x + offset.x,
-                    y * .1f * waveScale.y + offset.y
+                    x * .1f * waveScale.x + offset.x + reflectionOffset,
+                    y * .1f * waveScale.y + offset.y + reflectionOffset
                 );
-                height = Mathf.PerlinNoise(
+                height = 2 * Mathf.PerlinNoise(
                     delta.x,
                     delta.y
-                );
-
-                height = height * 2 * adjustedWaveHeight - adjustedWaveHeight;
+                ) - 1;
+            }
+            else if (waveType == Type.custom)
+            {
+                adjustedOffset.x = waveOffset.x + waveSpeed.x * Time.time; 
+                adjustedOffset.y = waveOffset.y + waveSpeed.y * Time.time;
+                adjustedPosition.x = x * .05f * waveScale.x + adjustedOffset.x; 
+                adjustedPosition.y = y * .05f * waveScale.y + adjustedOffset.y;
+                // height = 
+                //     (customWave.Evaluate(adjustedPosition.x.WrapBetween(0, 1)) +
+                //     customWave.Evaluate(adjustedPosition.y.WrapBetween(0, 1))) / 2;
+                
+                if (adjustedPosition.x < 0) { adjustedPosition.x *= -1; }
+                if (adjustedPosition.y < 0) { adjustedPosition.y *= -1; }
+                
+                height = 
+                    (customWave.Evaluate(adjustedPosition.x % 1) +
+                     customWave.Evaluate(adjustedPosition.y % 1)) / 2;
             }
         }
 
+        height *= ignoreInterpolation ? 1 : adjustedWaveHeight;
         height *= spreadMultiplier;
 
         return height;

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class SwellWater : MonoBehaviour
 {
-    [Header("Mesh")]
+    private const string H1 = " ";
+    [Header(H1+"Mesh"+H1)]
     [SerializeField] private MeshFilter meshFilterPrefab;
     [SerializeField] private Material material;
     [SerializeField] private ShadowCastingMode shadowCastingMode = ShadowCastingMode.Off;
@@ -20,30 +23,30 @@ public class SwellWater : MonoBehaviour
     private bool meshMoved = true;
     private Vector3 currentPosition;
     
-    [Header("Mesh Grid Sizing")]
+    [Header(H1+"Basic Settings"+H1)]
     [SerializeField] private int gridSize = 10; //number of tiles in water square
     private float gridDensity = 1; //distance between vectors
     private int tileWidth = 10; //Width of each tile
     private float centerOffset;
     [SerializeField] private bool remapUvs = false;
 
-    [Header("Water Horizon")]
+    [Header(H1+"Water Horizon"+H1)]
     [SerializeField] private bool showWaterHorizon;
     [SerializeField] private Material horizonMaterial;
     [SerializeField] private GameObject waterHorizon;
     
-    [Header("Position Anchoring")]
+    [Header(H1+"Position Anchoring"+H1)]
     [SerializeField] private bool usePositionAnchor = false;
     [SerializeField] private GameObject positionAnchor;
     [SerializeField] private Vector2 positionStep = Vector2.one * 10;
     
-    [Header("Normals")]
+    [Header(H1+"Normals"+H1)]
     [SerializeField] private bool lowPolyNormals = false;
     [SerializeField] private bool calculateNormals = true;
     [SerializeField] private float calculateNormalsFrequency = 1; //in seconds
     private float lastCalculateNormalsTime = 0;
     
-    [Header("Height Map")]
+    [Header(H1+"Height Map"+H1)]
     private Dictionary<long, float> heightMapDict;
     private bool useHeightMapArray = true; // This was created for debugging and is almost always faster to be set to true.
     private float[][] heightMapArray;
@@ -389,6 +392,12 @@ public class SwellWater : MonoBehaviour
             int xi = PositionToIndexX(xPosition);
             int yi = PositionToIndexY(yPosition);
 
+            // if (heightMapArray == null)
+            // {
+            //     //This is for use while the Application is not Playing.
+            //     height = CalculateHeight(xPosition, yPosition);
+            // }
+            // else 
             if (xi >= 0 && xi < heightMapArray.Length && yi >= 0 && yi < heightMapArray[xi].Length)
             {
                 height = heightMapArray[xi][yi];
@@ -719,6 +728,8 @@ public class SwellWater : MonoBehaviour
         }
     }
 
+    // private bool gizmoFirstSelectedDraw = false;
+    // private SwellWave[] gizmoWaves = new SwellWave[] { }; 
     void OnDrawGizmos()
     {
         if (!Application.isPlaying)
@@ -726,6 +737,7 @@ public class SwellWater : MonoBehaviour
             float fullSize = tileWidth * gridSize;
             Gizmos.color = new Color(.6f, .6f, .8f);
             Gizmos.DrawWireCube(transform.position, new Vector3(fullSize, 0, fullSize));
+            // gizmoFirstSelectedDraw = true;
         }
     }
 
@@ -749,10 +761,55 @@ public class SwellWater : MonoBehaviour
                     Gizmos.DrawWireCube(tilePosition, new Vector3(width, 0, width));
                 }
             }
+
+            // if (gizmoFirstSelectedDraw)
+            // {
+            //     gizmoFirstSelectedDraw = false;
+            //     gizmoWaves = FindObjectsOfType<SwellWave>();
+            // }
+            // Gizmos.color = Color.white;
+            // int full_extents = (int)(gridSize / 2f * width);
+            // float[,] heights = new float[full_extents, full_extents];
+            // int xi = 0, yi = 0;
+            // for (int positionX = -full_extents; positionX < full_extents; positionX++)
+            // {
+            //     for (int positionY = -full_extents; positionY < full_extents; positionY++)
+            //     {
+            //         Vector3 heightPosition = transform.position + new Vector3(positionX, 0, positionY);
+            //         heights[positionX,positionY] = CalculateGizmoHeight(heightPosition.x, heightPosition.z, gizmoWaves);
+            //         yi++;
+            //     }
+            //     xi++;
+            // }
+            //
+            // for (xi = 0; xi < heights.Length - 1; xi++)
+            // {
+            //     for (yi = 0; yi < heights.Length - 1; yi++)
+            //     {
+            //         // heights[xi, yi]
+            //         Vector3 p1 = transform.position + new Vector3()
+            //         Gizmos.DrawLine();
+            //     }
+            // }
             
             float fullSize = tileWidth * gridSize;
             Gizmos.color = new Color(.6f, .6f, .8f);
             Gizmos.DrawWireCube(transform.position, new Vector3(fullSize, 0, fullSize));
         }
     }
+    
+    // float CalculateGizmoHeight(float xPosition, float yPosition, SwellWave[] waves)
+    // {
+    //     int x = PositionToGrid(xPosition);
+    //     int y = PositionToGrid(yPosition);
+    //
+    //     float totalHeight = 0;
+    //     
+    //     foreach (SwellWave wave in waves)
+    //     {
+    //         totalHeight += wave.GetHeight(x, y, true);
+    //     }
+    //
+    //     return totalHeight;
+    // }
 }
