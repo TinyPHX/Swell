@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 20, y: 0, z: -40}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,12 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc6d6a6f685d1148b9e91e6774f8db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useSwellMesh: 1
+  swellMesh: {fileID: 0}
+  mainTextureSize: 0
+  secondaryTextureSize: 0
   meshFilterPrefab: {fileID: 4100580995506569975, guid: cd837931a91c3114abc6cfb1f00e8241,
     type: 3}
-  gridDensity: 1
-  tileWidth: 10
+  material: {fileID: 0}
+  shadowCastingMode: 0
+  receiveShadows: 0
+  lockAlbedoPosition: 0
+  meshAlbedoPosition: {fileID: 0}
   gridSize: 4
+  remapUvs: 0
   showWaterHorizon: 0
+  horizonMaterial: {fileID: 0}
   waterHorizon: {fileID: 0}
   usePositionAnchor: 0
   positionAnchor: {fileID: 0}
@@ -56,3 +66,4 @@ MonoBehaviour:
   lowPolyNormals: 1
   calculateNormals: 1
   calculateNormalsFrequency: 1
+  useHeightMapArray: 1

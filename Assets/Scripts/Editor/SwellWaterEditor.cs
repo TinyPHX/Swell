@@ -2,20 +2,23 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(SwellWater)), CanEditMultipleObjects]
-public class SwellWaterEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
 
-        if (GUILayout.Button("Re-initialize"))
+namespace Swell
+{
+    [CustomEditor(typeof(SwellWater)), CanEditMultipleObjects]
+    public class SwellWaterEditor : Editor
+    {
+        public override void OnInspectorGUI()
         {
+            base.OnInspectorGUI();
             SwellWater[] swellWaterTargets = Array.ConvertAll(targets, item => (SwellWater) item);
 
-            foreach (SwellWater swellWater in swellWaterTargets)
+            if (GUILayout.Button("Re-initialize"))
             {
-                swellWater.Reset();
+                foreach (SwellWater swellWater in swellWaterTargets)
+                {
+                    swellWater.Reset();
+                }
             }
         }
     }

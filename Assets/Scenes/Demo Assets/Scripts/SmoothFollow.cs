@@ -22,9 +22,14 @@ public class SmoothFollow : MonoBehaviour
 
     public void MoveTowardsTarget()
     {
-        float cameraDistance = Vector3.Distance(transform.position, target.transform.position);
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, cameraDistance * smoothTime);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, target.transform.rotation, cameraDistance * smoothTime * 10);
+        if (target)
+        {
+            float cameraDistance = Vector3.Distance(transform.position, target.transform.position);
+            transform.position =
+                Vector3.MoveTowards(transform.position, target.transform.position, cameraDistance * smoothTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, target.transform.rotation,
+                cameraDistance * smoothTime * 10);
+        }
     }
 
     public void MoveToTarget()

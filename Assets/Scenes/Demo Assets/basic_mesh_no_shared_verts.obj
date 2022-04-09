@@ -1,0 +1,35 @@
+# List of geometric vertices, with (x, y, z [,w]) coordinates, w is optional and defaults to 1.0.
+v -0.5 0 -0.5 1
+v -0.5 0 0.5 1
+v 0.5 0 0.5 1
+v 0.5 0 -0.5 1
+v -0.5 0 -0.5 1
+v -0.5 0 0.5 1
+v 0.5 0 0.5 1
+v 0.5 0 -0.5 1
+
+# List of texture coordinates, in (u, [,v ,w]) coordinates, these will vary between 0 and 1. v, w are optional and default to 0.
+vt 1.0 0.0 [0]
+vt 1.0 1.0 [0]
+vt 0.0 1.0 [0]
+vt 0.0 0.0 [0]
+vt 1.0 0.0 [0]
+vt 1.0 1.0 [0]
+vt 0.0 1.0 [0]
+vt 0.0 0.0 [0]
+
+# List of vertex normals in (x,y,z) form; normals might not be unit vectors.
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn 0.0 -1.0 0.0
+vn 0.0 -1.0 0.0
+vn 0.0 -1.0 0.0
+vn 0.0 -1.0 0.0
+
+# Polygonal face element (see below)
+f 1/1/1 2/2/2 3/3/3
+f 3/3/3 4/4/4 1/1/1
+f 7/7/7 6/6/6 5/5/5
+f 5/5/5 8/8/8 7/7/7
