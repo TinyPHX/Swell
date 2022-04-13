@@ -2,8 +2,11 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace Swell
+namespace Swell.Editors
 {
+    /**
+     * @brief `Editor` for SwellMesh component 
+     */
     [CustomEditor(typeof(SwellMesh))]
     public class SwellMeshEditor : Editor
     {

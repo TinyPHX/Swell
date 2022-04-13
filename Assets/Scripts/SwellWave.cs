@@ -5,6 +5,9 @@ using UnityEngine.Profiling;
 
 namespace Swell
 {
+    /**
+     * @brief Customizable wave that can be applied to all waters or to only a small area.  
+     */
     public class SwellWave : MonoBehaviour
     {
         public enum Type

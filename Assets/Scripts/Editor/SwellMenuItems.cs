@@ -3,8 +3,11 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Swell
+namespace Swell.Editors
 {
+    /**
+     * @brief `Right Click > Create` context menu items for quick shorcuts to create Swell GameObjects
+     */
     public class SwellMenuItems
     {
         [MenuItem("GameObject/Swell/Water", false, 40)]

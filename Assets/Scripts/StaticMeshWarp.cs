@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Swell
 {
+    /**
+     * @brief Helper class used to create static water horizon. This was possibly made obsolete by SwellMesh.
+     */
     public class StaticMeshWarp : MonoBehaviour {
 
         public MeshFilter meshFilter;

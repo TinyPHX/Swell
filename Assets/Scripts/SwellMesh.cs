@@ -17,14 +17,15 @@ using UnityEditor;
 
 namespace Swell
 {
+    /**
+     * @brief Dynamic mesh used to render water surface.
+     */
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class SwellMesh : MonoBehaviour
     {
-        public class MeshSettings
-        {
-            
-        }
-        
+        /**
+         * @brief Represents mesh grid fidelity levels.
+         */
         [Serializable]
         public class  MeshLevel
         {

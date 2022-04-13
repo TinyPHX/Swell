@@ -5,20 +5,107 @@ using UnityEngine.UIElements;
 
 namespace Swell
 {
-    public enum algorythmMethod
-    {
-        fast,
-        accurate
-    };
-
+    /**
+     * @brief MonoBehavior that can be attached to any RigidBody to enable float physics in SwellWater. 
+     * @author mkatic
+     * 
+     * Test image
+     * 
+     * ![Gif of Float Algorythm](../../images/float_algorythm_demo.gif)
+     * 
+     * doxygen test documentation
+     *
+     * @param test this is the only parameter of this test function. It does nothing!
+     *
+     * # Supported elements
+     *
+     * These elements have been tested with the custom CSS.
+     *
+     * ## Tables
+     *
+     * The table content is scrollable if the table gets too wide.
+     * 
+     * | first_column | second_column | third_column | fourth_column | fifth_column | sixth_column | seventh_column | eighth_column | ninth_column |
+     * |--------------|---------------|--------------|---------------|--------------|--------------|----------------|---------------|--------------|
+     * | 1            | 2             | 3            | 4             | 5            | 6            | 7              | 8             | 9            |
+     *
+     *
+     * ## Lists
+     *
+     * - element 1
+     * - element 2
+     *
+     * 1. element 1
+     *    ```
+     *    code in lists
+     *    ```
+     * 2. element 2
+     *
+     * ## Quotes
+     *
+     * > Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
+     * > ut labore et dolore magna aliqua. Vitae proin sagittis nisl rhoncus mattis rhoncus urna neque viverra. 
+     * > Velit sed ullamcorper morbi tincidunt ornare. 
+     * > 
+     * > Lorem ipsum dolor sit amet consectetur adipiscing elit duis.
+     * *- jothepro*
+     *
+     * ## Code block
+     *
+     * ```cpp
+     * auto x = "code within md fences (```)";
+     * ```
+     *
+     * @code{.cpp}
+     * // code within @code block
+     * while(true) {
+     *    auto example = std::make_shared<Example>(5);
+     *    example->test("test");
+     * }
+     * 
+     * @endcode
+     *
+     *     // code within indented code block
+     *     auto test = std::shared_ptr<Example(5);
+     *
+     *
+     * Inline `code` elements in a text. *Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.* This also works within multiline text and does not break the `layout`.
+     *
+     *
+     * ## Special hints
+     *
+     * @warning this is a warning only for demonstration purposes
+     *
+     * @note this is a note to show that notes work. They can also include `code`:
+     * @code{.c}
+     * void this_looks_awesome();
+     * @endcode
+     *
+     * @bug example bug
+     *
+     * @deprecated None of this will be deprecated, because it's beautiful!
+     *
+     * @invariant This is an invariant
+     *
+     * @pre This is a precondition
+     *
+     * @todo This theme is never finished!
+     *
+     * @remark This is awesome!
+     */
     public class SwellFloater : MonoBehaviour
     {
+        public enum Method
+        {
+            FAST,
+            ACCURATE
+        };
 
         [SerializeField] private float buoyancy = 1;
 
-        [SerializeField] private Rigidbody rigidbody;
-        [SerializeField] private algorythmMethod depthMethod = algorythmMethod.accurate;
-        [SerializeField] private algorythmMethod floatMethod = algorythmMethod.accurate;
+        [SerializeField] private new Rigidbody rigidbody;
+        [SerializeField] private Method depthMethod = Method.ACCURATE;
+        [SerializeField] private Method floatMethod = Method.ACCURATE;
         [SerializeField] private Vector3 center = Vector3.zero;
         [SerializeField] private bool stabilize = false;
 
@@ -62,7 +149,7 @@ namespace Swell
             RigidbodyChanged(null, rigidbody);
             SwellManager.Register(this);
 
-            if (floatMethod == algorythmMethod.fast && rigidbody)
+            if (floatMethod == Method.FAST && rigidbody)
             {
                 rigidbody.useGravity = false;
             }
@@ -108,15 +195,15 @@ namespace Swell
         {
             if (activeFrame != Time.frameCount)
             {
-                foreach (Rigidbody rigidbody in attachedFloaters.Keys)
+                foreach (Rigidbody rigidbodyWithFloater in attachedFloaters.Keys)
                 {
-                    float average = 0;
+                    float averageHeight = 0;
                     float min = float.MaxValue;
                     float max = float.MinValue;
-                    foreach (SwellFloater floater in attachedFloaters[rigidbody])
+                    foreach (SwellFloater floater in attachedFloaters[rigidbodyWithFloater])
                     {
                         float height = floater.Position.y;
-                        average += height;
+                        averageHeight += height;
                         if (min > height)
                         {
                             min = height;
@@ -128,11 +215,11 @@ namespace Swell
                         }
                     }
 
-                    average /= attachedFloaters[rigidbody].Count;
+                    averageHeight /= attachedFloaters[rigidbodyWithFloater].Count;
 
-                    if (attachedFloaters[rigidbody].Count > 1)
+                    if (attachedFloaters[rigidbodyWithFloater].Count > 1)
                     {
-                        foreach (SwellFloater floater in attachedFloaters[rigidbody])
+                        foreach (SwellFloater floater in attachedFloaters[rigidbodyWithFloater])
                         {
                             float height = floater.Position.y;
                             floater.attachedWeight = (height - min) / (max - min);
@@ -145,7 +232,6 @@ namespace Swell
             activeFrame = Time.frameCount;
         }
 
-        // Update is called once per frame
         void FixedUpdate()
         {
             OncePerRigidBodyUpdate();
@@ -154,7 +240,7 @@ namespace Swell
 
             water = SwellManager.GetNearestWater(Position);
 
-            if (depthMethod == algorythmMethod.fast)
+            if (depthMethod == Method.FAST)
             {
                 depth = Position.y - water.GetWaterHeightOptimized(Position) - water.Position.y;
             }
@@ -163,12 +249,12 @@ namespace Swell
                 depth = Position.y - water.GetWaterHeight(Position) - water.Position.y;
             }
 
-            if (depth == float.NaN)
+            if (float.IsNaN(depth))
             {
                 Debug.LogWarning("Swell Warning: depth: " + depth);
             }
 
-            if (floatMethod == algorythmMethod.fast)
+            if (floatMethod == Method.FAST)
             {
                 if (rigidbody)
                 {
@@ -193,12 +279,9 @@ namespace Swell
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.magenta;
-
-            float fakeDepth = 1;
-            float fakeAttachedWeight = 1;
             DrawUnlitSphere(Position, .05f);
             Vector3 force = Vector3.one;
-            if (floatMethod == algorythmMethod.accurate)
+            if (floatMethod == Method.ACCURATE)
             {
                 float mass = 1;
                 if (!rigidbody)
@@ -217,11 +300,11 @@ namespace Swell
             DrawUnlitSphere(Position + force, .05f);
         }
 
-        void DrawUnlitSphere(Vector3 position, float radius)
+        void DrawUnlitSphere(Vector3 origin, float radius)
         {
             for (float adjustedRadius = radius; adjustedRadius > 0; adjustedRadius -= radius / 100)
             {
-                Gizmos.DrawWireSphere(position, adjustedRadius);
+                Gizmos.DrawWireSphere(origin, adjustedRadius);
             }
         }
     }

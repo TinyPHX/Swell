@@ -3,8 +3,11 @@ using UnityEditor;
 using UnityEngine;
 
 
-namespace Swell
+namespace Swell.Editors
 {
+    /**
+     * @brief `Editor` for SwellWater component 
+     */
     [CustomEditor(typeof(SwellWater)), CanEditMultipleObjects]
     public class SwellWaterEditor : Editor
     {

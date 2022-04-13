@@ -5,6 +5,9 @@ using TP.ExtensionMethods;
 
 namespace Swell
 {
+    /**
+     * @brief Static class that is the Accountant of all water, waves and floaters.
+     */
     public static class SwellManager
     {
         private static List<SwellWater> allWaters = new List<SwellWater>();

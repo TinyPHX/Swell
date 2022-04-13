@@ -8,6 +8,9 @@ using UnityEngine.Rendering;
 
 namespace Swell
 {
+    /**
+     * @brief Creates SwellMesh, applies SwellWave s, and provides API to retrieve or modify water. 
+     */
     public class SwellWater : MonoBehaviour
     {
         private const string H1 = " ";
@@ -474,6 +477,20 @@ namespace Swell
             }
         }
 
+        /**
+         * @brief Gets the exact height of the SwellMesh 
+         *
+         * Returns y intersection value of the water mesh at some x, z value. To get the exact position of the
+         * mesh we get the height of the nearest vectors and then interpolate between them.
+         * 
+         * @param position The position (x, z) at which to check the water height.
+         *
+         * ##Example
+         * Returns the height of the water at the origin of the scene:
+         * ```
+         * GetWaterHeight(Vector3.Zero) 
+         * ```
+         */
         public float GetWaterHeight(Vector3 position)
         {
             float waterHeight = 0;
@@ -499,7 +516,7 @@ namespace Swell
                     float minY = gridY;
                     float maxY = gridY + levelStep;
 
-                    //Get corners 
+                    //Get corners. TODO: We probably can get this done with only 3 vectors instead of 4.
                     float cc = GetHeight(maxX, maxY, li: levelIndex);
                     float ff = GetHeight(minX, minY, li: levelIndex);
                     float cf = GetHeight(maxX, minY, li: levelIndex);
@@ -534,11 +551,30 @@ namespace Swell
             return waterHeight;
         }
 
+        /**
+         * @brief Gets the height of a nearby Vector on the SwellMesh
+         * 
+         * Returns y intersection value of the water mesh at some x, z value. This is an optimized approximation
+         * that only gets the height of a nearby vector. 
+         *
+         * @param position The position (x, z) at which to check the water height.
+         */
         public float GetWaterHeightOptimized(Vector3 position)
         {
             return GetHeight(Mathf.CeilToInt(position.x), Mathf.CeilToInt(position.z));
         }
         
+        /**
+         * @brief Returns exact wave height of the water mesh at some x, z value.
+         *
+         * This will check first to see if the position height has been calculated this frame, if not it will calculate it as long as calculate is set to
+         * true. li is the level of fidelity used in the SwellMesh.
+         *
+         * @param xPosition x position on the mesh
+         * @param yPosition y position on the mesh (z position in unity global space)
+         * @param calculate If false this will only return heights that have already been calculated this frame.
+         * @param li The grid level (fidelity) used to get the position from
+         */
         public float GetHeight(float xPosition, float yPosition, bool calculate=true, int li = -1)
         {
             float height = 0;
