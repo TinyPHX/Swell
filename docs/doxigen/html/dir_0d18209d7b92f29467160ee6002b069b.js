@@ -1,4 +1,0 @@
-var dir_0d18209d7b92f29467160ee6002b069b =
-[
-    [ "Demo Assets", "dir_30b4b57248a377280b582ba62866f836.html", "dir_30b4b57248a377280b582ba62866f836" ]
-];
