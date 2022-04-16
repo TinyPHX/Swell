@@ -13,11 +13,12 @@ namespace Swell.Editors
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
+            
             SwellMesh[] swellMeshTargets = Array.ConvertAll(targets, item => (SwellMesh) item);
-
-            if (GUILayout.Button("Generate"))
+            
+            foreach (SwellMesh swellMesh in swellMeshTargets)
             {
-                foreach (SwellMesh swellMesh in swellMeshTargets)
+                if (GUI.changed)
                 {
                     swellMesh.GenerateMesh();
                 }

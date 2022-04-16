@@ -4,7 +4,7 @@
 [![GitHub](https://img.shields.io/github/license/jothepro/doxygen-awesome-css)](https://github.com/jothepro/doxygen-awesome-css/blob/main/LICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/jothepro/doxygen-awesome-css)
 
-![Gif of Float Algorythm](docs/images/float_algorythm_demo.gif)
+![](docs/images/banner.png)
 
 ## Motivation
 
@@ -12,7 +12,7 @@ Swell was started as a way to add water with float physics to a Unity project wi
 
 ## Features
 
-- 🌅 Create massive oceans or river systems
+- 🌅 Create vast oceans or river systems
 - 🧜 Easy to use right click context menu
 - 🌊 Fully customizable and easy to use wave editor 
 - 🌈 Highly optimized float physics
@@ -20,7 +20,27 @@ Swell was started as a way to add water with float physics to a Unity project wi
 - 🧴 Works with any Unity rendering pipeline
 - 🌐 Dynamic mesh controllable for your needs
 
-## Examples
+## Quick Start Guide
+
+To get started with Swell all you need to do is open your new scene
+
+## Unity Demo Scenes
+
+### Swell Floater 
+#### Algorythm Demo
+*Scene:* ```%Swell Floater - Algorythm Demo.unity```
+#### Buoyancy Demo
+*Scene:* ```%Swell Floater - Buoyancy Demo.unity```
+#### Props Demo
+*Scene:* ```%Swell Floater - Buoyancy Demo.unity```
+#### Stress Test
+### Swell Water - Ocean Demo 2.unity
+### Swell Water - Ocean Demo.unity
+### Swell Water - Realistic Water Demo.unity
+### Swell Water - River Demo.unity
+### Swell Water - Waves Demo.unity
+
+## Scripts Examples
 
 - Sidebar-Only theme: [Documentation of this repository](https://jothepro.github.io/doxygen-awesome-css/)
 - Base theme: [libsl3](https://a4z.github.io/libsl3/)

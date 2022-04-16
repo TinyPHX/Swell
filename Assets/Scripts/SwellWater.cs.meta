@@ -1,12 +1,18 @@
 fileFormatVersion: 2
 guid: 0dc6d6a6f685d1148b9e91e6774f8db2
-timeCreated: 1485036885
-licenseType: Free
 MonoImporter:
+  externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - material: {instanceID: 0}
+  - swellMesh: {instanceID: 0}
+  - meshFilterPrefab: {instanceID: 0}
+  - meshAlbedoPosition: {instanceID: 0}
+  - horizonMaterial: {instanceID: 0}
+  - waterHorizon: {instanceID: 0}
+  - positionAnchor: {instanceID: 0}
   executionOrder: 0
-  icon: {instanceID: 0}
+  icon: {fileID: 2800000, guid: 9e633eec6991cc54daaa8dd5f51f1320, type: 3}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

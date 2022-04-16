@@ -59,40 +59,106 @@ namespace Swell.Editors
         }
 
         [MenuItem("GameObject/Swell/Mesh", false, 40)]
-        public static void CreateMesh()
+        public static void CreateMeshSimple()
         {
-            SwellMesh swellMesh = CreateNew<SwellMesh>("Swell Mesh").GetComponent<SwellMesh>();
-            swellMesh.GenerateMesh();
-            swellMesh.GetComponent<MeshRenderer>().material = new Material(Shader.Find("Standard"));
+            CreateMesh(false, "Swell Mesh (Simple)");
         }
 
-        [MenuItem("GameObject/Swell/Floater", false, 40)]
-        public static void CreateFloater()
+        [MenuItem("GameObject/Swell/Mesh (Levels)", false, 40)]
+        public static void CreateMeshLevels()
         {
-            Transform parent = null;
-            Rigidbody selectedRigidBody = Selected?.GetComponent<Rigidbody>();
-            SwellFloater floater = null;
-            if (selectedRigidBody)
+            CreateMesh(true, "Swell Mesh (Levels)");
+        }
+
+        public static void CreateMesh(bool levels, string name)
+        {
+            SwellMesh swellMesh;
+            MeshRenderer meshRenderer = Selected?.GetComponent<MeshRenderer>();
+            if (meshRenderer)
             {
-                floater = selectedRigidBody.gameObject.AddComponent<SwellFloater>();
+                int size = (int)meshRenderer.bounds.size.x;
+                swellMesh = Selected.gameObject.AddComponent<SwellMesh>();
+                swellMesh.MaxSize = size;
             }
             else
             {
-                parent = GameObject.CreatePrimitive(PrimitiveType.Cube).transform;
-                if (Selected)
+                swellMesh = CreateNew<SwellMesh>(name).GetComponent<SwellMesh>();
+                Material material = swellMesh.GetComponent<MeshRenderer>().sharedMaterial;
+                if (!material)
                 {
-                    parent.transform.parent = Selected.transform;
-                    parent.transform.localPosition = Vector3.zero;
+                    swellMesh.GetComponent<MeshRenderer>().sharedMaterial = new Material(Shader.Find("Standard"));
                 }
-
-                Rigidbody rigidbody = parent.gameObject.AddComponent<Rigidbody>();
-                rigidbody.drag = .2f;
-                rigidbody.angularDrag = .2f;
-                parent.gameObject.name = parent.gameObject.name + " (Floater)";
-                floater = CreateNew<SwellFloater>("Swell Floater", parent);
             }
 
+            if (levels)
+            {
+                swellMesh.MaxSize = 0;
+                swellMesh.Levels = new []
+                {
+                    new SwellMesh.MeshLevel(1, 12),
+                    new SwellMesh.MeshLevel(2, 4),
+                    new SwellMesh.MeshLevel(5, 4),
+                    new SwellMesh.MeshLevel(4, 1),
+                };
+            }
+            else
+            {
+                swellMesh.Levels = new SwellMesh.MeshLevel[] { };
+            }
+            
+            swellMesh.GenerateMesh();
+        }
+
+        [MenuItem("GameObject/Swell/Floater", false, 40)]
+        public static void CreateFloaterGameObject()
+        {
+            SwellFloater floater;
+            if (Selected && Is<Rigidbody>(Selected.gameObject))
+            {
+                floater = CreateNew<SwellFloater>("Swell Floater", Selected);
+            }
+            else
+            {
+                Transform primitive = GameObject.CreatePrimitive(PrimitiveType.Cube).transform;
+                primitive.gameObject.name = primitive.gameObject.name + " (Floater)";
+                if (Selected)
+                {
+                    primitive.transform.parent = Selected.transform;
+                    primitive.transform.localPosition = Vector3.zero;
+                }
+                floater = primitive.gameObject.AddComponent<SwellFloater>();
+            }
+            AddRigidbody(floater.gameObject);
             floater.Reset();
+        }
+
+        [MenuItem("GameObject/Swell/Floater (Component)", false, 40)]
+        public static void CreateFloaterComponent()
+        {
+            SwellFloater floater = Selected.gameObject.AddComponent<SwellFloater>();
+            AddRigidbody(floater.gameObject);
+            floater.Reset();
+        }
+
+        [MenuItem("GameObject/Swell/Floater (Component)", true)]
+        public static bool CreateFloaterGameObjectValidation()
+        {
+            return Selected != null;
+        }
+
+        private static void AddRigidbody(GameObject gameObject)
+        {
+            if (!Is<Rigidbody>(gameObject))
+            {
+                Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
+                rigidbody.drag = .2f;
+                rigidbody.angularDrag = .2f;
+            }
+        }
+
+        private static bool Is<T>(GameObject gameObject) where T: Component
+        {
+            return gameObject != null && (gameObject.GetComponent<T>() != null || gameObject.GetComponentInParent<T>() != null);
         }
 
         private static T CreateNew<T>(string name, Transform parent = null) where T : Component

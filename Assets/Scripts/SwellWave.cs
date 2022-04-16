@@ -1,13 +1,13 @@
-﻿using System;
-using TP.ExtensionMethods;
+﻿using MyBox;
 using UnityEngine;
-using UnityEngine.Profiling;
+using UnityEngine.Serialization;
 
 namespace Swell
 {
     /**
      * @brief Customizable wave that can be applied to all waters or to only a small area.  
      */
+    [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_wave.html")]
     public class SwellWave : MonoBehaviour
     {
         public enum Type
@@ -20,14 +20,12 @@ namespace Swell
             custom = 6
         }
 
-        private const string H1 = " ";
-
-        [Header(H1 + "Basic Settings" + H1)] [SerializeField]
-        private bool waveEnabled = true;
-
+        [Separator("Basic Settings")] 
+        [SerializeField] private bool waveEnabled = true;
+        
         [SerializeField] private Type waveType = Type.rounded;
 
-        [SerializeField] private AnimationCurve customWave = new AnimationCurve(new Keyframe[]
+        [SerializeField, ConditionalField(nameof(waveType), false, Type.custom)] private AnimationCurve customWave = new AnimationCurve(new Keyframe[]
         {
             new Keyframe(0, 0, 0, 0, 0, 0),
             new Keyframe(.25f, -1, 0, 0, .5f, .5f),
@@ -38,37 +36,39 @@ namespace Swell
 
         [SerializeField] private float waveHeight = 1;
         [SerializeField] private Vector2 waveScale = Vector2.one;
-        [SerializeField] private Vector2 waveOffset = Vector2.one;
-        [SerializeField] private Vector2 waveSpeed = Vector2.zero;
+        [SerializeField] private Vector2 waveOffset = Vector2.zero;
+        [SerializeField] private Vector2 waveSpeed = Vector2.one * .1f;
         [SerializeField, Range(0, 360)] private float waveRotation = 0;
 
-        [Header(H1 + "Spread" + H1)] [SerializeField]
-        private float spread = 0;
-
-        [SerializeField] private AnimationCurve spreadCurve = new AnimationCurve(new Keyframe[]
+        [Separator("Spread")]
+        [OverrideLabel("")]
+        [SerializeField] private bool spread = false;
+        [FormerlySerializedAs("spread")] [SerializeField, ConditionalField(nameof(spread))] private float spreadRadius = 10;
+        [SerializeField, ConditionalField(nameof(spread))] private AnimationCurve spreadCurve = new AnimationCurve(new Keyframe[]
         {
             new Keyframe(0, 1, 0, 0, .5f, .5f),
             new Keyframe(1, 0, 0, 0, .5f, .5f),
         });
 
-        [Header(H1 + "Interpolate" + H1)] [SerializeField]
-        private bool interpolate = true;
+        [Separator("Interpolate")]
+        [OverrideLabel("")]
+        [SerializeField] private bool interpolate = true;
 
-        [SerializeField] private float interpolationTime = 10;
+        [SerializeField, ConditionalField(nameof(interpolate))] private float interpolationTime = 10;
 
-        [SerializeField] private AnimationCurve interpolationCurve = new AnimationCurve(new Keyframe[]
+        [SerializeField, ConditionalField(nameof(interpolate))] private AnimationCurve interpolationCurve = new AnimationCurve(new Keyframe[]
         {
             new Keyframe(0, 0, 0, 0, .5f, .5f),
             new Keyframe(1, 1, 0, 0, .5f, .5f),
         });
+ 
+        [Separator("Fluctuate")]
+        [OverrideLabel("")]
+        [SerializeField] private bool fluctuate = false;
+        [SerializeField, ConditionalField(nameof(fluctuate))] private float fluctuatePeriodTime = 10;
+        [SerializeField, ConditionalField(nameof(fluctuate)), Range(0, 1)] private float fluctuateOffset = 0;
 
-        [Header(H1 + "Fluctuate" + H1)] [SerializeField]
-        private bool fluctuate = false;
-
-        [SerializeField] private float fluctuatePeriodTime = 10;
-        [SerializeField, Range(0, 1)] private float fluctuateOffset = 0;
-
-        [SerializeField] private AnimationCurve fluctuateCurve = new AnimationCurve(new Keyframe[]
+        [SerializeField, ConditionalField(nameof(fluctuate))] private AnimationCurve fluctuateCurve = new AnimationCurve(new Keyframe[]
         {
             new Keyframe(0, -1, 0, 0, .5f, .5f),
             new Keyframe(.5f, 1, 0, 0, .5f, .5f),
@@ -100,6 +100,15 @@ namespace Swell
         {
             UpdateAdjustedWaveHeight();
             position = transform.position;
+        }
+
+        private void OnDisable()
+        {
+            activeAndEnabled = isActiveAndEnabled;
+        }
+
+        private void OnEnable()
+        {
             activeAndEnabled = isActiveAndEnabled;
         }
 
@@ -212,49 +221,40 @@ namespace Swell
 
         public float GetSpread(float spreadPositionX, float spreadPositionY)
         {
-            float xSpradRatio = (spreadPositionX < 0 ? -spreadPositionX : spreadPositionX) / spread;
+            spreadPositionX -= 1;
+            spreadPositionY -= 1;
+            
+            float xSpradRatio = (spreadPositionX * spreadPositionX) / (spreadRadius * spreadRadius);
+            float ySpradRatio = (spreadPositionY * spreadPositionY) / (spreadRadius * spreadRadius);
             xSpradRatio = xSpradRatio > 1 ? 1 : xSpradRatio;
-            float ySpradRatio = (spreadPositionY < 0 ? -spreadPositionY : spreadPositionY) / spread;
             ySpradRatio = ySpradRatio > 1 ? 1 : ySpradRatio;
+            
             float curveTime = 1 - (1 - xSpradRatio) * (1 - ySpradRatio);
+            // float curveTime = xSpradRatio * ySpradRatio;
             return spreadCurve.Evaluate(curveTime);
-
-            //The above is an optimize version of this code. Including because it's hard to read. Basically just replaced
-            //min and abs functions.
-            // float xSpradRatio = Mathf.Min(Mathf.Abs(spreadPositionX) / spread, 1);
-            // float ySpradRatio = Mathf.Min(Mathf.Abs(spreadPositionY) / spread, 1);
-            // float curveTime = 1 - (1 - xSpradRatio) * (1 - ySpradRatio);
-            // return spreadCurve.Evaluate(curveTime);
         }
 
         //Possible optimization: If for each wave we figured out the phase we can calculate the height only across the
         //phase once then use mod to lookup the height on repeated patterns. Still would have to calculate spread.  
         public float GetHeight(float x, float y, bool ignoreInterpolation = false)
         {
-            // Profiler.BeginSample("isActiveAndEnabled");
             if (!activeAndEnabled)
             {
                 return 0;
             }
-            // Profiler.EndSample();
 
             //  https://www.wolframalpha.com/input/?i=2%5E%28-+%28x%5E2+%2F+%282*2%5E2%29%29+-+%28y%5E2+%2F+%282*2%5E2%29%29%29+++++++x%3D-5+to+5+y%3D-5+to5
             //  https://www.wolframalpha.com/input/?i=Gaussian+Distribution
             float spreadMultiplier = 1;
 
             
-            // Profiler.BeginSample("Spread");
-
-            if (spread > 0)
+            if (spread)
             {
                 float spreadPositionX = x - position.x;
                 float spreadPositionY = y - position.z;
                 spreadMultiplier = GetSpread(spreadPositionX, spreadPositionY);
             }
-
-            // Profiler.EndSample();
-
-            // Profiler.BeginSample("waveRotation");
+            
             if (waveRotation != 0)
             {
                 //  Should consider rotating grids in bulk earlier with unit quaternion
@@ -264,46 +264,24 @@ namespace Swell
                 x = rotatedPosition.x + position.x;
                 y = rotatedPosition.z + position.z;
             }
-            // Profiler.EndSample();
 
             float height = 0;
             if (spreadMultiplier > 0)
             {
-
-                // Profiler.BeginSample("Calculate wave height");
                 if (waveType == Type.rounded)
                 {
                     //https://www.wolframalpha.com/input/?i=sin%28x%29%2C+x%3D-5+to+5+y%3D-5+to+5
 
-                    // Vector2 adjustedOffset = waveOffset + waveSpeed * Time.time;
                     adjustedOffset = new Vector2(
                         waveOffset.x + waveSpeed.x * Time.time,
                         waveOffset.y + waveSpeed.y * Time.time
                     );
 
-                    // height = Mathf.Sin(
-                    //     (x * waveScale.x + adjustedOffset.x) * periodX + 
-                    //     (y * waveScale.y + adjustedOffset.y) * periodY
-                    // ) * (enabled ? WaveHeight : 0);
-
-                    // height = Mathf.Sin((x * waveScale.x + adjustedOffset.x) + periodX) *
-                    // Mathf.Sin((y * waveScale.y + adjustedOffset.y) + periodY) * 
-                    // (enabled ? WaveHeight : 0);  
-
                     height = Mathf.Sin((x * waveScale.x / 10 + adjustedOffset.x) * Mathf.PI + 1) *
                              Mathf.Sin((y * waveScale.y / 10 + adjustedOffset.y) * Mathf.PI + 1);
-
-                    // height = Mathf.Sin((x * waveScale.x + adjustedOffset.x) * periodX) *
-                    // Mathf.Sin((y * waveScale.y + adjustedOffset.y) * periodY) * 
-                    // (enabled ? WaveHeight : 0);
-
-                    // height = Mathf.Sin(((x + adjustedOffset.x) * waveScale.x) * periodX) *
-                    // Mathf.Sin(((y + adjustedOffset.y) * waveScale.y) * periodY) * 
-                    // (enabled ? WaveHeight : 0);   
                 }
                 else if (waveType == Type.pointed)
                 {
-                    // Vector2 adjustedOffset = waveOffset + waveSpeed * Time.time;
                     adjustedOffset = new Vector2(
                         waveOffset.x + waveSpeed.x * Time.time,
                         waveOffset.y + waveSpeed.y * Time.time
@@ -325,25 +303,6 @@ namespace Swell
                 else if (waveType == Type.ripple)
                 {
                     //https://www.wolframalpha.com/input/?i=sin%283+*+%28+sqrt%28x*x+%2B+y*y%29+%2F+10+%29+*+pi*2+%2B+1%29%2C+x%3D-5+to+5+y%3D-5+to5
-
-                    // Vector2 offset = Time.time * waveSpeed + waveOffset;
-                    // Vector2 delta = new Vector2(
-                    //     x * waveScale.x + offset.x,
-                    //     y * waveScale.y + offset.y
-                    // );
-                    // //Math.abs((Math.sin(WAVE_COUNT * (Math.sqrt((x) * (x) + (y) * (y)) / WIDTH) * RAD + phaseShift) + 1)
-                    // height = Mathf.Sin(3 * (Mathf.Sqrt(delta.x * delta.x + delta.y * delta.y) / 10) * Mathf.PI * 2 + 1);
-
-                    //float distance = 5;
-                    // float spread = Mathf.Pow(Mathf.Sqrt(2 * Mathf.PI), -Mathf.Pow(y / distance, 2) / 2) * 10;
-
-
-                    // float spread = 
-                    //     (Mathf.Pow(Mathf.Sqrt(2 * Mathf.PI), -Mathf.Pow(x / distance, 2) / 2)
-                    //      + Mathf.Pow(Mathf.Sqrt(2 * Mathf.PI), -Mathf.Pow(y / distance, 2) / 2))
-                    //     / waveScale.y;
-
-                    // height = spread * WaveHeight; 
 
                     //waveScale.y, waveSpeed.y, and waveOffset.y not used.
                     waveScale.y = waveScale.x;
@@ -419,18 +378,13 @@ namespace Swell
                         (customWave.Evaluate(adjustedPosition.x) +
                          customWave.Evaluate(adjustedPosition.y)) / 2;
                 }
-                // Profiler.EndSample();
             }
 
-            // Profiler.BeginSample("Apply spread and interpolation");
             height *= ignoreInterpolation ? 1 : adjustedWaveHeight;
             height *= spreadMultiplier;
-            // Profiler.EndSample();
 
             return height;
         }
-
-        // public bool IsEnabled => waveEnabled && enabled && gameObject.activeInHierarchy;
 
         /// <summary>
         ///   <para>Weather the wave is enabled or not. We use this instead of "Component.enabled" because when disabled

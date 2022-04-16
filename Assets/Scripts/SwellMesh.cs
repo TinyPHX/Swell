@@ -1,14 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
 using System.Text;
-using Unity.Profiling;
+using MyBox;
 using UnityEngine;
-using UnityEngine.Analytics;
-using UnityEngine.UIElements;
 using Color = UnityEngine.Color;
 
 #if UNITY_EDITOR
@@ -20,22 +15,81 @@ namespace Swell
     /**
      * @brief Dynamic mesh used to render water surface.
      */
-    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+    [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_mesh.html")]
+    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer)), ExecuteInEditMode]
     public class SwellMesh : MonoBehaviour
     {
-        /**
-         * @brief Represents mesh grid fidelity levels.
-         */
+        [SerializeField, Min(1)] private int startGridSize = 1;
+        [SerializeField, Min(0)] private int maxSize = 10;
+        [SerializeField, ReadOnly] private float currentSize = 10;
+        [SerializeField] private MeshLevel[] levels = {};
+        [SerializeField] private bool top = true;
+        [SerializeField] private bool bottom = true;
+        
+        private MeshFilter meshFilter;
+        private MeshRenderer meshRenderer;
+        private List<Vector3> vertices = new();
+        private List<Vector2> uv = new();
+        private List<Vector3> normals = new();
+        private List<int> triangles = new();
+        private List<int> triangles2 = new();
+
+        private MeshVectors topMeshVectors = new MeshVectors();
+        private MeshVectors bottomMeshVectors = new MeshVectors();
+        private bool needsGeneration;
+        private float maxLevelSize;
+
         [Serializable]
         public class  MeshLevel
         {
-            [SerializeField] private float step;
-            [SerializeField] private float size;
+            [HideInInspector] public string name;
+            [SerializeField, Min(1)] private int factor = 1; //factor:1
+            [SerializeField, Min(0)] private int count;
+            
+            private float step;
+            private float size;
+            private float maxSize;
 
-            public MeshLevel(float step, float size)
+            public MeshLevel(int factor, int count)
             {
+                this.factor = factor;
+                this.count = count;
+            }
+
+            public MeshLevel(int factor, int count, float step, float size)
+            {
+                this.factor = factor;
+                this.count = count;
                 this.step = step;
                 this.size = size;
+            }
+
+            public void Validate(SwellMesh swellMesh)
+            {
+                float savedStep = step;
+                float savedSize = size;
+                float savedMaxSize = maxSize;
+                step = GetStep(swellMesh);
+                size = GetSize(swellMesh);
+                maxSize = GetSize(swellMesh, false);
+
+                int index = Array.IndexOf(swellMesh.Levels, this);
+                name = "Level " + (index + 1);
+                
+                // previous size must be divisible by step with no remainder
+
+                if (index > 0)
+                {
+                    float previousSize = swellMesh.Levels[index - 1].GetSize(swellMesh, false);
+                    if (previousSize % step != 0)
+                    {
+                        step = savedStep;
+                        size = savedSize;
+                        maxSize = savedMaxSize;
+                        Debug.LogWarning("Invalid SwellMesh size settings for " + swellMesh.gameObject.name + " - " + name);
+                        name += " (WARN: Invalid factor)";
+                    }
+                }
             }
 
             public bool InBounds(float x, float y)
@@ -46,37 +100,56 @@ namespace Swell
                 return x >= -size && y >= -size && x <= size && y <= size;
             }
 
-            // public int VertWidth => (int)(size + 1);
-            // public int VertHeight => (int)(size + 1);
-            // public int VertCount => VertWidth * VertHeight;
-            public Vector3 Offset => new (size / 2f, 0, size / 2f);
+            public float Offset => size / 2f;
             public int VertWidth => (int)(size / step) + 1;
             public float Step => step;
             public float Size => size;
-        }
- 
-        [SerializeField] private MeshLevel[] levels = new []
-        {
-            new MeshLevel(2,16), 
-            new MeshLevel(4, 32),
-            new MeshLevel(8, 64),
-            new MeshLevel(16, 128),
-            new MeshLevel(32,256), 
-            new MeshLevel(64, 512),
-            new MeshLevel(128, 1024),
-            new MeshLevel(256, 2048),
-        };
-        [SerializeField] private bool top = true;
-        [SerializeField] private bool bottom = true;
-        // [SerializeField] private bool splitTopAndBottom = false; //Add ability to apply different materials
-        
-        private MeshFilter meshFilter;
-        private List<Vector3> vertices = new();
-        private List<Vector2> uv = new();
-        private List<Vector3> normals = new();
-        private List<int> triangles = new();
-        private List<int> triangles2 = new();
+            public float MaxSize => maxSize;
 
+            public Vector3 GetOffset(SwellMesh swellMesh)
+            {
+                float totalSize = GetSize(swellMesh);
+                return new (totalSize / 2f, 0, totalSize / 2f);
+            }
+
+            private float GetStep(SwellMesh swellMesh)
+            {
+                return GetCumulativeFactor(swellMesh) * swellMesh.StartGridSize;
+            }
+            
+            private float GetCumulativeFactor(SwellMesh swellMesh)
+            {
+                int index = Array.IndexOf(swellMesh.Levels, this);
+                
+                if (index == 0)
+                {
+                    return factor;
+                }
+                else
+                {
+                    return swellMesh.Levels[index - 1].GetCumulativeFactor(swellMesh) * factor;
+                }
+            }
+            
+            private float GetSize(SwellMesh swellMesh, bool adjust=true)
+            {
+                int index = Array.IndexOf(swellMesh.Levels, this);
+                float cumulativeFactor = GetCumulativeFactor(swellMesh);
+                float currentSize = swellMesh.StartGridSize * cumulativeFactor * (count * 2);
+                
+                if (index > 0)
+                {
+                    currentSize += swellMesh.Levels[index - 1].GetSize(swellMesh, adjust);
+                }
+
+                while (adjust && currentSize > swellMesh.MaxSize && swellMesh.MaxSize > 0)
+                {
+                    currentSize -= swellMesh.StartGridSize * cumulativeFactor * 2;
+                }
+
+                return currentSize;
+            }
+        }
         private class MeshVectors
         {
             public Dictionary<(float, float), int> positionToIndex = new();
@@ -91,12 +164,14 @@ namespace Swell
             }
         }
 
-        private MeshVectors topMeshVectors = new MeshVectors();
-        private MeshVectors bottomMeshVectors = new MeshVectors();
-
         void Start()
         {
             GenerateMesh();
+        }
+
+        public void MeshLevelValidation()
+        {
+            levels.ForEach(level => level.Validate(this));
         }
 
         public void GenerateMesh(float step, int size)
@@ -108,16 +183,19 @@ namespace Swell
         {
             levels = new []
             {
-                new MeshLevel(step ,size)
+                new MeshLevel(1 ,size)
             };
             this.top = top;
             this.bottom = bottom;
             
             GenerateMesh();
         }
-
+        
+        [ButtonMethod]
         public void GenerateMesh()
         {
+            MeshLevelValidation();
+            
             Mesh = new Mesh();
             vertices.Clear();
             uv.Clear();
@@ -127,16 +205,26 @@ namespace Swell
             topMeshVectors.Clear();
             bottomMeshVectors.Clear();
             Mesh.subMeshCount = 2;
-            // vertices = new();
-            // uv = new();
-            // normals = new();
-            // triangles = new();
 
-            for (var i = 0; i < levels.Length; i++)
+            MeshLevel[] tempLevels = Levels;
+
+            if (tempLevels.Length == 0)
             {
-                MeshLevel topLevel = levels[^1];
-                MeshLevel innerLevel = i > 0 ? levels[i - 1] : null;
-                MeshLevel level = levels[i];
+                int size = MaxSize - MaxSize % StartGridSize;
+                tempLevels = new[]
+                {
+                    new MeshLevel(1, size, StartGridSize, size),
+                };
+            }
+            
+            currentSize = tempLevels.Last().Size;
+            maxLevelSize = tempLevels.Last().MaxSize;
+
+            for (var i = 0; i < tempLevels.Length; i++)
+            {
+                MeshLevel topLevel = tempLevels[^1];
+                MeshLevel innerLevel = i > 0 ? tempLevels[i - 1] : null;
+                MeshLevel level = tempLevels[i];
                 if (top)
                 {
                     AddToMesh(level, topLevel, innerLevel);
@@ -151,103 +239,12 @@ namespace Swell
             Mesh.vertices = vertices.ToArray();
             Mesh.uv = uv.ToArray();
             Mesh.normals = normals.ToArray();
-            // Mesh.triangles = triangles.ToArray();
             Mesh.SetTriangles(triangles, 0);
             Mesh.SetTriangles(triangles2, 1);
 
             Mesh.RecalculateBounds();
             Mesh.RecalculateTangents();
         }
-
-        // public void GenerateMesh()
-        // {
-        //     levels = new[]
-        //     {
-        //         new MeshLevel(1, 5),
-        //         new MeshLevel(1, 20),
-        //     };
-        //     
-        //     MeshLevel level = levels[0];
-        //     int sides = Convert.ToInt32(bottom) + Convert.ToInt32(top);
-        //     int arrayLength = level.VertCount * sides;
-        //     
-        //     Mesh = new Mesh();
-        //     Mesh.vertices = new Vector3[arrayLength];
-        //     Mesh.uv = new Vector2[arrayLength];
-        //     Mesh.normals = new Vector3[arrayLength];
-        //     Mesh.triangles = new int[(arrayLength - (level.VertWidth + level.VertHeight - 1) * sides) * 2 * 3]; // number of triangles per grid (2) times 3 (one for each corner)
-        //     
-        //     vertIndex = -1;
-        //     triCount = 0;
-        //     
-        //     if (top)
-        //     {
-        //         AddToMesh(levels[0]);
-        //     }
-        //     if (bottom)
-        //     {
-        //         AddToMesh(levels[0], true);
-        //     }
-        //     
-        //     Mesh.RecalculateBounds();
-        // }
-
-        // private void AddAllToMesh()
-        // {
-        //     int density = 2;
-        //     int[] levelWidth = { 10, 20 };
-        //     int[] levelFactor = { 1, 2 };
-        //     int levels = levelWidth.Length;
-        //     
-        //     Mesh = new Mesh();
-        //     List<Vector3> vertices = new List<Vector3>();
-        //     List<Vector2> uv = new List<Vector2>();
-        //     List<Vector3> normals = new List<Vector3>();
-        //     List<int> triangles = new List<int>();
-        //     
-        //     int width = levelWidth[levels] + 1;
-        //     int height = levelWidth[levels] + 1;
-        //     Vector3 offset = new Vector3((width - 1) / 2f, 0, (height - 1) / 2f)
-        //     int normalDirection = bottom ? -1 : 1;
-        //
-        //     for (int x = 0; x < width; x++)
-        //     {
-        //         for (int y = 0; y < height; y++)
-        //         {
-        //             vertices.Add(new Vector3(x, 0, y) - offset);
-        //             uv.Add(new Vector2(x / (float)(width - 1),  y / (float)(height - 1)));
-        //             normals.Add(new Vector3(0, normalDirection, 0));
-        //     
-        //             if (x > 0 && y > 0)
-        //             {
-        //                 int[] p =
-        //                 {
-        //                     vertIndex + 1 + width * (y - 1) + (x - 1),
-        //                     vertIndex + 1 + width * (y - 0) + (x - 1),
-        //                     vertIndex + 1 + width * (y - 1) + (x - 0),
-        //                     vertIndex + 1 + width * (y - 0) + (x - 0)
-        //                 };
-        //     
-        //                 List<int> triOrder = new List<int>() { 0, 1, 2, 1, 3, 2 };
-        //     
-        //                 if (bottom)
-        //                 {
-        //                     triOrder.Reverse();
-        //                 }
-        //     
-        //                 foreach (int triIndex in triOrder)
-        //                 {
-        //                     triangles.Add(p[triIndex]);
-        //                 }
-        //             }
-        //         }
-        //     }
-        //
-        //     Mesh.vertices = vertices.ToArray();
-        //     Mesh.uv = uv.ToArray();
-        //     Mesh.normals = normals.ToArray();
-        //     Mesh.triangles = triangles.ToArray();
-        // }
 
         private bool AddVector(float x, float y, int index, bool bottom=false)
         {
@@ -325,16 +322,22 @@ namespace Swell
             float topSize = topLevel.Size;
             float innerDistance = (innerLevel?.Size) / 2 ?? 0;
             float density = newMeshLevel.Step;
-            Vector3 offset = newMeshLevel.Offset;  //new Vector3((width - 1) / 2f, 0, (height - 1) / 2f)
+            float offset = newMeshLevel.Offset;
             int normalDirection = bottom ? -1 : 1;
 
+            if (density <= 0)
+            {
+                Debug.LogWarning("Swell Mesh not updated. Start Size must be > 0");
+                return;
+            }
+            
             float step = density;
             for (float xi = 0; xi <= meshSize; xi += step)
             {
                 for (float yi = 0; yi <= meshSize; yi += step)
                 {
-                    float x = xi - offset.x;
-                    float y = yi - offset.z;
+                    float x = xi - offset;
+                    float y = yi - offset;
 
                     if (x <= -innerDistance || y <= -innerDistance || x > innerDistance || y > innerDistance)
                     {
@@ -371,75 +374,6 @@ namespace Swell
                     }
                 }
             }
-        }
-
-        // private void AddToMesh(MeshLevel newMeshLevel, bool bottom = false)
-        // {
-        //     Vector3[] vertices = Mesh.vertices;
-        //     Vector2[] uv = Mesh.uv;
-        //     Vector3[] normals = Mesh.normals;
-        //     int[] triangles = Mesh.triangles;
-        //     
-        //     int width = newMeshLevel.VertWidth;
-        //     int height = newMeshLevel.VertWidth;
-        //     float density = newMeshLevel.Density;
-        //     Vector3 offset = newMeshLevel.Offset;  //new Vector3((width - 1) / 2f, 0, (height - 1) / 2f)
-        //     int normalDirection = bottom ? -1 : 1;
-        //
-        //     int newVertIndex = 0;
-        //
-        //     for (int x = 0; x < width; x++)
-        //     {
-        //         for (int y = 0; y < height; y++)
-        //         {
-        //             newVertIndex = vertIndex + 1 + width * y + x;
-        //     
-        //             vertices[newVertIndex] = new Vector3(x, 0, y) - offset;
-        //             uv[newVertIndex] = new Vector2(x / (float)(width - 1),  y / (float)(height - 1));
-        //             normals[newVertIndex] = new Vector3(0, normalDirection, 0);
-        //     
-        //             if (x > 0 && y > 0)
-        //             {
-        //                 int[] p =
-        //                 {
-        //                     vertIndex + 1 + width * (y - 1) + (x - 1),
-        //                     vertIndex + 1 + width * (y - 0) + (x - 1),
-        //                     vertIndex + 1 + width * (y - 1) + (x - 0),
-        //                     vertIndex + 1 + width * (y - 0) + (x - 0)
-        //                 };
-        //     
-        //                 List<int> triOrder = new List<int>() { 0, 1, 2, 1, 3, 2 };
-        //     
-        //                 if (bottom)
-        //                 {
-        //                     triOrder.Reverse();
-        //                 }
-        //     
-        //                 foreach (int triIndex in triOrder)
-        //                 {
-        //                     triangles[triCount++] = p[triIndex];
-        //                 }
-        //             }
-        //         }
-        //     }
-        //
-        //     vertIndex = newVertIndex;
-        //
-        //     Mesh.vertices = vertices;
-        //     Mesh.uv = uv;
-        //     Mesh.normals = normals;
-        //     Mesh.triangles = triangles;
-        // }
-
-        private string Strigify<T>(T[] array)
-        {
-            StringBuilder stringBuilder = new StringBuilder(); 
-            foreach(var item in array)
-            {
-                stringBuilder.Append(item.ToString()).Append("\n");
-            }
-
-            return stringBuilder.ToString();
         }
         
         public Mesh Mesh
@@ -478,21 +412,63 @@ namespace Swell
             }
         }
 
-        public float Size => levels.Last().Size;
+        public float Size => levels != null && levels.Length > 0 ? levels.Last().Size : MaxSize;
 
         public MeshLevel[] Levels
         {
             get => levels;
-            set => levels = value;
+            set
+            {
+                levels = value;
+                MeshLevelValidation();
+            }
+        }
+
+        public int MaxSize
+        {
+            get => maxSize;
+            set => maxSize = value;
+        }
+
+        public int StartGridSize
+        {
+            get => startGridSize;
+            set => startGridSize = value;
         }
         
-        #if UNITY_EDITOR
+        private MeshRenderer MeshRenderer
+        {
+            get
+            {
+                if (!meshRenderer)
+                {
+                    meshRenderer = GetComponent<MeshRenderer>();
+                }
+        
+                return meshRenderer;
+            }
+        }
+
+#if UNITY_EDITOR
         void OnDrawGizmosSelected()
         {
-            if (Selection.transforms.First() == this.transform)
+            if (Selection.transforms.First() == transform && Mesh && Mesh.vertexCount > 0)
             {
                 Gizmos.color = Color.grey;
                 Gizmos.DrawWireMesh(Mesh, transform.position, transform.rotation, transform.lossyScale);
+
+                if (maxSize > 0)
+                {
+                    if (maxLevelSize > maxSize)
+                    {
+                        Gizmos.color = Color.yellow;
+                    }
+                    else
+                    {
+                        Gizmos.color = Color.green;
+                    }
+                    Gizmos.DrawWireCube(transform.position, new Vector3(maxSize, 0, maxSize));
+                }
             }
         }
         #endif

@@ -24,9 +24,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2399464497932029724}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -60, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -92,7 +93,8 @@ MonoBehaviour:
   waveOffset: {x: 1, y: 1}
   waveSpeed: {x: 0, y: -0.1}
   waveRotation: 0
-  spread: 30
+  spread: 1
+  spreadRadius: 25
   spreadCurve:
     serializedVersion: 2
     m_Curve:
@@ -117,7 +119,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  interpolate: 0
+  interpolate: 1
   interpolationTime: 10
   interpolationCurve:
     serializedVersion: 2

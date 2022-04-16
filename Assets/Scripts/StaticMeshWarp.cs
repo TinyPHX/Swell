@@ -7,6 +7,7 @@ namespace Swell
     /**
      * @brief Helper class used to create static water horizon. This was possibly made obsolete by SwellMesh.
      */
+    [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_static_mesh_warp.html")]
     public class StaticMeshWarp : MonoBehaviour {
 
         public MeshFilter meshFilter;

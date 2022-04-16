@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using UnityEditor;
+using MyBox;
 using UnityEngine;
-using UnityEngine.Profiling;
 using UnityEngine.Rendering;
 
 namespace Swell
 {
     /**
-     * @brief Creates SwellMesh, applies SwellWave s, and provides API to retrieve or modify water. 
+     * @brief Creates SwellMesh, applies SwellWave s, and provides API to retrieve or modify water.
+     * 
      */
+    [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_water.html")]
     public class SwellWater : MonoBehaviour
     {
-        private const string H1 = " ";
-
-        [Header(H1 + "Mesh" + H1)] 
-        [SerializeField] private bool useSwellMesh = false;
-        [SerializeField] private SwellMesh swellMesh;
-        [SerializeField] private float mainTextureSize = 0;
-        [SerializeField] private int secondaryTextureSize = 0;
-        [SerializeField] private MeshFilter meshFilterPrefab;
-        [SerializeField] private Material material;
-        [SerializeField] private ShadowCastingMode shadowCastingMode = ShadowCastingMode.Off;
-        [SerializeField] private bool receiveShadows = false;
-        [SerializeField] private bool lockAlbedoPosition;
-        [SerializeField] private Transform meshAlbedoPosition;
+        [Separator("Basic Settings")] 
+        [SerializeField] private Material material;//!< TODO
+        
+        [Separator("Mesh Settings")] 
+        [SerializeField] private bool useSwellMesh = false; //!< TODO: This is how you add member docs in doxigen. 
+        [SerializeField, ConditionalField(nameof(useSwellMesh))] private SwellMesh swellMesh; //!< TODO
+        [SerializeField, ConditionalField(nameof(useSwellMesh))] private float mainTextureSize = 0;//!< TODO
+        [SerializeField, ConditionalField(nameof(useSwellMesh))] private int secondaryTextureSize = 0;//!< TODO
+        [SerializeField, ConditionalField(nameof(useSwellMesh), inverse:true)] private MeshFilter meshFilterPrefab;//!< TODO
+        [SerializeField] private ShadowCastingMode shadowCastingMode = ShadowCastingMode.Off;//!< TODO
+        [SerializeField] private bool receiveShadows = false;//!< TODO
+        [SerializeField] private Transform meshAlbedoPosition;//!< TODO
+        [SerializeField] private bool remapUvs = false; //!< TODO
         
         private GameObject meshFilterGrid;
         private bool combineMeshes = true;
@@ -37,34 +37,35 @@ namespace Swell
         private bool meshMoved = true;
         private Vector3 position;
         
-        [Header(H1+"Basic Settings"+H1)]
-        [SerializeField] private int gridSize = 10; //number of tiles in water square
-        private float gridDensity = 1; //distance between vectors
-        private int tileWidth = 10; //Width of each tile
+        [SerializeField] private int gridSize = 10; //!< number of tiles in water square
+        private float gridDensity = 1;
+        private int tileWidth = 10;
         private float centerOffset;
-        [SerializeField] private bool remapUvs = false;
+        
+        [Separator("Position Anchoring")] 
+        [OverrideLabel("")]
+        [SerializeField] private bool usePositionAnchor = false;//!< TODO
+        [SerializeField, ConditionalField(nameof(usePositionAnchor))] private GameObject positionAnchor;//!< TODO
+        [SerializeField, ConditionalField(nameof(usePositionAnchor))] private Vector2 positionStep = Vector2.one * 10;//!< TODO
+        [SerializeField, ConditionalField(nameof(usePositionAnchor))] private bool lockAlbedoPosition;//!< TODO
 
-        [Header(H1+"Water Horizon"+H1)]
-        [SerializeField] private bool showWaterHorizon;
-        [SerializeField] private Material horizonMaterial;
-        [SerializeField] private GameObject waterHorizon;
+        [Separator("Water Horizon")] 
+        [OverrideLabel("")]
+        [SerializeField] private bool showWaterHorizon;//!< TODO
+        [SerializeField, ConditionalField(nameof(showWaterHorizon))] private Material horizonMaterial;//!< TODO
+        [SerializeField, ConditionalField(nameof(showWaterHorizon))] private GameObject waterHorizon;//!< TODO
         
-        [Header(H1+"Position Anchoring"+H1)]
-        [SerializeField] private bool usePositionAnchor = false;
-        [SerializeField] private GameObject positionAnchor;
-        [SerializeField] private Vector2 positionStep = Vector2.one * 10;
-        
-        [Header(H1+"Normals"+H1)]
-        [SerializeField] private bool lowPolyNormals = false;
-        [SerializeField] private bool calculateNormals = true;
-        [SerializeField] private float calculateNormalsFrequency = 1; //in seconds
+        [Separator("Calculate Normals")] 
+        [OverrideLabel("")]
+        [SerializeField] private bool calculateNormals = true;//!< TODO
+        [SerializeField, ConditionalField(nameof(calculateNormals))] private bool lowPolyNormals = false;//!< TODO
+        [SerializeField, ConditionalField(nameof(calculateNormals))] private float calculateNormalsFrequency = 1; //!< TODO (in seconds)
         private float lastCalculateNormalsTime = 0;
         
-        [Header(H1+"Height Map"+H1)]
+        [Separator("Height Map")] 
         private Dictionary<long, float> heightMapDict;
-        [SerializeField] private bool useHeightMapArray = true; // This was created for debugging and is almost always faster to be set to true.
+        private bool useHeightMapArray = true; // This was created for debugging and is almost always faster to be set to true.
         private float[][,] heightMapArray;
-        private bool heightMapInitialized = false;
 
         private List<GameObject> instantiatedList = new List<GameObject>();
 
@@ -755,22 +756,22 @@ namespace Swell
         
         float PositionToGridX(float positionX, SwellMesh.MeshLevel level)
         {
-            return positionX - (positionX + level.Offset.x - position.x) % level.Step;
+            return positionX - (positionX + level.Offset - position.x) % level.Step;
         }
         
         float PositionToGridY(float positionY, SwellMesh.MeshLevel level)
         {   
-            return positionY - (positionY + level.Offset.z - position.z) % level.Step;
+            return positionY - (positionY + level.Offset - position.z) % level.Step;
         }
         
         int PositionToIndexX(float positionX, SwellMesh.MeshLevel level)
         {
-            return (int) ((positionX + level.Offset.x - position.x) / level.Step);
+            return (int) ((positionX + level.Offset - position.x) / level.Step);
         }
         
         int PositionToIndexY(float positionY, SwellMesh.MeshLevel level)
         {
-            return (int) ((positionY + level.Offset.z - position.z) / level.Step);
+            return (int) ((positionY + level.Offset - position.z) / level.Step);
         }
         
         int PositionToIndexX(float positionX)
@@ -785,12 +786,12 @@ namespace Swell
 
         float IndexToPositionX(int indexX, SwellMesh.MeshLevel level)
         {
-            return (indexX - .5f) * level.Step - level.Offset.x + position.x;
+            return (indexX - .5f) * level.Step - level.Offset + position.x;
         }
         
         float IndexToPositionY(int indexY, SwellMesh.MeshLevel level)
         {
-            return (indexY - .5f) * level.Step - level.Offset.z + position.z;
+            return (indexY - .5f) * level.Step - level.Offset + position.z;
         }
 
         int PositionToIndex(float position, float parentPosition)
@@ -891,8 +892,6 @@ namespace Swell
                     }
                 }
             }
-            
-            heightMapInitialized = true;
         }
 
         void UpdateMeshes()

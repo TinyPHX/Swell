@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using MyBox;
 
 
 namespace Swell
@@ -93,6 +93,7 @@ namespace Swell
      *
      * @remark This is awesome!
      */
+    [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_floater.html")]
     public class SwellFloater : MonoBehaviour
     {
         public enum Method
@@ -101,18 +102,20 @@ namespace Swell
             ACCURATE
         };
 
+        [Separator("Basic Settings")] 
         [SerializeField] private float buoyancy = 1;
-
-        [SerializeField] private new Rigidbody rigidbody;
-        [SerializeField] private Method depthMethod = Method.ACCURATE;
-        [SerializeField] private Method floatMethod = Method.ACCURATE;
         [SerializeField] private Vector3 center = Vector3.zero;
-        [SerializeField] private bool stabilize = false;
 
-        private SwellWater water;
+        [Separator("Advanced")] 
+        [SerializeField] private bool showAdvanced;
+        [SerializeField, ConditionalField(nameof(showAdvanced))] private Method depthMethod = Method.ACCURATE;
+        [SerializeField, ConditionalField(nameof(showAdvanced))] private Method floatMethod = Method.ACCURATE;
+        [SerializeField, ConditionalField(nameof(showAdvanced))] private bool stabilize = false;
+        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private new Rigidbody rigidbody;
+        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private SwellWater water;
+        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private float depth;
+        
         private float attachedWeight = 1;
-        private float depth;
-
         private static Dictionary<Rigidbody, List<SwellFloater>> attachedFloaters =
             new Dictionary<Rigidbody, List<SwellFloater>>();
 

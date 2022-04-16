@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['allfloaters_0',['AllFloaters',['../class_swell_1_1_swell_manager.html#a963ba1c6801a6f91707b1d8f6dcd61e5',1,'Swell::SwellManager']]],
-  ['allwaters_1',['AllWaters',['../class_swell_1_1_swell_manager.html#a21877cb790221c49027b67e684f96d91',1,'Swell::SwellManager']]],
-  ['allwaves_2',['AllWaves',['../class_swell_1_1_swell_manager.html#acda26edce06695589c531198861d6346',1,'Swell::SwellManager']]],
-  ['attachedfloaters_3',['AttachedFloaters',['../class_swell_1_1_swell_floater.html#abbefa5deb0090c16953c3711b803ab18',1,'Swell::SwellFloater']]]
+  ['fluctuate_0',['Fluctuate',['../class_swell_1_1_swell_wave.html#af244ce4e33622fa41cc7c818bfe4eb16',1,'Swell::SwellWave']]],
+  ['fluctuateoffset_1',['FluctuateOffset',['../class_swell_1_1_swell_wave.html#ab04f6d256bb7d9bbdb56d45cd85c80be',1,'Swell::SwellWave']]],
+  ['fluctuateperiodtime_2',['FluctuatePeriodTime',['../class_swell_1_1_swell_wave.html#a3e9747643cd711ed310e90dab71f9413',1,'Swell::SwellWave']]]
 ];

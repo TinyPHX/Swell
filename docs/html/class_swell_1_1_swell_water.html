@@ -102,7 +102,7 @@ $(document).ready(function(){initNavTree('class_swell_1_1_swell_water.html','');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#properties">Properties</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_swell_1_1_swell_water-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Swell.SwellWater Class Reference</div></div>
 </div><!--header-->
@@ -110,17 +110,11 @@ $(document).ready(function(){initNavTree('class_swell_1_1_swell_water.html','');
 
 <p>Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a> s, and provides API to retrieve or modify water.  
  <a href="class_swell_1_1_swell_water.html#details">More...</a></p>
-<div class="dynheader">
-Inheritance diagram for Swell.SwellWater:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_swell_1_1_swell_water.png" alt=""/>
- </div></div>
+
+<p>Inherits MonoBehaviour.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a68759421e985a24c95b59496f2b8822b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_water.html#a68759421e985a24c95b59496f2b8822b">Reset</a> ()</td></tr>
-<tr class="separator:a68759421e985a24c95b59496f2b8822b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a45c077a4db43f580133b1ad47432ae8a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">GetWaterHeight</a> (Vector3 position)</td></tr>
 <tr class="memdesc:a45c077a4db43f580133b1ad47432ae8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the exact height of the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>.  <a href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">More...</a><br /></td></tr>
 <tr class="separator:a45c077a4db43f580133b1ad47432ae8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -130,58 +124,152 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a60807b86de16f0dc521f583b398997ed"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_water.html#a60807b86de16f0dc521f583b398997ed">GetHeight</a> (float xPosition, float yPosition, bool calculate=true, int li=-1)</td></tr>
 <tr class="memdesc:a60807b86de16f0dc521f583b398997ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns exact wave height of the water mesh at some x, z value.  <a href="class_swell_1_1_swell_water.html#a60807b86de16f0dc521f583b398997ed">More...</a><br /></td></tr>
 <tr class="separator:a60807b86de16f0dc521f583b398997ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab71a488f69cf1570679a308a7ac55342"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_water.html#ab71a488f69cf1570679a308a7ac55342">SetHeight</a> (float xPosition, float yPosition, float height)</td></tr>
-<tr class="separator:ab71a488f69cf1570679a308a7ac55342"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aada956e226def82d8c4a336b8b0ae354"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_water.html#aada956e226def82d8c4a336b8b0ae354">AddHeight</a> (float xPosition, float yPosition, float height)</td></tr>
-<tr class="separator:aada956e226def82d8c4a336b8b0ae354"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
-Properties</h2></td></tr>
-<tr class="memitem:a9df4397af187bcbd525f08c73abaab77"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_water.html#a9df4397af187bcbd525f08c73abaab77">Position</a><code> [get]</code></td></tr>
-<tr class="separator:a9df4397af187bcbd525f08c73abaab77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3945444cdfac6d1711771273d81c8353"><td class="memItemLeft" align="right" valign="top"><a id="a3945444cdfac6d1711771273d81c8353" name="a3945444cdfac6d1711771273d81c8353"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>useSwellMesh</b> = false</td></tr>
+<tr class="memdesc:a3945444cdfac6d1711771273d81c8353"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO: This is how you add member docs in doxigen. <br /></td></tr>
+<tr class="separator:a3945444cdfac6d1711771273d81c8353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d4ba94ce91a78d7454a8836075e2af3"><td class="memItemLeft" align="right" valign="top"><a id="a1d4ba94ce91a78d7454a8836075e2af3" name="a1d4ba94ce91a78d7454a8836075e2af3"></a>
+<a class="el" href="class_swell_1_1_swell_mesh.html">SwellMesh</a>&#160;</td><td class="memItemRight" valign="bottom"><b>swellMesh</b></td></tr>
+<tr class="memdesc:a1d4ba94ce91a78d7454a8836075e2af3"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a1d4ba94ce91a78d7454a8836075e2af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbf5e05a03e81903fa63b0071f3e884a"><td class="memItemLeft" align="right" valign="top"><a id="abbf5e05a03e81903fa63b0071f3e884a" name="abbf5e05a03e81903fa63b0071f3e884a"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>mainTextureSize</b> = 0</td></tr>
+<tr class="memdesc:abbf5e05a03e81903fa63b0071f3e884a"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:abbf5e05a03e81903fa63b0071f3e884a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1a580962fa47738fb7ceb437c43724c"><td class="memItemLeft" align="right" valign="top"><a id="ab1a580962fa47738fb7ceb437c43724c" name="ab1a580962fa47738fb7ceb437c43724c"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>secondaryTextureSize</b> = 0</td></tr>
+<tr class="memdesc:ab1a580962fa47738fb7ceb437c43724c"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ab1a580962fa47738fb7ceb437c43724c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5222cdf959bc14ab6f2ac44a8e21aa7b"><td class="memItemLeft" align="right" valign="top"><a id="a5222cdf959bc14ab6f2ac44a8e21aa7b" name="a5222cdf959bc14ab6f2ac44a8e21aa7b"></a>
+MeshFilter&#160;</td><td class="memItemRight" valign="bottom"><b>meshFilterPrefab</b></td></tr>
+<tr class="memdesc:a5222cdf959bc14ab6f2ac44a8e21aa7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a5222cdf959bc14ab6f2ac44a8e21aa7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a923a7787877a75b5368587860ee191c4"><td class="memItemLeft" align="right" valign="top"><a id="a923a7787877a75b5368587860ee191c4" name="a923a7787877a75b5368587860ee191c4"></a>
+Material&#160;</td><td class="memItemRight" valign="bottom"><b>material</b></td></tr>
+<tr class="memdesc:a923a7787877a75b5368587860ee191c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a923a7787877a75b5368587860ee191c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3ef50264ac8a477e9e40ecd9f5ec805"><td class="memItemLeft" align="right" valign="top"><a id="ab3ef50264ac8a477e9e40ecd9f5ec805" name="ab3ef50264ac8a477e9e40ecd9f5ec805"></a>
+ShadowCastingMode&#160;</td><td class="memItemRight" valign="bottom"><b>shadowCastingMode</b> = ShadowCastingMode.Off</td></tr>
+<tr class="memdesc:ab3ef50264ac8a477e9e40ecd9f5ec805"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ab3ef50264ac8a477e9e40ecd9f5ec805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0393337e36e0aa0dd74547c3b6ec9fd1"><td class="memItemLeft" align="right" valign="top"><a id="a0393337e36e0aa0dd74547c3b6ec9fd1" name="a0393337e36e0aa0dd74547c3b6ec9fd1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>receiveShadows</b> = false</td></tr>
+<tr class="memdesc:a0393337e36e0aa0dd74547c3b6ec9fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a0393337e36e0aa0dd74547c3b6ec9fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa00927b0cec776b018fc70f44615c540"><td class="memItemLeft" align="right" valign="top"><a id="aa00927b0cec776b018fc70f44615c540" name="aa00927b0cec776b018fc70f44615c540"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>lockAlbedoPosition</b></td></tr>
+<tr class="memdesc:aa00927b0cec776b018fc70f44615c540"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:aa00927b0cec776b018fc70f44615c540"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="memItemLeft" align="right" valign="top"><a id="ae8fee9be6ddddb5a81a0ce65aab09521" name="ae8fee9be6ddddb5a81a0ce65aab09521"></a>
+Transform&#160;</td><td class="memItemRight" valign="bottom"><b>meshAlbedoPosition</b></td></tr>
+<tr class="memdesc:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac967024241c0082aefcfd01318a514a0"><td class="memItemLeft" align="right" valign="top"><a id="ac967024241c0082aefcfd01318a514a0" name="ac967024241c0082aefcfd01318a514a0"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>gridSize</b> = 10</td></tr>
+<tr class="memdesc:ac967024241c0082aefcfd01318a514a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of tiles in water square <br /></td></tr>
+<tr class="separator:ac967024241c0082aefcfd01318a514a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a508bbac2d6f369b7be8ac6904c042d23"><td class="memItemLeft" align="right" valign="top"><a id="a508bbac2d6f369b7be8ac6904c042d23" name="a508bbac2d6f369b7be8ac6904c042d23"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>remapUvs</b> = false</td></tr>
+<tr class="memdesc:a508bbac2d6f369b7be8ac6904c042d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a508bbac2d6f369b7be8ac6904c042d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga1412e4151304f7bdf42a056ec38b28fb"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>showWaterHorizon</b></td></tr>
+<tr class="memdesc:ga1412e4151304f7bdf42a056ec38b28fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ga1412e4151304f7bdf42a056ec38b28fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga115bded1acd7793c294aaf5a61fa6e69"><td class="memItemLeft" align="right" valign="top">
+Material&#160;</td><td class="memItemRight" valign="bottom"><b>horizonMaterial</b></td></tr>
+<tr class="memdesc:ga115bded1acd7793c294aaf5a61fa6e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ga115bded1acd7793c294aaf5a61fa6e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4c02191cdc39ec734e2c415753c2e80d"><td class="memItemLeft" align="right" valign="top">
+GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>waterHorizon</b></td></tr>
+<tr class="memdesc:ga4c02191cdc39ec734e2c415753c2e80d"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ga4c02191cdc39ec734e2c415753c2e80d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab421cda87666122ea1eee8dba6e14fa1"><td class="memItemLeft" align="right" valign="top"><a id="ab421cda87666122ea1eee8dba6e14fa1" name="ab421cda87666122ea1eee8dba6e14fa1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>usePositionAnchor</b> = false</td></tr>
+<tr class="memdesc:ab421cda87666122ea1eee8dba6e14fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ab421cda87666122ea1eee8dba6e14fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add8901717ad2bf0a3e185cb46a3fb536"><td class="memItemLeft" align="right" valign="top"><a id="add8901717ad2bf0a3e185cb46a3fb536" name="add8901717ad2bf0a3e185cb46a3fb536"></a>
+GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>positionAnchor</b></td></tr>
+<tr class="memdesc:add8901717ad2bf0a3e185cb46a3fb536"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:add8901717ad2bf0a3e185cb46a3fb536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c9fde7092910250158de9b0602bda5f"><td class="memItemLeft" align="right" valign="top"><a id="a1c9fde7092910250158de9b0602bda5f" name="a1c9fde7092910250158de9b0602bda5f"></a>
+Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>positionStep</b> = Vector2.one * 10</td></tr>
+<tr class="memdesc:a1c9fde7092910250158de9b0602bda5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a1c9fde7092910250158de9b0602bda5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5f4bbab04c356f8da59d2f4f2b6d558"><td class="memItemLeft" align="right" valign="top"><a id="ae5f4bbab04c356f8da59d2f4f2b6d558" name="ae5f4bbab04c356f8da59d2f4f2b6d558"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>calculateNormals</b> = true</td></tr>
+<tr class="memdesc:ae5f4bbab04c356f8da59d2f4f2b6d558"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ae5f4bbab04c356f8da59d2f4f2b6d558"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39ae372793b11dfdcdfc3aa4f959fc33"><td class="memItemLeft" align="right" valign="top"><a id="a39ae372793b11dfdcdfc3aa4f959fc33" name="a39ae372793b11dfdcdfc3aa4f959fc33"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>lowPolyNormals</b> = false</td></tr>
+<tr class="memdesc:a39ae372793b11dfdcdfc3aa4f959fc33"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a39ae372793b11dfdcdfc3aa4f959fc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff16b25305c6a4d45bb68cf2429a728d"><td class="memItemLeft" align="right" valign="top"><a id="aff16b25305c6a4d45bb68cf2429a728d" name="aff16b25305c6a4d45bb68cf2429a728d"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>calculateNormalsFrequency</b> = 1</td></tr>
+<tr class="memdesc:aff16b25305c6a4d45bb68cf2429a728d"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO (in seconds) <br /></td></tr>
+<tr class="separator:aff16b25305c6a4d45bb68cf2429a728d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a> s, and provides API to retrieve or modify water. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="aada956e226def82d8c4a336b8b0ae354" name="aada956e226def82d8c4a336b8b0ae354"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aada956e226def82d8c4a336b8b0ae354">&#9670;&nbsp;</a></span>AddHeight()</h2>
+<a id="a45c077a4db43f580133b1ad47432ae8a" name="a45c077a4db43f580133b1ad47432ae8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c077a4db43f580133b1ad47432ae8a">&#9670;&nbsp;</a></span>GetWaterHeight()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Swell.SwellWater.AddHeight </td>
+          <td class="memname">float Swell.SwellWater.GetWaterHeight </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>xPosition</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>yPosition</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
+
+<p>Gets the exact height of the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>. </p>
+<p >Returns y intersection value of the water mesh at some x, z value. To get the exact position of the mesh we get the height of the nearest vectors and then interpolate between them.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The position (x, z) at which to check the water height.</td></tr>
+  </table>
+  </dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md6"></a>
+Example</h2>
+<p >Returns the height of the water at the origin of the scene: </p><div class="fragment"><div class="line"><a class="code hl_function" href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">GetWaterHeight</a>(Vector3.Zero) </div>
+<div class="ttc" id="aclass_swell_1_1_swell_water_html_a45c077a4db43f580133b1ad47432ae8a"><div class="ttname"><a href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">Swell.SwellWater.GetWaterHeight</a></div><div class="ttdeci">float GetWaterHeight(Vector3 position)</div><div class="ttdoc">Gets the exact height of the SwellMesh.</div><div class="ttdef"><b>Definition:</b> SwellWater.cs:500</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="aace3511ee4b8460850a6ab7c86c3fc01" name="aace3511ee4b8460850a6ab7c86c3fc01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aace3511ee4b8460850a6ab7c86c3fc01">&#9670;&nbsp;</a></span>GetWaterHeightOptimized()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Swell.SwellWater.GetWaterHeightOptimized </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the height of a nearby Vector on the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>. </p>
+<p >Returns y intersection value of the water mesh at some x, z value. This is an optimized approximation that only gets the height of a nearby vector.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The position (x, z) at which to check the water height. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -190,9 +278,6 @@ Properties</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">float Swell.SwellWater.GetHeight </td>
@@ -224,11 +309,6 @@ Properties</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Returns exact wave height of the water mesh at some x, z value. </p>
@@ -242,170 +322,6 @@ Properties</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<a id="a45c077a4db43f580133b1ad47432ae8a" name="a45c077a4db43f580133b1ad47432ae8a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45c077a4db43f580133b1ad47432ae8a">&#9670;&nbsp;</a></span>GetWaterHeight()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float Swell.SwellWater.GetWaterHeight </td>
-          <td>(</td>
-          <td class="paramtype">Vector3&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gets the exact height of the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>. </p>
-<p >Returns y intersection value of the water mesh at some x, z value. To get the exact position of the mesh we get the height of the nearest vectors and then interpolate between them.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">position</td><td>The position (x, z) at which to check the water height.</td></tr>
-  </table>
-  </dd>
-</dl>
-<h2><a class="anchor" id="autotoc_md6"></a>
-Example</h2>
-<p >Returns the height of the water at the origin of the scene: </p><div class="fragment"><div class="line"><a class="code hl_function" href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">GetWaterHeight</a>(Vector3.Zero) </div>
-<div class="ttc" id="aclass_swell_1_1_swell_water_html_a45c077a4db43f580133b1ad47432ae8a"><div class="ttname"><a href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">Swell.SwellWater.GetWaterHeight</a></div><div class="ttdeci">float GetWaterHeight(Vector3 position)</div><div class="ttdoc">Gets the exact height of the SwellMesh.</div><div class="ttdef"><b>Definition:</b> SwellWater.cs:494</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-<a id="aace3511ee4b8460850a6ab7c86c3fc01" name="aace3511ee4b8460850a6ab7c86c3fc01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aace3511ee4b8460850a6ab7c86c3fc01">&#9670;&nbsp;</a></span>GetWaterHeightOptimized()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float Swell.SwellWater.GetWaterHeightOptimized </td>
-          <td>(</td>
-          <td class="paramtype">Vector3&#160;</td>
-          <td class="paramname"><em>position</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Gets the height of a nearby Vector on the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>. </p>
-<p >Returns y intersection value of the water mesh at some x, z value. This is an optimized approximation that only gets the height of a nearby vector.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">position</td><td>The position (x, z) at which to check the water height. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a68759421e985a24c95b59496f2b8822b" name="a68759421e985a24c95b59496f2b8822b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a68759421e985a24c95b59496f2b8822b">&#9670;&nbsp;</a></span>Reset()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Swell.SwellWater.Reset </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab71a488f69cf1570679a308a7ac55342" name="ab71a488f69cf1570679a308a7ac55342"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab71a488f69cf1570679a308a7ac55342">&#9670;&nbsp;</a></span>SetHeight()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Swell.SwellWater.SetHeight </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>xPosition</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>yPosition</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Property Documentation</h2>
-<a id="a9df4397af187bcbd525f08c73abaab77" name="a9df4397af187bcbd525f08c73abaab77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9df4397af187bcbd525f08c73abaab77">&#9670;&nbsp;</a></span>Position</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Vector3 Swell.SwellWater.Position</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
 
 </div>
 </div>
