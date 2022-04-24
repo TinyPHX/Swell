@@ -192,6 +192,10 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>lowPolyNormals</b> = 
 float&#160;</td><td class="memItemRight" valign="bottom"><b>calculateNormalsFrequency</b> = 1</td></tr>
 <tr class="memdesc:aff16b25305c6a4d45bb68cf2429a728d"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO (in seconds) <br /></td></tr>
 <tr class="separator:aff16b25305c6a4d45bb68cf2429a728d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0dc1e3c1f3246d6ed4b9d720a6a4f7cb"><td class="memItemLeft" align="right" valign="top"><a id="a0dc1e3c1f3246d6ed4b9d720a6a4f7cb" name="a0dc1e3c1f3246d6ed4b9d720a6a4f7cb"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>lastCalculateNormalsTime</b> = 0</td></tr>
+<tr class="memdesc:a0dc1e3c1f3246d6ed4b9d720a6a4f7cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a0dc1e3c1f3246d6ed4b9d720a6a4f7cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab421cda87666122ea1eee8dba6e14fa1"><td class="memItemLeft" align="right" valign="top"><a id="ab421cda87666122ea1eee8dba6e14fa1" name="ab421cda87666122ea1eee8dba6e14fa1"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>usePositionAnchor</b> = false</td></tr>
 <tr class="memdesc:ab421cda87666122ea1eee8dba6e14fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
@@ -212,6 +216,22 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>lockAlbedoPosition</b
 Transform&#160;</td><td class="memItemRight" valign="bottom"><b>meshAlbedoPosition</b></td></tr>
 <tr class="memdesc:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
 <tr class="separator:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f4d2a507b86e3e2461fd5a948363b5f"><td class="memItemLeft" align="right" valign="top"><a id="a5f4d2a507b86e3e2461fd5a948363b5f" name="a5f4d2a507b86e3e2461fd5a948363b5f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>optimize</b></td></tr>
+<tr class="memdesc:a5f4d2a507b86e3e2461fd5a948363b5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a5f4d2a507b86e3e2461fd5a948363b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04615e913ac6936c1f9a483d84eb5230"><td class="memItemLeft" align="right" valign="top"><a id="a04615e913ac6936c1f9a483d84eb5230" name="a04615e913ac6936c1f9a483d84eb5230"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>waterFps</b> = 60</td></tr>
+<tr class="memdesc:a04615e913ac6936c1f9a483d84eb5230"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a04615e913ac6936c1f9a483d84eb5230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb2cd5658988740bf35fed05ecf10b7d"><td class="memItemLeft" align="right" valign="top"><a id="abb2cd5658988740bf35fed05ecf10b7d" name="abb2cd5658988740bf35fed05ecf10b7d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>autoThrottle</b> = true</td></tr>
+<tr class="memdesc:abb2cd5658988740bf35fed05ecf10b7d"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:abb2cd5658988740bf35fed05ecf10b7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdc7e0eee14a9a3a9387593789069d27"><td class="memItemLeft" align="right" valign="top"><a id="abdc7e0eee14a9a3a9387593789069d27" name="abdc7e0eee14a9a3a9387593789069d27"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>throttleFps</b> = 60</td></tr>
+<tr class="memdesc:abdc7e0eee14a9a3a9387593789069d27"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO If the game fps falls under this fps then the waterFPS will automatically drop. <br /></td></tr>
+<tr class="separator:abdc7e0eee14a9a3a9387593789069d27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a> s, and provides API to retrieve or modify water. </p>
@@ -240,10 +260,10 @@ Transform&#160;</td><td class="memItemRight" valign="bottom"><b>meshAlbedoPositi
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md0"></a>
 Example</h2>
 <p >Returns the height of the water at the origin of the scene: </p><div class="fragment"><div class="line"><a class="code hl_function" href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">GetWaterHeight</a>(Vector3.Zero) </div>
-<div class="ttc" id="aclass_swell_1_1_swell_water_html_a45c077a4db43f580133b1ad47432ae8a"><div class="ttname"><a href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">Swell.SwellWater.GetWaterHeight</a></div><div class="ttdeci">float GetWaterHeight(Vector3 position)</div><div class="ttdoc">Gets the exact height of the SwellMesh.</div><div class="ttdef"><b>Definition:</b> SwellWater.cs:633</div></div>
+<div class="ttc" id="aclass_swell_1_1_swell_water_html_a45c077a4db43f580133b1ad47432ae8a"><div class="ttname"><a href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">Swell.SwellWater.GetWaterHeight</a></div><div class="ttdeci">float GetWaterHeight(Vector3 position)</div><div class="ttdoc">Gets the exact height of the SwellMesh.</div><div class="ttdef"><b>Definition:</b> SwellWater.cs:272</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

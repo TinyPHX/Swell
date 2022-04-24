@@ -24,11 +24,16 @@ Swell was started as a way to add water with float physics to a Unity project wi
 
 ### Overview
 
-
 ### Step by step
 
-To get started with Swell all you need to do is open your new scene
+To get started with Swell all you need to do is, on the Hierarchy:
+ - Right Click > Swell > Water
+ - Right Click > Swell > Wave
+ - Right Click > Swell > Floater
+ - Click Play!
 
+That should get you started and from there you can explore each Objects components 
+to see how Swell works.
 
 ## Components
 
@@ -50,61 +55,25 @@ grid at the cent
 
 ![](docs/images/swell_wave_icon_22.png) **SwellWave**
 
+SwellWave lets you add any of server types of waves. They are all real time and fully customizable. 
+
 ![](docs/images/component_swell_wave.png)
 
 ![](docs/images/swell_floater_icon_22.png) **SwellFloater**
 
+Floaters can be attached to any regular Unity RigidBody3D to make it float!
+
 ![](docs/images/component_swell_floater.png)
 
+[//]: # (###Scripting Interface)
 
-- ![](docs/images/swell_water_icon_22.png) **SwellWater** - 
-- ![](docs/images/swell_mesh_icon_22.png) **SwellMesh** -
-- ![](docs/images/swell_wave_icon_22.png) **SwellWave** -
-- ![](docs/images/swell_floater_icon_22.png) **SwellFloater** -
+[//]: # ()
+[//]: # (//Link to classes)
 
-|  SwellWater |
-|-----------------------------------------------------|
-| ![](docs/images/component_swell_water.png)          |
+[//]: # (#### Scripts Examples)
 
-| ![](docs/images/swell_wave_icon_22.png) SwellWave |
-|---------------------------------------------------|
-| [](docs/images/component_swell_wave.png)          |
-
-|SwellMesh                                 | SwellFloater                                 |
-|------------------------------------------|----------------------------------------------|
-|![](docs/images/component_swell_mesh.png) | ![](docs/images/component_swell_floater.png) |
-
-###Scripting Interface
-
-//Link to classes
-
-#### Scripts Examples
-
-
-## Installation
-
-Copy the file `doxygen-awesome.css` from this repository into your project or add this repository as submodule and check out the latest release:
-
-```bash
-git submodule add https://github.com/jothepro/doxygen-awesome-css.git
-cd doxygen-awesome-css
-git checkout v2.0.3
-```
-
-1. **Base theme**:
-```
-# Doxyfile
-GENERATE_TREEVIEW      = YES # optional. Also works without treeview
-HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css
-```
-
-2. **Sidebar-only theme**:
-```
-# Doxyfile
-GENERATE_TREEVIEW      = YES # required!
-HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css \
-                         doxygen-awesome-css/doxygen-awesome-sidebar-only.css
-```
+[//]: # ()
+[//]: # (TODO)
 
 ## Credits
 

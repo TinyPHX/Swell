@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['secondarytexturesize_0',['secondaryTextureSize',['../class_swell_1_1_swell_water.html#ab1a580962fa47738fb7ceb437c43724c',1,'Swell::SwellWater']]],
-  ['shadowcastingmode_1',['shadowCastingMode',['../class_swell_1_1_swell_water.html#ab3ef50264ac8a477e9e40ecd9f5ec805',1,'Swell::SwellWater']]],
-  ['swellmesh_2',['swellMesh',['../class_swell_1_1_swell_water.html#a1d4ba94ce91a78d7454a8836075e2af3',1,'Swell::SwellWater']]]
+  ['interpolate_0',['interpolate',['../class_swell_1_1_swell_wave.html#ad5544e1c7c391d1fbf05aac115c41b5b',1,'Swell::SwellWave']]],
+  ['interpolationcurve_1',['interpolationCurve',['../class_swell_1_1_swell_wave.html#a5fe7cac792f875e0f2c31f41e04ea1e6',1,'Swell::SwellWave']]],
+  ['interpolationtime_2',['interpolationTime',['../class_swell_1_1_swell_wave.html#ad8d21d288f261816b358120eb1140de6',1,'Swell::SwellWave']]]
 ];

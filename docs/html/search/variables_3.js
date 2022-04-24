@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['positionanchor_0',['positionAnchor',['../class_swell_1_1_swell_water.html#add8901717ad2bf0a3e185cb46a3fb536',1,'Swell::SwellWater']]],
-  ['positionstep_1',['positionStep',['../class_swell_1_1_swell_water.html#a1c9fde7092910250158de9b0602bda5f',1,'Swell::SwellWater']]]
+  ['depth_0',['depth',['../class_swell_1_1_swell_floater.html#a44d3a12ed20b9e48d16b5f5ddcebc626',1,'Swell::SwellFloater']]],
+  ['depthmethod_1',['depthMethod',['../class_swell_1_1_swell_floater.html#a5a1c05b6520a8b6395bef9e2e35439bf',1,'Swell::SwellFloater']]]
 ];

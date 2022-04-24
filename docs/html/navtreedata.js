@@ -25,19 +25,14 @@
 var NAVTREE =
 [
   [ "Swell", "index.html", [
-    [ "Motivation", "index.html#autotoc_md8", null ],
-    [ "Features", "index.html#autotoc_md9", null ],
-    [ "Quick Start Guide", "index.html#autotoc_md10", [
-      [ "Overview", "index.html#autotoc_md11", null ],
-      [ "Step by step", "index.html#autotoc_md12", null ]
+    [ "Motivation", "index.html#autotoc_md2", null ],
+    [ "Features", "index.html#autotoc_md3", null ],
+    [ "Quick Start Guide", "index.html#autotoc_md4", [
+      [ "Overview", "index.html#autotoc_md5", null ],
+      [ "Step by step", "index.html#autotoc_md6", null ]
     ] ],
-    [ "Components", "index.html#autotoc_md13", [
-      [ "Scripting Interface", "index.html#autotoc_md14", [
-        [ "Scripts Examples", "index.html#autotoc_md15", null ]
-      ] ]
-    ] ],
-    [ "Installation", "index.html#autotoc_md16", null ],
-    [ "Credits", "index.html#autotoc_md17", null ],
+    [ "Components", "index.html#autotoc_md7", null ],
+    [ "Credits", "index.html#autotoc_md8", null ],
     [ "Unity Demo Scenes", "md_demos.html", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],

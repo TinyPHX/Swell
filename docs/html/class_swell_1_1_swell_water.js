@@ -15,9 +15,14 @@ var class_swell_1_1_swell_water =
     [ "calculateNormals", "class_swell_1_1_swell_water.html#ae5f4bbab04c356f8da59d2f4f2b6d558", null ],
     [ "lowPolyNormals", "class_swell_1_1_swell_water.html#a39ae372793b11dfdcdfc3aa4f959fc33", null ],
     [ "calculateNormalsFrequency", "class_swell_1_1_swell_water.html#aff16b25305c6a4d45bb68cf2429a728d", null ],
+    [ "lastCalculateNormalsTime", "class_swell_1_1_swell_water.html#a0dc1e3c1f3246d6ed4b9d720a6a4f7cb", null ],
     [ "usePositionAnchor", "class_swell_1_1_swell_water.html#ab421cda87666122ea1eee8dba6e14fa1", null ],
     [ "positionAnchor", "class_swell_1_1_swell_water.html#add8901717ad2bf0a3e185cb46a3fb536", null ],
     [ "positionStep", "class_swell_1_1_swell_water.html#a1c9fde7092910250158de9b0602bda5f", null ],
     [ "lockAlbedoPosition", "class_swell_1_1_swell_water.html#aa00927b0cec776b018fc70f44615c540", null ],
-    [ "meshAlbedoPosition", "class_swell_1_1_swell_water.html#ae8fee9be6ddddb5a81a0ce65aab09521", null ]
+    [ "meshAlbedoPosition", "class_swell_1_1_swell_water.html#ae8fee9be6ddddb5a81a0ce65aab09521", null ],
+    [ "optimize", "class_swell_1_1_swell_water.html#a5f4d2a507b86e3e2461fd5a948363b5f", null ],
+    [ "waterFps", "class_swell_1_1_swell_water.html#a04615e913ac6936c1f9a483d84eb5230", null ],
+    [ "autoThrottle", "class_swell_1_1_swell_water.html#abb2cd5658988740bf35fed05ecf10b7d", null ],
+    [ "throttleFps", "class_swell_1_1_swell_water.html#abdc7e0eee14a9a3a9387593789069d27", null ]
 ];

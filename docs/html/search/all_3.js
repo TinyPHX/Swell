@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['interpolate_0',['Interpolate',['../class_swell_1_1_swell_wave.html#ad24eaf522c9e182645db7f3d44413d38',1,'Swell::SwellWave']]]
+  ['depth_0',['depth',['../class_swell_1_1_swell_floater.html#a44d3a12ed20b9e48d16b5f5ddcebc626',1,'Swell::SwellFloater']]],
+  ['depthmethod_1',['depthMethod',['../class_swell_1_1_swell_floater.html#a5a1c05b6520a8b6395bef9e2e35439bf',1,'Swell::SwellFloater']]]
 ];

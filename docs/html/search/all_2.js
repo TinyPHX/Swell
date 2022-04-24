@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['getheight_0',['GetHeight',['../class_swell_1_1_swell_water.html#a60807b86de16f0dc521f583b398997ed',1,'Swell::SwellWater']]],
-  ['getwaterheight_1',['GetWaterHeight',['../class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a',1,'Swell::SwellWater']]],
-  ['getwaterheightoptimized_2',['GetWaterHeightOptimized',['../class_swell_1_1_swell_water.html#aace3511ee4b8460850a6ab7c86c3fc01',1,'Swell::SwellWater']]]
+  ['calculatenormals_0',['calculateNormals',['../class_swell_1_1_swell_water.html#ae5f4bbab04c356f8da59d2f4f2b6d558',1,'Swell::SwellWater']]],
+  ['calculatenormalsfrequency_1',['calculateNormalsFrequency',['../class_swell_1_1_swell_water.html#aff16b25305c6a4d45bb68cf2429a728d',1,'Swell::SwellWater']]],
+  ['center_2',['center',['../class_swell_1_1_swell_floater.html#a18a458fe93337e3f2f2a060c3690dafa',1,'Swell::SwellFloater']]],
+  ['customswellmesh_3',['customSwellMesh',['../class_swell_1_1_swell_water.html#a6227c215730ecaaf31aefe3d05d249d3',1,'Swell::SwellWater']]],
+  ['customwave_4',['customWave',['../class_swell_1_1_swell_wave.html#ae4d6e704e09b7a86f4e05b1c3606b1ac',1,'Swell::SwellWave']]]
 ];
