@@ -17,12 +17,9 @@ namespace Swell.Editors
             
             SwellMesh[] swellMeshTargets = Array.ConvertAll(targets, item => (SwellMesh) item);
 
-            // bool transformChanged = false;
             bool waterMissing = false;
             foreach (SwellMesh swellMesh in swellMeshTargets)
             {
-                // transformChanged |= swellMesh.transform.hasChanged;
-
                 if (GUI.changed || swellMesh.transform.hasChanged)
                 {
                     if (swellMesh.Water)
@@ -51,29 +48,6 @@ namespace Swell.Editors
                     }
                 }
             }
-            
-            // bool waterUpdated = false;
-            // if (GUI.changed || transformChanged)
-            // {
-            //     foreach (SwellWater water in SwellManager.GetAll<SwellWater>())
-            //     {
-            //         water.EditorUpdate();
-            //         water.Update();
-            //         waterUpdated = true;
-            //     }
-            // }
-            //
-            // if (!waterUpdated)
-            // {
-            //     foreach (SwellMesh swellMesh in swellMeshTargets)
-            //     {
-            //         if (GUI.changed)
-            //         {
-            //             swellMesh.GenerateMesh();
-            //             swellMesh.Update();
-            //         }
-            //     }
-            // }
         }
     }
 }

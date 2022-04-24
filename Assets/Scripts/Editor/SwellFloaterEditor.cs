@@ -5,6 +5,6 @@ namespace Swell.Editors
      */
     public class SwellFloaterEditor
     {
-        //TODO: add better floater visual with Handle pointing in direction of force.
+        /** TODO: Create SwellFloater editor and add better floater visual with Handle pointing in direction of force. */
     }
 }

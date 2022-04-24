@@ -27,8 +27,6 @@ namespace Swell
         [SerializeField] private MeshLevel[] levels = {};
         [SerializeField] private bool top = true;
         [SerializeField] private bool bottom = true;
-        // [SerializeField] private bool lowPolyNormals = false;
-        // private bool lowPolyNormalsApplied = false;
 
         private SwellWater water;
         private MeshFilter meshFilter;
@@ -56,7 +54,7 @@ namespace Swell
         public class  MeshLevel
         {
             [HideInInspector] public string name;
-            [SerializeField, Min(1)] private int factor = 1; //factor:1
+            [SerializeField, Min(1)] private int factor;
             [SerializeField, Min(0)] private int count;
             
             private float step;
@@ -126,7 +124,6 @@ namespace Swell
                 name = "Level " + (index + 1);
                 
                 // previous size must be divisible by step with no remainder
-
                 if (PreviousLevel(swellMesh) != null)
                 {
                     float previousSize = PreviousLevel(swellMesh).GetSize(swellMesh, false);
@@ -243,7 +240,6 @@ namespace Swell
         void Start()
         {
             GenerateMesh();
-            // lowPolyNormalsApplied = false;
         }
 
         public void Update()
@@ -356,64 +352,7 @@ namespace Swell
 
                 Mesh.RecalculateBounds();
                 Mesh.RecalculateTangents();
-                // Mesh.RecalculateNormals();
-
-                // LowPolyNormals();
             }
-        }
-
-        private void LowPolyNormals()
-        {
-            //TODO:
-            // MeshFilter filterLowPoly = meshFiltersLowPoly[j];
-            //                 
-            // Mesh meshLowPoly = filterLowPoly.mesh;
-            //
-            // if (meshLowPoly.vertices.Length != meshLowPoly.triangles.Length)
-            // {
-            //     Vector3[] verts1 = meshLowPoly.vertices;
-            //     Vector2[] uv1 = meshLowPoly.uv;
-            //     int[] tris1 = meshLowPoly.triangles;
-            //     Vector4[] tang1 = meshLowPoly.tangents;
-            //     Vector3[] normal1 = meshLowPoly.normals;
-            //
-            //     int newLength = tris1.Length; //Every tri needs dedicated verts not shared with any other tri
-            //
-            //     Vector3[] verts2 = new Vector3[newLength];
-            //     Vector2[] uv2 = new Vector2[newLength];
-            //     int[] tris2 = new int[newLength];
-            //     Vector4[] tang2 = new Vector4[newLength];
-            //     Vector3[] normal2 = new Vector3[newLength];
-            //
-            //     for (int newIndex = 0; newIndex < newLength; newIndex++)
-            //     {
-            //         int oldIndex = tris1[newIndex];
-            //         tris2[newIndex] = newIndex;
-            //         verts2[newIndex] = verts1[oldIndex];
-            //         uv2[newIndex] = uv1[oldIndex];
-            //         tang2[newIndex] = tang1[oldIndex];
-            //         normal2[newIndex] = normal1[oldIndex];
-            //     }
-            //
-            //     meshLowPoly.vertices = verts2;
-            //     meshLowPoly.uv = uv2;
-            //     meshLowPoly.tangents = tang2;
-            //     meshLowPoly.normals = normal2;
-            //     meshLowPoly.triangles = tris2;
-            //
-            //     // meshLowPoly.RecalculateBounds();
-            //
-            //     // Begin Function CalculateSurfaceNormal (Input Triangle) Returns Vector
-            //     //
-            //     // Set Vector U to (Triangle.p2 minus Triangle.p1)
-            //     // Set Vector V to (Triangle.p3 minus Triangle.p1)
-            //     //
-            //     // Set Normal.x to (multiply U.y by V.z) minus (multiply U.z by V.y)
-            //     // Set Normal.y to (multiply U.z by V.x) minus (multiply U.x by V.z)
-            //     // Set Normal.z to (multiply U.x by V.y) minus (multiply U.y by V.x)
-            //     //
-            //     // Returning Normal
-            // }
         }
 
         private List<int> GetPointsInSquare(float x1, float y1, float x2, float y2, bool bottom)
@@ -491,7 +430,6 @@ namespace Swell
                         
                         if (meshVectors.AddVector(x, y, vertices.Count))
                         {
-                            // vertices.Add(new Vector3(x, .0001f, y));
                             vertices.Add(new Vector3(x, 0, y));
                             uv.Add(new Vector2((xi + (topSize - meshSize) / 2) / topSize, (yi + (topSize - meshSize) / 2) / topSize));
                             normals.Add(new Vector3(0, normalDirection, 0));
@@ -667,12 +605,6 @@ namespace Swell
             set => water = value;
         }
 
-        // public bool LowPolyNormalsApplied
-        // {
-        //     get => lowPolyNormalsApplied;
-        //     set => lowPolyNormalsApplied = value;
-        // }
-
 #if UNITY_EDITOR
         void OnDrawGizmosSelected()
         {
@@ -680,11 +612,8 @@ namespace Swell
             if (meshVectors.positionToIndex.Count == 0)
             {
                 Water?.EditorUpdate();
-                // Water?.Update();
-                // GenerateMesh();
             }
 
-            // if (Selection.transforms.Length > 0 && Selection.transforms.Contains(transform) && Mesh && Mesh.vertexCount > 0)
             if (Selection.transforms.Length > 0 && Selection.transforms.First() == transform && Mesh && Mesh.vertexCount > 0)
             {
                 Color gridColor = Color.white;
@@ -695,7 +624,6 @@ namespace Swell
                 }
 
                 Gizmos.color = gridColor;
-                // Gizmos.DrawWireMesh(Mesh, transform.position, transform.rotation, transform.lossyScale);
 
                 DrawFlatGrid();
 
@@ -711,13 +639,7 @@ namespace Swell
                 MeshLevel innerLevel = i > 0 ? Levels[i - 1] : null;
                 MeshLevel level = Levels[i];
 
-                // float range = .5f;
-                // float darkness = range - (1 - range) * (i / (float)(Levels.Length - 1));
-                // Gizmos.color = new Color(darkness, darkness, darkness);
                 DrawGizmoLevelGrid(level, topLevel, innerLevel);
-                    
-                // Gizmos.color = Color.magenta;
-                // DrawGizmoLevelBoarder(level);
             }
         }
 
@@ -733,51 +655,33 @@ namespace Swell
         void DrawGizmoLevelGrid(MeshLevel level, MeshLevel topLevel, MeshLevel innerLevel = null)
         {
             float meshSize = level.Size;
-            // float topSize = topLevel.Size;
             float innerDistance = (innerLevel?.Size) / 2 ?? 0;
-            float density = level.Step;
+            float step = level.Step;
             float offset = level.Offset;
 
-            // MeshVectors meshVectors = top ? topMeshVectors : bottomMeshVectors;
-            
-            // if (meshVectors.positionToIndex.Count > 0)
-            // {
-                float step = density;
-                for (float xi = 0; xi <= meshSize - step; xi += step)
+            for (float xi = 0; xi <= meshSize - step; xi += step)
+            {
+                for (float yi = 0; yi <= meshSize - step; yi += step)
                 {
-                    for (float yi = 0; yi <= meshSize - step; yi += step)
+                    float x = xi - offset;
+                    float y = yi - offset;
+
+
+                    if (x < -innerDistance || y < -innerDistance || x >= innerDistance || y >= innerDistance)
                     {
-                        float x = xi - offset;
-                        float y = yi - offset;
+                        Vector2[] pointsInSquare = new Vector2[4];
+                        pointsInSquare[0] = new (x, y);
+                        pointsInSquare[1] = new (x, y + step);
+                        pointsInSquare[2] = new (x + step, y + step);
+                        pointsInSquare[3] = new (x + step, y);
 
-
-                        if (x < -innerDistance || y < -innerDistance || x >= innerDistance || y >= innerDistance)
-                        {
-                            // Vector3[] pointsInSquare = new Vector3[4];
-                            // pointsInSquare[0] = vertices[meshVectors.positionToIndex[(x, y)]];
-                            // pointsInSquare[1] = vertices[meshVectors.positionToIndex[(x, y + step)]];
-                            // pointsInSquare[2] = vertices[meshVectors.positionToIndex[(x + step, y + step)]];
-                            // pointsInSquare[3] = vertices[meshVectors.positionToIndex[(x + step, y)]];
-                            // DrawPoly(pointsInSquare);
-                            
-                            Vector2[] pointsInSquare = new Vector2[4];
-                            pointsInSquare[0] = new (x, y);
-                            pointsInSquare[1] = new (x, y + step);
-                            pointsInSquare[2] = new (x + step, y + step);
-                            pointsInSquare[3] = new (x + step, y);
-
-                            Vector3[] pointsWithHeight = pointsInSquare.Select(vector =>
-                                new Vector3(vector.x, water?.GetHeight(transform.position.x + vector.x, transform.position.z + vector.y) ?? 0, vector.y)).ToArray();
-                            
-                            DrawPoly(pointsWithHeight, innerDistance);
-
-                            // x = x + step / 2;
-                            // y = y + step / 2;
-                            // Gizmos.DrawWireCube(transform.position + new Vector3(x, 0, y), new Vector3(step, 0, step));
-                        }
+                        Vector3[] pointsWithHeight = pointsInSquare.Select(vector =>
+                            new Vector3(vector.x, water?.GetHeight(transform.position.x + vector.x, transform.position.z + vector.y) ?? 0, vector.y)).ToArray();
+                        
+                        DrawPoly(pointsWithHeight, innerDistance);
                     }
                 }
-            // }
+            }
         }
 
         void DrawPoly(Vector3[] points, float innerDistance, bool connect = true)
@@ -806,13 +710,6 @@ namespace Swell
                 }
             }
         }
-
-        // void DrawGizmoLevelBoarder(MeshLevel level)
-        // {
-        //     float meshSize = level.Size;
-        //     
-        //     Gizmos.DrawWireCube(transform.position, new Vector3(meshSize, 0, meshSize));
-        // }
 #endif
     }
 }

@@ -17,68 +17,62 @@ namespace Swell
     {
         public enum Type
         {
-            rounded = 1, //sin curve
-            pointed = 5, //square root sin curve 
-            ripple = 3, //radial sin curve
-            bell = 4, //gaussian curve
-            random = 2, //perlin noise
-            custom = 6
+            ROUNDED = 1, //sin curve
+            POINTED = 5, //square root sin curve 
+            RIPPLE = 3, //radial sin curve
+            BELL = 4, //gaussian curve
+            RANDOM = 2, //perlin noise
+            CUSTOM = 6
         }
 
         [Separator("Basic Settings")] 
-        [SerializeField] private bool waveEnabled = true;
-        
-        [SerializeField] private Type waveType = Type.rounded;
-
-        [SerializeField, ConditionalField(nameof(waveType), false, Type.custom)] private AnimationCurve customWave = new AnimationCurve(new Keyframe[]
+        [SerializeField] private bool waveEnabled = true; //!< TODO
+        [SerializeField] private Type waveType = Type.ROUNDED; //!< TODO
+        [SerializeField, ConditionalField(nameof(waveType), false, Type.CUSTOM)] private AnimationCurve customWave = new AnimationCurve(new Keyframe[]
         {
             new Keyframe(0, 0, 0, 0, 0, 0),
             new Keyframe(.25f, -1, 0, 0, .5f, .5f),
             new Keyframe(.5f, 0, 0, 0, 0, 0),
             new Keyframe(.75f, 1, 0, 0, .5f, .5f),
             new Keyframe(1, 0, 0, 0, 0, 0),
-        });
-        
-        [SerializeField] private float waveHeight = 1;
-        [SerializeField] private Vector2 waveScale = Vector2.one;
-        [SerializeField] private Vector2 waveOffset = Vector2.zero;
-        [SerializeField] private Vector2 waveSpeed = Vector2.one * .1f;
-        [SerializeField, Range(0, 360)] private float waveRotation = 0;
+        }); //!< TODO
+        [SerializeField] private float waveHeight = 1; //!< TODO
+        [SerializeField] private Vector2 waveScale = Vector2.one; //!< TODO
+        [SerializeField] private Vector2 waveOffset = Vector2.zero; //!< TODO
+        [SerializeField] private Vector2 waveSpeed = Vector2.one * .1f; //!< TODO
+        [SerializeField, Range(0, 360)] private float waveRotation = 0; //!< TODO
 
         [Separator("Spread")]
         [OverrideLabel("")]
-        [SerializeField] private bool spread = false;
-        [FormerlySerializedAs("spread")] [SerializeField, ConditionalField(nameof(spread))] private float spreadRadius = 10;
+        [SerializeField] private bool spread = false; //!< TODO
+        [FormerlySerializedAs("spread")] [SerializeField, ConditionalField(nameof(spread))] private float spreadRadius = 10; //!< TODO
         [SerializeField, ConditionalField(nameof(spread))] private AnimationCurve spreadCurve = new AnimationCurve(new Keyframe[]
         {
             new Keyframe(0, 1, 0, 0, .5f, .5f),
             new Keyframe(1, 0, 0, 0, .5f, .5f),
-        });
+        }); //!< TODO
 
         [Separator("Interpolate")]
         [OverrideLabel("")]
-        [SerializeField] private bool interpolate = true;
-
-        [SerializeField, ConditionalField(nameof(interpolate))] private float interpolationTime = 10;
-
+        [SerializeField] private bool interpolate = true; //!< TODO
+        [SerializeField, ConditionalField(nameof(interpolate))] private float interpolationTime = 10; //!< TODO
         [SerializeField, ConditionalField(nameof(interpolate))] private AnimationCurve interpolationCurve = new AnimationCurve(new Keyframe[]
         {
             new Keyframe(0, 0, 0, 0, .5f, .5f),
             new Keyframe(1, 1, 0, 0, .5f, .5f),
-        });
+        }); //!< TODO
  
         [Separator("Fluctuate")]
-        [OverrideLabel("")]
-        [SerializeField] private bool fluctuate = false;
-        [SerializeField, ConditionalField(nameof(fluctuate))] private float fluctuatePeriodTime = 10;
-        [SerializeField, ConditionalField(nameof(fluctuate)), Range(0, 1)] private float fluctuateOffset = 0;
-
+        [OverrideLabel("")] //!< TODO
+        [SerializeField] private bool fluctuate = false; //!< TODO
+        [SerializeField, ConditionalField(nameof(fluctuate))] private float fluctuatePeriodTime = 10; //!< TODO
+        [SerializeField, ConditionalField(nameof(fluctuate)), Range(0, 1)] private float fluctuateOffset = 0; //!< TODO
         [SerializeField, ConditionalField(nameof(fluctuate))] private AnimationCurve fluctuateCurve = new AnimationCurve(new Keyframe[]
         {
             new Keyframe(0, -1, 0, 0, .5f, .5f),
             new Keyframe(.5f, 1, 0, 0, .5f, .5f),
             new Keyframe(1, -1, 0, 0, .5f, .5f)
-        });
+        }); //!< TODO
 
         private float adjustedWaveHeight;
         private bool previousWaveEnabled;
@@ -99,7 +93,6 @@ namespace Swell
 
         void Start()
         {
-            // SwellManager.Register(this);
             this.Register();
 
             if (interpolate && waveEnabled)
@@ -148,7 +141,6 @@ namespace Swell
 
         private void OnDestroy()
         {
-            // SwellManager.Unregister(this);
             this.UnRegister();
         }
 
@@ -226,9 +218,9 @@ namespace Swell
         public float[] GetNormal(float x, float y)
         {
             float[] normal = new[] {0f, 0f};
-            if (waveType == Type.rounded)
+            if (waveType == Type.ROUNDED)
             {
-                //TODO calculate tangent from curve instead of using the geometry.
+                // TODO calculate tangent from curve instead of using the geometry.
                 //1. Create derivative function for each wave type. Example: dx/dy sin(x) = cos(x)
                 //   https://www.derivative-calculator.net/
                 //2. The derivitive gives you the slope (tangent) at each position
@@ -238,16 +230,16 @@ namespace Swell
                 //?? Is this easier or faster than sampling more points to get slope? That method would also work for
                 //perlin where the above method does not. 
             }
-            else if (waveType == Type.ripple)
+            else if (waveType == Type.RIPPLE)
             {
             }
-            else if (waveType == Type.bell)
+            else if (waveType == Type.BELL)
             {
             }
-            else if (waveType == Type.random)
+            else if (waveType == Type.RANDOM)
             {
             }
-            else if (waveType == Type.custom)
+            else if (waveType == Type.CUSTOM)
             {
             }
 
@@ -265,12 +257,11 @@ namespace Swell
             ySpradRatio = ySpradRatio > 1 ? 1 : ySpradRatio;
             
             float curveTime = 1 - (1 - xSpradRatio) * (1 - ySpradRatio);
-            // float curveTime = xSpradRatio * ySpradRatio;
             return spreadCurve.Evaluate(curveTime);
         }
 
-        //Possible optimization: If for each wave we figured out the phase we can calculate the height only across the
-        //phase once then use mod to lookup the height on repeated patterns. Still would have to calculate spread.  
+        // TODO: Possible optimization: If for each wave we figured out the phase we can calculate the height only across the
+        // phase once then use mod to lookup the height on repeated patterns. Still would have to calculate spread.  
         public float GetHeight(float x, float y, bool ignoreInterpolation = false)
         {
             if (!activeAndEnabled)
@@ -278,8 +269,8 @@ namespace Swell
                 return 0;
             }
 
-            //  https://www.wolframalpha.com/input/?i=2%5E%28-+%28x%5E2+%2F+%282*2%5E2%29%29+-+%28y%5E2+%2F+%282*2%5E2%29%29%29+++++++x%3D-5+to+5+y%3D-5+to5
-            //  https://www.wolframalpha.com/input/?i=Gaussian+Distribution
+            // https://www.wolframalpha.com/input/?i=2%5E%28-+%28x%5E2+%2F+%282*2%5E2%29%29+-+%28y%5E2+%2F+%282*2%5E2%29%29%29+++++++x%3D-5+to+5+y%3D-5+to5
+            // https://www.wolframalpha.com/input/?i=Gaussian+Distribution
             float spreadMultiplier = 1;
 
             if (spread)
@@ -291,8 +282,8 @@ namespace Swell
             
             if (waveRotation != 0)
             {
-                //  Should consider rotating grids in bulk earlier with unit quaternion
-                //  https://stackoverflow.com/questions/62974296/rotating-multiple-points-around-axis-using-quaternion
+                // TODO: Should consider rotating grids in bulk earlier with unit quaternion
+                // https://stackoverflow.com/questions/62974296/rotating-multiple-points-around-axis-using-quaternion
                 Vector3 rotatedPosition = Quaternion.AngleAxis(-waveRotation, Vector3.up) *
                                           new Vector3(position.x - x, 0, position.z - y);
                 x = rotatedPosition.x + position.x;
@@ -302,7 +293,7 @@ namespace Swell
             float height = 0;
             if (spreadMultiplier > 0)
             {
-                if (waveType == Type.rounded)
+                if (waveType == Type.ROUNDED)
                 {
                     //https://www.wolframalpha.com/input/?i=sin%28x%29%2C+x%3D-5+to+5+y%3D-5+to+5
 
@@ -314,7 +305,7 @@ namespace Swell
                     height = Mathf.Sin((x * waveScale.x / 10 + adjustedOffset.x) * Mathf.PI + 1) *
                              Mathf.Sin((y * waveScale.y / 10 + adjustedOffset.y) * Mathf.PI + 1);
                 }
-                else if (waveType == Type.pointed)
+                else if (waveType == Type.POINTED)
                 {
                     adjustedOffset = new Vector2(
                         waveOffset.x + waveSpeed.x * time,
@@ -334,7 +325,7 @@ namespace Swell
                                        Mathf.PI)
                         ) / maxHeight - 1);
                 }
-                else if (waveType == Type.ripple)
+                else if (waveType == Type.RIPPLE)
                 {
                     //https://www.wolframalpha.com/input/?i=sin%283+*+%28+sqrt%28x*x+%2B+y*y%29+%2F+10+%29+*+pi*2+%2B+1%29%2C+x%3D-5+to+5+y%3D-5+to5
 
@@ -356,7 +347,7 @@ namespace Swell
                     height = Mathf.Sin(Mathf.Sqrt(delta.x * delta.x + delta.y * delta.y) / 10 * Mathf.PI * 2 +
                                        adjustedOffset.x);
                 }
-                else if (waveType == Type.bell)
+                else if (waveType == Type.BELL)
                 {
                     waveSpeed = Vector2.zero;
 
@@ -373,10 +364,9 @@ namespace Swell
                         -delta.x * delta.x / (2 * distance * distance)
                         - delta.y * delta.y / (2 * distance * distance));
                 }
-                else if (waveType == Type.random)
+                else if (waveType == Type.RANDOM)
                 {
                     Vector2 offset = time * waveSpeed + waveOffset;
-                    ;
                     //Noise reflects at 0 so we offset as much as possible. 
                     float reflectionOffset = 50000;
                     Vector3 delta = new Vector2(
@@ -388,7 +378,7 @@ namespace Swell
                         delta.y
                     ) - 1;
                 }
-                else if (waveType == Type.custom)
+                else if (waveType == Type.CUSTOM)
                 {
                     adjustedOffset.x = waveOffset.x + waveSpeed.x * time;
                     adjustedOffset.y = waveOffset.y + waveSpeed.y * time;
@@ -427,7 +417,6 @@ namespace Swell
 #if UNITY_EDITOR
                 if (!Application.isPlaying)
                 {
-                    // return (float)EditorApplication.timeSinceStartup;
                     return 10000;
                 }
 #endif

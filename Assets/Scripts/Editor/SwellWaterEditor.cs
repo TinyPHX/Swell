@@ -25,7 +25,6 @@ namespace Swell.Editors
                 {
                     water.transform.hasChanged = false;
                     water.EditorUpdate();
-                    // swellWater.Update();
                 }
             }
                 

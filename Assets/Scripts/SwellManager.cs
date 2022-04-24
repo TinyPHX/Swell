@@ -13,7 +13,7 @@ using Object = System.Object;
 namespace Swell
 {
     /**
-     * @brief Static class that is the Accountant of all water, waves and floaters.
+     * @brief Static class that is the Accountant of all water, meshes, waves, and floaters.
      */
     [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_manager.html")]
     public static class SwellManager
@@ -69,14 +69,12 @@ namespace Swell
             return registeredWater;
         }
 
-
         public static List<SwellFloater> AllFloaters()
         {
             UpdateAllRegistered();
 
             return registeredFloater;
         }
-
 
         public static List<SwellWave> AllWaves()
         {

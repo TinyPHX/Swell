@@ -25,28 +25,28 @@ namespace Swell.Editors
         public static void CreateWaveSin()
         {
             SwellWave wave = CreateNew<SwellWave>("Swell Wave (Rounded)");
-            wave.WaveType = SwellWave.Type.rounded;
+            wave.WaveType = SwellWave.Type.ROUNDED;
         }
 
         [MenuItem("GameObject/Swell/Wave (Pointed)", false, 40)]
         public static void CreateWaveRootSin()
         {
             SwellWave wave = CreateNew<SwellWave>("Swell Wave (Pointed)");
-            wave.WaveType = SwellWave.Type.pointed;
+            wave.WaveType = SwellWave.Type.POINTED;
         }
 
         [MenuItem("GameObject/Swell/Wave (Random)", false, 40)]
         public static void CreateWavePerlin()
         {
             SwellWave wave = CreateNew<SwellWave>("Swell Wave (Random)");
-            wave.WaveType = SwellWave.Type.random;
+            wave.WaveType = SwellWave.Type.RANDOM;
         }
 
         [MenuItem("GameObject/Swell/Wave (Bell)", false, 40)]
         public static void CreateWaveGausian()
         {
             SwellWave wave = CreateNew<SwellWave>("Swell Wave (Bell)");
-            wave.WaveType = SwellWave.Type.bell;
+            wave.WaveType = SwellWave.Type.BELL;
             wave.WaveScale = Vector2.one * 20;
             wave.WaveOffset = Vector2.one;
         }
@@ -55,14 +55,14 @@ namespace Swell.Editors
         public static void CreateWaveRadial()
         {
             SwellWave wave = CreateNew<SwellWave>("Swell Wave (Ripple)");
-            wave.WaveType = SwellWave.Type.ripple;
+            wave.WaveType = SwellWave.Type.RIPPLE;
         }
 
         [MenuItem("GameObject/Swell/Wave (Custom)", false, 40)]
         public static void CreateWaveCustom()
         {
             SwellWave wave = CreateNew<SwellWave>("Swell Wave (Custom)");
-            wave.WaveType = SwellWave.Type.custom;
+            wave.WaveType = SwellWave.Type.CUSTOM;
         }
 
         [MenuItem("GameObject/Swell/Mesh", false, 40)]
