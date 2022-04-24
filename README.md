@@ -8,7 +8,7 @@
 
 ## Motivation
 
-Swell was started as a way to add water with float physics to a Unity project without attempting to control the look of the water. Swell works great with most shaders but also looks just fine with the Unity standard shader. It's the perfect tool to get your water to feel and behave how you want before spending time getting the look correct. 
+%Swell was started as a way to add water with float physics to a Unity project without attempting to control the look of the water. %Swell works great with most shaders but also looks just fine with the Unity standard shader. It's the perfect tool to get your water to feel and behave how you want before spending time getting the look correct. 
 
 ## Features
 
@@ -26,22 +26,22 @@ Swell was started as a way to add water with float physics to a Unity project wi
 
 ### Step by step
 
-To get started with Swell all you need to do is, on the Hierarchy:
- - Right Click > Swell > Water
- - Right Click > Swell > Wave
- - Right Click > Swell > Floater
+To get started with %Swell all you need to do is, on the Hierarchy:
+ - Right Click > %Swell > Water
+ - Right Click > %Swell > Wave (Choose any)
+ - Right Click > %Swell > Floater
  - Click Play!
 
 That should get you started and from there you can explore each Objects components 
-to see how Swell works.
+to see how %Swell works.
 
 ## Components
 
-There are 4 main components that hold Swell together:
+There are 4 main components that hold %Swell together:
 
 ![](docs/images/swell_water_icon_22.png) **SwellWater** 
 
-Swell water is a dynamically sizeable water surface that pairs with a material  
+%Swell water is a dynamically sizeable water surface that pairs with a material  
 
 ![](docs/images/component_swell_water.png)
 
