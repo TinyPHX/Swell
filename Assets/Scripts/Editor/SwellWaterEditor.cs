@@ -11,16 +11,29 @@ namespace Swell.Editors
     [CustomEditor(typeof(SwellWater)), CanEditMultipleObjects]
     public class SwellWaterEditor : Editor
     {
+        public string lastTooltip = " ";
+
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
+            
             SwellWater[] swellWaterTargets = Array.ConvertAll(targets, item => (SwellWater) item);
-
-            if (GUILayout.Button("Re-initialize"))
+            
+            foreach (SwellWater water in swellWaterTargets)
+            {
+                if (GUI.changed || water.transform.hasChanged || water.NeedsInitialize())
+                {
+                    water.transform.hasChanged = false;
+                    water.EditorUpdate();
+                    // swellWater.Update();
+                }
+            }
+                
+            if (GUILayout.Button(new GUIContent("Refresh", "")))
             {
                 foreach (SwellWater swellWater in swellWaterTargets)
                 {
-                    swellWater.Reset();
+                    swellWater.EditorUpdate();
                 }
             }
         }

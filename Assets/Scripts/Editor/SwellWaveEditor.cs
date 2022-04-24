@@ -10,71 +10,39 @@ namespace Swell.Editors
     [CustomEditor(typeof(SwellWave)), CanEditMultipleObjects]
     public class SwellWaveEditor : Editor
     {
-        // List<SerializedProperty> basicProperties;
-        // List<SerializedProperty> advancedProperties;
         SerializedProperty myProperty;
 
         private void OnEnable()
         {
             myProperty = serializedObject.FindProperty("customWave");
-            // serializedObject.FindProperty()
         }
 
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            // DrawDefaultInspector();
             
-            // SwellWave[] swellWaveTargets = Array.ConvertAll(targets, item => (SwellWave) item);
-            
-            // EditorGUILayout.PropertyField(m_BoolProp, new GUIContent("Wave Enabled 2"));
-            // EditorGUILayout.PropertyField(myProperty, new GUIContent("Wave Enabled 2"), GUILayout.Height(100));
-            
+            SwellWave[] swellWaveTargets = Array.ConvertAll(targets, item => (SwellWave) item);
 
-            // foreach (SerializedProperty serializedProperty in serializedObject.GetIterator())
-            // {
-            //     Debug.Log("TEST 1 "+ serializedProperty.type );
-            //     Debug.Log("TEST 2 "+ nameof(AnimationCurve));
-            // }
-            
-            ///////////////////////////////////////////////////
+            bool waveTransformChanged = false;
+            foreach (SwellWave wave in swellWaveTargets)
+            {
+                waveTransformChanged |= wave.transform.hasChanged;
 
-            // serializedObject.Update(); //maybe
-            //
-            // SerializedProperty serializedProperty = serializedObject.GetIterator();
-            // serializedProperty.Next(true);
-            // do
-            // {
-            //     Debug.Log("TEST 1 " + serializedProperty.type);
-            //     Debug.Log("TEST 2 " + typeof(AnimationCurve).ToString());
-            //
-            //     if (serializedProperty.type == "AnimationCurve")
-            //     {
-            //         EditorGUILayout.PropertyField(serializedProperty,  GUILayout.Height(100));
-            //     }
-            //     else
-            //     {
-            //         EditorGUILayout.PropertyField(serializedProperty);
-            //     }
-            // } while (serializedProperty.Next(false));
-            //
-            // serializedObject.ApplyModifiedProperties();
+                if (GUI.changed || wave.transform.hasChanged)
+                {
+                    wave.Update();
+                }
+                
+                wave.transform.hasChanged = false;
+            }
             
-            ///////////////////////////////////////////////////
-
-            // foreach (SwellWave swellWave in swellWaveTargets)
-            // {
-            //
-            //     swellWave.WaveEnabled = GUILayout.Toggle(swellWave.WaveEnabled, "Wave Enabled");
-            // }
-            //
-            // if (GUILayout.Button("Generate"))
-            // {
-            //     foreach (SwellWave swellWave in swellWaveTargets)
-            //     {
-            //         
-            //     }
-            // }
+            foreach (SwellWater water in SwellManager.AllWaters())
+            {
+                if (GUI.changed || waveTransformChanged)
+                {
+                    water.Update();
+                }
+            }
         }
     }
 }

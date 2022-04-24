@@ -8,11 +8,11 @@ public class FrameAnimation : MonoBehaviour
     public int framesPerSecond = 1;
     private int frameIndex = 0;
     private float lastUpdate;
-    private Material material;
+    private Renderer meshRenderer;
 
     void Start () {
         lastUpdate = Time.time;
-        material = gameObject.GetComponent<Renderer>().material;
+        meshRenderer = gameObject.GetComponent<Renderer>();
     }
     
     void Update() {
@@ -27,10 +27,10 @@ public class FrameAnimation : MonoBehaviour
                 frameIndex = 0;
             }
             
-            material.SetTexture("_DetailAlbedoMap", frames[frameIndex]);
+            meshRenderer.material.SetTexture("_DetailAlbedoMap", frames[frameIndex]);
             if (useNormals)
             {
-                material.SetTexture("_DetailNormalMap", frameNormals[frameIndex]);
+                meshRenderer.material.SetTexture("_DetailNormalMap", frameNormals[frameIndex]);
             }
         }
     }

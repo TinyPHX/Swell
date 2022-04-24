@@ -2,6 +2,13 @@
 using System.Linq;
 using UnityEngine;
 using TP.ExtensionMethods;
+using System;
+using System.Net.Http.Headers;
+using JetBrains.Annotations;
+using NWH.DWP2.DefaultWater;
+using UnityEditor;
+using UnityEngine.UIElements;
+using Object = System.Object;
 
 namespace Swell
 {
@@ -11,58 +18,76 @@ namespace Swell
     [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_manager.html")]
     public static class SwellManager
     {
-        private static List<SwellWater> allWaters = new List<SwellWater>();
-        private static List<SwellWave> allWaves = new List<SwellWave>();
-        private static List<SwellFloater> allFloaters = new List<SwellFloater>();
-
-        public static List<SwellWater> AllWaters => allWaters;
-        public static List<SwellWave> AllWaves => allWaves;
-        public static List<SwellFloater> AllFloaters => allFloaters;
-
+        // private static Dictionary<Type, List<T>> registered = new ();
+        private static List<SwellWater> registeredWater = new List<SwellWater>();
+        private static List<SwellFloater> registeredFloater = new List<SwellFloater>();
+        private static List<SwellWave> registeredWave = new List<SwellWave>();
         private static SwellWater onlyWater = null;
 
-        public static void Register(SwellWater water)
+        private static float searchTime;
+
+        public static void Register(this SwellWater toRegister)
         {
-            if (AllWaters.Count == 0)
+            registeredWater.AddUnique(toRegister);
+            onlyWater = registeredWater.Count == 1 ? toRegister : null;
+        }
+        public static void UnRegister(this SwellWater toUnRegister) { registeredWater.Remove(toUnRegister); }
+        public static void Register(this SwellFloater toRegister) { registeredFloater.AddUnique(toRegister); }
+        public static void UnRegister(this SwellFloater toUnRegister) { registeredFloater.Remove(toUnRegister); }
+
+        public static void Register(this SwellWave toRegister) { registeredWave.AddUnique(toRegister); }
+
+        public static void UnRegister(this SwellWave toUnRegister)
+        {
+            registeredWave.Remove(toUnRegister);
+
+            if (!Application.isPlaying)
             {
-                onlyWater = water;
+                foreach (var water in AllWaters())
+                {
+                    water.EditorUpdate();
+                }
             }
-            else
+        }
+        
+        private static void UpdateAllRegistered()
+        {
+            if (!Application.isPlaying && (float)EditorApplication.timeSinceStartup - searchTime > 2)
             {
-                onlyWater = null;
+                searchTime = (float)EditorApplication.timeSinceStartup;
+                
+                registeredWater = UnityEngine.Object.FindObjectsOfType<SwellWater>().ToList();
+                registeredFloater = UnityEngine.Object.FindObjectsOfType<SwellFloater>().ToList();
+                registeredWave = UnityEngine.Object.FindObjectsOfType<SwellWave>().ToList();
             }
-            
-            AllWaters.Add(water);
         }
 
-        public static void Unregister(SwellWater water)
+        public static List<SwellWater> AllWaters()
         {
-            AllWaters.Remove(water);
+            UpdateAllRegistered();
+
+            return registeredWater;
         }
 
-        public static void Register(SwellWave wave)
+
+        public static List<SwellFloater> AllFloaters()
         {
-            allWaves.Add(wave);
+            UpdateAllRegistered();
+
+            return registeredFloater;
         }
 
-        public static void Unregister(SwellWave wave)
+
+        public static List<SwellWave> AllWaves()
         {
-            allWaves.Remove(wave);
-        }
+            UpdateAllRegistered();
 
-        public static void Register(SwellFloater floater)
-        {
-            allFloaters.Add(floater);
+            return registeredWave;
         }
-
-        public static void Unregister(SwellFloater floater)
-        {
-            allFloaters.Remove(floater);
-        }
-
+        
         public static SwellWater GetNearestWater(Vector3 position)
         {
-            return onlyWater ? onlyWater : position.NearestComponent(AllWaters);
+            return onlyWater ? onlyWater : position.NearestComponent(AllWaters());
         }
     }
 }

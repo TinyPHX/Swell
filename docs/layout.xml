@@ -20,7 +20,7 @@
       <tab type="classlist" visible="yes" title="" intro=""/>
       <tab type="classindex" visible="$ALPHABETICAL_INDEX" title=""/> 
       <tab type="hierarchy" visible="no" title="" intro=""/>
-      <tab type="classmembers" visible="no" title="" intro=""/>
+      <tab type="classmembers" visible="yes" title="" intro=""/>
     </tab>
     <tab type="structs" visible="yes" title="">
       <tab type="structlist" visible="yes" title="" intro=""/>

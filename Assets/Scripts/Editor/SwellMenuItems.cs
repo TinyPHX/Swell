@@ -13,7 +13,12 @@ namespace Swell.Editors
         [MenuItem("GameObject/Swell/Water", false, 40)]
         public static void CreateWater()
         {
-            CreateNew<SwellWater>("Swell Water");
+            SwellWater water = CreateNew<SwellWater>("Swell Water");
+            if (!water.Material)
+            {
+                water.Material = new Material(Shader.Find("Standard"));
+            }
+            water.EditorUpdate();
         }
 
         [MenuItem("GameObject/Swell/Wave (Rounded)", false, 40)]
@@ -42,6 +47,8 @@ namespace Swell.Editors
         {
             SwellWave wave = CreateNew<SwellWave>("Swell Wave (Bell)");
             wave.WaveType = SwellWave.Type.bell;
+            wave.WaveScale = Vector2.one * 20;
+            wave.WaveOffset = Vector2.one;
         }
 
         [MenuItem("GameObject/Swell/Wave (Ripple)", false, 40)]
@@ -120,7 +127,7 @@ namespace Swell.Editors
             else
             {
                 Transform primitive = GameObject.CreatePrimitive(PrimitiveType.Cube).transform;
-                primitive.gameObject.name = primitive.gameObject.name + " (Floater)";
+                primitive.gameObject.name = "Swell Floater (" + primitive.gameObject.name + ")";
                 if (Selected)
                 {
                     primitive.transform.parent = Selected.transform;
@@ -171,6 +178,10 @@ namespace Swell.Editors
             T newComponent = new GameObject(name, new Type[] {typeof(T)}).GetComponent<T>();
             newComponent.transform.parent = parent;
             newComponent.transform.localPosition = Vector3.zero;
+            
+            Selection.objects = new UnityEngine.Object[] { newComponent.gameObject };
+            
+            EditorUtility.SetDirty(newComponent.gameObject);
 
             return newComponent;
         }

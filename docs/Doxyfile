@@ -606,7 +606,7 @@ HIDE_COMPOUND_REFERENCE= NO
 # will show which file needs to be included to use the class.
 # The default value is: YES.
 
-SHOW_HEADERFILE        = YES
+SHOW_HEADERFILE        = NO
 
 # If the SHOW_INCLUDE_FILES tag is set to YES then doxygen will put a list of
 # the files that are included by a file in the documentation of that file.
@@ -874,7 +874,8 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = S:/Workspace/unity/Swell
+INPUT                  = S:/Workspace/unity/Swell \
+                         S:/Workspace/unity/Swell/docs/demos.md
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -1274,7 +1275,7 @@ HTML_FILE_EXTENSION    = .html
 # of the possible markers and block names see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_HEADER            = headerFile.html
+HTML_HEADER            = header.html
 
 # The HTML_FOOTER tag can be used to specify a user-defined HTML footer for each
 # generated HTML page. If the tag is left blank doxygen will generate a standard
@@ -1309,8 +1310,11 @@ HTML_STYLESHEET        =
 # list). For an example see the documentation.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_STYLESHEET  = doxygen-awesome-css-main/doxygen-awesome.css \
-                         doxygen-awesome-css-main/doxygen-awesome-sidebar-only.css
+HTML_EXTRA_STYLESHEET  = doxygen-awesome-css-main/doxygen-custom/custom.css \
+                         doxygen-awesome-css-main/doxygen-awesome.css \
+                         doxygen-awesome-css-main/doxygen-awesome-sidebar-only.css \
+                         doxygen-awesome-css-main/doxygen-awesome-sidebar-only-darkmode-toggle.css \
+                         doxygen-awesome-css-main/doxygen-custom/custom-alternative.css
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note
@@ -1320,7 +1324,11 @@ HTML_EXTRA_STYLESHEET  = doxygen-awesome-css-main/doxygen-awesome.css \
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES       = images/favicon.ico
+HTML_EXTRA_FILES       = images/favicon.ico \
+                         doxygen-awesome-css-main/doxygen-awesome-darkmode-toggle.js \
+                         doxygen-awesome-css-main/doxygen-awesome-fragment-copy-button.js \
+                         doxygen-awesome-css-main/doxygen-awesome-paragraph-link.js \
+                         doxygen-awesome-css-main/doxygen-custom/toggle-alternative-theme.js
 
 # The HTML_COLORSTYLE_HUE tag controls the color of the HTML output. Doxygen
 # will adjust the colors in the style sheet and background images according to

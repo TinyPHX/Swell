@@ -107,6 +107,7 @@ namespace Swell
         [SerializeField] private Vector3 center = Vector3.zero;
 
         [Separator("Advanced")] 
+        [OverrideLabel("")]
         [SerializeField] private bool showAdvanced;
         [SerializeField, ConditionalField(nameof(showAdvanced))] private Method depthMethod = Method.ACCURATE;
         [SerializeField, ConditionalField(nameof(showAdvanced))] private Method floatMethod = Method.ACCURATE;
@@ -150,7 +151,8 @@ namespace Swell
             gravity = Physics.gravity.magnitude;
             UpdateRigidBody();
             RigidbodyChanged(null, rigidbody);
-            SwellManager.Register(this);
+            // SwellManager.Register(this);
+            this.Register();
 
             if (floatMethod == Method.FAST && rigidbody)
             {
@@ -160,7 +162,8 @@ namespace Swell
 
         private void OnDestroy()
         {
-            SwellManager.Unregister(this);
+            // SwellManager.Unregister(this);
+            this.UnRegister();
         }
 
         void UpdateRigidBody()
@@ -235,7 +238,7 @@ namespace Swell
             activeFrame = Time.frameCount;
         }
 
-        void FixedUpdate()
+        public void FixedUpdate()
         {
             OncePerRigidBodyUpdate();
 
@@ -282,7 +285,9 @@ namespace Swell
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.magenta;
-            DrawUnlitSphere(Position, .05f);
+            Vector3 gizmoPosition =  gizmoPosition = transform.position + transform.rotation * Vector3.Scale(center, transform.lossyScale);
+            
+            DrawUnlitSphere(gizmoPosition, .05f);
             Vector3 force = Vector3.one;
             if (floatMethod == Method.ACCURATE)
             {
@@ -299,8 +304,8 @@ namespace Swell
                 
                 force = Vector3.up * (buoyancy / mass);                
             }
-            Gizmos.DrawRay(Position, force);
-            DrawUnlitSphere(Position + force, .05f);
+            Gizmos.DrawRay(gizmoPosition, force);
+            DrawUnlitSphere(gizmoPosition + force, .05f);
         }
 
         void DrawUnlitSphere(Vector3 origin, float radius)

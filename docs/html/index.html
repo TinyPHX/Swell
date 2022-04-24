@@ -1,15 +1,16 @@
-<!-- HTML header for doxygen 1.9.3-->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN icon -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<!-- END icon -->
 <!-- BEGIN opengraph metadata -->
 <meta property="og:title" content="Swell" />
-<!-- <meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" /> TODOTODOTODOTODOTODOTODOTODOTODO--> 
+<!-- <meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" /> TODOTODOTODOTODOTODOTODOTODOTODO-->
 <meta property="og:description" content="Water Physics for Unity." />
 <meta property="og:url" content="https://tinyphx.github.io/Swell/" />
 <!-- END opengraph metadata -->
@@ -18,11 +19,20 @@
 <meta name="twitter:title" content="Doxygen Awesome" />
 <meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." /> -->
 <!-- END twitter metadata -->
-<!-- <title>Swell: Swell</title> -->
-<title>Swell: Water physics for Unity | Swell</title>
+<title>Swell: Swell</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
+<!--<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>-->
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+</script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -31,17 +41,24 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/TinyPHX" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
+ <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
-  <td id="projectalign">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Swell
    </div>
    <div id="projectbrief">Water physics for Unity</div>
@@ -124,49 +141,75 @@ Features</h1>
 </ul>
 <h1><a class="anchor" id="autotoc_md10"></a>
 Quick Start Guide</h1>
-<p >To get started with <a class="el" href="namespace_swell.html">Swell</a> all you need to do is open your new scene</p>
-<h1><a class="anchor" id="autotoc_md11"></a>
-Unity Demo Scenes</h1>
+<h2><a class="anchor" id="autotoc_md11"></a>
+Overview</h2>
 <h2><a class="anchor" id="autotoc_md12"></a>
-Swell Floater</h2>
-<h3><a class="anchor" id="autotoc_md13"></a>
-Algorythm Demo</h3>
-<p ><em>Scene:</em> <code>Swell Floater - Algorythm Demo.unity</code> </p>
-<h3><a class="anchor" id="autotoc_md14"></a>
-Buoyancy Demo</h3>
-<p ><em>Scene:</em> <code>Swell Floater - Buoyancy Demo.unity</code> </p>
-<h3><a class="anchor" id="autotoc_md15"></a>
-Props Demo</h3>
-<p ><em>Scene:</em> <code>Swell Floater - Buoyancy Demo.unity</code> </p>
-<h3><a class="anchor" id="autotoc_md16"></a>
-Stress Test</h3>
-<h2><a class="anchor" id="autotoc_md17"></a>
-Swell Water - Ocean Demo 2.unity</h2>
-<h2><a class="anchor" id="autotoc_md18"></a>
-Swell Water - Ocean Demo.unity</h2>
-<h2><a class="anchor" id="autotoc_md19"></a>
-Swell Water - Realistic Water Demo.unity</h2>
-<h2><a class="anchor" id="autotoc_md20"></a>
-Swell Water - River Demo.unity</h2>
-<h2><a class="anchor" id="autotoc_md21"></a>
-Swell Water - Waves Demo.unity</h2>
-<h1><a class="anchor" id="autotoc_md22"></a>
-Scripts Examples</h1>
-<ul>
-<li>Sidebar-Only theme: <a href="https://jothepro.github.io/doxygen-awesome-css/">Documentation of this repository</a></li>
-<li>Base theme: <a href="https://a4z.github.io/libsl3/">libsl3</a></li>
+Step by step</h2>
+<p >To get started with <a class="el" href="namespace_swell.html">Swell</a> all you need to do is open your new scene</p>
+<h1><a class="anchor" id="autotoc_md13"></a>
+Components</h1>
+<p >There are 4 main components that hold <a class="el" href="namespace_swell.html">Swell</a> together:</p>
+<p ><img src="swell_water_icon_22.png" alt="" class="inline"/>    <b>SwellWater</b></p>
+<p ><a class="el" href="namespace_swell.html">Swell</a> water is a dynamically sizeable water surface that pairs with a material <br  />
+</p>
+<div class="image">
+<img src="component_swell_water.png" alt=""/>
+</div>
+   <p ><img src="swell_mesh_icon_22.png" alt="" class="inline"/>    <b>SwellMesh</b></p>
+<p >SwellMesh is completely managed by SwellWater but can exists on it's own as an independent component. It's main feature is that you can create a large water mesh with a more granular grid at the cent</p>
+<div class="image">
+<img src="component_swell_mesh.png" alt=""/>
+</div>
+   <p ><img src="swell_wave_icon_22.png" alt="" class="inline"/>    <b>SwellWave</b></p>
+<div class="image">
+<img src="component_swell_wave.png" alt=""/>
+</div>
+   <p ><img src="swell_floater_icon_22.png" alt="" class="inline"/>    <b>SwellFloater</b></p>
+<div class="image">
+<img src="component_swell_floater.png" alt=""/>
+</div>
+   <ul>
+<li><img src="swell_water_icon_22.png" alt="" class="inline"/>    <b>SwellWater</b> -</li>
+<li><img src="swell_mesh_icon_22.png" alt="" class="inline"/>    <b>SwellMesh</b> -</li>
+<li><img src="swell_wave_icon_22.png" alt="" class="inline"/>    <b>SwellWave</b> -</li>
+<li><img src="swell_floater_icon_22.png" alt="" class="inline"/>    <b>SwellFloater</b> -</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md23"></a>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">SwellWater    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><p class="starttd"><img src="component_swell_water.png" alt="" class="inline"/>   </p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone"><img src="swell_wave_icon_22.png" alt="" class="inline"/>    SwellWave    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">[](docs/images/component_swell_wave.png)   </td></tr>
+</table>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">SwellMesh   </th><th class="markdownTableHeadNone">SwellFloater    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><p class="starttd"><img src="component_swell_mesh.png" alt="" class="inline"/>   </p>
+<p class="endtd"></p>
+</td><td class="markdownTableBodyNone"><p class="starttd"><img src="component_swell_floater.png" alt="" class="inline"/>   </p>
+<p class="endtd"></p>
+</td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md14"></a>
+Scripting Interface</h2>
+<p >//Link to classes</p>
+<h3><a class="anchor" id="autotoc_md15"></a>
+Scripts Examples</h3>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Installation</h1>
 <p >Copy the file <code>doxygen-awesome.css</code> from this repository into your project or add this repository as submodule and check out the latest release:</p>
 <div class="fragment"><div class="line">git submodule add https://github.com/jothepro/doxygen-awesome-css.git</div>
 <div class="line">cd doxygen-awesome-css</div>
 <div class="line">git checkout v2.0.3</div>
-</div><!-- fragment --><p >Choose one of the theme variants and configure Doxygen accordingly:</p>
-<p ><span id="variants_image"></span></p>
-<p ><span id="variants_image"><img src="img/theme-variants.drawio.svg" alt="Available theme variants" style="pointer-events: none;" class="inline"/></span></p>
-<p ><span id="variants_image"></span></p>
-<ol type="1">
+</div><!-- fragment --><ol type="1">
 <li><b>Base theme</b>: <div class="fragment"><div class="line"># Doxyfile</div>
 <div class="line">GENERATE_TREEVIEW      = YES # optional. Also works without treeview</div>
 <div class="line">HTML_EXTRA_STYLESHEET  = doxygen-awesome-css/doxygen-awesome.css</div>
@@ -177,28 +220,26 @@ Installation</h1>
 <div class="line">                         doxygen-awesome-css/doxygen-awesome-sidebar-only.css</div>
 </div><!-- fragment --></li>
 </ol>
-<p >Further installation instructions:</p>
-<ul>
-<li>How to install extensions</li>
-<li>How to customize the theme (colors, spacing, border-radius, ...)</li>
-<li>Tips and Tricks for further configuration</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md24"></a>
-Browser support</h1>
-<p >Tested with</p>
-<ul>
-<li>Chrome 98, Chrome 98 for Android, Chrome 87 for iOS</li>
-<li>Safari 15, Safari for iOS 15</li>
-<li>Firefox 97, Firefox Daylight 97 for Android, Firefox Daylight 96 for iOS</li>
-</ul>
-<h1><a class="anchor" id="autotoc_md25"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 Credits</h1>
+<p >Thanks to all the providers of these assets which were used in part in some of the demo scenes:</p>
 <ul>
-<li>This theme is inspired by the <a href="https://vuepress.vuejs.org/">vuepress</a> static site generator default theme.</li>
-<li>Thank you for all the feedback on github!</li>
+<li><a href="https://assetstore.unity.com/packages/3d/vehicles/sea/brig-sloop-sailing-ship-77862">USSC Brig Sloop</a></li>
+<li><a href="https://assetstore.unity.com/packages/essentials/asset-packs/standard-assets-for-unity-2018-4-32351">Standard Assets</a></li>
+<li><a href="https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633">SkySeries Freebie</a></li>
+<li><a href="https://assetstore.unity.com/packages/vfx/shaders/toony-colors-pro-2-8105#content">JMO Assets</a></li>
+<li><a href="https://docs.unity3d.com/530/Documentation/Manual/HOWTO-Water.html">Unity Standard Assets</a></li>
+</ul>
+<p >Special thanks to the creator and contributors of MyBox which was used to put the finishing touches on the UI, and saving me the extensive headache of creating and maintaining custom unity inspector code.</p>
+<ul>
+<li><a href="https://github.com/Deadcows/MyBox">MyBox</a></li>
+</ul>
+<p >Lastly thanks to the Doxigen team and creator of Doxygen Awesome which was a tremendous help in creating pretty docs!</p><ul>
+<li><a href="https://www.doxygen.nl/index.html">Doxygen</a></li>
+<li><a href="https://jothepro.github.io/doxygen-awesome-css/">Doxygen Awesome</a></li>
 </ul>
 <p ><span class="next_section_button"></span></p>
-<p ><span class="next_section_button">Read Next: Extensions </span> </p>
+<p ><span class="next_section_button">Read Next: <a class="el" href="md_demos.html">Unity Demo Scenes</a> </span> </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 </div><!-- doc-content -->

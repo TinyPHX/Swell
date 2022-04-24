@@ -25,7 +25,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 7.6, y: 7.6}
         m_Offset: {x: 0, y: 0}
     - _DetailMask:
         m_Texture: {fileID: 0}
@@ -33,7 +33,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 7.6, y: 7.6}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: efa766d5b1bccf949a1db567a2666868, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 38, y: 38}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -59,6 +59,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -86,3 +87,4 @@ Material:
     - _HColor: {r: 0.6, g: 0.6, b: 0.6, a: 1}
     - _SColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
     - _SpecColor: {r: 0.18382353, g: 0.18382353, b: 0.18382353, a: 1}
+  m_BuildTextureStacks: []

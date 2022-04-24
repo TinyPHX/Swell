@@ -1,15 +1,16 @@
-<!-- HTML header for doxygen 1.9.3-->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN icon -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<!-- END icon -->
 <!-- BEGIN opengraph metadata -->
 <meta property="og:title" content="Swell" />
-<!-- <meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" /> TODOTODOTODOTODOTODOTODOTODOTODO--> 
+<!-- <meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" /> TODOTODOTODOTODOTODOTODOTODOTODO-->
 <meta property="og:description" content="Water Physics for Unity." />
 <meta property="og:url" content="https://tinyphx.github.io/Swell/" />
 <!-- END opengraph metadata -->
@@ -18,11 +19,20 @@
 <meta name="twitter:title" content="Doxygen Awesome" />
 <meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." /> -->
 <!-- END twitter metadata -->
-<!-- <title>Swell: Swell.SwellWater Class Reference</title> -->
-<title>Swell: Water physics for Unity | Swell.SwellWater Class Reference</title>
+<title>Swell: Swell.SwellWater Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
+<!--<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>-->
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+</script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -31,17 +41,24 @@
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
 <link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/TinyPHX" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
+ <tr style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
-  <td id="projectalign">
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Swell
    </div>
    <div id="projectbrief">Water physics for Unity</div>
@@ -127,10 +144,22 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a3945444cdfac6d1711771273d81c8353"><td class="memItemLeft" align="right" valign="top"><a id="a3945444cdfac6d1711771273d81c8353" name="a3945444cdfac6d1711771273d81c8353"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>useSwellMesh</b> = false</td></tr>
-<tr class="memdesc:a3945444cdfac6d1711771273d81c8353"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO: This is how you add member docs in doxigen. <br /></td></tr>
-<tr class="separator:a3945444cdfac6d1711771273d81c8353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a923a7787877a75b5368587860ee191c4"><td class="memItemLeft" align="right" valign="top"><a id="a923a7787877a75b5368587860ee191c4" name="a923a7787877a75b5368587860ee191c4"></a>
+Material&#160;</td><td class="memItemRight" valign="bottom"><b>material</b></td></tr>
+<tr class="memdesc:a923a7787877a75b5368587860ee191c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a923a7787877a75b5368587860ee191c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6227c215730ecaaf31aefe3d05d249d3"><td class="memItemLeft" align="right" valign="top"><a id="a6227c215730ecaaf31aefe3d05d249d3" name="a6227c215730ecaaf31aefe3d05d249d3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>customSwellMesh</b> = false</td></tr>
+<tr class="memdesc:a6227c215730ecaaf31aefe3d05d249d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO: This is how you add member docs in doxigen. <br /></td></tr>
+<tr class="separator:a6227c215730ecaaf31aefe3d05d249d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62578328b5cf5c2c5b7ca0e7df05b4a4"><td class="memItemLeft" align="right" valign="top"><a id="a62578328b5cf5c2c5b7ca0e7df05b4a4" name="a62578328b5cf5c2c5b7ca0e7df05b4a4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>meshGridSize</b> = 1</td></tr>
+<tr class="memdesc:a62578328b5cf5c2c5b7ca0e7df05b4a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a62578328b5cf5c2c5b7ca0e7df05b4a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14c74f9229f8c275e90bce2e997096a5"><td class="memItemLeft" align="right" valign="top"><a id="a14c74f9229f8c275e90bce2e997096a5" name="a14c74f9229f8c275e90bce2e997096a5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>meshSize</b> = 40</td></tr>
+<tr class="memdesc:a14c74f9229f8c275e90bce2e997096a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a14c74f9229f8c275e90bce2e997096a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d4ba94ce91a78d7454a8836075e2af3"><td class="memItemLeft" align="right" valign="top"><a id="a1d4ba94ce91a78d7454a8836075e2af3" name="a1d4ba94ce91a78d7454a8836075e2af3"></a>
 <a class="el" href="class_swell_1_1_swell_mesh.html">SwellMesh</a>&#160;</td><td class="memItemRight" valign="bottom"><b>swellMesh</b></td></tr>
 <tr class="memdesc:a1d4ba94ce91a78d7454a8836075e2af3"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
@@ -143,14 +172,6 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>mainTextureSize</b> 
 int&#160;</td><td class="memItemRight" valign="bottom"><b>secondaryTextureSize</b> = 0</td></tr>
 <tr class="memdesc:ab1a580962fa47738fb7ceb437c43724c"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
 <tr class="separator:ab1a580962fa47738fb7ceb437c43724c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5222cdf959bc14ab6f2ac44a8e21aa7b"><td class="memItemLeft" align="right" valign="top"><a id="a5222cdf959bc14ab6f2ac44a8e21aa7b" name="a5222cdf959bc14ab6f2ac44a8e21aa7b"></a>
-MeshFilter&#160;</td><td class="memItemRight" valign="bottom"><b>meshFilterPrefab</b></td></tr>
-<tr class="memdesc:a5222cdf959bc14ab6f2ac44a8e21aa7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a5222cdf959bc14ab6f2ac44a8e21aa7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a923a7787877a75b5368587860ee191c4"><td class="memItemLeft" align="right" valign="top"><a id="a923a7787877a75b5368587860ee191c4" name="a923a7787877a75b5368587860ee191c4"></a>
-Material&#160;</td><td class="memItemRight" valign="bottom"><b>material</b></td></tr>
-<tr class="memdesc:a923a7787877a75b5368587860ee191c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a923a7787877a75b5368587860ee191c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3ef50264ac8a477e9e40ecd9f5ec805"><td class="memItemLeft" align="right" valign="top"><a id="ab3ef50264ac8a477e9e40ecd9f5ec805" name="ab3ef50264ac8a477e9e40ecd9f5ec805"></a>
 ShadowCastingMode&#160;</td><td class="memItemRight" valign="bottom"><b>shadowCastingMode</b> = ShadowCastingMode.Off</td></tr>
 <tr class="memdesc:ab3ef50264ac8a477e9e40ecd9f5ec805"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
@@ -159,46 +180,6 @@ ShadowCastingMode&#160;</td><td class="memItemRight" valign="bottom"><b>shadowCa
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>receiveShadows</b> = false</td></tr>
 <tr class="memdesc:a0393337e36e0aa0dd74547c3b6ec9fd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
 <tr class="separator:a0393337e36e0aa0dd74547c3b6ec9fd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa00927b0cec776b018fc70f44615c540"><td class="memItemLeft" align="right" valign="top"><a id="aa00927b0cec776b018fc70f44615c540" name="aa00927b0cec776b018fc70f44615c540"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>lockAlbedoPosition</b></td></tr>
-<tr class="memdesc:aa00927b0cec776b018fc70f44615c540"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:aa00927b0cec776b018fc70f44615c540"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="memItemLeft" align="right" valign="top"><a id="ae8fee9be6ddddb5a81a0ce65aab09521" name="ae8fee9be6ddddb5a81a0ce65aab09521"></a>
-Transform&#160;</td><td class="memItemRight" valign="bottom"><b>meshAlbedoPosition</b></td></tr>
-<tr class="memdesc:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac967024241c0082aefcfd01318a514a0"><td class="memItemLeft" align="right" valign="top"><a id="ac967024241c0082aefcfd01318a514a0" name="ac967024241c0082aefcfd01318a514a0"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>gridSize</b> = 10</td></tr>
-<tr class="memdesc:ac967024241c0082aefcfd01318a514a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of tiles in water square <br /></td></tr>
-<tr class="separator:ac967024241c0082aefcfd01318a514a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a508bbac2d6f369b7be8ac6904c042d23"><td class="memItemLeft" align="right" valign="top"><a id="a508bbac2d6f369b7be8ac6904c042d23" name="a508bbac2d6f369b7be8ac6904c042d23"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>remapUvs</b> = false</td></tr>
-<tr class="memdesc:a508bbac2d6f369b7be8ac6904c042d23"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a508bbac2d6f369b7be8ac6904c042d23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga1412e4151304f7bdf42a056ec38b28fb"><td class="memItemLeft" align="right" valign="top">
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>showWaterHorizon</b></td></tr>
-<tr class="memdesc:ga1412e4151304f7bdf42a056ec38b28fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:ga1412e4151304f7bdf42a056ec38b28fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga115bded1acd7793c294aaf5a61fa6e69"><td class="memItemLeft" align="right" valign="top">
-Material&#160;</td><td class="memItemRight" valign="bottom"><b>horizonMaterial</b></td></tr>
-<tr class="memdesc:ga115bded1acd7793c294aaf5a61fa6e69"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:ga115bded1acd7793c294aaf5a61fa6e69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4c02191cdc39ec734e2c415753c2e80d"><td class="memItemLeft" align="right" valign="top">
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>waterHorizon</b></td></tr>
-<tr class="memdesc:ga4c02191cdc39ec734e2c415753c2e80d"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:ga4c02191cdc39ec734e2c415753c2e80d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab421cda87666122ea1eee8dba6e14fa1"><td class="memItemLeft" align="right" valign="top"><a id="ab421cda87666122ea1eee8dba6e14fa1" name="ab421cda87666122ea1eee8dba6e14fa1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>usePositionAnchor</b> = false</td></tr>
-<tr class="memdesc:ab421cda87666122ea1eee8dba6e14fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:ab421cda87666122ea1eee8dba6e14fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add8901717ad2bf0a3e185cb46a3fb536"><td class="memItemLeft" align="right" valign="top"><a id="add8901717ad2bf0a3e185cb46a3fb536" name="add8901717ad2bf0a3e185cb46a3fb536"></a>
-GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>positionAnchor</b></td></tr>
-<tr class="memdesc:add8901717ad2bf0a3e185cb46a3fb536"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:add8901717ad2bf0a3e185cb46a3fb536"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c9fde7092910250158de9b0602bda5f"><td class="memItemLeft" align="right" valign="top"><a id="a1c9fde7092910250158de9b0602bda5f" name="a1c9fde7092910250158de9b0602bda5f"></a>
-Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>positionStep</b> = Vector2.one * 10</td></tr>
-<tr class="memdesc:a1c9fde7092910250158de9b0602bda5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a1c9fde7092910250158de9b0602bda5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5f4bbab04c356f8da59d2f4f2b6d558"><td class="memItemLeft" align="right" valign="top"><a id="ae5f4bbab04c356f8da59d2f4f2b6d558" name="ae5f4bbab04c356f8da59d2f4f2b6d558"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>calculateNormals</b> = true</td></tr>
 <tr class="memdesc:ae5f4bbab04c356f8da59d2f4f2b6d558"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
@@ -211,6 +192,26 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>lowPolyNormals</b> = 
 float&#160;</td><td class="memItemRight" valign="bottom"><b>calculateNormalsFrequency</b> = 1</td></tr>
 <tr class="memdesc:aff16b25305c6a4d45bb68cf2429a728d"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO (in seconds) <br /></td></tr>
 <tr class="separator:aff16b25305c6a4d45bb68cf2429a728d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab421cda87666122ea1eee8dba6e14fa1"><td class="memItemLeft" align="right" valign="top"><a id="ab421cda87666122ea1eee8dba6e14fa1" name="ab421cda87666122ea1eee8dba6e14fa1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>usePositionAnchor</b> = false</td></tr>
+<tr class="memdesc:ab421cda87666122ea1eee8dba6e14fa1"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ab421cda87666122ea1eee8dba6e14fa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add8901717ad2bf0a3e185cb46a3fb536"><td class="memItemLeft" align="right" valign="top"><a id="add8901717ad2bf0a3e185cb46a3fb536" name="add8901717ad2bf0a3e185cb46a3fb536"></a>
+GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>positionAnchor</b></td></tr>
+<tr class="memdesc:add8901717ad2bf0a3e185cb46a3fb536"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:add8901717ad2bf0a3e185cb46a3fb536"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c9fde7092910250158de9b0602bda5f"><td class="memItemLeft" align="right" valign="top"><a id="a1c9fde7092910250158de9b0602bda5f" name="a1c9fde7092910250158de9b0602bda5f"></a>
+Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>positionStep</b> = Vector2.one * 10</td></tr>
+<tr class="memdesc:a1c9fde7092910250158de9b0602bda5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:a1c9fde7092910250158de9b0602bda5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa00927b0cec776b018fc70f44615c540"><td class="memItemLeft" align="right" valign="top"><a id="aa00927b0cec776b018fc70f44615c540" name="aa00927b0cec776b018fc70f44615c540"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>lockAlbedoPosition</b></td></tr>
+<tr class="memdesc:aa00927b0cec776b018fc70f44615c540"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:aa00927b0cec776b018fc70f44615c540"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="memItemLeft" align="right" valign="top"><a id="ae8fee9be6ddddb5a81a0ce65aab09521" name="ae8fee9be6ddddb5a81a0ce65aab09521"></a>
+Transform&#160;</td><td class="memItemRight" valign="bottom"><b>meshAlbedoPosition</b></td></tr>
+<tr class="memdesc:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="separator:ae8fee9be6ddddb5a81a0ce65aab09521"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a> s, and provides API to retrieve or modify water. </p>
@@ -242,7 +243,7 @@ float&#160;</td><td class="memItemRight" valign="bottom"><b>calculateNormalsFreq
 <h2><a class="anchor" id="autotoc_md6"></a>
 Example</h2>
 <p >Returns the height of the water at the origin of the scene: </p><div class="fragment"><div class="line"><a class="code hl_function" href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">GetWaterHeight</a>(Vector3.Zero) </div>
-<div class="ttc" id="aclass_swell_1_1_swell_water_html_a45c077a4db43f580133b1ad47432ae8a"><div class="ttname"><a href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">Swell.SwellWater.GetWaterHeight</a></div><div class="ttdeci">float GetWaterHeight(Vector3 position)</div><div class="ttdoc">Gets the exact height of the SwellMesh.</div><div class="ttdef"><b>Definition:</b> SwellWater.cs:500</div></div>
+<div class="ttc" id="aclass_swell_1_1_swell_water_html_a45c077a4db43f580133b1ad47432ae8a"><div class="ttname"><a href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">Swell.SwellWater.GetWaterHeight</a></div><div class="ttdeci">float GetWaterHeight(Vector3 position)</div><div class="ttdoc">Gets the exact height of the SwellMesh.</div><div class="ttdef"><b>Definition:</b> SwellWater.cs:633</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

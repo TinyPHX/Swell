@@ -1,6 +1,11 @@
-﻿using MyBox;
+﻿using System;
+using MyBox;
 using UnityEngine;
 using UnityEngine.Serialization;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Swell
 {
@@ -33,7 +38,7 @@ namespace Swell
             new Keyframe(.75f, 1, 0, 0, .5f, .5f),
             new Keyframe(1, 0, 0, 0, 0, 0),
         });
-
+        
         [SerializeField] private float waveHeight = 1;
         [SerializeField] private Vector2 waveScale = Vector2.one;
         [SerializeField] private Vector2 waveOffset = Vector2.zero;
@@ -83,53 +88,83 @@ namespace Swell
         private bool activeAndEnabled;  //optimize access of property;
         private Vector2 adjustedOffset;
         private Vector2 adjustedPosition;
+        private float time;
+        private float startTime;
+        private bool initialized = false;
+
+        private void Reset()
+        {
+            UpdateActive();
+        }
 
         void Start()
         {
-            SwellManager.Register(this);
+            // SwellManager.Register(this);
+            this.Register();
 
             if (interpolate && waveEnabled)
             {
                 previousInterpolate = interpolate;
                 previousWaveEnabled = waveEnabled;
-                interpolateStartTime = Time.time;
+                interpolateStartTime = startTime;
             }
         }
 
-        private void Update()
+        void Initialize()
         {
+            if (!initialized)
+            {
+                initialized = true;
+                Start();
+            }
+        }
+
+        public void Update()
+        {
+            time = WaveTime;
+            startTime = WaveStartTime;
+            
+            Initialize();
+            
+            UpdateActive();
             UpdateAdjustedWaveHeight();
             position = transform.position;
         }
 
         private void OnDisable()
         {
-            activeAndEnabled = isActiveAndEnabled;
+            UpdateActive();
         }
 
         private void OnEnable()
+        {
+            UpdateActive();
+        }
+
+        private void UpdateActive()
         {
             activeAndEnabled = isActiveAndEnabled;
         }
 
         private void OnDestroy()
         {
-            SwellManager.Unregister(this);
+            // SwellManager.Unregister(this);
+            this.UnRegister();
         }
 
-        void UpdateAdjustedWaveHeight()
+        public void UpdateAdjustedWaveHeight()
         {
             float tempWaveHeight = waveEnabled || interpolate ? waveHeight : 0;
             adjustedWaveHeight = tempWaveHeight * GetInterpolateRatio() * GetFluctuateRatio();
         }
 
-        public float GetFluctuateRatio()
+        private float GetFluctuateRatio()
         {
             float fluctuateRatio;
 
             if (fluctuate)
             {
-                fluctuateRatio = fluctuateCurve.Evaluate((Time.time / fluctuatePeriodTime + fluctuateOffset) %
+                fluctuateRatio = fluctuateCurve.Evaluate((time / fluctuatePeriodTime + fluctuateOffset) %
                                                          fluctuateCurve.keys[fluctuateCurve.length - 1].time);
             }
             else
@@ -140,7 +175,7 @@ namespace Swell
             return fluctuateRatio;
         }
 
-        public float GetInterpolateRatio()
+        private float GetInterpolateRatio()
         {
             float interpolateRatio = 1;
 
@@ -149,12 +184,12 @@ namespace Swell
                 previousInterpolate = interpolate;
                 if (interpolate)
                 {
-                    interpolateStartTime = Time.time;
+                    interpolateStartTime = startTime;
                     if (waveHeight != 0)
                     {
                         float currentHeightRatio = adjustedWaveHeight / waveHeight;
                         currentHeightRatio = waveEnabled ? currentHeightRatio : 1 - currentHeightRatio;
-                        interpolateStartTime = Time.time - interpolationTime * currentHeightRatio;
+                        interpolateStartTime = startTime - interpolationTime * currentHeightRatio;
                     }
                 }
             }
@@ -165,21 +200,21 @@ namespace Swell
 
                 if (interpolate)
                 {
-                    float timeSinceStart = Time.time - interpolateStartTime;
+                    float timeSinceStart = time - interpolateStartTime;
                     if (timeSinceStart < interpolationTime)
                     {
-                        interpolateStartTime = Time.time - (interpolationTime - timeSinceStart);
+                        interpolateStartTime = time - (interpolationTime - timeSinceStart);
                     }
                     else
                     {
-                        interpolateStartTime = Time.time;
+                        interpolateStartTime = startTime;
                     }
                 }
             }
 
             if (interpolate)
             {
-                float timeSinceStart = Time.time - interpolateStartTime;
+                float timeSinceStart = time - interpolateStartTime;
                 float curveRatio = interpolationTime == 0 ? 1 : timeSinceStart / interpolationTime;
                 curveRatio = waveEnabled ? curveRatio : 1 - curveRatio;
                 interpolateRatio = interpolationCurve.Evaluate(curveRatio);
@@ -247,7 +282,6 @@ namespace Swell
             //  https://www.wolframalpha.com/input/?i=Gaussian+Distribution
             float spreadMultiplier = 1;
 
-            
             if (spread)
             {
                 float spreadPositionX = x - position.x;
@@ -273,8 +307,8 @@ namespace Swell
                     //https://www.wolframalpha.com/input/?i=sin%28x%29%2C+x%3D-5+to+5+y%3D-5+to+5
 
                     adjustedOffset = new Vector2(
-                        waveOffset.x + waveSpeed.x * Time.time,
-                        waveOffset.y + waveSpeed.y * Time.time
+                        waveOffset.x + waveSpeed.x * time,
+                        waveOffset.y + waveSpeed.y * time
                     );
 
                     height = Mathf.Sin((x * waveScale.x / 10 + adjustedOffset.x) * Mathf.PI + 1) *
@@ -283,8 +317,8 @@ namespace Swell
                 else if (waveType == Type.pointed)
                 {
                     adjustedOffset = new Vector2(
-                        waveOffset.x + waveSpeed.x * Time.time,
-                        waveOffset.y + waveSpeed.y * Time.time
+                        waveOffset.x + waveSpeed.x * time,
+                        waveOffset.y + waveSpeed.y * time
                     );
 
                     //https://www.wolframalpha.com/input?i=plot+y+%3D+-%28sqrt%28sin%28x%29+%2B+1%29+%2B+sqrt%28sin%28z%29+%2B+1%29+*+sqrt%282%29+-+1%29
@@ -310,8 +344,8 @@ namespace Swell
                     waveOffset.y = waveOffset.x;
 
                     adjustedOffset = new Vector2(
-                        waveOffset.x + waveSpeed.x * Time.time,
-                        waveOffset.y + waveSpeed.y * Time.time
+                        waveOffset.x + waveSpeed.x * time,
+                        waveOffset.y + waveSpeed.y * time
                     );
                     Vector2 delta = new Vector2(
                         (x - position.x) * waveScale.x,
@@ -341,7 +375,7 @@ namespace Swell
                 }
                 else if (waveType == Type.random)
                 {
-                    Vector2 offset = Time.time * waveSpeed + waveOffset;
+                    Vector2 offset = time * waveSpeed + waveOffset;
                     ;
                     //Noise reflects at 0 so we offset as much as possible. 
                     float reflectionOffset = 50000;
@@ -356,8 +390,8 @@ namespace Swell
                 }
                 else if (waveType == Type.custom)
                 {
-                    adjustedOffset.x = waveOffset.x + waveSpeed.x * Time.time;
-                    adjustedOffset.y = waveOffset.y + waveSpeed.y * Time.time;
+                    adjustedOffset.x = waveOffset.x + waveSpeed.x * time;
+                    adjustedOffset.y = waveOffset.y + waveSpeed.y * time;
                     adjustedPosition.x = x * .05f * waveScale.x + adjustedOffset.x;
                     adjustedPosition.y = y * .05f * waveScale.y + adjustedOffset.y;
 
@@ -384,6 +418,35 @@ namespace Swell
             height *= spreadMultiplier;
 
             return height;
+        }
+
+        private float WaveTime
+        {
+            get
+            {
+#if UNITY_EDITOR
+                if (!Application.isPlaying)
+                {
+                    // return (float)EditorApplication.timeSinceStartup;
+                    return 10000;
+                }
+#endif
+                return Time.time;
+            }
+        }
+
+        private float WaveStartTime
+        {
+            get
+            {
+#if UNITY_EDITOR
+                if (!Application.isPlaying)
+                {
+                    return 0;
+                }
+#endif
+                return Time.time;
+            }
         }
 
         /// <summary>
