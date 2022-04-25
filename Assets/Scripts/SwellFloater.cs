@@ -14,18 +14,18 @@ namespace Swell
         private enum Method { FAST, ACCURATE };
 
         [Separator("Basic Settings")] 
-        [SerializeField] private float buoyancy = 1; //!< TODO
-        [SerializeField] private Vector3 center = Vector3.zero; //!< TODO
+        [SerializeField] private float buoyancy = 5; //!< Upwards force that grows the deeper under water this floater is. 
+        [SerializeField] private Vector3 center = Vector3.zero; //!< Position offset to apply depth check and force to rigidbody.
 
         [Separator("Advanced")] 
         [OverrideLabel("")]
-        [SerializeField] private bool showAdvanced; //!< TODO
-        [SerializeField, ConditionalField(nameof(showAdvanced))] private Method depthMethod = Method.ACCURATE; //!< TODO
-        [SerializeField, ConditionalField(nameof(showAdvanced))] private Method floatMethod = Method.ACCURATE; //!< TODO
-        [SerializeField, ConditionalField(nameof(showAdvanced))] private bool stabilize = false; //!< TODO
-        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private new Rigidbody rigidbody; //!< TODO
-        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private SwellWater water; //!< TODO
-        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private float depth; //!< TODO
+        [SerializeField] private bool showAdvanced; //!< Show advanced settings in inspector.
+        [SerializeField, ConditionalField(nameof(showAdvanced))] private Method depthMethod = Method.ACCURATE; //!< Method to use to calculate depth. One is more accurate and the second is faster.
+        [SerializeField, ConditionalField(nameof(showAdvanced))] private Method floatMethod = Method.ACCURATE; //!< Method to use to calculate float physics. One is more accurate and the second is faster.
+        [SerializeField, ConditionalField(nameof(showAdvanced))] private bool stabilize = false; //!< Experimental feature for rigidbodies with multiple floaters. When enabled this makes adjustments that consider all attached floaters. 
+        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private new Rigidbody rigidbody; //!< Rigidbody to apply float physics to.  
+        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private SwellWater water; //!< Water this floater will ask for depth from.
+        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private float depth; //!< Active depth of this floater
         
         private float attachedWeight = 1;
         private static Dictionary<Rigidbody, List<SwellFloater>> attachedFloaters = new ();

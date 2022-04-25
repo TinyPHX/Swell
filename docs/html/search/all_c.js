@@ -7,11 +7,12 @@ var searchData=
   ['spreadcurve_4',['spreadCurve',['../class_swell_1_1_swell_wave.html#a36e4900b46265b47769cb815e3412ca7',1,'Swell::SwellWave']]],
   ['spreadradius_5',['spreadRadius',['../class_swell_1_1_swell_wave.html#a69f43da6664e1aa8235facdb13e4c23f',1,'Swell::SwellWave']]],
   ['stabilize_6',['stabilize',['../class_swell_1_1_swell_floater.html#a1f24a43663b1ee6d8709b63933396e08',1,'Swell::SwellFloater']]],
-  ['swell_7',['Swell',['../index.html',1,'(Global Namespace)'],['../namespace_swell.html',1,'Swell']]],
-  ['swellfloater_8',['SwellFloater',['../class_swell_1_1_swell_floater.html',1,'Swell']]],
-  ['swellmanager_9',['SwellManager',['../class_swell_1_1_swell_manager.html',1,'Swell']]],
-  ['swellmesh_10',['SwellMesh',['../class_swell_1_1_swell_mesh.html',1,'Swell']]],
-  ['swellmesh_11',['swellMesh',['../class_swell_1_1_swell_water.html#a1d4ba94ce91a78d7454a8836075e2af3',1,'Swell::SwellWater']]],
-  ['swellwater_12',['SwellWater',['../class_swell_1_1_swell_water.html',1,'Swell']]],
-  ['swellwave_13',['SwellWave',['../class_swell_1_1_swell_wave.html',1,'Swell']]]
+  ['startgridsize_7',['startGridSize',['../class_swell_1_1_swell_mesh.html#a3dce66f1142ac17b443e014535b6d6cb',1,'Swell::SwellMesh']]],
+  ['swell_8',['Swell',['../index.html',1,'(Global Namespace)'],['../namespace_swell.html',1,'Swell']]],
+  ['swellfloater_9',['SwellFloater',['../class_swell_1_1_swell_floater.html',1,'Swell']]],
+  ['swellmanager_10',['SwellManager',['../class_swell_1_1_swell_manager.html',1,'Swell']]],
+  ['swellmesh_11',['SwellMesh',['../class_swell_1_1_swell_mesh.html',1,'Swell']]],
+  ['swellmesh_12',['swellMesh',['../class_swell_1_1_swell_water.html#a1d4ba94ce91a78d7454a8836075e2af3',1,'Swell::SwellWater']]],
+  ['swellwater_13',['SwellWater',['../class_swell_1_1_swell_water.html',1,'Swell']]],
+  ['swellwave_14',['SwellWave',['../class_swell_1_1_swell_wave.html',1,'Swell']]]
 ];

@@ -22,15 +22,12 @@
 
 ## Quick Start Guide
 
-### Overview
-
-### Step by step
-
 To get started with %Swell all you need to do is, on the Hierarchy:
  - Right Click > %Swell > Water
  - Right Click > %Swell > Wave (Choose any)
  - Right Click > %Swell > Floater
- - Click Play!
+
+![](https://imgur.com/yye0qXa.gif)
 
 That should get you started and from there you can explore each Objects components 
 to see how %Swell works.
@@ -55,7 +52,7 @@ grid at the cent
 
 ![](docs/images/swell_wave_icon_22.png) **SwellWave**
 
-SwellWave lets you add any of server types of waves. They are all real time and fully customizable. 
+SwellWave lets you add any of several types of waves. They are all real time and fully customizable. 
 
 ![](docs/images/component_swell_wave.png)
 

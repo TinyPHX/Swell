@@ -21,12 +21,12 @@ namespace Swell
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class SwellMesh : MonoBehaviour
     {
-        [SerializeField, Min(1)] private int startGridSize = 1;
-        [SerializeField, Min(0)] private int maxSize = 10;
-        [SerializeField, ReadOnly] private float currentSize = 10;
-        [SerializeField] private MeshLevel[] levels = {};
-        [SerializeField] private bool top = true;
-        [SerializeField] private bool bottom = true;
+        [SerializeField, Min(1)] private int startGridSize = 1; //!< TODO
+        [SerializeField, Min(0)] private int maxSize = 10; //!< TODO
+        [SerializeField, ReadOnly] private float currentSize = 10; //!< TODO
+        [SerializeField] private MeshLevel[] levels = {}; //!< TODO
+        [SerializeField] private bool top = true; //!< TODO
+        [SerializeField] private bool bottom = true; //!< TODO
 
         private SwellWater water;
         private MeshFilter meshFilter;
@@ -74,17 +74,15 @@ namespace Swell
                 this.count = count;
             }
 
-            public override bool Equals(object obj)
+            public bool ValueEquals(object obj)
             {
-                if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+                if ((obj == null) || GetType() != obj.GetType())
                 {
                     return false;
                 }
-                else
-                {
-                    MeshLevel mesh = (MeshLevel)obj;
-                    return mesh.factor == factor && mesh.count == count && mesh.index == index;
-                }
+                
+                MeshLevel mesh = (MeshLevel)obj;
+                return mesh.factor == factor && mesh.count == count && mesh.index == index;
             }
 
             public void SetDefaults(int step, int size)
@@ -272,11 +270,13 @@ namespace Swell
         [ButtonMethod]
         public void GenerateMesh()
         {
+            bool valid = MeshLevelValidation();
+            
             bool valueChanged = false;
-            MeshLevel[] currentLevels = Levels;
+            MeshLevel[] currentLevels = levels;
             MeshLevel[] levelsCopy = new MeshLevel[currentLevels.Length];
             
-            for (int i = 0; i < Levels.Length; i++)
+            for (int i = 0; i < currentLevels.Length; i++)
             {
                 levelsCopy[i] = new MeshLevel(currentLevels[i]);
             }
@@ -295,11 +295,11 @@ namespace Swell
             {
                 for (int i = 0; i < previousLevels.Length && !valueChanged; i++)
                 {
-                    valueChanged |= !previousLevels[i].Equals(levelsCopy[i]);
+                    valueChanged |= !previousLevels[i].ValueEquals(levelsCopy[i]);
                 }
             }
 
-            if (valueChanged)
+            if (valueChanged && valid)
             {
                 previousStartGridSize = startGridSize;
                 previousMaxSize = maxSize;
@@ -308,12 +308,6 @@ namespace Swell
                 previousBottom = bottom;
                 
                 UpdateLevels();
-                bool validMesh = MeshLevelValidation();
-
-                if (!validMesh)
-                {
-                    return;
-                }
                 
                 Mesh = new Mesh();
                 vertices.Clear();
