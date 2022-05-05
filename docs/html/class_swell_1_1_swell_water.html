@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.3"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN icon -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<!-- END icon -->
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Swell" />
+<!-- <meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" /> TODOTODOTODOTODOTODOTODOTODOTODO-->
+<meta property="og:description" content="Water Physics for Unity." />
+<meta property="og:url" content="https://tinyphx.github.io/Swell/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata TODODODODODOTODOTODOTODO-->
+<!-- <meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." /> -->
+<!-- END twitter metadata -->
+<title>Swell: Swell.SwellWater Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<!--<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>-->
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/TinyPHX" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Swell
+   </div>
+   <div id="projectbrief">Water physics for Unity</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.3 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('class_swell_1_1_swell_water.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a> &#124;
+<a href="class_swell_1_1_swell_water-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">Swell.SwellWater Class Reference</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a>, and provides API to retrieve or modify water.  
+ <a href="class_swell_1_1_swell_water.html#details">More...</a></p>
+
+<p>Inherits MonoBehaviour.</p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a45c077a4db43f580133b1ad47432ae8a"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">GetWaterHeight</a> (Vector3 position)</td></tr>
+<tr class="memdesc:a45c077a4db43f580133b1ad47432ae8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the exact height of the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>.  <a href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">More...</a><br /></td></tr>
+<tr class="separator:a45c077a4db43f580133b1ad47432ae8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aace3511ee4b8460850a6ab7c86c3fc01"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_water.html#aace3511ee4b8460850a6ab7c86c3fc01">GetWaterHeightOptimized</a> (Vector3 position)</td></tr>
+<tr class="memdesc:aace3511ee4b8460850a6ab7c86c3fc01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the height of a nearby Vector on the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>.  <a href="class_swell_1_1_swell_water.html#aace3511ee4b8460850a6ab7c86c3fc01">More...</a><br /></td></tr>
+<tr class="separator:aace3511ee4b8460850a6ab7c86c3fc01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60807b86de16f0dc521f583b398997ed"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_water.html#a60807b86de16f0dc521f583b398997ed">GetHeight</a> (float xPosition, float yPosition, bool calculate=true, int li=-1)</td></tr>
+<tr class="memdesc:a60807b86de16f0dc521f583b398997ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns exact wave height of the water mesh at some x, z value.  <a href="class_swell_1_1_swell_water.html#a60807b86de16f0dc521f583b398997ed">More...</a><br /></td></tr>
+<tr class="separator:a60807b86de16f0dc521f583b398997ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a6e70d01fd1eb2def52f6ebff86ae0d83"><td class="memItemLeft" align="right" valign="top"><a id="a6e70d01fd1eb2def52f6ebff86ae0d83" name="a6e70d01fd1eb2def52f6ebff86ae0d83"></a>
+Material&#160;</td><td class="memItemRight" valign="bottom"><b>Material</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a6e70d01fd1eb2def52f6ebff86ae0d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">The material applied to the top side of the mesh. <br /></td></tr>
+<tr class="separator:a6e70d01fd1eb2def52f6ebff86ae0d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d1e88062439978514435d49b9de98bd"><td class="memItemLeft" align="right" valign="top"><a id="a1d1e88062439978514435d49b9de98bd" name="a1d1e88062439978514435d49b9de98bd"></a>
+<a class="el" href="class_swell_1_1_swell_water.html#a6e70d01fd1eb2def52f6ebff86ae0d83">Material</a>&#160;</td><td class="memItemRight" valign="bottom"><b>BottomMaterial</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a1d1e88062439978514435d49b9de98bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The material applied to the bottom side of the mesh. <br /></td></tr>
+<tr class="separator:a1d1e88062439978514435d49b9de98bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a550b8a10d5c1766f46d6d84e3ec9e3f4"><td class="memItemLeft" align="right" valign="top"><a id="a550b8a10d5c1766f46d6d84e3ec9e3f4" name="a550b8a10d5c1766f46d6d84e3ec9e3f4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>MeshGridSize</b> = 1<code> [get, set]</code></td></tr>
+<tr class="memdesc:a550b8a10d5c1766f46d6d84e3ec9e3f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The distance between vertices in your mesh grid. <br  />
+ <br /></td></tr>
+<tr class="separator:a550b8a10d5c1766f46d6d84e3ec9e3f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83d2590e323dd094e859a60073a8092d"><td class="memItemLeft" align="right" valign="top"><a id="a83d2590e323dd094e859a60073a8092d" name="a83d2590e323dd094e859a60073a8092d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>MeshSize</b> = 40<code> [get, set]</code></td></tr>
+<tr class="memdesc:a83d2590e323dd094e859a60073a8092d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The full width of your mesh. If this number is not divisible by MeshGridSize then the actual size will be slightly smaller. <br /></td></tr>
+<tr class="separator:a83d2590e323dd094e859a60073a8092d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c2a1fb29f5fca37970dce2e4b0ee93a"><td class="memItemLeft" align="right" valign="top"><a id="a5c2a1fb29f5fca37970dce2e4b0ee93a" name="a5c2a1fb29f5fca37970dce2e4b0ee93a"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>MainTextureSize</b> = 0<code> [get, set]</code></td></tr>
+<tr class="memdesc:a5c2a1fb29f5fca37970dce2e4b0ee93a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constant size to scale the main texture by. This only applies to the Unity standard shader. <br /></td></tr>
+<tr class="separator:a5c2a1fb29f5fca37970dce2e4b0ee93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cc75bc488472624fa3921e12b6d3b31"><td class="memItemLeft" align="right" valign="top"><a id="a1cc75bc488472624fa3921e12b6d3b31" name="a1cc75bc488472624fa3921e12b6d3b31"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>SecondaryTextureSize</b> = 0<code> [get, set]</code></td></tr>
+<tr class="memdesc:a1cc75bc488472624fa3921e12b6d3b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constant size to scale the secondary texture by. This only applies to the Unity standard shader. <br /></td></tr>
+<tr class="separator:a1cc75bc488472624fa3921e12b6d3b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae655dcca5b6d9f56e751c6885c414a63"><td class="memItemLeft" align="right" valign="top"><a id="ae655dcca5b6d9f56e751c6885c414a63" name="ae655dcca5b6d9f56e751c6885c414a63"></a>
+ShadowCastingMode&#160;</td><td class="memItemRight" valign="bottom"><b>CastingMode</b> = ShadowCastingMode.Off<code> [get, set]</code></td></tr>
+<tr class="memdesc:ae655dcca5b6d9f56e751c6885c414a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not this mesh casts shadows. <br /></td></tr>
+<tr class="separator:ae655dcca5b6d9f56e751c6885c414a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2e35ef4a252ae57045b1411ba00a1e4"><td class="memItemLeft" align="right" valign="top"><a id="aa2e35ef4a252ae57045b1411ba00a1e4" name="aa2e35ef4a252ae57045b1411ba00a1e4"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>ReceiveShadows</b> = false<code> [get, set]</code></td></tr>
+<tr class="memdesc:aa2e35ef4a252ae57045b1411ba00a1e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not this mesh receives shadows. <br /></td></tr>
+<tr class="separator:aa2e35ef4a252ae57045b1411ba00a1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6102fbcc339b5106953f9cd5c2ce7be1"><td class="memItemLeft" align="right" valign="top"><a id="a6102fbcc339b5106953f9cd5c2ce7be1" name="a6102fbcc339b5106953f9cd5c2ce7be1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>LowPolyNormals</b> = false<code> [get, set]</code></td></tr>
+<tr class="memdesc:a6102fbcc339b5106953f9cd5c2ce7be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply low poly normals to this mesh while generating it. <br /></td></tr>
+<tr class="separator:a6102fbcc339b5106953f9cd5c2ce7be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa39c85d65340c0c819198775b900fba"><td class="memItemLeft" align="right" valign="top"><a id="aaa39c85d65340c0c819198775b900fba" name="aaa39c85d65340c0c819198775b900fba"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>UseCustomSwellMesh</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:aaa39c85d65340c0c819198775b900fba"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a> is accessible in the Unity hierarchy giving you access to add custom leveling. <br /></td></tr>
+<tr class="separator:aaa39c85d65340c0c819198775b900fba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeb81fe6a149ac9f9948c852e3832567"><td class="memItemLeft" align="right" valign="top"><a id="aaeb81fe6a149ac9f9948c852e3832567" name="aaeb81fe6a149ac9f9948c852e3832567"></a>
+<a class="el" href="class_swell_1_1_swell_mesh.html">SwellMesh</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SwellMesh</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:aaeb81fe6a149ac9f9948c852e3832567"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a> being controlled by this <a class="el" href="class_swell_1_1_swell_water.html" title="Creates SwellMesh, applies SwellWave, and provides API to retrieve or modify water.">SwellWater</a>. <br /></td></tr>
+<tr class="separator:aaeb81fe6a149ac9f9948c852e3832567"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01806a5857b82aeb6b9e32bb6a48b124"><td class="memItemLeft" align="right" valign="top"><a id="a01806a5857b82aeb6b9e32bb6a48b124" name="a01806a5857b82aeb6b9e32bb6a48b124"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>UsePositionAnchor</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a01806a5857b82aeb6b9e32bb6a48b124"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, this can be used to have the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a> follow a target. <br /></td></tr>
+<tr class="separator:a01806a5857b82aeb6b9e32bb6a48b124"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a772cf2db226154b35529cc8196d863e3"><td class="memItemLeft" align="right" valign="top"><a id="a772cf2db226154b35529cc8196d863e3" name="a772cf2db226154b35529cc8196d863e3"></a>
+GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>PositionAnchor</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a772cf2db226154b35529cc8196d863e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The target for the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a> to anchor to. <br /></td></tr>
+<tr class="separator:a772cf2db226154b35529cc8196d863e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad233cf7fdc0ad05a19bd2371aea51cbd"><td class="memItemLeft" align="right" valign="top"><a id="ad233cf7fdc0ad05a19bd2371aea51cbd" name="ad233cf7fdc0ad05a19bd2371aea51cbd"></a>
+Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>PositionStep</b> = Vector2.one * 10<code> [get, set]</code></td></tr>
+<tr class="memdesc:ad233cf7fdc0ad05a19bd2371aea51cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The smallest size step the mesh will move at a time. This is useful if your material has texture to it. <br /></td></tr>
+<tr class="separator:ad233cf7fdc0ad05a19bd2371aea51cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a13ece8aff2e44540e7bae46550bddb8a"><td class="memItemLeft" align="right" valign="top"><a id="a13ece8aff2e44540e7bae46550bddb8a" name="a13ece8aff2e44540e7bae46550bddb8a"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>LockAlbedoPosition</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a13ece8aff2e44540e7bae46550bddb8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, this will adjust the standard shader albedo offset to keep a texture in relative place. This is useful for rendering rivers. <br /></td></tr>
+<tr class="separator:a13ece8aff2e44540e7bae46550bddb8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e40f9a65b2047f40f0983a32f66188a"><td class="memItemLeft" align="right" valign="top"><a id="a8e40f9a65b2047f40f0983a32f66188a" name="a8e40f9a65b2047f40f0983a32f66188a"></a>
+Transform&#160;</td><td class="memItemRight" valign="bottom"><b>MeshAlbedoPosition</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a8e40f9a65b2047f40f0983a32f66188a"><td class="mdescLeft">&#160;</td><td class="mdescRight">When set this is the the position the albedo will lock to instead of (0, 0). <br /></td></tr>
+<tr class="separator:a8e40f9a65b2047f40f0983a32f66188a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91a83f6b6c526d066fb3086aa0efd6f9"><td class="memItemLeft" align="right" valign="top"><a id="a91a83f6b6c526d066fb3086aa0efd6f9" name="a91a83f6b6c526d066fb3086aa0efd6f9"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Optimize</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a91a83f6b6c526d066fb3086aa0efd6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, water fps throttling is applied to keep <a class="el" href="class_swell_1_1_swell_water.html" title="Creates SwellMesh, applies SwellWave, and provides API to retrieve or modify water.">SwellWater</a> from hogging resources. <br /></td></tr>
+<tr class="separator:a91a83f6b6c526d066fb3086aa0efd6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcb1e5d286ee3dc752d76a22ed154b97"><td class="memItemLeft" align="right" valign="top"><a id="afcb1e5d286ee3dc752d76a22ed154b97" name="afcb1e5d286ee3dc752d76a22ed154b97"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>WaterFps</b> = 60<code> [get]</code></td></tr>
+<tr class="memdesc:afcb1e5d286ee3dc752d76a22ed154b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of time the water is updated per frame. <br  />
+ <br /></td></tr>
+<tr class="separator:afcb1e5d286ee3dc752d76a22ed154b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ebeb2ac1ab30da52faef2b0bed617bd"><td class="memItemLeft" align="right" valign="top"><a id="a7ebeb2ac1ab30da52faef2b0bed617bd" name="a7ebeb2ac1ab30da52faef2b0bed617bd"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>AutoThrottle</b> = true<code> [get, set]</code></td></tr>
+<tr class="memdesc:a7ebeb2ac1ab30da52faef2b0bed617bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Then true we'll automatically throttle when the FPS falls below 60. <br /></td></tr>
+<tr class="separator:a7ebeb2ac1ab30da52faef2b0bed617bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49ddbf9f09d97a84222f137865a6d878"><td class="memItemLeft" align="right" valign="top"><a id="a49ddbf9f09d97a84222f137865a6d878" name="a49ddbf9f09d97a84222f137865a6d878"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>ThrottleFps</b> = 60<code> [get, set]</code></td></tr>
+<tr class="memdesc:a49ddbf9f09d97a84222f137865a6d878"><td class="mdescLeft">&#160;</td><td class="mdescRight">When the game FPS falls below this number start reducing the WaterFps. <br /></td></tr>
+<tr class="separator:a49ddbf9f09d97a84222f137865a6d878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a>, and provides API to retrieve or modify water. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a45c077a4db43f580133b1ad47432ae8a" name="a45c077a4db43f580133b1ad47432ae8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45c077a4db43f580133b1ad47432ae8a">&#9670;&nbsp;</a></span>GetWaterHeight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Swell.SwellWater.GetWaterHeight </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the exact height of the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>. </p>
+<p >Returns y intersection value of the water mesh at some x, z value. To get the exact position of the mesh we get the height of the nearest vectors and then interpolate between them.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The position (x, z) at which to check the water height.</td></tr>
+  </table>
+  </dd>
+</dl>
+<h2><a class="anchor" id="autotoc_md9"></a>
+Example</h2>
+<p >Returns the height of the water at the origin of the scene: </p><div class="fragment"><div class="line"><a class="code hl_function" href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">GetWaterHeight</a>(Vector3.Zero) </div>
+<div class="ttc" id="aclass_swell_1_1_swell_water_html_a45c077a4db43f580133b1ad47432ae8a"><div class="ttname"><a href="class_swell_1_1_swell_water.html#a45c077a4db43f580133b1ad47432ae8a">Swell.SwellWater.GetWaterHeight</a></div><div class="ttdeci">float GetWaterHeight(Vector3 position)</div><div class="ttdoc">Gets the exact height of the SwellMesh.</div><div class="ttdef"><b>Definition:</b> SwellWater.cs:349</div></div>
+</div><!-- fragment --><p >Providing the levelIndex was more efficient but we don't know for sure if the level has this point. float cc = GetHeight(maxX, maxY, li: levelIndex); float ff = GetHeight(minX, minY, li: levelIndex); float cf = GetHeight(maxX, minY, li: levelIndex); float fc = GetHeight(minX, maxY, li: levelIndex); </p>
+
+</div>
+</div>
+<a id="aace3511ee4b8460850a6ab7c86c3fc01" name="aace3511ee4b8460850a6ab7c86c3fc01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aace3511ee4b8460850a6ab7c86c3fc01">&#9670;&nbsp;</a></span>GetWaterHeightOptimized()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Swell.SwellWater.GetWaterHeightOptimized </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the height of a nearby Vector on the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>. </p>
+<p >Returns y intersection value of the water mesh at some x, z value. This is an optimized approximation that only gets the height of a nearby vector.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The position (x, z) at which to check the water height. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a60807b86de16f0dc521f583b398997ed" name="a60807b86de16f0dc521f583b398997ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60807b86de16f0dc521f583b398997ed">&#9670;&nbsp;</a></span>GetHeight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Swell.SwellWater.GetHeight </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>xPosition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>yPosition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>calculate</em> = <code>true</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>li</em> = <code>-1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns exact wave height of the water mesh at some x, z value. </p>
+<p >This will check first to see if the position height has been calculated this frame, if not it will calculate it as long as calculate is set to true. li is the level of fidelity used in the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xPosition</td><td>x position on the mesh </td></tr>
+    <tr><td class="paramname">yPosition</td><td>y position on the mesh (z position in unity global space) </td></tr>
+    <tr><td class="paramname">calculate</td><td>If false this will only return heights that have already been calculated this frame. </td></tr>
+    <tr><td class="paramname">li</td><td>The grid level (fidelity) used to get the position from </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespace_swell.html">Swell</a></li><li class="navelem"><a class="el" href="class_swell_1_1_swell_water.html">SwellWater</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
+</body>
+</html>

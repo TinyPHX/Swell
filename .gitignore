@@ -4,16 +4,12 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
-/[Uu]ser[Ss]ettings/
-*/[Ii]gnore/
-[Ii]gnore.meta
-*/[Ss]amples/
-[Ss]amples.meta
-*/[Rr]esources/
-[Rr]esources.meta
-*/[Pp]lugins/
-[Pp]lugins.meta
+/UserSettings/
+[Ii]gnore*
+[Rr]esources*
+[Pp]lugins*
 /Assets/AssetStoreTools*
+/Assets/Samples
 
 # Visual Studio 2015 cache directory
 /.vs/
