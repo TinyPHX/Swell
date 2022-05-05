@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('class_swell_1_1_swell_water.html','');
 </div><!--header-->
 <div class="contents">
 
-<p>Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a> s, and provides API to retrieve or modify water.  
+<p>Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a>, and provides API to retrieve or modify water.  
  <a href="class_swell_1_1_swell_water.html#details">More...</a></p>
 
 <p>Inherits MonoBehaviour.</p>
@@ -146,87 +146,89 @@ Public Member Functions</h2></td></tr>
 Properties</h2></td></tr>
 <tr class="memitem:a6e70d01fd1eb2def52f6ebff86ae0d83"><td class="memItemLeft" align="right" valign="top"><a id="a6e70d01fd1eb2def52f6ebff86ae0d83" name="a6e70d01fd1eb2def52f6ebff86ae0d83"></a>
 Material&#160;</td><td class="memItemRight" valign="bottom"><b>Material</b><code> [get, set]</code></td></tr>
-<tr class="memdesc:a6e70d01fd1eb2def52f6ebff86ae0d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a6e70d01fd1eb2def52f6ebff86ae0d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">The material applied to the top side of the mesh. <br /></td></tr>
 <tr class="separator:a6e70d01fd1eb2def52f6ebff86ae0d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d1e88062439978514435d49b9de98bd"><td class="memItemLeft" align="right" valign="top"><a id="a1d1e88062439978514435d49b9de98bd" name="a1d1e88062439978514435d49b9de98bd"></a>
 <a class="el" href="class_swell_1_1_swell_water.html#a6e70d01fd1eb2def52f6ebff86ae0d83">Material</a>&#160;</td><td class="memItemRight" valign="bottom"><b>BottomMaterial</b><code> [get, set]</code></td></tr>
-<tr class="memdesc:a1d1e88062439978514435d49b9de98bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a1d1e88062439978514435d49b9de98bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The material applied to the bottom side of the mesh. <br /></td></tr>
 <tr class="separator:a1d1e88062439978514435d49b9de98bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a550b8a10d5c1766f46d6d84e3ec9e3f4"><td class="memItemLeft" align="right" valign="top"><a id="a550b8a10d5c1766f46d6d84e3ec9e3f4" name="a550b8a10d5c1766f46d6d84e3ec9e3f4"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>MeshGridSize</b> = 1<code> [get, set]</code></td></tr>
-<tr class="memdesc:a550b8a10d5c1766f46d6d84e3ec9e3f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a550b8a10d5c1766f46d6d84e3ec9e3f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The distance between vertices in your mesh grid. <br  />
+ <br /></td></tr>
 <tr class="separator:a550b8a10d5c1766f46d6d84e3ec9e3f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83d2590e323dd094e859a60073a8092d"><td class="memItemLeft" align="right" valign="top"><a id="a83d2590e323dd094e859a60073a8092d" name="a83d2590e323dd094e859a60073a8092d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>MeshSize</b> = 40<code> [get, set]</code></td></tr>
-<tr class="memdesc:a83d2590e323dd094e859a60073a8092d"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a83d2590e323dd094e859a60073a8092d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The full width of your mesh. If this number is not divisible by MeshGridSize then the actual size will be slightly smaller. <br /></td></tr>
 <tr class="separator:a83d2590e323dd094e859a60073a8092d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c2a1fb29f5fca37970dce2e4b0ee93a"><td class="memItemLeft" align="right" valign="top"><a id="a5c2a1fb29f5fca37970dce2e4b0ee93a" name="a5c2a1fb29f5fca37970dce2e4b0ee93a"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>MainTextureSize</b> = 0<code> [get, set]</code></td></tr>
-<tr class="memdesc:a5c2a1fb29f5fca37970dce2e4b0ee93a"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a5c2a1fb29f5fca37970dce2e4b0ee93a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constant size to scale the main texture by. This only applies to the Unity standard shader. <br /></td></tr>
 <tr class="separator:a5c2a1fb29f5fca37970dce2e4b0ee93a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cc75bc488472624fa3921e12b6d3b31"><td class="memItemLeft" align="right" valign="top"><a id="a1cc75bc488472624fa3921e12b6d3b31" name="a1cc75bc488472624fa3921e12b6d3b31"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>SecondaryTextureSize</b> = 0<code> [get, set]</code></td></tr>
-<tr class="memdesc:a1cc75bc488472624fa3921e12b6d3b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a1cc75bc488472624fa3921e12b6d3b31"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constant size to scale the secondary texture by. This only applies to the Unity standard shader. <br /></td></tr>
 <tr class="separator:a1cc75bc488472624fa3921e12b6d3b31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae655dcca5b6d9f56e751c6885c414a63"><td class="memItemLeft" align="right" valign="top"><a id="ae655dcca5b6d9f56e751c6885c414a63" name="ae655dcca5b6d9f56e751c6885c414a63"></a>
 ShadowCastingMode&#160;</td><td class="memItemRight" valign="bottom"><b>CastingMode</b> = ShadowCastingMode.Off<code> [get, set]</code></td></tr>
-<tr class="memdesc:ae655dcca5b6d9f56e751c6885c414a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:ae655dcca5b6d9f56e751c6885c414a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not this mesh casts shadows. <br /></td></tr>
 <tr class="separator:ae655dcca5b6d9f56e751c6885c414a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2e35ef4a252ae57045b1411ba00a1e4"><td class="memItemLeft" align="right" valign="top"><a id="aa2e35ef4a252ae57045b1411ba00a1e4" name="aa2e35ef4a252ae57045b1411ba00a1e4"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>ReceiveShadows</b> = false<code> [get, set]</code></td></tr>
-<tr class="memdesc:aa2e35ef4a252ae57045b1411ba00a1e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:aa2e35ef4a252ae57045b1411ba00a1e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether or not this mesh receives shadows. <br /></td></tr>
 <tr class="separator:aa2e35ef4a252ae57045b1411ba00a1e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6102fbcc339b5106953f9cd5c2ce7be1"><td class="memItemLeft" align="right" valign="top"><a id="a6102fbcc339b5106953f9cd5c2ce7be1" name="a6102fbcc339b5106953f9cd5c2ce7be1"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>LowPolyNormals</b> = false<code> [get, set]</code></td></tr>
-<tr class="memdesc:a6102fbcc339b5106953f9cd5c2ce7be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a6102fbcc339b5106953f9cd5c2ce7be1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply low poly normals to this mesh while generating it. <br /></td></tr>
 <tr class="separator:a6102fbcc339b5106953f9cd5c2ce7be1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa39c85d65340c0c819198775b900fba"><td class="memItemLeft" align="right" valign="top"><a id="aaa39c85d65340c0c819198775b900fba" name="aaa39c85d65340c0c819198775b900fba"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>UseCustomSwellMesh</b><code> [get, set]</code></td></tr>
-<tr class="memdesc:aaa39c85d65340c0c819198775b900fba"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:aaa39c85d65340c0c819198775b900fba"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a> is accessible in the Unity hierarchy giving you access to add custom leveling. <br /></td></tr>
 <tr class="separator:aaa39c85d65340c0c819198775b900fba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaeb81fe6a149ac9f9948c852e3832567"><td class="memItemLeft" align="right" valign="top"><a id="aaeb81fe6a149ac9f9948c852e3832567" name="aaeb81fe6a149ac9f9948c852e3832567"></a>
 <a class="el" href="class_swell_1_1_swell_mesh.html">SwellMesh</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SwellMesh</b><code> [get, set]</code></td></tr>
-<tr class="memdesc:aaeb81fe6a149ac9f9948c852e3832567"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:aaeb81fe6a149ac9f9948c852e3832567"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a> being controlled by this <a class="el" href="class_swell_1_1_swell_water.html" title="Creates SwellMesh, applies SwellWave, and provides API to retrieve or modify water.">SwellWater</a>. <br /></td></tr>
 <tr class="separator:aaeb81fe6a149ac9f9948c852e3832567"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01806a5857b82aeb6b9e32bb6a48b124"><td class="memItemLeft" align="right" valign="top"><a id="a01806a5857b82aeb6b9e32bb6a48b124" name="a01806a5857b82aeb6b9e32bb6a48b124"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>UsePositionAnchor</b><code> [get, set]</code></td></tr>
-<tr class="memdesc:a01806a5857b82aeb6b9e32bb6a48b124"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a01806a5857b82aeb6b9e32bb6a48b124"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, this can be used to have the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a> follow a target. <br /></td></tr>
 <tr class="separator:a01806a5857b82aeb6b9e32bb6a48b124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a772cf2db226154b35529cc8196d863e3"><td class="memItemLeft" align="right" valign="top"><a id="a772cf2db226154b35529cc8196d863e3" name="a772cf2db226154b35529cc8196d863e3"></a>
 GameObject&#160;</td><td class="memItemRight" valign="bottom"><b>PositionAnchor</b><code> [get, set]</code></td></tr>
-<tr class="memdesc:a772cf2db226154b35529cc8196d863e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a772cf2db226154b35529cc8196d863e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The target for the <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a> to anchor to. <br /></td></tr>
 <tr class="separator:a772cf2db226154b35529cc8196d863e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad233cf7fdc0ad05a19bd2371aea51cbd"><td class="memItemLeft" align="right" valign="top"><a id="ad233cf7fdc0ad05a19bd2371aea51cbd" name="ad233cf7fdc0ad05a19bd2371aea51cbd"></a>
 Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>PositionStep</b> = Vector2.one * 10<code> [get, set]</code></td></tr>
-<tr class="memdesc:ad233cf7fdc0ad05a19bd2371aea51cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:ad233cf7fdc0ad05a19bd2371aea51cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">The smallest size step the mesh will move at a time. This is useful if your material has texture to it. <br /></td></tr>
 <tr class="separator:ad233cf7fdc0ad05a19bd2371aea51cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13ece8aff2e44540e7bae46550bddb8a"><td class="memItemLeft" align="right" valign="top"><a id="a13ece8aff2e44540e7bae46550bddb8a" name="a13ece8aff2e44540e7bae46550bddb8a"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>LockAlbedoPosition</b><code> [get, set]</code></td></tr>
-<tr class="memdesc:a13ece8aff2e44540e7bae46550bddb8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a13ece8aff2e44540e7bae46550bddb8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, this will adjust the standard shader albedo offset to keep a texture in relative place. This is useful for rendering rivers. <br /></td></tr>
 <tr class="separator:a13ece8aff2e44540e7bae46550bddb8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e40f9a65b2047f40f0983a32f66188a"><td class="memItemLeft" align="right" valign="top"><a id="a8e40f9a65b2047f40f0983a32f66188a" name="a8e40f9a65b2047f40f0983a32f66188a"></a>
 Transform&#160;</td><td class="memItemRight" valign="bottom"><b>MeshAlbedoPosition</b><code> [get, set]</code></td></tr>
-<tr class="memdesc:a8e40f9a65b2047f40f0983a32f66188a"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a8e40f9a65b2047f40f0983a32f66188a"><td class="mdescLeft">&#160;</td><td class="mdescRight">When set this is the the position the albedo will lock to instead of (0, 0). <br /></td></tr>
 <tr class="separator:a8e40f9a65b2047f40f0983a32f66188a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91a83f6b6c526d066fb3086aa0efd6f9"><td class="memItemLeft" align="right" valign="top"><a id="a91a83f6b6c526d066fb3086aa0efd6f9" name="a91a83f6b6c526d066fb3086aa0efd6f9"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>Optimize</b><code> [get, set]</code></td></tr>
-<tr class="memdesc:a91a83f6b6c526d066fb3086aa0efd6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a91a83f6b6c526d066fb3086aa0efd6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true, water fps throttling is applied to keep <a class="el" href="class_swell_1_1_swell_water.html" title="Creates SwellMesh, applies SwellWave, and provides API to retrieve or modify water.">SwellWater</a> from hogging resources. <br /></td></tr>
 <tr class="separator:a91a83f6b6c526d066fb3086aa0efd6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcb1e5d286ee3dc752d76a22ed154b97"><td class="memItemLeft" align="right" valign="top"><a id="afcb1e5d286ee3dc752d76a22ed154b97" name="afcb1e5d286ee3dc752d76a22ed154b97"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>WaterFps</b> = 60<code> [get]</code></td></tr>
-<tr class="memdesc:afcb1e5d286ee3dc752d76a22ed154b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:afcb1e5d286ee3dc752d76a22ed154b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of time the water is updated per frame. <br  />
+ <br /></td></tr>
 <tr class="separator:afcb1e5d286ee3dc752d76a22ed154b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ebeb2ac1ab30da52faef2b0bed617bd"><td class="memItemLeft" align="right" valign="top"><a id="a7ebeb2ac1ab30da52faef2b0bed617bd" name="a7ebeb2ac1ab30da52faef2b0bed617bd"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>AutoThrottle</b> = true<code> [get, set]</code></td></tr>
-<tr class="memdesc:a7ebeb2ac1ab30da52faef2b0bed617bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a7ebeb2ac1ab30da52faef2b0bed617bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Then true we'll automatically throttle when the FPS falls below 60. <br /></td></tr>
 <tr class="separator:a7ebeb2ac1ab30da52faef2b0bed617bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49ddbf9f09d97a84222f137865a6d878"><td class="memItemLeft" align="right" valign="top"><a id="a49ddbf9f09d97a84222f137865a6d878" name="a49ddbf9f09d97a84222f137865a6d878"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>ThrottleFps</b> = 60<code> [get, set]</code></td></tr>
-<tr class="memdesc:a49ddbf9f09d97a84222f137865a6d878"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
+<tr class="memdesc:a49ddbf9f09d97a84222f137865a6d878"><td class="mdescLeft">&#160;</td><td class="mdescRight">When the game FPS falls below this number start reducing the WaterFps. <br /></td></tr>
 <tr class="separator:a49ddbf9f09d97a84222f137865a6d878"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a> s, and provides API to retrieve or modify water. </p>
+<div class="textblock"><p >Creates <a class="el" href="class_swell_1_1_swell_mesh.html" title="Dynamic mesh used to render water surface.">SwellMesh</a>, applies <a class="el" href="class_swell_1_1_swell_wave.html" title="Customizable wave that can be applied to all waters or to only a small area.">SwellWave</a>, and provides API to retrieve or modify water. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a45c077a4db43f580133b1ad47432ae8a" name="a45c077a4db43f580133b1ad47432ae8a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a45c077a4db43f580133b1ad47432ae8a">&#9670;&nbsp;</a></span>GetWaterHeight()</h2>
