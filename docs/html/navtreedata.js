@@ -25,11 +25,11 @@
 var NAVTREE =
 [
   [ "Swell", "index.html", [
-    [ "Motivation", "index.html#autotoc_md5", null ],
-    [ "Features", "index.html#autotoc_md6", null ],
-    [ "Quick Start Guide", "index.html#autotoc_md7", null ],
-    [ "Components", "index.html#autotoc_md8", null ],
-    [ "Credits", "index.html#autotoc_md9", null ],
+    [ "Motivation", "index.html#autotoc_md1", null ],
+    [ "Features", "index.html#autotoc_md2", null ],
+    [ "Quick Start Guide", "index.html#autotoc_md3", null ],
+    [ "Components", "index.html#autotoc_md4", null ],
+    [ "Credits", "index.html#autotoc_md5", null ],
     [ "Unity Demo Scenes", "md_demos.html", [
       [ "SwellFloater", "md_demos.html#autotoc_md11", [
         [ "Algorithm", "md_demos.html#autotoc_md12", null ],

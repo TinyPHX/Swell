@@ -157,38 +157,45 @@ namespace Swell
 
             Water = SwellManager.GetNearestWater(Position);
 
-            if (DepthMethod == Method.FAST)
+            if (Water == null)
             {
-                Depth = Position.y - Water.GetWaterHeightOptimized(Position) - Water.Position.y;
+                Depth = 0;
             }
             else
             {
-                Depth = Position.y - Water.GetWaterHeight(Position) - Water.Position.y;
-            }
-
-            if (float.IsNaN(Depth))
-            {
-                Debug.LogWarning("Swell Warning: depth: " + Depth);
-            }
-
-            if (FloatMethod == Method.FAST)
-            {
-                if (rigidbody)
+                if (DepthMethod == Method.FAST)
                 {
-                    rigidbody.transform.position -= new Vector3(0, Depth, 0);
+                    Depth = Position.y - Water.GetWaterHeightOptimized(Position) - Water.Position.y;
                 }
                 else
                 {
-                    transform.position -= new Vector3(0, Depth, 0);
+                    Depth = Position.y - Water.GetWaterHeight(Position) - Water.Position.y;
                 }
-            }
-            else
-            {
 
-                if (Depth < 0)
+                if (float.IsNaN(Depth))
                 {
-                    Vector3 floatForce = Vector3.up * (Buoyancy * attachedWeight * -Depth * gravity);
-                    rigidbody.AddForceAtPosition(floatForce, Position);
+                    Debug.LogWarning("Swell Warning: depth: " + Depth);
+                }
+
+                if (FloatMethod == Method.FAST)
+                {
+                    if (rigidbody)
+                    {
+                        rigidbody.transform.position -= new Vector3(0, Depth, 0);
+                    }
+                    else
+                    {
+                        transform.position -= new Vector3(0, Depth, 0);
+                    }
+                }
+                else
+                {
+
+                    if (Depth < 0)
+                    {
+                        Vector3 floatForce = Vector3.up * (Buoyancy * attachedWeight * -Depth * gravity);
+                        rigidbody.AddForceAtPosition(floatForce, Position);
+                    }
                 }
             }
         }

@@ -64,12 +64,11 @@ Floaters can be attached to any regular Unity RigidBody3D to make it float!
 
 [//]: # (###Scripting Interface)
 
-[//]: # ()
-[//]: # (//Link to classes)
+[//]: # (TODO)
+
 
 [//]: # (#### Scripts Examples)
 
-[//]: # ()
 [//]: # (TODO)
 
 ## Credits
