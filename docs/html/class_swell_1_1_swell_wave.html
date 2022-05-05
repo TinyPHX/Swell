@@ -118,8 +118,8 @@ $(document).ready(function(){initNavTree('class_swell_1_1_swell_wave.html',''); 
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#properties">Properties</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_swell_1_1_swell_wave-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Swell.SwellWave Class Reference</div></div>
 </div><!--header-->
@@ -131,373 +131,136 @@ $(document).ready(function(){initNavTree('class_swell_1_1_swell_wave.html',''); 
 
 <p>Inherits MonoBehaviour.</p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a2580fc2fc37aaaad4be781987983be43"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#a2580fc2fc37aaaad4be781987983be43">GetHeight</a> (float x, float y, bool ignoreInterpolation=false)</td></tr>
+<tr class="memdesc:a2580fc2fc37aaaad4be781987983be43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the height of this wave at the given position.  <a href="class_swell_1_1_swell_wave.html#a2580fc2fc37aaaad4be781987983be43">More...</a><br /></td></tr>
+<tr class="separator:a2580fc2fc37aaaad4be781987983be43"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a55dd5cfb9813892d9847405a2e8fd3b2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#a55dd5cfb9813892d9847405a2e8fd3b2">WaveEnabled</a><code> [get, set]</code></td></tr>
+<tr class="memitem:a55dd5cfb9813892d9847405a2e8fd3b2"><td class="memItemLeft" align="right" valign="top"><a id="a55dd5cfb9813892d9847405a2e8fd3b2" name="a55dd5cfb9813892d9847405a2e8fd3b2"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>WaveEnabled</b> = true<code> [get, set]</code></td></tr>
+<tr class="memdesc:a55dd5cfb9813892d9847405a2e8fd3b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the wave is enabled or not. We use this instead of "Component.enabled" because when disabled we interpolate the wave height back to 0, if interpolation is enabled. <br /></td></tr>
 <tr class="separator:a55dd5cfb9813892d9847405a2e8fd3b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af4f4640312102bc1ee17fba873277eef"><td class="memItemLeft" align="right" valign="top">Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#af4f4640312102bc1ee17fba873277eef">WaveType</a><code> [get, set]</code></td></tr>
+<tr class="memitem:af4f4640312102bc1ee17fba873277eef"><td class="memItemLeft" align="right" valign="top"><a id="af4f4640312102bc1ee17fba873277eef" name="af4f4640312102bc1ee17fba873277eef"></a>
+Type&#160;</td><td class="memItemRight" valign="bottom"><b>WaveType</b> = Type.ROUNDED<code> [get, set]</code></td></tr>
+<tr class="memdesc:af4f4640312102bc1ee17fba873277eef"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of wave curve algorithm. <br /></td></tr>
 <tr class="separator:af4f4640312102bc1ee17fba873277eef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1e46ceb3b7a2b9aef902602313629c2"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#ad1e46ceb3b7a2b9aef902602313629c2">WaveHeight</a><code> [get, set]</code></td></tr>
+<tr class="memitem:ab6a5a2322f9f3e0ef26d23bef21c8578"><td class="memItemLeft" align="right" valign="top"><a id="ab6a5a2322f9f3e0ef26d23bef21c8578" name="ab6a5a2322f9f3e0ef26d23bef21c8578"></a>
+AnimationCurve&#160;</td><td class="memItemRight" valign="bottom"><b>CustomWave</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:ab6a5a2322f9f3e0ef26d23bef21c8578"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the WaveType is set to CUSTOM, this this AnimationCurve is used to set the curvature of the wave. <br /></td></tr>
+<tr class="separator:ab6a5a2322f9f3e0ef26d23bef21c8578"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1e46ceb3b7a2b9aef902602313629c2"><td class="memItemLeft" align="right" valign="top"><a id="ad1e46ceb3b7a2b9aef902602313629c2" name="ad1e46ceb3b7a2b9aef902602313629c2"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>WaveHeight</b> = 1<code> [get, set]</code></td></tr>
+<tr class="memdesc:ad1e46ceb3b7a2b9aef902602313629c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The height of the wave from origin to to peak. The lenght from valley to peak is double this for some wave types. <br /></td></tr>
 <tr class="separator:ad1e46ceb3b7a2b9aef902602313629c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00d27cbb9a93bce9f2bca5535457d86a"><td class="memItemLeft" align="right" valign="top">Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#a00d27cbb9a93bce9f2bca5535457d86a">WaveScale</a><code> [get, set]</code></td></tr>
+<tr class="memitem:a00d27cbb9a93bce9f2bca5535457d86a"><td class="memItemLeft" align="right" valign="top"><a id="a00d27cbb9a93bce9f2bca5535457d86a" name="a00d27cbb9a93bce9f2bca5535457d86a"></a>
+Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>WaveScale</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a00d27cbb9a93bce9f2bca5535457d86a"><td class="mdescLeft">&#160;</td><td class="mdescRight">The phase of the wave. A larger number means closer peaks. <br /></td></tr>
 <tr class="separator:a00d27cbb9a93bce9f2bca5535457d86a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45ddc73e91616380407d8563b6eaf7b7"><td class="memItemLeft" align="right" valign="top">Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#a45ddc73e91616380407d8563b6eaf7b7">WaveOffset</a><code> [get, set]</code></td></tr>
+<tr class="memitem:a45ddc73e91616380407d8563b6eaf7b7"><td class="memItemLeft" align="right" valign="top"><a id="a45ddc73e91616380407d8563b6eaf7b7" name="a45ddc73e91616380407d8563b6eaf7b7"></a>
+Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>WaveOffset</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a45ddc73e91616380407d8563b6eaf7b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">An offset to the time component of the wave. <br /></td></tr>
 <tr class="separator:a45ddc73e91616380407d8563b6eaf7b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2014f2491275244b5b58dbfbbb6991e0"><td class="memItemLeft" align="right" valign="top">Vector2&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#a2014f2491275244b5b58dbfbbb6991e0">WaveSpeed</a><code> [get, set]</code></td></tr>
+<tr class="memitem:a2014f2491275244b5b58dbfbbb6991e0"><td class="memItemLeft" align="right" valign="top"><a id="a2014f2491275244b5b58dbfbbb6991e0" name="a2014f2491275244b5b58dbfbbb6991e0"></a>
+Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>WaveSpeed</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a2014f2491275244b5b58dbfbbb6991e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A multiplier to the rate of change in the offset of the wave. <br  />
+ <br /></td></tr>
 <tr class="separator:a2014f2491275244b5b58dbfbbb6991e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad24eaf522c9e182645db7f3d44413d38"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#ad24eaf522c9e182645db7f3d44413d38">Interpolate</a><code> [get, set]</code></td></tr>
+<tr class="memitem:a0e41211891e44333c87ce1a7a96b3173"><td class="memItemLeft" align="right" valign="top"><a id="a0e41211891e44333c87ce1a7a96b3173" name="a0e41211891e44333c87ce1a7a96b3173"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>WaveRotation</b> = 0<code> [get, set]</code></td></tr>
+<tr class="memdesc:a0e41211891e44333c87ce1a7a96b3173"><td class="mdescLeft">&#160;</td><td class="mdescRight">Degrees offset of the rotation of the wave. This can be expensive! <br /></td></tr>
+<tr class="separator:a0e41211891e44333c87ce1a7a96b3173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e05e4137d2f5561678caca48ae8bd41"><td class="memItemLeft" align="right" valign="top"><a id="a4e05e4137d2f5561678caca48ae8bd41" name="a4e05e4137d2f5561678caca48ae8bd41"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Spread</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a4e05e4137d2f5561678caca48ae8bd41"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true a spread multiplier is calculated for each point adjusting the range of the wave. <br  />
+ <br /></td></tr>
+<tr class="separator:a4e05e4137d2f5561678caca48ae8bd41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65d199c7b9d3de7269131862fd2a0b8d"><td class="memItemLeft" align="right" valign="top"><a id="a65d199c7b9d3de7269131862fd2a0b8d" name="a65d199c7b9d3de7269131862fd2a0b8d"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>SpreadRadius</b> = 10<code> [get, set]</code></td></tr>
+<tr class="memdesc:a65d199c7b9d3de7269131862fd2a0b8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The area of affect of the wave. <br /></td></tr>
+<tr class="separator:a65d199c7b9d3de7269131862fd2a0b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a008f7d9f076de28bb1675ce375550bec"><td class="memItemLeft" align="right" valign="top"><a id="a008f7d9f076de28bb1675ce375550bec" name="a008f7d9f076de28bb1675ce375550bec"></a>
+AnimationCurve&#160;</td><td class="memItemRight" valign="bottom"><b>SpreadCurve</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a008f7d9f076de28bb1675ce375550bec"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rate at which the spread is adjusted. <br /></td></tr>
+<tr class="separator:a008f7d9f076de28bb1675ce375550bec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad24eaf522c9e182645db7f3d44413d38"><td class="memItemLeft" align="right" valign="top"><a id="ad24eaf522c9e182645db7f3d44413d38" name="ad24eaf522c9e182645db7f3d44413d38"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Interpolate</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:ad24eaf522c9e182645db7f3d44413d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true the waves height is interpolated on Start() and when WaveEnabled is changed. <br /></td></tr>
 <tr class="separator:ad24eaf522c9e182645db7f3d44413d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af244ce4e33622fa41cc7c818bfe4eb16"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#af244ce4e33622fa41cc7c818bfe4eb16">Fluctuate</a><code> [get, set]</code></td></tr>
+<tr class="memitem:aa15faafcb00bd44ca2b250a89fbd92c6"><td class="memItemLeft" align="right" valign="top"><a id="aa15faafcb00bd44ca2b250a89fbd92c6" name="aa15faafcb00bd44ca2b250a89fbd92c6"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>InterpolationTime</b> = 10<code> [get, set]</code></td></tr>
+<tr class="memdesc:aa15faafcb00bd44ca2b250a89fbd92c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time in seconds it takes to interpolate to full height. <br /></td></tr>
+<tr class="separator:aa15faafcb00bd44ca2b250a89fbd92c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a394ad00fc3291009a1c5612cfbb14222"><td class="memItemLeft" align="right" valign="top"><a id="a394ad00fc3291009a1c5612cfbb14222" name="a394ad00fc3291009a1c5612cfbb14222"></a>
+AnimationCurve&#160;</td><td class="memItemRight" valign="bottom"><b>InterpolationCurve</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a394ad00fc3291009a1c5612cfbb14222"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rate at which interpolation is applied. <br /></td></tr>
+<tr class="separator:a394ad00fc3291009a1c5612cfbb14222"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af244ce4e33622fa41cc7c818bfe4eb16"><td class="memItemLeft" align="right" valign="top"><a id="af244ce4e33622fa41cc7c818bfe4eb16" name="af244ce4e33622fa41cc7c818bfe4eb16"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Fluctuate</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:af244ce4e33622fa41cc7c818bfe4eb16"><td class="mdescLeft">&#160;</td><td class="mdescRight">When true the waves's height fluctuates between WaveHeight and -WaveHeight. <br /></td></tr>
 <tr class="separator:af244ce4e33622fa41cc7c818bfe4eb16"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3e9747643cd711ed310e90dab71f9413"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#a3e9747643cd711ed310e90dab71f9413">FluctuatePeriodTime</a><code> [get, set]</code></td></tr>
+<tr class="memitem:a3e9747643cd711ed310e90dab71f9413"><td class="memItemLeft" align="right" valign="top"><a id="a3e9747643cd711ed310e90dab71f9413" name="a3e9747643cd711ed310e90dab71f9413"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>FluctuatePeriodTime</b> = 10<code> [get, set]</code></td></tr>
+<tr class="memdesc:a3e9747643cd711ed310e90dab71f9413"><td class="mdescLeft">&#160;</td><td class="mdescRight">The time in seconds it takes do one fluctuate loop. <br /></td></tr>
 <tr class="separator:a3e9747643cd711ed310e90dab71f9413"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab04f6d256bb7d9bbdb56d45cd85c80be"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#ab04f6d256bb7d9bbdb56d45cd85c80be">FluctuateOffset</a><code> [get, set]</code></td></tr>
+<tr class="memitem:ab04f6d256bb7d9bbdb56d45cd85c80be"><td class="memItemLeft" align="right" valign="top"><a id="ab04f6d256bb7d9bbdb56d45cd85c80be" name="ab04f6d256bb7d9bbdb56d45cd85c80be"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>FluctuateOffset</b> = 0<code> [get, set]</code></td></tr>
+<tr class="memdesc:ab04f6d256bb7d9bbdb56d45cd85c80be"><td class="mdescLeft">&#160;</td><td class="mdescRight">An offset to the time component of fluctuate. <br /></td></tr>
 <tr class="separator:ab04f6d256bb7d9bbdb56d45cd85c80be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr class="memitem:a9e493bb6c13aa7c06698b8a0847479cb"><td class="memItemLeft" align="right" valign="top"><a id="a9e493bb6c13aa7c06698b8a0847479cb" name="a9e493bb6c13aa7c06698b8a0847479cb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>waveEnabled</b> = true</td></tr>
-<tr class="memdesc:a9e493bb6c13aa7c06698b8a0847479cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a9e493bb6c13aa7c06698b8a0847479cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71c8549ef9a65625c69b3432510965d6"><td class="memItemLeft" align="right" valign="top"><a id="a71c8549ef9a65625c69b3432510965d6" name="a71c8549ef9a65625c69b3432510965d6"></a>
-Type&#160;</td><td class="memItemRight" valign="bottom"><b>waveType</b> = Type.ROUNDED</td></tr>
-<tr class="memdesc:a71c8549ef9a65625c69b3432510965d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a71c8549ef9a65625c69b3432510965d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4d6e704e09b7a86f4e05b1c3606b1ac"><td class="memItemLeft" align="right" valign="top"><a id="ae4d6e704e09b7a86f4e05b1c3606b1ac" name="ae4d6e704e09b7a86f4e05b1c3606b1ac"></a>
-AnimationCurve&#160;</td><td class="memItemRight" valign="bottom"><b>customWave</b></td></tr>
-<tr class="memdesc:ae4d6e704e09b7a86f4e05b1c3606b1ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:ae4d6e704e09b7a86f4e05b1c3606b1ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f625d64dd710be31a06b3c266ac6e9c"><td class="memItemLeft" align="right" valign="top"><a id="a7f625d64dd710be31a06b3c266ac6e9c" name="a7f625d64dd710be31a06b3c266ac6e9c"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>waveHeight</b> = 1</td></tr>
-<tr class="memdesc:a7f625d64dd710be31a06b3c266ac6e9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a7f625d64dd710be31a06b3c266ac6e9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a32cb28b086b0c9b2751f7ce3a20b43db"><td class="memItemLeft" align="right" valign="top"><a id="a32cb28b086b0c9b2751f7ce3a20b43db" name="a32cb28b086b0c9b2751f7ce3a20b43db"></a>
-Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>waveScale</b> = Vector2.one</td></tr>
-<tr class="memdesc:a32cb28b086b0c9b2751f7ce3a20b43db"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a32cb28b086b0c9b2751f7ce3a20b43db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a059f4eac55cea103d60f6116c80b9fe3"><td class="memItemLeft" align="right" valign="top"><a id="a059f4eac55cea103d60f6116c80b9fe3" name="a059f4eac55cea103d60f6116c80b9fe3"></a>
-Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>waveOffset</b> = Vector2.zero</td></tr>
-<tr class="memdesc:a059f4eac55cea103d60f6116c80b9fe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a059f4eac55cea103d60f6116c80b9fe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39f97edb7183ba69a11da69f33ccc82e"><td class="memItemLeft" align="right" valign="top"><a id="a39f97edb7183ba69a11da69f33ccc82e" name="a39f97edb7183ba69a11da69f33ccc82e"></a>
-Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>waveSpeed</b> = Vector2.one * .1f</td></tr>
-<tr class="memdesc:a39f97edb7183ba69a11da69f33ccc82e"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a39f97edb7183ba69a11da69f33ccc82e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a70eeaac3d2d921d29c791702916d967e"><td class="memItemLeft" align="right" valign="top"><a id="a70eeaac3d2d921d29c791702916d967e" name="a70eeaac3d2d921d29c791702916d967e"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>waveRotation</b> = 0</td></tr>
-<tr class="memdesc:a70eeaac3d2d921d29c791702916d967e"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a70eeaac3d2d921d29c791702916d967e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64306366d308e70eeb90cd4b65c359fb"><td class="memItemLeft" align="right" valign="top"><a id="a64306366d308e70eeb90cd4b65c359fb" name="a64306366d308e70eeb90cd4b65c359fb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>spread</b> = false</td></tr>
-<tr class="memdesc:a64306366d308e70eeb90cd4b65c359fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a64306366d308e70eeb90cd4b65c359fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69f43da6664e1aa8235facdb13e4c23f"><td class="memItemLeft" align="right" valign="top"><a id="a69f43da6664e1aa8235facdb13e4c23f" name="a69f43da6664e1aa8235facdb13e4c23f"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>spreadRadius</b> = 10</td></tr>
-<tr class="memdesc:a69f43da6664e1aa8235facdb13e4c23f"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a69f43da6664e1aa8235facdb13e4c23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a36e4900b46265b47769cb815e3412ca7"><td class="memItemLeft" align="right" valign="top"><a id="a36e4900b46265b47769cb815e3412ca7" name="a36e4900b46265b47769cb815e3412ca7"></a>
-AnimationCurve&#160;</td><td class="memItemRight" valign="bottom"><b>spreadCurve</b></td></tr>
-<tr class="memdesc:a36e4900b46265b47769cb815e3412ca7"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a36e4900b46265b47769cb815e3412ca7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5544e1c7c391d1fbf05aac115c41b5b"><td class="memItemLeft" align="right" valign="top"><a id="ad5544e1c7c391d1fbf05aac115c41b5b" name="ad5544e1c7c391d1fbf05aac115c41b5b"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>interpolate</b> = true</td></tr>
-<tr class="memdesc:ad5544e1c7c391d1fbf05aac115c41b5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:ad5544e1c7c391d1fbf05aac115c41b5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8d21d288f261816b358120eb1140de6"><td class="memItemLeft" align="right" valign="top"><a id="ad8d21d288f261816b358120eb1140de6" name="ad8d21d288f261816b358120eb1140de6"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>interpolationTime</b> = 10</td></tr>
-<tr class="memdesc:ad8d21d288f261816b358120eb1140de6"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:ad8d21d288f261816b358120eb1140de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fe7cac792f875e0f2c31f41e04ea1e6"><td class="memItemLeft" align="right" valign="top"><a id="a5fe7cac792f875e0f2c31f41e04ea1e6" name="a5fe7cac792f875e0f2c31f41e04ea1e6"></a>
-AnimationCurve&#160;</td><td class="memItemRight" valign="bottom"><b>interpolationCurve</b></td></tr>
-<tr class="memdesc:a5fe7cac792f875e0f2c31f41e04ea1e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a5fe7cac792f875e0f2c31f41e04ea1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4d57a734df61b85490040b36b65d2616"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_swell_1_1_swell_wave.html#a4d57a734df61b85490040b36b65d2616">fluctuate</a> = false</td></tr>
-<tr class="memdesc:a4d57a734df61b85490040b36b65d2616"><td class="mdescLeft">&#160;</td><td class="mdescRight">&lt; TODO  <a href="class_swell_1_1_swell_wave.html#a4d57a734df61b85490040b36b65d2616">More...</a><br /></td></tr>
-<tr class="separator:a4d57a734df61b85490040b36b65d2616"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a25a0e12b74bac450a320bb13fa9407fc"><td class="memItemLeft" align="right" valign="top"><a id="a25a0e12b74bac450a320bb13fa9407fc" name="a25a0e12b74bac450a320bb13fa9407fc"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>fluctuatePeriodTime</b> = 10</td></tr>
-<tr class="memdesc:a25a0e12b74bac450a320bb13fa9407fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a25a0e12b74bac450a320bb13fa9407fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9c76a93da91c98251aa21eeb0bba7864"><td class="memItemLeft" align="right" valign="top"><a id="a9c76a93da91c98251aa21eeb0bba7864" name="a9c76a93da91c98251aa21eeb0bba7864"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>fluctuateOffset</b> = 0</td></tr>
-<tr class="memdesc:a9c76a93da91c98251aa21eeb0bba7864"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a9c76a93da91c98251aa21eeb0bba7864"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3186b534d62eb00eea6814eb5a10165e"><td class="memItemLeft" align="right" valign="top"><a id="a3186b534d62eb00eea6814eb5a10165e" name="a3186b534d62eb00eea6814eb5a10165e"></a>
-AnimationCurve&#160;</td><td class="memItemRight" valign="bottom"><b>fluctuateCurve</b></td></tr>
-<tr class="memdesc:a3186b534d62eb00eea6814eb5a10165e"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a3186b534d62eb00eea6814eb5a10165e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4b3058ee4db9834bcff1b6b335c590e"><td class="memItemLeft" align="right" valign="top"><a id="ae4b3058ee4db9834bcff1b6b335c590e" name="ae4b3058ee4db9834bcff1b6b335c590e"></a>
+AnimationCurve&#160;</td><td class="memItemRight" valign="bottom"><b>FluctuateCurve</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:ae4b3058ee4db9834bcff1b6b335c590e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rate at which the height fluctuates. <br /></td></tr>
+<tr class="separator:ae4b3058ee4db9834bcff1b6b335c590e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Customizable wave that can be applied to all waters or to only a small area. <br  />
  </p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="a4d57a734df61b85490040b36b65d2616" name="a4d57a734df61b85490040b36b65d2616"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4d57a734df61b85490040b36b65d2616">&#9670;&nbsp;</a></span>fluctuate</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2580fc2fc37aaaad4be781987983be43" name="a2580fc2fc37aaaad4be781987983be43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2580fc2fc37aaaad4be781987983be43">&#9670;&nbsp;</a></span>GetHeight()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Swell.SwellWave.fluctuate = false</td>
+          <td class="memname">float Swell.SwellWave.GetHeight </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>&lt; TODO </p>
-<p >TODO </p>
-
-</div>
-</div>
-<h2 class="groupheader">Property Documentation</h2>
-<a id="a55dd5cfb9813892d9847405a2e8fd3b2" name="a55dd5cfb9813892d9847405a2e8fd3b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a55dd5cfb9813892d9847405a2e8fd3b2">&#9670;&nbsp;</a></span>WaveEnabled</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">bool Swell.SwellWave.WaveEnabled</td>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p></p>
-<p >Weather the wave is enabled or not. We use this instead of "Component.enabled" because when disabled we interpolate the wave height back to 0, if interpolation is enabled.</p>
-
-</div>
-</div>
-<a id="af4f4640312102bc1ee17fba873277eef" name="af4f4640312102bc1ee17fba873277eef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4f4640312102bc1ee17fba873277eef">&#9670;&nbsp;</a></span>WaveType</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">Type Swell.SwellWave.WaveType</td>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>ignoreInterpolation</em> = <code>false</code>&#160;</td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p></p>
-<p >The type of wave curve algorithm.</p>
-
-</div>
-</div>
-<a id="ad1e46ceb3b7a2b9aef902602313629c2" name="ad1e46ceb3b7a2b9aef902602313629c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1e46ceb3b7a2b9aef902602313629c2">&#9670;&nbsp;</a></span>WaveHeight</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">float Swell.SwellWave.WaveHeight</td>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p></p>
-<p >The height of the wave from origin to to peak. The lenght from valley to peak is double this for some wave types.</p>
-
-</div>
-</div>
-<a id="a00d27cbb9a93bce9f2bca5535457d86a" name="a00d27cbb9a93bce9f2bca5535457d86a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00d27cbb9a93bce9f2bca5535457d86a">&#9670;&nbsp;</a></span>WaveScale</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Vector2 Swell.SwellWave.WaveScale</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p></p>
-
-</div>
-</div>
-<a id="a45ddc73e91616380407d8563b6eaf7b7" name="a45ddc73e91616380407d8563b6eaf7b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a45ddc73e91616380407d8563b6eaf7b7">&#9670;&nbsp;</a></span>WaveOffset</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Vector2 Swell.SwellWave.WaveOffset</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p></p>
-
-</div>
-</div>
-<a id="a2014f2491275244b5b58dbfbbb6991e0" name="a2014f2491275244b5b58dbfbbb6991e0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2014f2491275244b5b58dbfbbb6991e0">&#9670;&nbsp;</a></span>WaveSpeed</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Vector2 Swell.SwellWave.WaveSpeed</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p></p>
-
-</div>
-</div>
-<a id="ad24eaf522c9e182645db7f3d44413d38" name="ad24eaf522c9e182645db7f3d44413d38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad24eaf522c9e182645db7f3d44413d38">&#9670;&nbsp;</a></span>Interpolate</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Swell.SwellWave.Interpolate</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p></p>
-
-</div>
-</div>
-<a id="af244ce4e33622fa41cc7c818bfe4eb16" name="af244ce4e33622fa41cc7c818bfe4eb16"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af244ce4e33622fa41cc7c818bfe4eb16">&#9670;&nbsp;</a></span>Fluctuate</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool Swell.SwellWave.Fluctuate</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p></p>
-
-</div>
-</div>
-<a id="a3e9747643cd711ed310e90dab71f9413" name="a3e9747643cd711ed310e90dab71f9413"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e9747643cd711ed310e90dab71f9413">&#9670;&nbsp;</a></span>FluctuatePeriodTime</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float Swell.SwellWave.FluctuatePeriodTime</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p></p>
-
-</div>
-</div>
-<a id="ab04f6d256bb7d9bbdb56d45cd85c80be" name="ab04f6d256bb7d9bbdb56d45cd85c80be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab04f6d256bb7d9bbdb56d45cd85c80be">&#9670;&nbsp;</a></span>FluctuateOffset</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">float Swell.SwellWave.FluctuateOffset</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">get</span><span class="mlabel">set</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p></p>
+<p>Returns the height of this wave at the given position. </p>
+<p >Optionally allows ignoring of interpolation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x position to be used in our height check </td></tr>
+    <tr><td class="paramname">y</td><td>The x position to be used in our height check </td></tr>
+    <tr><td class="paramname">ignoreInterpolation</td><td>Optional param that when set to true will return the true height ignoring time passed and interpolation.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>TODO: Possible optimization: If for each wave we figured out the phase we can calculate the height only across the phase once then use mod to lookup the height on repeated patterns. Still would have to calculate spread. </p>
 
 </div>
 </div>

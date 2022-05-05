@@ -13,17 +13,15 @@ using Object = System.Object;
 namespace Swell
 {
     /**
-     * @brief Static class that is the Accountant of all water, meshes, waves, and floaters.
+     * @brief Static class that accounts for all water, meshes, waves, and floaters.
      */
     [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_manager.html")]
     public static class SwellManager
     {
-        // private static Dictionary<Type, List<T>> registered = new ();
-        private static List<SwellWater> registeredWater = new List<SwellWater>();
-        private static List<SwellFloater> registeredFloater = new List<SwellFloater>();
-        private static List<SwellWave> registeredWave = new List<SwellWave>();
+        private static List<SwellWater> registeredWater = new ();
+        private static List<SwellFloater> registeredFloater = new ();
+        private static List<SwellWave> registeredWave = new ();
         private static SwellWater onlyWater = null;
-
         private static float searchTime;
 
         public static void Register(this SwellWater toRegister)
@@ -34,9 +32,7 @@ namespace Swell
         public static void UnRegister(this SwellWater toUnRegister) { registeredWater.Remove(toUnRegister); }
         public static void Register(this SwellFloater toRegister) { registeredFloater.AddUnique(toRegister); }
         public static void UnRegister(this SwellFloater toUnRegister) { registeredFloater.Remove(toUnRegister); }
-
         public static void Register(this SwellWave toRegister) { registeredWave.AddUnique(toRegister); }
-
         public static void UnRegister(this SwellWave toUnRegister)
         {
             registeredWave.Remove(toUnRegister);
@@ -62,6 +58,9 @@ namespace Swell
             }
         }
 
+        /**
+         * @brief Return all SwellWaters in the scene.
+         */
         public static List<SwellWater> AllWaters()
         {
             UpdateAllRegistered();
@@ -69,6 +68,9 @@ namespace Swell
             return registeredWater;
         }
 
+        /**
+         * @brief Return all SwellFloaters in the scene.
+         */
         public static List<SwellFloater> AllFloaters()
         {
             UpdateAllRegistered();
@@ -76,6 +78,9 @@ namespace Swell
             return registeredFloater;
         }
 
+        /**
+         * @brief Return all SwellWaves in the scene.
+         */
         public static List<SwellWave> AllWaves()
         {
             UpdateAllRegistered();

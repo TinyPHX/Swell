@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+// using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using MyBox;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using Color = UnityEngine.Color;
 
 #if UNITY_EDITOR
@@ -16,17 +18,30 @@ namespace Swell
 {
     /**
      * @brief Dynamic mesh used to render water surface.
+     * 
+     * # Simple Mesh
+     * A mesh can be very simple, using only SwellMesh.StartGridSize and SwellMesh.MaxSize to form the grid.
+     * 
+     * ![SwellMesh (Simple)](https://imgur.com/TW0ShBI.png)
+     * 
+     * # Advanced Mesh
+     * Alternatively you can use levels to define a mesh that gets progressively less coarse as it gets further from
+     * it's center.
+     * 
+     * ![SwellMesh (Advanced)](https://i.imgur.com/oelmhcU.png)
      */
     [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_mesh.html")]
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class SwellMesh : MonoBehaviour
     {
-        [SerializeField, Min(1)] private int startGridSize = 1; //!< TODO
-        [SerializeField, Min(0)] private int maxSize = 10; //!< TODO
-        [SerializeField, ReadOnly] private float currentSize = 10; //!< TODO
-        [SerializeField] private MeshLevel[] levels = {}; //!< TODO
-        [SerializeField] private bool top = true; //!< TODO
-        [SerializeField] private bool bottom = true; //!< TODO
+        [field: SerializeField, Min(1)] public int StartGridSize { get; set; } = 1; //!< The Size of the inner most triangles of the mesh. If this is 1, then the shortest distance between any mesh triangle's verts will be 1.
+        [field: SerializeField, Min(0)] public int MaxSize { get; set; } = 10; //!< The largest, this mesh can become in world space. When levels are used, this can be set to 0 to allow the levels to grow boundlessly. 
+        [field: SerializeField, ReadOnly] public float CurrentSize { get; private set; } = 10; //!< The active size of the mesh. This will not always equal the MaxSize because of partially fitting grid spacing.
+        [SerializeField] private MeshLevel[] levels = {};
+        public MeshLevel[] Levels { get => usedLevels; set => levels = value; } //!< An alternative to solely using MaxSize. Levels allow a rang of factor increases, creating a grid that gets less dense as it protrudes from it's center.
+        [field: SerializeField] public bool Top { get; set; } = true; //!< If true, vectors and triangles are added to the mesh facing upwards. The first MeshRenderer.Material is applied to this mesh. 
+        [field: SerializeField] public bool Bottom { get; set; } = true; //!< If true, vectors and triangles are added to the mesh facing downwards. The second MeshRenderer.Material is applied to this mesh.
+        [field: SerializeField] public bool LowPolyNormals { get; set; } = false; //!< If true, on generation, vectors are not shared by triangles. This results in a lot of vectors but leaves a cool Low Poly effect that can be used with most Materials. 
 
         private SwellWater water;
         private MeshFilter meshFilter;
@@ -42,6 +57,7 @@ namespace Swell
         private MeshVectors topMeshVectors = new ();
         private MeshVectors bottomMeshVectors = new ();
         private float maxLevelSize;
+        private const int MAX_VERT_COUNT = 65535; //https://docs.unity3d.com/ScriptReference/Mesh-indexFormat.html
         
         //Previous state
         private MeshLevel[] previousLevels;
@@ -49,13 +65,14 @@ namespace Swell
         private float previousMaxSize;
         private bool previousTop;
         private bool previousBottom;
+        private bool previousLowPolyNormals;
 
         [Serializable]
         public class  MeshLevel
         {
             [HideInInspector] public string name;
             [SerializeField, Min(1)] private int factor;
-            [SerializeField, Min(0)] private int count;
+            [SerializeField, Min(1)] private int count;
             
             private float step;
             private float size;
@@ -104,10 +121,12 @@ namespace Swell
             public bool Validate(SwellMesh swellMesh)
             {
                 bool valid = true;
-
-                if (factor <= 0)
+                
+                if (index == 0 && factor == 0 && count == 0)
                 {
                     factor = 1;
+                    count = 5;
+                    // count = swellMesh.maxSize / swellMesh.startGridSize;
                 }
                 
                 float savedStep = step;
@@ -205,11 +224,15 @@ namespace Swell
             public Dictionary<float, List<float>> xByY = new();
             public Dictionary<float, List<float>> yByX = new();
 
+            public int Count { get; private set; } = 0;
+
             public void Clear()
             {
                 positionToIndex.Clear();
                 xByY.Clear();
                 yByX.Clear();
+
+                Count = 0;
             }
 
             public bool AddVector(float x, float y, int index)
@@ -228,6 +251,8 @@ namespace Swell
                     xByY[y].Add(x);
                     yByX[x].Add(y);
 
+                    Count++;
+
                     return true;
                 }
 
@@ -238,6 +263,24 @@ namespace Swell
         void Start()
         {
             GenerateMesh();
+        }
+
+        public void EditorUpdate()
+        {
+            if (Water)
+            {
+                Water.MeshGridSize = StartGridSize;
+                Water.MeshSize = MaxSize;
+                if (Top) {Water.RestoreMaterial();} else {Water.ClearMaterial();}
+                if (Bottom) {Water.RestoreBottomMaterial();} else {Water.ClearBottomMaterial();}
+                Water.LowPolyNormals = LowPolyNormals;
+                Water.EditorUpdate();
+            }
+            else
+            {
+                GenerateMesh();
+                Update();
+            }
         }
 
         public void Update()
@@ -267,7 +310,9 @@ namespace Swell
             return valid;
         }
         
-        [ButtonMethod]
+        /**
+         * @brief When called the mesh vectors, normals, triangles are all recomputed based on the configured properties and levels. After generation the mesh is applied to the MeshFilter.Mesh.
+         */
         public void GenerateMesh()
         {
             bool valid = MeshLevelValidation();
@@ -282,10 +327,11 @@ namespace Swell
             }
 
             //Field changed
-            valueChanged |= previousStartGridSize != startGridSize ||
-                            previousMaxSize != maxSize ||
-                            previousTop != top ||
-                            previousBottom != bottom;
+            valueChanged |= previousStartGridSize != StartGridSize ||
+                            previousMaxSize != MaxSize ||
+                            previousTop != Top ||
+                            previousBottom != Bottom ||
+                            previousLowPolyNormals != LowPolyNormals;
 
             //Level added or removed
             valueChanged |= previousLevels == null || previousLevels.Length != levelsCopy.Length;
@@ -301,15 +347,17 @@ namespace Swell
 
             if (valueChanged && valid)
             {
-                previousStartGridSize = startGridSize;
-                previousMaxSize = maxSize;
+                previousStartGridSize = StartGridSize;
+                previousMaxSize = MaxSize;
                 previousLevels = levelsCopy.ToArray();
-                previousTop = top;
-                previousBottom = bottom;
+                previousTop = Top;
+                previousBottom = Bottom;
+                previousLowPolyNormals = LowPolyNormals;
                 
                 UpdateLevels();
+
+                Mesh mesh = new Mesh();
                 
-                Mesh = new Mesh();
                 vertices.Clear();
                 uv.Clear();
                 normals.Clear();
@@ -317,38 +365,56 @@ namespace Swell
                 triangles2.Clear();
                 topMeshVectors.Clear();
                 bottomMeshVectors.Clear();
-                Mesh.subMeshCount = 2;
-                
-                currentSize = Levels.Last().Size;
-                maxLevelSize = Levels.Last().MaxSize;
+                mesh.subMeshCount = Convert.ToInt32(Top) + Convert.ToInt32(Bottom);
 
-                for (var i = 0; i < Levels.Length; i++)
+                int topSubMeshIndex = Top ? 0 : -1;
+                int bottomSubMeshIndex = Top && Bottom ? 1 : !Top && Bottom ? 0 : -1;
+
+                if (mesh.subMeshCount > 0)
                 {
-                    MeshLevel topLevel = Levels[^1];
-                    MeshLevel innerLevel = i > 0 ? Levels[i - 1] : null;
-                    MeshLevel level = Levels[i];
-                    if (top)
+                    CurrentSize = Levels.Last().Size;
+                    maxLevelSize = Levels.Last().MaxSize;
+
+                    for (var i = 0; i < Levels.Length; i++)
                     {
-                        AddToMesh(level, topLevel, innerLevel);
+                        MeshLevel topLevel = Levels[^1];
+                        MeshLevel innerLevel = i > 0 ? Levels[i - 1] : null;
+                        MeshLevel level = Levels[i];
+                        if (Top)
+                        {
+                            AddToMesh(level, topLevel, innerLevel);
+                        }
+
+                        if (Bottom)
+                        {
+                            AddToMesh(level, topLevel, innerLevel, true);
+                        }
                     }
 
-                    if (bottom)
+                    mesh.vertices = vertices.ToArray();
+                    mesh.uv = uv.ToArray();
+                    mesh.normals = normals.ToArray();
+                    if (topSubMeshIndex > -1)
                     {
-                        AddToMesh(level, topLevel, innerLevel, true);
+                        mesh.SetTriangles(triangles, topSubMeshIndex);
                     }
+                    if (bottomSubMeshIndex > -1)
+                    {
+                        mesh.SetTriangles(triangles2, bottomSubMeshIndex);
+                    }
+
+                    mesh.RecalculateBounds();
+                    mesh.RecalculateTangents();
+
+                    UpdateMeshLowPoly(mesh);
+
+                    mesh.RecalculateNormals();
                 }
 
-                Mesh.vertices = vertices.ToArray();
-                Mesh.uv = uv.ToArray();
-                Mesh.normals = normals.ToArray();
-                Mesh.SetTriangles(triangles, 0);
-                Mesh.SetTriangles(triangles2, 1);
-
-                Mesh.RecalculateBounds();
-                Mesh.RecalculateTangents();
+                Mesh = mesh;
             }
         }
-
+        
         private List<int> GetPointsInSquare(float x1, float y1, float x2, float y2, bool bottom)
         {
             MeshVectors meshVectors = bottom ? bottomMeshVectors : topMeshVectors;
@@ -400,20 +466,19 @@ namespace Swell
             float meshSize = newMeshLevel.Size;
             float topSize = topLevel.Size;
             float innerDistance = (innerLevel?.Size) / 2 ?? 0;
-            float density = newMeshLevel.Step;
+            float step = newMeshLevel.Step;
             float offset = newMeshLevel.Offset;
             int normalDirection = bottom ? -1 : 1;
 
-            if (density <= 0)
+            if (step <= 0)
             {
                 Debug.LogWarning("Swell Mesh not updated. Start Size must be > 0");
                 return;
             }
-            
-            float step = density;
-            for (float xi = 0; xi <= meshSize; xi += step)
+
+            for (float xi = 0; xi <= meshSize && !TooBig; xi += step)
             {
-                for (float yi = 0; yi <= meshSize; yi += step)
+                for (float yi = 0; yi <= meshSize && !TooBig; yi += step)
                 {
                     float x = xi - offset;
                     float y = yi - offset;
@@ -455,6 +520,80 @@ namespace Swell
                     }
                 }
             }
+
+            if (TooBig)
+            {
+                Debug.LogWarning("Mesh is too big! Unity has a limit of " + MAX_VERT_COUNT + " vectors per mesh and this mesh " +
+                                 "has exceeded that limit. To create a larger water you'll have to create and tile " +
+                                 "multiple SwellWaters. " +
+                                 "https://docs.unity3d.com/ScriptReference/Mesh.SetIndexBufferParams.html");
+            }
+        }
+        
+        private void UpdateMeshLowPoly(Mesh mesh)
+        {
+            if (LowPolyNormals)
+            {
+                if (mesh.vertices.Length != mesh.triangles.Length)
+                {
+                    int indexCount = mesh.triangles.Length;
+                    if (indexCount > MAX_VERT_COUNT)
+                    {
+                        Debug.LogWarning("Generating low poly normals requires that many more vectors are added " +
+                                         "to our your SwellMesh. Unity has a limit of " + MAX_VERT_COUNT + " vectors per mesh and this " +
+                                         "mesh has exceeded that limit. To create a larger low poly water you'll have " +
+                                         "to create and tile multiple SwellWaters." +
+                                         "https://docs.unity3d.com/ScriptReference/Mesh.SetIndexBufferParams.html");
+                    }
+
+                    Vector3[] verts1 = mesh.vertices;
+                    Vector2[] uv1 = mesh.uv;
+                    int[] tris1 = mesh.triangles;
+                    Vector4[] tang1 = mesh.tangents;
+                    Vector3[] normal1 = mesh.normals;
+
+                    int newLength = tris1.Length; //Every tri needs dedicated verts not shared with any other tri
+
+                    Vector3[] verts2 = new Vector3[newLength];
+                    Vector2[] uv2 = new Vector2[newLength];
+                    int[] tris2 = new int[newLength];
+                    Vector4[] tang2 = new Vector4[newLength];
+                    Vector3[] normal2 = new Vector3[newLength];
+
+                    for (int newIndex = 0; newIndex < newLength; newIndex++)
+                    {
+                        int oldIndex = tris1[newIndex];
+                        tris2[newIndex] = newIndex;
+                        verts2[newIndex] = verts1[oldIndex];
+                        uv2[newIndex] = uv1[oldIndex];
+                        tang2[newIndex] = tang1[oldIndex];
+                        normal2[newIndex] = normal1[oldIndex];
+                    }
+
+                    mesh.vertices = verts2;
+                    mesh.uv = uv2;
+                    mesh.tangents = tang2;
+                    mesh.normals = normal2;
+
+                    if (mesh.subMeshCount == 1)
+                    {
+                        mesh.triangles = tris2;
+                    }
+                    else if (mesh.subMeshCount == 2)
+                    {
+                        Range mesh1Range = new Range(0, tris2.Length / 2);
+                        Range mesh2Range = new Range(tris2.Length / 2, ^0);
+                        
+                        mesh.SetTriangles(tris2[mesh1Range], 0);
+                        mesh.SetTriangles(tris2[mesh2Range], 1);
+                    }
+                }
+            }
+        }
+
+        public bool TooBig
+        {
+            get => bottomMeshVectors.Count + topMeshVectors.Count >= MAX_VERT_COUNT;
         }
         
         public Mesh Mesh
@@ -481,8 +620,60 @@ namespace Swell
                     MeshFilter.sharedMesh = value;
                 }
             }
-        }
+        } //!< Helper for providing shared assets (sharedMesh) when in edit mode and non-shared assets (mesh) otherwise. 
         
+        public MeshRenderer Renderer
+        {
+            get
+            {
+                if (!meshRenderer)
+                {
+                    meshRenderer = GetComponent<MeshRenderer>();
+                }
+        
+                return meshRenderer;
+            }
+        } //Renderer being used by SwellMesh
+        
+        public MeshFilter MeshFilter
+        {
+            get
+            {
+                if (!meshFilter)
+                {
+                    meshFilter = GetComponent<MeshFilter>();
+                }
+        
+                return meshFilter;
+            }
+        } //MeshFilter being used by SwellMesh.
+
+        public Material[] Materials
+        {
+            get
+            {
+                if (Application.isPlaying)
+                {
+                    return Renderer.materials;
+                }
+                else
+                {
+                    return Renderer.sharedMaterials;
+                }
+            }
+            set
+            {
+                if (Application.isPlaying)
+                {
+                    Renderer.materials = value;
+                }
+                else
+                {
+                    Renderer.sharedMaterials = value;
+                }
+            }
+        } //!< Helper for providing shared assets (sharedMaterials) when in edit mode and non-shared assets (materials) otherwise. 
+
         public Material Material
         {
             get
@@ -536,96 +727,49 @@ namespace Swell
                     }
                 }
             }
-        }
+        } //!< Helper for providing shared assets (sharedMaterial) when in edit mode and non-shared assets (material) otherwise. 
 
         public float Size => Levels != null && Levels.Length > 0 ? Levels.Last().Size : MaxSize;
         
-        public float Offset => Size / 2f;
-
-        public MeshLevel[] Levels
-        {
-            get
-            {
-                return usedLevels;
-            }
-            set
-            {
-                levels = value;
-                MeshLevelValidation();
-            }
-        }
-
-        public int MaxSize
-        {
-            get => maxSize;
-            set => maxSize = value;
-        }
-
-        public int StartGridSize
-        {
-            get => startGridSize;
-            set => startGridSize = value;
-        }
-        
-        public MeshRenderer Renderer
-        {
-            get
-            {
-                if (!meshRenderer)
-                {
-                    meshRenderer = GetComponent<MeshRenderer>();
-                }
-        
-                return meshRenderer;
-            }
-        }
-        
-        public MeshFilter MeshFilter
-        {
-            get
-            {
-                if (!meshFilter)
-                {
-                    meshFilter = GetComponent<MeshFilter>();
-                }
-        
-                return meshFilter;
-            }
-        }
+        public float Offset => Size / 2f; //!< Half the size of this mesh.
 
         public SwellWater Water
         {
             get => water;
             set => water = value;
-        }
+        } //!< The Water controlling this mesh, if any.
 
 #if UNITY_EDITOR
-        void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
         {
-            MeshVectors meshVectors = top ? topMeshVectors : bottomMeshVectors;
-            if (meshVectors.positionToIndex.Count == 0)
+            if (!TooBig)
             {
-                Water?.EditorUpdate();
-            }
-
-            if (Selection.transforms.Length > 0 && Selection.transforms.First() == transform && Mesh && Mesh.vertexCount > 0)
-            {
-                Color gridColor = Color.white;
-
-                if (Material.shader.HasProperty("color"))
+                MeshVectors meshVectors = Top ? topMeshVectors : bottomMeshVectors;
+                if (meshVectors.positionToIndex.Count == 0)
                 {
-                    gridColor = new Color(1 - Material.color.r, 1 - Material.color.g, 1 - Material.color.b);
+                    Water?.EditorUpdate();
                 }
 
-                Gizmos.color = gridColor;
+                if (Selection.transforms.Length > 0 && Selection.transforms.First() == transform && Mesh &&
+                    Mesh.vertexCount > 0)
+                {
+                    Color gridColor = Color.white;
 
-                DrawFlatGrid();
+                    if (Material && Material.shader.HasProperty("color"))
+                    {
+                        gridColor = new Color(1 - Material.color.r, 1 - Material.color.g, 1 - Material.color.b);
+                    }
 
-                DrawMaxSizeBox();
+                    Gizmos.color = gridColor;
+
+                    DrawFlatGrid();
+
+                    DrawMaxSizeBox();
+                }
             }
         }
 
-        void DrawFlatGrid()
+        private void DrawFlatGrid()
         {
             for (var i = 0; i < Levels.Length; i++)
             {
@@ -637,16 +781,16 @@ namespace Swell
             }
         }
 
-        void DrawMaxSizeBox()
+        private void DrawMaxSizeBox()
         {
-            if (maxSize > 0)
+            if (MaxSize > 0)
             {
-                Gizmos.color = maxLevelSize > maxSize ? Color.yellow : Color.green;
-                Gizmos.DrawWireCube(transform.position, new Vector3(maxSize, 0, maxSize));
+                Gizmos.color = maxLevelSize > MaxSize ? Color.yellow : Color.green;
+                Gizmos.DrawWireCube(transform.position, new Vector3(MaxSize, 0, MaxSize));
             }
         }
 
-        void DrawGizmoLevelGrid(MeshLevel level, MeshLevel topLevel, MeshLevel innerLevel = null)
+        private void DrawGizmoLevelGrid(MeshLevel level, MeshLevel topLevel, MeshLevel innerLevel = null)
         {
             float meshSize = level.Size;
             float innerDistance = (innerLevel?.Size) / 2 ?? 0;
@@ -678,7 +822,7 @@ namespace Swell
             }
         }
 
-        void DrawPoly(Vector3[] points, float innerDistance, bool connect = true)
+        private void DrawPoly(Vector3[] points, float innerDistance, bool connect = true)
         {
             for (int i = 0; i < points.Length; i++)
             {

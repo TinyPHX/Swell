@@ -1,8 +1,8 @@
 # Unity Demo Scenes
 
 ## SwellFloater
-### Algorythm
-Path: `Scenes/Swell Floater - Algorythm Demo.unity`
+### Algorithm
+Path: `Scenes/Swell Floater - Algorithm Demo.unity`
 
 Demonstrates look of optimized vs unoptimized methods of floating objects.
 

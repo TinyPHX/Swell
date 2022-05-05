@@ -6,35 +6,38 @@ using MyBox;
 namespace Swell
 {    
     /**
-     * @brief MonoBehavior that can be attached to any RigidBody to enable float physics in SwellWater. 
+     * @brief Can be attached to any RigidBody to enable float physics in SwellWater.
+     *
+     * When the SwellFloater.Center point falls below the surface of a SwellFloater.Water, a force is applied to the SwellFloater.Rigidbody at that position with a force relative to the value of the SwellFloater.Buoyancy.
+     *
+     * # Example
+     * See: `Scenes/Swell Floater - Algorithm Demo.unity`
+     * ![Gif of Float Algorithm](https://i.imgur.com/71ojK7E.gif)
      */
     [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_floater.html")]
     public class SwellFloater : MonoBehaviour
     {
-        private enum Method { FAST, ACCURATE };
+        public enum Method { FAST, ACCURATE };
 
-        [Separator("Basic Settings")] 
-        [SerializeField] private float buoyancy = 5; //!< Upwards force that grows the deeper under water this floater is. 
-        [SerializeField] private Vector3 center = Vector3.zero; //!< Position offset to apply depth check and force to rigidbody.
+        [field: Separator("Basic Settings"), SerializeField] public float Buoyancy { get; set; } = 5; //!< Upwards force that grows the deeper under water this floater is. 
+        [field: SerializeField] public Vector3 Center { get; set; } = Vector3.zero; //!< Position offset to apply depth check and force to rigidbody.
 
         [Separator("Advanced")] 
-        [OverrideLabel("")]
-        [SerializeField] private bool showAdvanced; //!< Show advanced settings in inspector.
-        [SerializeField, ConditionalField(nameof(showAdvanced))] private Method depthMethod = Method.ACCURATE; //!< Method to use to calculate depth. One is more accurate and the second is faster.
-        [SerializeField, ConditionalField(nameof(showAdvanced))] private Method floatMethod = Method.ACCURATE; //!< Method to use to calculate float physics. One is more accurate and the second is faster.
-        [SerializeField, ConditionalField(nameof(showAdvanced))] private bool stabilize = false; //!< Experimental feature for rigidbodies with multiple floaters. When enabled this makes adjustments that consider all attached floaters. 
-        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private new Rigidbody rigidbody; //!< Rigidbody to apply float physics to.  
-        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private SwellWater water; //!< Water this floater will ask for depth from.
-        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private float depth; //!< Active depth of this floater
-        
+        [OverrideLabel(""), SerializeField] private bool showAdvanced; //!< Show advanced settings in inspector.
+        [field: SerializeField, ConditionalField(nameof(showAdvanced))] public Method DepthMethod { get; set; } = Method.ACCURATE; //!< Method to use to calculate depth. One is more accurate and the second is faster.
+        [field: SerializeField, ConditionalField(nameof(showAdvanced))] public Method FloatMethod { get; set; } = Method.ACCURATE; //!< Method to use to calculate float physics. One is more accurate and the second is faster.
+        [field: SerializeField, ConditionalField(nameof(showAdvanced))] public bool Stabilize { get; set; } = false; //!< Experimental feature for rigidbodies with multiple floaters. When enabled this makes adjustments that consider all attached floaters.
+
+        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private new Rigidbody rigidbody;
+        [field: SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] public SwellWater Water { get; private set; } //!< The water actively being used to get depth.
+        [field: SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] public float Depth { get; private set; } //!< The active depth of this floater under the water.
+
         private float attachedWeight = 1;
         private static Dictionary<Rigidbody, List<SwellFloater>> attachedFloaters = new ();
-
         private static int activeFrame = 0;
         private static float gravity;
-
         private Vector3 position = Vector3.zero;
-        public Vector3 Position => position;
+        private Vector3 Position => position;
 
         public Rigidbody Rigidbody
         {
@@ -47,7 +50,7 @@ namespace Swell
                     rigidbody = value;
                 }
             }
-        }
+        } //!< The rigidbody buoyancy force is being applied to. 
 
         public List<SwellFloater> AttachedFloaters => attachedFloaters[rigidbody];
 
@@ -63,7 +66,7 @@ namespace Swell
             RigidbodyChanged(null, rigidbody);
             this.Register();
 
-            if (floatMethod == Method.FAST && rigidbody)
+            if (FloatMethod == Method.FAST && rigidbody)
             {
                 rigidbody.useGravity = false;
             }
@@ -89,7 +92,7 @@ namespace Swell
 
         void RigidbodyChanged(Rigidbody previousRigidbody, Rigidbody newRigidbody)
         {
-            if (stabilize)
+            if (Stabilize)
             {
                 if (previousRigidbody != null)
                 {
@@ -150,41 +153,41 @@ namespace Swell
         {
             OncePerRigidBodyUpdate();
 
-            position = transform.position + transform.rotation * Vector3.Scale(center, transform.lossyScale);
+            position = transform.position + transform.rotation * Vector3.Scale(Center, transform.lossyScale);
 
-            water = SwellManager.GetNearestWater(Position);
+            Water = SwellManager.GetNearestWater(Position);
 
-            if (depthMethod == Method.FAST)
+            if (DepthMethod == Method.FAST)
             {
-                depth = Position.y - water.GetWaterHeightOptimized(Position) - water.Position.y;
+                Depth = Position.y - Water.GetWaterHeightOptimized(Position) - Water.Position.y;
             }
             else
             {
-                depth = Position.y - water.GetWaterHeight(Position) - water.Position.y;
+                Depth = Position.y - Water.GetWaterHeight(Position) - Water.Position.y;
             }
 
-            if (float.IsNaN(depth))
+            if (float.IsNaN(Depth))
             {
-                Debug.LogWarning("Swell Warning: depth: " + depth);
+                Debug.LogWarning("Swell Warning: depth: " + Depth);
             }
 
-            if (floatMethod == Method.FAST)
+            if (FloatMethod == Method.FAST)
             {
                 if (rigidbody)
                 {
-                    rigidbody.transform.position -= new Vector3(0, depth, 0);
+                    rigidbody.transform.position -= new Vector3(0, Depth, 0);
                 }
                 else
                 {
-                    transform.position -= new Vector3(0, depth, 0);
+                    transform.position -= new Vector3(0, Depth, 0);
                 }
             }
             else
             {
 
-                if (depth < 0)
+                if (Depth < 0)
                 {
-                    Vector3 floatForce = Vector3.up * (buoyancy * attachedWeight * -depth * gravity);
+                    Vector3 floatForce = Vector3.up * (Buoyancy * attachedWeight * -Depth * gravity);
                     rigidbody.AddForceAtPosition(floatForce, Position);
                 }
             }
@@ -193,11 +196,11 @@ namespace Swell
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.magenta;
-            Vector3 gizmoPosition =  gizmoPosition = transform.position + transform.rotation * Vector3.Scale(center, transform.lossyScale);
+            Vector3 gizmoPosition =  gizmoPosition = transform.position + transform.rotation * Vector3.Scale(Center, transform.lossyScale);
             
             DrawUnlitSphere(gizmoPosition, .05f);
             Vector3 force = Vector3.one;
-            if (floatMethod == Method.ACCURATE)
+            if (FloatMethod == Method.ACCURATE)
             {
                 float mass = 1;
                 if (!rigidbody)
@@ -210,7 +213,7 @@ namespace Swell
                     mass = rigidbody.mass;
                 }
                 
-                force = Vector3.up * (buoyancy / mass);                
+                force = Vector3.up * (Buoyancy / mass);                
             }
             Gizmos.DrawRay(gizmoPosition, force);
             DrawUnlitSphere(gizmoPosition + force, .05f);

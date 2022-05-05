@@ -17,36 +17,28 @@ namespace Swell.Editors
             
             SwellMesh[] swellMeshTargets = Array.ConvertAll(targets, item => (SwellMesh) item);
 
-            bool waterMissing = false;
+            bool anyHasWater = false;
+            bool anyTooBig = false;
             foreach (SwellMesh swellMesh in swellMeshTargets)
             {
                 if (GUI.changed || swellMesh.transform.hasChanged)
                 {
-                    if (swellMesh.Water)
-                    {
-                        swellMesh.Water.EditorUpdate();
-                    }
-                    else
-                    {
-                        swellMesh.GenerateMesh();
-                        swellMesh.Update();
-                    }
+                    swellMesh.EditorUpdate();
                 }
-
-                waterMissing |= swellMesh.Water == null;
-                
                 swellMesh.transform.hasChanged = false;
+
+                anyHasWater |= swellMesh.Water != null;
+                anyTooBig |= swellMesh.TooBig;
             }
 
-            if (waterMissing)
+            if (anyTooBig)
             {
-                foreach (SwellWater water in SwellManager.AllWaters())
-                {
-                    if (water.NeedsInitialize())
-                    {
-                        water.EditorUpdate();
-                    }
-                }
+                EditorGUILayout.HelpBox("This mesh is too big. See console for details.", MessageType.Warning);
+            }
+
+            if (anyHasWater)
+            {
+                EditorGUILayout.HelpBox("Some values above driven by SwellWater.", MessageType.Info);
             }
         }
     }

@@ -25,26 +25,26 @@
 var NAVTREE =
 [
   [ "Swell", "index.html", [
-    [ "Motivation", "index.html#autotoc_md2", null ],
-    [ "Features", "index.html#autotoc_md3", null ],
-    [ "Quick Start Guide", "index.html#autotoc_md4", null ],
-    [ "Components", "index.html#autotoc_md5", null ],
-    [ "Credits", "index.html#autotoc_md6", null ],
+    [ "Motivation", "index.html#autotoc_md5", null ],
+    [ "Features", "index.html#autotoc_md6", null ],
+    [ "Quick Start Guide", "index.html#autotoc_md7", null ],
+    [ "Components", "index.html#autotoc_md8", null ],
+    [ "Credits", "index.html#autotoc_md9", null ],
     [ "Unity Demo Scenes", "md_demos.html", [
-      [ "SwellFloater", "md_demos.html#autotoc_md8", [
-        [ "Algorythm", "md_demos.html#autotoc_md9", null ],
-        [ "Buoyancy", "md_demos.html#autotoc_md10", null ],
-        [ "Props", "md_demos.html#autotoc_md11", null ],
-        [ "Stress Test", "md_demos.html#autotoc_md12", null ]
+      [ "SwellFloater", "md_demos.html#autotoc_md11", [
+        [ "Algorithm", "md_demos.html#autotoc_md12", null ],
+        [ "Buoyancy", "md_demos.html#autotoc_md13", null ],
+        [ "Props", "md_demos.html#autotoc_md14", null ],
+        [ "Stress Test", "md_demos.html#autotoc_md15", null ]
       ] ],
-      [ "SwellWater", "md_demos.html#autotoc_md13", [
-        [ "Matrial", "md_demos.html#autotoc_md14", null ],
-        [ "Ocean", "md_demos.html#autotoc_md15", null ],
-        [ "Realistic Water", "md_demos.html#autotoc_md16", null ],
-        [ "River", "md_demos.html#autotoc_md17", null ]
+      [ "SwellWater", "md_demos.html#autotoc_md16", [
+        [ "Matrial", "md_demos.html#autotoc_md17", null ],
+        [ "Ocean", "md_demos.html#autotoc_md18", null ],
+        [ "Realistic Water", "md_demos.html#autotoc_md19", null ],
+        [ "River", "md_demos.html#autotoc_md20", null ]
       ] ],
-      [ "SwellWaves", "md_demos.html#autotoc_md18", [
-        [ "Wave Types", "md_demos.html#autotoc_md19", null ]
+      [ "SwellWaves", "md_demos.html#autotoc_md21", [
+        [ "Wave Types", "md_demos.html#autotoc_md22", null ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
@@ -52,7 +52,6 @@ var NAVTREE =
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ],
         [ "Properties", "functions_prop.html", null ]
       ] ]
     ] ]

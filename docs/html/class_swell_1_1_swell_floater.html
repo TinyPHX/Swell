@@ -118,59 +118,58 @@ $(document).ready(function(){initNavTree('class_swell_1_1_swell_floater.html',''
 
 <div class="header">
   <div class="summary">
-<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_swell_1_1_swell_floater-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Swell.SwellFloater Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>MonoBehavior that can be attached to any RigidBody to enable float physics in <a class="el" href="class_swell_1_1_swell_water.html" title="Creates SwellMesh, applies SwellWave s, and provides API to retrieve or modify water.">SwellWater</a>.  
+<p>Can be attached to any RigidBody to enable float physics in <a class="el" href="class_swell_1_1_swell_water.html" title="Creates SwellMesh, applies SwellWave s, and provides API to retrieve or modify water.">SwellWater</a>.  
  <a href="class_swell_1_1_swell_floater.html#details">More...</a></p>
 
 <p>Inherits MonoBehaviour.</p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr class="memitem:a88315668cbbc4bd4551124682c7aa86f"><td class="memItemLeft" align="right" valign="top"><a id="a88315668cbbc4bd4551124682c7aa86f" name="a88315668cbbc4bd4551124682c7aa86f"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>buoyancy</b> = 5</td></tr>
-<tr class="memdesc:a88315668cbbc4bd4551124682c7aa86f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upwards force that grows the deeper under water this floater is. <br /></td></tr>
-<tr class="separator:a88315668cbbc4bd4551124682c7aa86f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a18a458fe93337e3f2f2a060c3690dafa"><td class="memItemLeft" align="right" valign="top"><a id="a18a458fe93337e3f2f2a060c3690dafa" name="a18a458fe93337e3f2f2a060c3690dafa"></a>
-Vector3&#160;</td><td class="memItemRight" valign="bottom"><b>center</b> = Vector3.zero</td></tr>
-<tr class="memdesc:a18a458fe93337e3f2f2a060c3690dafa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position offset to apply depth check and force to rigidbody. <br /></td></tr>
-<tr class="separator:a18a458fe93337e3f2f2a060c3690dafa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afcc3c0c2cc87731d95228b03f5144145"><td class="memItemLeft" align="right" valign="top"><a id="afcc3c0c2cc87731d95228b03f5144145" name="afcc3c0c2cc87731d95228b03f5144145"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>showAdvanced</b></td></tr>
-<tr class="memdesc:afcc3c0c2cc87731d95228b03f5144145"><td class="mdescLeft">&#160;</td><td class="mdescRight">Show advanced settings in inspector. <br /></td></tr>
-<tr class="separator:afcc3c0c2cc87731d95228b03f5144145"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a1c05b6520a8b6395bef9e2e35439bf"><td class="memItemLeft" align="right" valign="top"><a id="a5a1c05b6520a8b6395bef9e2e35439bf" name="a5a1c05b6520a8b6395bef9e2e35439bf"></a>
-Method&#160;</td><td class="memItemRight" valign="bottom"><b>depthMethod</b> = Method.ACCURATE</td></tr>
-<tr class="memdesc:a5a1c05b6520a8b6395bef9e2e35439bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to use to calculate depth. One is more accurate and the second is faster. <br /></td></tr>
-<tr class="separator:a5a1c05b6520a8b6395bef9e2e35439bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afad3fccd70485edfe292b3c9ba54418d"><td class="memItemLeft" align="right" valign="top"><a id="afad3fccd70485edfe292b3c9ba54418d" name="afad3fccd70485edfe292b3c9ba54418d"></a>
-Method&#160;</td><td class="memItemRight" valign="bottom"><b>floatMethod</b> = Method.ACCURATE</td></tr>
-<tr class="memdesc:afad3fccd70485edfe292b3c9ba54418d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to use to calculate float physics. One is more accurate and the second is faster. <br /></td></tr>
-<tr class="separator:afad3fccd70485edfe292b3c9ba54418d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f24a43663b1ee6d8709b63933396e08"><td class="memItemLeft" align="right" valign="top"><a id="a1f24a43663b1ee6d8709b63933396e08" name="a1f24a43663b1ee6d8709b63933396e08"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>stabilize</b> = false</td></tr>
-<tr class="memdesc:a1f24a43663b1ee6d8709b63933396e08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Experimental feature for rigidbodies with multiple floaters. When enabled this makes adjustments that consider all attached floaters. <br /></td></tr>
-<tr class="separator:a1f24a43663b1ee6d8709b63933396e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afa77a027487702347d403e2c43adc1ec"><td class="memItemLeft" align="right" valign="top"><a id="afa77a027487702347d403e2c43adc1ec" name="afa77a027487702347d403e2c43adc1ec"></a>
-new Rigidbody&#160;</td><td class="memItemRight" valign="bottom"><b>rigidbody</b></td></tr>
-<tr class="memdesc:afa77a027487702347d403e2c43adc1ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rigidbody to apply float physics to. <br  />
- <br /></td></tr>
-<tr class="separator:afa77a027487702347d403e2c43adc1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c594d079704c305177e3220057880da"><td class="memItemLeft" align="right" valign="top"><a id="a0c594d079704c305177e3220057880da" name="a0c594d079704c305177e3220057880da"></a>
-<a class="el" href="class_swell_1_1_swell_water.html">SwellWater</a>&#160;</td><td class="memItemRight" valign="bottom"><b>water</b></td></tr>
-<tr class="memdesc:a0c594d079704c305177e3220057880da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Water this floater will ask for depth from. <br /></td></tr>
-<tr class="separator:a0c594d079704c305177e3220057880da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44d3a12ed20b9e48d16b5f5ddcebc626"><td class="memItemLeft" align="right" valign="top"><a id="a44d3a12ed20b9e48d16b5f5ddcebc626" name="a44d3a12ed20b9e48d16b5f5ddcebc626"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>depth</b></td></tr>
-<tr class="memdesc:a44d3a12ed20b9e48d16b5f5ddcebc626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Active depth of this floater. <br /></td></tr>
-<tr class="separator:a44d3a12ed20b9e48d16b5f5ddcebc626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:ab6eff2a4861e3e1adcf3842eae725247"><td class="memItemLeft" align="right" valign="top"><a id="ab6eff2a4861e3e1adcf3842eae725247" name="ab6eff2a4861e3e1adcf3842eae725247"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>Buoyancy</b> = 5<code> [get, set]</code></td></tr>
+<tr class="memdesc:ab6eff2a4861e3e1adcf3842eae725247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Upwards force that grows the deeper under water this floater is. <br /></td></tr>
+<tr class="separator:ab6eff2a4861e3e1adcf3842eae725247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ded69570aa9b1a2fcce016c3115432c"><td class="memItemLeft" align="right" valign="top"><a id="a8ded69570aa9b1a2fcce016c3115432c" name="a8ded69570aa9b1a2fcce016c3115432c"></a>
+Vector3&#160;</td><td class="memItemRight" valign="bottom"><b>Center</b> = Vector3.zero<code> [get, set]</code></td></tr>
+<tr class="memdesc:a8ded69570aa9b1a2fcce016c3115432c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Position offset to apply depth check and force to rigidbody. <br /></td></tr>
+<tr class="separator:a8ded69570aa9b1a2fcce016c3115432c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7a6ab48082109a5462f8705ed5efc791"><td class="memItemLeft" align="right" valign="top"><a id="a7a6ab48082109a5462f8705ed5efc791" name="a7a6ab48082109a5462f8705ed5efc791"></a>
+Method&#160;</td><td class="memItemRight" valign="bottom"><b>DepthMethod</b> = Method.ACCURATE<code> [get, set]</code></td></tr>
+<tr class="memdesc:a7a6ab48082109a5462f8705ed5efc791"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to use to calculate depth. One is more accurate and the second is faster. <br /></td></tr>
+<tr class="separator:a7a6ab48082109a5462f8705ed5efc791"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4bcf8e07e12e2d24bfd83ba4689e009"><td class="memItemLeft" align="right" valign="top"><a id="ad4bcf8e07e12e2d24bfd83ba4689e009" name="ad4bcf8e07e12e2d24bfd83ba4689e009"></a>
+Method&#160;</td><td class="memItemRight" valign="bottom"><b>FloatMethod</b> = Method.ACCURATE<code> [get, set]</code></td></tr>
+<tr class="memdesc:ad4bcf8e07e12e2d24bfd83ba4689e009"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to use to calculate float physics. One is more accurate and the second is faster. <br /></td></tr>
+<tr class="separator:ad4bcf8e07e12e2d24bfd83ba4689e009"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adccef4f1032b1038b9a263c48af148ce"><td class="memItemLeft" align="right" valign="top"><a id="adccef4f1032b1038b9a263c48af148ce" name="adccef4f1032b1038b9a263c48af148ce"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Stabilize</b> = false<code> [get, set]</code></td></tr>
+<tr class="memdesc:adccef4f1032b1038b9a263c48af148ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Experimental feature for rigidbodies with multiple floaters. When enabled this makes adjustments that consider all attached floaters. <br /></td></tr>
+<tr class="separator:adccef4f1032b1038b9a263c48af148ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa13cb45beb0269cd2f2eddcc0d64f9f"><td class="memItemLeft" align="right" valign="top"><a id="afa13cb45beb0269cd2f2eddcc0d64f9f" name="afa13cb45beb0269cd2f2eddcc0d64f9f"></a>
+<a class="el" href="class_swell_1_1_swell_water.html">SwellWater</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Water</b><code> [get]</code></td></tr>
+<tr class="memdesc:afa13cb45beb0269cd2f2eddcc0d64f9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The water actively being used to get depth. <br /></td></tr>
+<tr class="separator:afa13cb45beb0269cd2f2eddcc0d64f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a554d42fe23fd4530e2631e5bc2392b14"><td class="memItemLeft" align="right" valign="top"><a id="a554d42fe23fd4530e2631e5bc2392b14" name="a554d42fe23fd4530e2631e5bc2392b14"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>Depth</b><code> [get]</code></td></tr>
+<tr class="memdesc:a554d42fe23fd4530e2631e5bc2392b14"><td class="mdescLeft">&#160;</td><td class="mdescRight">The active depth of this floater under the water. <br /></td></tr>
+<tr class="separator:a554d42fe23fd4530e2631e5bc2392b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a8349051189af5cdf08bab24044906d"><td class="memItemLeft" align="right" valign="top"><a id="a6a8349051189af5cdf08bab24044906d" name="a6a8349051189af5cdf08bab24044906d"></a>
+Rigidbody&#160;</td><td class="memItemRight" valign="bottom"><b>Rigidbody</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a6a8349051189af5cdf08bab24044906d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The rigidbody buoyancy force is being applied to. <br /></td></tr>
+<tr class="separator:a6a8349051189af5cdf08bab24044906d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >MonoBehavior that can be attached to any RigidBody to enable float physics in <a class="el" href="class_swell_1_1_swell_water.html" title="Creates SwellMesh, applies SwellWave s, and provides API to retrieve or modify water.">SwellWater</a>. </p>
+<div class="textblock"><p >Can be attached to any RigidBody to enable float physics in <a class="el" href="class_swell_1_1_swell_water.html" title="Creates SwellMesh, applies SwellWave s, and provides API to retrieve or modify water.">SwellWater</a>. </p>
+<p >When the <a class="el" href="class_swell_1_1_swell_floater.html#a8ded69570aa9b1a2fcce016c3115432c" title="Position offset to apply depth check and force to rigidbody.">SwellFloater.Center</a> point falls below the surface of a <a class="el" href="class_swell_1_1_swell_floater.html#afa13cb45beb0269cd2f2eddcc0d64f9f" title="The water actively being used to get depth.">SwellFloater.Water</a>, a force is applied to the <a class="el" href="class_swell_1_1_swell_floater.html#a6a8349051189af5cdf08bab24044906d" title="The rigidbody buoyancy force is being applied to.">SwellFloater.Rigidbody</a> at that position with a force relative to the value of the <a class="el" href="class_swell_1_1_swell_floater.html#ab6eff2a4861e3e1adcf3842eae725247" title="Upwards force that grows the deeper under water this floater is.">SwellFloater.Buoyancy</a>.</p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Example</h1>
+<p >See: <code>Scenes/Swell Floater - Algorithm Demo.unity</code> <img src="https://i.imgur.com/71ojK7E.gif" alt="Gif of Float Algorithm" class="inline"/> </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

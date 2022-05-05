@@ -118,7 +118,8 @@ $(document).ready(function(){initNavTree('class_swell_1_1_swell_mesh.html',''); 
 
 <div class="header">
   <div class="summary">
-<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_swell_1_1_swell_mesh-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Swell.SwellMesh Class Reference</div></div>
 </div><!--header-->
@@ -129,35 +130,74 @@ $(document).ready(function(){initNavTree('class_swell_1_1_swell_mesh.html',''); 
 
 <p>Inherits MonoBehaviour.</p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
-<tr class="memitem:a3dce66f1142ac17b443e014535b6d6cb"><td class="memItemLeft" align="right" valign="top"><a id="a3dce66f1142ac17b443e014535b6d6cb" name="a3dce66f1142ac17b443e014535b6d6cb"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>startGridSize</b> = 1</td></tr>
-<tr class="memdesc:a3dce66f1142ac17b443e014535b6d6cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a3dce66f1142ac17b443e014535b6d6cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44d5a4d759f71914f909afab802fdbd7"><td class="memItemLeft" align="right" valign="top"><a id="a44d5a4d759f71914f909afab802fdbd7" name="a44d5a4d759f71914f909afab802fdbd7"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>maxSize</b> = 10</td></tr>
-<tr class="memdesc:a44d5a4d759f71914f909afab802fdbd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a44d5a4d759f71914f909afab802fdbd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a17f977d7a5d478a56d01eb871b943fa0"><td class="memItemLeft" align="right" valign="top"><a id="a17f977d7a5d478a56d01eb871b943fa0" name="a17f977d7a5d478a56d01eb871b943fa0"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>currentSize</b> = 10</td></tr>
-<tr class="memdesc:a17f977d7a5d478a56d01eb871b943fa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a17f977d7a5d478a56d01eb871b943fa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1dd345752040855d7107a0c33349a89a"><td class="memItemLeft" align="right" valign="top"><a id="a1dd345752040855d7107a0c33349a89a" name="a1dd345752040855d7107a0c33349a89a"></a>
-MeshLevel[]&#160;</td><td class="memItemRight" valign="bottom"><b>levels</b> = {}</td></tr>
-<tr class="memdesc:a1dd345752040855d7107a0c33349a89a"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a1dd345752040855d7107a0c33349a89a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a433f90647b301f60960eceeb94e22ecc"><td class="memItemLeft" align="right" valign="top"><a id="a433f90647b301f60960eceeb94e22ecc" name="a433f90647b301f60960eceeb94e22ecc"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>top</b> = true</td></tr>
-<tr class="memdesc:a433f90647b301f60960eceeb94e22ecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:a433f90647b301f60960eceeb94e22ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeec4d22a53081ab55f61ba4a107ccf94"><td class="memItemLeft" align="right" valign="top"><a id="aeec4d22a53081ab55f61ba4a107ccf94" name="aeec4d22a53081ab55f61ba4a107ccf94"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>bottom</b> = true</td></tr>
-<tr class="memdesc:aeec4d22a53081ab55f61ba4a107ccf94"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO. <br /></td></tr>
-<tr class="separator:aeec4d22a53081ab55f61ba4a107ccf94"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a574cc4bf8e3f45625a05a2ce099fb30b"><td class="memItemLeft" align="right" valign="top"><a id="a574cc4bf8e3f45625a05a2ce099fb30b" name="a574cc4bf8e3f45625a05a2ce099fb30b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>GenerateMesh</b> ()</td></tr>
+<tr class="memdesc:a574cc4bf8e3f45625a05a2ce099fb30b"><td class="mdescLeft">&#160;</td><td class="mdescRight">When called the mesh vectors, normals, triangles are all recomputed based on the configured properties and levels. After generation the mesh is applied to the MeshFilter.Mesh. <br /></td></tr>
+<tr class="separator:a574cc4bf8e3f45625a05a2ce099fb30b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="properties" name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:acb396494fde0ba95cbab7c5bdb0778a4"><td class="memItemLeft" align="right" valign="top"><a id="acb396494fde0ba95cbab7c5bdb0778a4" name="acb396494fde0ba95cbab7c5bdb0778a4"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>StartGridSize</b> = 1<code> [get, set]</code></td></tr>
+<tr class="memdesc:acb396494fde0ba95cbab7c5bdb0778a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Size of the inner most triangles of the mesh. If this is 1, then the shortest distance between any mesh triangle's verts will be 1. <br /></td></tr>
+<tr class="separator:acb396494fde0ba95cbab7c5bdb0778a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26dbb58bb16577f92e9c8b6b1168388b"><td class="memItemLeft" align="right" valign="top"><a id="a26dbb58bb16577f92e9c8b6b1168388b" name="a26dbb58bb16577f92e9c8b6b1168388b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>MaxSize</b> = 10<code> [get, set]</code></td></tr>
+<tr class="memdesc:a26dbb58bb16577f92e9c8b6b1168388b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The largest, this mesh can become in world space. When levels are used, this can be set to 0 to allow the levels to grow boundlessly. <br /></td></tr>
+<tr class="separator:a26dbb58bb16577f92e9c8b6b1168388b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c34342f72283a5b3c7a78ec130766d2"><td class="memItemLeft" align="right" valign="top"><a id="a6c34342f72283a5b3c7a78ec130766d2" name="a6c34342f72283a5b3c7a78ec130766d2"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentSize</b> = 10<code> [get]</code></td></tr>
+<tr class="memdesc:a6c34342f72283a5b3c7a78ec130766d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">The active size of the mesh. This will not always equal the MaxSize because of partially fitting grid spacing. <br /></td></tr>
+<tr class="separator:a6c34342f72283a5b3c7a78ec130766d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae75b1a5bd90f3705c0250f4670637f6"><td class="memItemLeft" align="right" valign="top"><a id="aae75b1a5bd90f3705c0250f4670637f6" name="aae75b1a5bd90f3705c0250f4670637f6"></a>
+MeshLevel[]&#160;</td><td class="memItemRight" valign="bottom"><b>Levels</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:aae75b1a5bd90f3705c0250f4670637f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">An alternative to solely using MaxSize. Levels allow a rang of factor increases, creating a grid that gets less dense as it protrudes from it's center. <br /></td></tr>
+<tr class="separator:aae75b1a5bd90f3705c0250f4670637f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ab44cf9cf6b8e7bba08596e6625e90b"><td class="memItemLeft" align="right" valign="top"><a id="a8ab44cf9cf6b8e7bba08596e6625e90b" name="a8ab44cf9cf6b8e7bba08596e6625e90b"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Top</b> = true<code> [get, set]</code></td></tr>
+<tr class="memdesc:a8ab44cf9cf6b8e7bba08596e6625e90b"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, vectors and triangles are added to the mesh facing upwards. The first MeshRenderer.Material is applied to this mesh. <br /></td></tr>
+<tr class="separator:a8ab44cf9cf6b8e7bba08596e6625e90b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af34806138a86771cce9de8d847ffe319"><td class="memItemLeft" align="right" valign="top"><a id="af34806138a86771cce9de8d847ffe319" name="af34806138a86771cce9de8d847ffe319"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>Bottom</b> = true<code> [get, set]</code></td></tr>
+<tr class="memdesc:af34806138a86771cce9de8d847ffe319"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, vectors and triangles are added to the mesh facing downwards. The second MeshRenderer.Material is applied to this mesh. <br /></td></tr>
+<tr class="separator:af34806138a86771cce9de8d847ffe319"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01a90e9e47bc4308ebecb6e361771dfc"><td class="memItemLeft" align="right" valign="top"><a id="a01a90e9e47bc4308ebecb6e361771dfc" name="a01a90e9e47bc4308ebecb6e361771dfc"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>LowPolyNormals</b> = false<code> [get, set]</code></td></tr>
+<tr class="memdesc:a01a90e9e47bc4308ebecb6e361771dfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">If true, on generation, vectors are not shared by triangles. This results in a lot of vectors but leaves a cool Low Poly effect that can be used with most Materials. <br /></td></tr>
+<tr class="separator:a01a90e9e47bc4308ebecb6e361771dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12d8c7e307cf93c3a77fa9d17f2941f2"><td class="memItemLeft" align="right" valign="top"><a id="a12d8c7e307cf93c3a77fa9d17f2941f2" name="a12d8c7e307cf93c3a77fa9d17f2941f2"></a>
+Mesh&#160;</td><td class="memItemRight" valign="bottom"><b>Mesh</b><code> [get]</code></td></tr>
+<tr class="memdesc:a12d8c7e307cf93c3a77fa9d17f2941f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for providing shared assets (sharedMesh) when in edit mode and non-shared assets (mesh) otherwise. <br /></td></tr>
+<tr class="separator:a12d8c7e307cf93c3a77fa9d17f2941f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecbfad73707af61127d73fdf19975d7f"><td class="memItemLeft" align="right" valign="top"><a id="aecbfad73707af61127d73fdf19975d7f" name="aecbfad73707af61127d73fdf19975d7f"></a>
+<a class="el" href="class_swell_1_1_swell_mesh.html#aad57f09c4a032c800e2d8a0c85ac21cf">Material</a>[]&#160;</td><td class="memItemRight" valign="bottom"><b>Materials</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:aecbfad73707af61127d73fdf19975d7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for providing shared assets (sharedMaterials) when in edit mode and non-shared assets (materials) otherwise. <br /></td></tr>
+<tr class="separator:aecbfad73707af61127d73fdf19975d7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad57f09c4a032c800e2d8a0c85ac21cf"><td class="memItemLeft" align="right" valign="top"><a id="aad57f09c4a032c800e2d8a0c85ac21cf" name="aad57f09c4a032c800e2d8a0c85ac21cf"></a>
+Material&#160;</td><td class="memItemRight" valign="bottom"><b>Material</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:aad57f09c4a032c800e2d8a0c85ac21cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper for providing shared assets (sharedMaterial) when in edit mode and non-shared assets (material) otherwise. <br /></td></tr>
+<tr class="separator:aad57f09c4a032c800e2d8a0c85ac21cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f882028b72a9275c38654e463083eb8"><td class="memItemLeft" align="right" valign="top"><a id="a1f882028b72a9275c38654e463083eb8" name="a1f882028b72a9275c38654e463083eb8"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>Offset</b><code> [get]</code></td></tr>
+<tr class="memdesc:a1f882028b72a9275c38654e463083eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Half the size of this mesh. <br /></td></tr>
+<tr class="separator:a1f882028b72a9275c38654e463083eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d494aa63d686a784fba11250c9d164e"><td class="memItemLeft" align="right" valign="top"><a id="a4d494aa63d686a784fba11250c9d164e" name="a4d494aa63d686a784fba11250c9d164e"></a>
+<a class="el" href="class_swell_1_1_swell_water.html">SwellWater</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Water</b><code> [get, set]</code></td></tr>
+<tr class="memdesc:a4d494aa63d686a784fba11250c9d164e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Water controlling this mesh, if any. <br /></td></tr>
+<tr class="separator:a4d494aa63d686a784fba11250c9d164e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Dynamic mesh used to render water surface. </p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Simple Mesh</h1>
+<p >A mesh can be very simple, using only <a class="el" href="class_swell_1_1_swell_mesh.html#acb396494fde0ba95cbab7c5bdb0778a4" title="The Size of the inner most triangles of the mesh. If this is 1, then the shortest distance between an...">SwellMesh.StartGridSize</a> and <a class="el" href="class_swell_1_1_swell_mesh.html#a26dbb58bb16577f92e9c8b6b1168388b" title="The largest, this mesh can become in world space. When levels are used, this can be set to 0 to allow...">SwellMesh.MaxSize</a> to form the grid.</p>
+<p ><img src="https://imgur.com/TW0ShBI.png" alt="SwellMesh (Simple)" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Advanced Mesh</h1>
+<p >Alternatively you can use levels to define a mesh that gets progressively less coarse as it gets further from it's center.</p>
+<p ><img src="https://i.imgur.com/oelmhcU.png" alt="SwellMesh (Advanced)" class="inline"/> </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

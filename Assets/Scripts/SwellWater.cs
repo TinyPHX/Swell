@@ -18,41 +18,37 @@ namespace Swell
     [HelpURL("https://tinyphx.github.io/Swell/html/class_swell_1_1_swell_water.html")]
     public class SwellWater : MonoBehaviour
     {
-        [Separator("Basic Settings")] 
-        [SerializeField] private Material material; //!< TODO
+        [field: Separator("Basic Settings")]
+        [field: SerializeField] public Material Material { get; set; } //!< TODO
+        [field: SerializeField] public Material BottomMaterial { get; set; } //!< TODO
+        [field: SerializeField, Min(0)] public int MeshGridSize { get; set; } = 1; //!< TODO
+        [field: SerializeField, Min(0)] public int MeshSize { get; set; } = 40; //!< TODO
+        [field: SerializeField, OverrideLabel("Texture Size (Main)"), Min(0)] public float MainTextureSize { get; set; } = 0; //!< TODO
+        [field: SerializeField, OverrideLabel("Texture Size (Secondary)"), Min(0)] public float SecondaryTextureSize { get; set; } = 0; //!< TODO
+        [field: SerializeField] public ShadowCastingMode CastingMode { get; set; } = ShadowCastingMode.Off; //!< TODO
+        [field: SerializeField] public bool ReceiveShadows { get; set; } = false; //!< TODO
+        [field: SerializeField] public bool LowPolyNormals { get; set; } = false; //!< TODO
         
-        [Separator("Mesh Settings")] 
-        [SerializeField] private bool customSwellMesh = false; //!< TODO: This is how you add member docs in doxigen.
-        [SerializeField, ConditionalField(nameof(customSwellMesh), true), Min(1)] private int meshGridSize = 1; //!< TODO
-        [SerializeField, ConditionalField(nameof(customSwellMesh), true), Min(1)] private int meshSize = 40; //!< TODO
-        [SerializeField, ConditionalField(nameof(customSwellMesh))] private SwellMesh swellMesh; //!< TODO
-        [SerializeField] private float mainTextureSize = 0; //!< TODO
-        [SerializeField] private int secondaryTextureSize = 0; //!< TODO
-        [SerializeField] private ShadowCastingMode shadowCastingMode = ShadowCastingMode.Off; //!< TODO
-        [SerializeField] private bool receiveShadows = false; //!< TODO
-        
-        [Separator("Calculate Normals")] 
-        [OverrideLabel("")]
-        [SerializeField] private bool calculateNormals = true; //!< TODO
-        [SerializeField, ConditionalField(nameof(calculateNormals))] private bool lowPolyNormals = false; //!< TODO
-        [SerializeField, ConditionalField(nameof(calculateNormals))] private float calculateNormalsFrequency = 1; //!< TODO (in seconds)
-        private float lastCalculateNormalsTime = 0; //!< TODO
-        
-        [Separator("Position Anchoring")] 
-        [OverrideLabel("")]
-        [SerializeField] private bool usePositionAnchor = false; //!< TODO
-        [SerializeField, ConditionalField(nameof(usePositionAnchor))] private GameObject positionAnchor; //!< TODO
-        [SerializeField, ConditionalField(nameof(usePositionAnchor))] private Vector2 positionStep = Vector2.one * 10; //!< TODO
-        [SerializeField, ConditionalField(nameof(usePositionAnchor))] private bool lockAlbedoPosition; //!< TODO
-        [SerializeField, ConditionalField(nameof(usePositionAnchor))] private Transform meshAlbedoPosition; //!< TODO
+        [field: Separator("Custom Swell Mesh")]
+        [field: OverrideLabel(""), SerializeField] private bool useCustomSwellMesh = false;
+        public bool UseCustomSwellMesh { get => useCustomSwellMesh; set => useCustomSwellMesh = value; } //!< TODO
+        [field: SerializeField, ConditionalField(nameof(useCustomSwellMesh))] public SwellMesh SwellMesh { get; set; } //!< TODO
+
+        [Separator("Position Anchoring")]
+        [OverrideLabel(""), SerializeField] private bool usePositionAnchor = false;
+        public bool UsePositionAnchor { get => usePositionAnchor; set => usePositionAnchor = value; } //!< TODO
+        [field: SerializeField, ConditionalField(nameof(usePositionAnchor))] public GameObject PositionAnchor { get; set; } //!< TODO
+        [field: SerializeField, ConditionalField(nameof(usePositionAnchor))] public Vector2 PositionStep { get; set; } = Vector2.one * 10; //!< TODO
+        [field: SerializeField, ConditionalField(nameof(usePositionAnchor))] public bool LockAlbedoPosition { get; set; } //!< TODO
+        [field: SerializeField, ConditionalField(nameof(usePositionAnchor))] public Transform MeshAlbedoPosition { get; set; } //!< TODO
 
         [Separator("Optimize")] 
-        [OverrideLabel("")]
-        [SerializeField] private bool optimize; //!< TODO
-        [SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(autoThrottle))] private float waterFps = 60; //!< TODO
-        [SerializeField, ConditionalField(nameof(optimize))] private bool autoThrottle = true; //!< TODO
-        [SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(autoThrottle), true)] private float throttleFps = 60; //!< TODO If the game fps falls under this fps then the waterFPS will automatically drop.
-        
+        [OverrideLabel(""), SerializeField] private bool optimize;
+        public bool Optimize { get => optimize; set => optimize = value; } //!< TODO
+        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(AutoThrottle))] public float WaterFps { get; private set; } = 60; //!< TODO
+        [field: SerializeField, ConditionalField(nameof(optimize))] public bool AutoThrottle { get; set; } = true; //!< TODO
+        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(AutoThrottle), true)] public float ThrottleFps { get; set; } = 60; //!< TODO
+
         private Dictionary<long, float> heightMapDict;
         private bool useHeightMapArray = true; //This was created for debugging and is almost always faster to be set to true.
         private float[][,] heightMapArray;
@@ -61,21 +57,21 @@ namespace Swell
         private bool initialized = false;
         private float lastUpdate;
         private float fps;
+        private Material previousMaterial;
+        private Material previousBottomMaterial;
+        private static readonly int DetailAlbedoMap = Shader.PropertyToID("_DetailAlbedoMap");
+        private static readonly int DetailNormalMap = Shader.PropertyToID("_DetailNormalMap");
 
         public Vector3 Position => position;
 
-        public Material Material
-        {
-            get { return material; }
-            set { material = value; }
-        }
-
         public void Reset()
         {
-            if (swellMesh != null)
+            if (SwellMesh != null)
             {
-                swellMesh.gameObject.BlowUp();
+                SwellMesh.gameObject.BlowUp();
             }
+
+            Material = new Material(Shader.Find("Standard"));
 
             EditorUpdate();
         }
@@ -88,7 +84,7 @@ namespace Swell
             InitializeWaterMesh();
             
             heightMapDict = new Dictionary<long, float>();
-            SwellMesh.MeshLevel[] levels = swellMesh.Levels;
+            SwellMesh.MeshLevel[] levels = SwellMesh.Levels;
             heightMapArray = new float[levels.Length][,];
 
             for (int levelIndex = 0; levelIndex < levels.Length; levelIndex++)
@@ -123,28 +119,33 @@ namespace Swell
             }
             
             Initialize(true);
-            UpdateMeshLowPoly(true);
             Update();
+
+            foreach (SwellMesh childSwellMesh in GetComponentsInChildren<SwellMesh>())
+            {
+                childSwellMesh.gameObject.hideFlags = HideFlags.None;
+            }
+            SwellMesh.gameObject.hideFlags = UseCustomSwellMesh ? HideFlags.None : HideFlags.HideInHierarchy;
         }
 
         public bool ShouldUpdate()
-        { 
+        {
             bool shouldUpdate = true;
 
             if (optimize && Application.isPlaying)
             {
-                if (autoThrottle)
+                if (AutoThrottle)
                 {
                     //fps is an approximate rolling average across 10 frames.
                     fps = fps - fps / 10 +  1 / Time.deltaTime / 10;
                     
-                    if (fps < throttleFps && waterFps >= 1 || fps > throttleFps && waterFps < 60)
+                    if (fps < ThrottleFps && WaterFps >= 1 || fps > ThrottleFps && WaterFps < 60)
                     {
-                        waterFps += .1f * (fps - waterFps);
+                        WaterFps += .1f * (fps - WaterFps);
                     }
                 }
 
-                if (waterFps > 0 && Time.time - lastUpdate < 1 / waterFps)
+                if (WaterFps > 0 && Time.time - lastUpdate < 1 / WaterFps)
                 {
                     shouldUpdate = false;
                 }
@@ -158,14 +159,14 @@ namespace Swell
             if (ShouldUpdate())
             {
                 lastUpdate = Time.time;
-                if (usePositionAnchor && positionAnchor)
+                if (usePositionAnchor && PositionAnchor)
                 {
-                    Vector3 anchor = positionAnchor.transform.position;
+                    Vector3 anchor = PositionAnchor.transform.position;
 
                     transform.position = new Vector3(
-                        anchor.x - anchor.x % positionStep.x,
+                        anchor.x - anchor.x % PositionStep.x,
                         transform.position.y,
-                        anchor.z - anchor.z % positionStep.y
+                        anchor.z - anchor.z % PositionStep.y
                     );
                 }
 
@@ -177,71 +178,142 @@ namespace Swell
 
         void InitializeWaterMesh(bool setDefaults=false)
         {
-            if (swellMesh == null)
+            if (SwellMesh == null)
+            {
+                SwellMesh = GetComponentInChildren<SwellMesh>();
+
+                if (SwellMesh != null)
+                {
+                    Material = SwellMesh.Materials[0];
+                    MeshGridSize = SwellMesh.StartGridSize;
+                    MeshSize = SwellMesh.MaxSize;
+                    LowPolyNormals = SwellMesh.LowPolyNormals;
+                }
+            }
+            
+            if (SwellMesh == null)
             {
                 Type[] components = { typeof(SwellMesh) };
-                swellMesh = new GameObject("Swell Mesh", components).GetComponent<SwellMesh>();
-                swellMesh.transform.parent = transform;
-                swellMesh.transform.localPosition = Vector3.zero;
-                swellMesh.Material = new Material(Shader.Find("Standard"));
+                SwellMesh = new GameObject("Swell Mesh", components).GetComponent<SwellMesh>();
+                SwellMesh.transform.parent = transform;
+                SwellMesh.transform.localPosition = Vector3.zero;
+                SwellMesh.Material = new Material(Shader.Find("Standard"));
 
                 setDefaults = true;
             }
 
-            swellMesh.Water = this;
+            SwellMesh.Water = this;
 
-            if (setDefaults || !customSwellMesh)
+            // if (setDefaults || !UseCustomSwellMesh)
             {
-                swellMesh.MaxSize = meshSize;
-                swellMesh.StartGridSize = meshGridSize;
-                swellMesh.Levels = new SwellMesh.MeshLevel[] { };
-            }
+                if (MeshSize > 0) SwellMesh.MaxSize = MeshSize;
+                if (MeshGridSize > 0) SwellMesh.StartGridSize = MeshGridSize;
+                SwellMesh.Renderer.shadowCastingMode = CastingMode;
+                SwellMesh.Renderer.receiveShadows = ReceiveShadows;
+                SwellMesh.LowPolyNormals = LowPolyNormals;
+                SwellMesh.Top = Material != null;
+                SwellMesh.Bottom = BottomMaterial != null;
 
-            swellMesh.Renderer.shadowCastingMode = shadowCastingMode;
-            swellMesh.Renderer.receiveShadows = receiveShadows;
-                
-            if (material)
-            {
-                if (material.shader.name == "Standard")
+                List<Material> materials = new List<Material>();
+                if (Material)
                 {
-                    if (mainTextureSize > 0)
-                    {
-                        material.mainTextureScale =
-                            Vector2.one * (swellMesh.Size / (float) mainTextureSize);
-                    }
-
-                    if (secondaryTextureSize > 0)
-                    {
-                        material.SetTextureScale("_DetailAlbedoMap",
-                            Vector2.one * (swellMesh.Size / (float) secondaryTextureSize));
-                        material.SetTextureScale("_DetailNormalMap",
-                            Vector2.one * (swellMesh.Size / (float) secondaryTextureSize));
-                    }
+                    UpdateTexture(Material);
+                    materials.Add(Material);
                 }
 
-                swellMesh.Material = material;
-
-                if (swellMesh.Material.shader.name == "Standard")
+                if (BottomMaterial)
                 {
-                    swellMesh.Update();
-                    if (mainTextureSize > 0)
-                    {
-                        swellMesh.Material.mainTextureScale =
-                            Vector2.one * (swellMesh.Size / (float) mainTextureSize);
-                    }
-
-                    if (secondaryTextureSize > 0)
-                    {
-                        swellMesh.Material.SetTextureScale("_DetailAlbedoMap",
-                            Vector2.one * (swellMesh.Size / (float) secondaryTextureSize));
-                        swellMesh.Material.SetTextureScale("_DetailNormalMap",
-                            Vector2.one * (swellMesh.Size / (float) secondaryTextureSize));
-                    }
+                    UpdateTexture(BottomMaterial);
+                    materials.Add(BottomMaterial);
                 }
+
+                SwellMesh.Materials = materials.ToArray();
+
+                // SwellMesh.Materials = new[] { Material, BottomMaterial };
+            }
+            
+            if (!useCustomSwellMesh)
+            {
+                SwellMesh.Levels = new SwellMesh.MeshLevel[] { };
             }
 
-            swellMesh.GenerateMesh();
+            SwellMesh.GenerateMesh();
         }
+
+        private void UpdateTexture(Material material)
+        {
+            if (material != null && material.shader.name == "Standard")
+            {
+                SwellMesh.Update();
+                
+                if (MainTextureSize > 0)
+                {
+                    float newScale = SwellMesh.Size / MainTextureSize;
+                    Vector2 newOffset = Vector2.one *  (-newScale / 2 + .5f);
+                    material.mainTextureScale =  Vector2.one * newScale;
+
+                    if (LockAlbedoPosition)
+                    {
+                        newOffset += new Vector2(
+                            SwellMesh.Renderer.transform.position.x - MeshAlbedoPosition?.position.x ?? 0,
+                            SwellMesh.Renderer.transform.position.z - MeshAlbedoPosition?.position.z ?? 0
+                        ) / newScale / 2;
+                    }
+                    
+                    material.mainTextureOffset = newOffset;
+                    
+                }
+
+                if (SecondaryTextureSize > 0)
+                {
+                    float newScale = SwellMesh.Size / SecondaryTextureSize;
+                    float newOffset = -newScale / 2 + .5f;
+                    
+                    material.SetTextureScale(DetailAlbedoMap, Vector2.one * newScale);
+                    material.SetTextureScale(DetailAlbedoMap, Vector2.one * newScale);
+                    material.SetTextureOffset(DetailAlbedoMap, Vector2.one * newOffset);
+                    material.SetTextureOffset(DetailAlbedoMap, Vector2.one * newOffset);
+                }
+            }
+        }
+
+        public void ClearMaterial()
+        {
+            previousMaterial = Material;
+            Material = null;
+        }
+
+        public void RestoreMaterial()
+        {
+            if (Material == null)
+            {
+                if (previousMaterial == null)
+                {
+                    previousMaterial = new Material(Shader.Find("Standard"));
+                }
+                Material = previousMaterial;
+            }
+        }
+
+        public void ClearBottomMaterial()
+        {
+            previousBottomMaterial = BottomMaterial;
+            BottomMaterial = null;
+        }
+
+        public void RestoreBottomMaterial()
+        {
+            if (BottomMaterial == null)
+            {
+                if (previousBottomMaterial == null)
+                {
+                    previousBottomMaterial = new Material(Shader.Find("Standard"));
+                }
+                
+                BottomMaterial = previousBottomMaterial;
+            }
+        }
+        
         
         private void OnDestroy()
         {
@@ -252,7 +324,6 @@ namespace Swell
         {   
             UpdateHeightMap();
             UpdateMeshes();
-            UpdateMeshBoundsAndNormals();
         }
 
         /**
@@ -268,6 +339,12 @@ namespace Swell
          * ```
          * GetWaterHeight(Vector3.Zero) 
          * ```
+         *
+         * Providing the levelIndex was more efficient but we don't know for sure if the level has this point. 
+         * float cc = GetHeight(maxX, maxY, li: levelIndex);
+         * float ff = GetHeight(minX, minY, li: levelIndex);
+         * float cf = GetHeight(maxX, minY, li: levelIndex);
+         * float fc = GetHeight(minX, maxY, li: levelIndex);
          */
         public float GetWaterHeight(Vector3 position)
         {
@@ -281,7 +358,7 @@ namespace Swell
             }
             else
             {
-                SwellMesh.MeshLevel meshLevel = swellMesh.Levels[levelIndex];
+                SwellMesh.MeshLevel meshLevel = SwellMesh.Levels[levelIndex];
                 float levelStep = meshLevel.Step;
 
                 float gridX = PositionToGridX(position.x, meshLevel);
@@ -293,10 +370,10 @@ namespace Swell
                 float maxY = gridY + levelStep;
 
                 //Get corners. TODO: We probably interpolate between 3 vectors instead of 4.
-                float cc = GetHeight(maxX, maxY, li: levelIndex);
-                float ff = GetHeight(minX, minY, li: levelIndex);
-                float cf = GetHeight(maxX, minY, li: levelIndex);
-                float fc = GetHeight(minX, maxY, li: levelIndex);
+                float cc = GetHeight(maxX, maxY);
+                float ff = GetHeight(minX, minY);
+                float cf = GetHeight(maxX, minY);
+                float fc = GetHeight(minX, maxY); 
 
                 float ratioX = (position.x - minX) / levelStep;
                 float ratioZ = (position.z - minY) / levelStep;
@@ -350,8 +427,8 @@ namespace Swell
                 }
                 else
                 {
-                    xi = PositionToIndexX(xPosition, swellMesh.Levels[li]);
-                    yi = PositionToIndexY(yPosition, swellMesh.Levels[li]);
+                    xi = PositionToIndexX(xPosition, SwellMesh.Levels[li]);
+                    yi = PositionToIndexY(yPosition, SwellMesh.Levels[li]);
                 }
                 
                 if (heightMapArray != null && xi >= 0 && xi < heightMapArray[li].Length && yi >= 0 && yi < heightMapArray[li].GetLength(1))
@@ -432,7 +509,7 @@ namespace Swell
         (int, int, int) PositionToArrayIndexes(float positionX, float positionY)
         {
             SwellMesh.MeshLevel level = null;
-            SwellMesh.MeshLevel[] levels = swellMesh.Levels;
+            SwellMesh.MeshLevel[] levels = SwellMesh.Levels;
             for (int li = 0; li < levels.Length; li++)
             {
                 level = levels[li];
@@ -449,7 +526,7 @@ namespace Swell
         
         int PositionToLevelIndex(float positionX, float positionY)
         {
-            SwellMesh.MeshLevel[] levels = swellMesh.Levels;
+            SwellMesh.MeshLevel[] levels = SwellMesh.Levels;
             for (int li = 0; li < levels.Length; li++)
             {
                 if (levels[li].InBounds(positionX - position.x, positionY - position.z))
@@ -463,7 +540,7 @@ namespace Swell
         
         SwellMesh.MeshLevel PositionToLevel(float positionX, float positionY)
         {
-            SwellMesh.MeshLevel[] levels = swellMesh.Levels;
+            SwellMesh.MeshLevel[] levels = SwellMesh.Levels;
             for (int li = 0; li < levels.Length; li++)
             {
                 if (levels[li].InBounds(positionX - position.x, positionY - position.z))
@@ -522,7 +599,7 @@ namespace Swell
 
         int PositionToIndex(float position, float parentPosition)
         {
-            return (int) ((position + swellMesh.Offset - parentPosition) * gridDensity + .5f);
+            return (int) ((position + SwellMesh.Offset - parentPosition) * gridDensity + .5f);
         }
 
         float IndexToPositionX(int index)
@@ -537,7 +614,7 @@ namespace Swell
         
         float IndexToPosition(int index, float parentPosition)
         {
-            return (index - .5f) / gridDensity - swellMesh.Offset + parentPosition;
+            return (index - .5f) / gridDensity - SwellMesh.Offset + parentPosition;
         }
         
         int PositionToGrid(float position, float offset)
@@ -565,21 +642,7 @@ namespace Swell
 
         void UpdateHeightMap()
         {
-            if (lockAlbedoPosition)
-            {
-                if (swellMesh.Material.shader.name == "Standard")
-                {
-                    Vector2 offset = new Vector2(
-                        swellMesh.Renderer.transform.position.x - meshAlbedoPosition?.position.x ?? 0,
-                        swellMesh.Renderer.transform.position.z - meshAlbedoPosition?.position.z ?? 0
-                    );
-
-                    offset /= swellMesh.Size;
-                    swellMesh.Material.mainTextureOffset = offset;
-                }
-            }
-            
-            foreach (Vector3 point in swellMesh.Mesh.vertices)
+            foreach (Vector3 point in SwellMesh.Mesh.vertices)
             {
                 // Vector3 transformedPoint = swellMesh.transform.TransformPoint(point); // This was causing out of bounds index error on mesh movement
                 Vector3 transformedPoint = point + position;
@@ -594,12 +657,12 @@ namespace Swell
             // Vector3 startPosition = meshFilters[0].mesh.vertices[0];
             // Vector3 positionChange = startPosition - transform.TransformPoint(startPosition);
             
-            Mesh mesh = swellMesh.Mesh;
+            Mesh mesh = SwellMesh.Mesh;
             Vector3[] vertices = mesh.vertices;
             
             for (int i = 0; i < vertices.Length; ++i)
             {
-                Vector3 v = swellMesh.transform.TransformPoint(vertices[i]);
+                Vector3 v = SwellMesh.transform.TransformPoint(vertices[i]);
                 float waveHeight = GetHeight(v.x, v.z, true);
 
                 vertices[i] = new Vector3(
@@ -610,84 +673,17 @@ namespace Swell
             }
 
             mesh.vertices = vertices;
-
-            UpdateMeshLowPoly();
+            
+            mesh.RecalculateNormals();
         }
 
-        void UpdateMeshLowPoly(bool force = false)
-        {
-            if (calculateNormals)
-            {
-                if (Time.time - lastCalculateNormalsTime > calculateNormalsFrequency || force)
-                {
-                    lastCalculateNormalsTime = Time.time;
-
-                    if (lowPolyNormals)
-                    {
-                        Mesh meshLowPoly = swellMesh.Mesh;
-
-                        if (meshLowPoly.vertices.Length != meshLowPoly.triangles.Length)
-                        {
-                            int indexCount = meshLowPoly.triangles.Length;
-                            int maxVertCount = 65535; //https://docs.unity3d.com/ScriptReference/Mesh-indexFormat.html
-                            if (indexCount > maxVertCount)
-                            {
-                                Debug.LogWarning("Generating low poly normals require that many more vectors are added to our your SwellMesh. Unity has a limit of 65,000" +
-                                                 "vectors per mesh and this mesh has exceeded that limit. To create a larger low poly water you'll have to create multiple SwellWaters." +
-                                                 "https://docs.unity3d.com/ScriptReference/Mesh.SetIndexBufferParams.html");
-                            }
-
-                            Vector3[] verts1 = meshLowPoly.vertices;
-                            Vector2[] uv1 = meshLowPoly.uv;
-                            int[] tris1 = meshLowPoly.triangles;
-                            Vector4[] tang1 = meshLowPoly.tangents;
-                            Vector3[] normal1 = meshLowPoly.normals;
-
-                            int newLength = tris1.Length; //Every tri needs dedicated verts not shared with any other tri
-
-                            Vector3[] verts2 = new Vector3[newLength];
-                            Vector2[] uv2 = new Vector2[newLength];
-                            int[] tris2 = new int[newLength];
-                            Vector4[] tang2 = new Vector4[newLength];
-                            Vector3[] normal2 = new Vector3[newLength];
-
-                            for (int newIndex = 0; newIndex < newLength; newIndex++)
-                            {
-                                int oldIndex = tris1[newIndex];
-                                tris2[newIndex] = newIndex;
-                                verts2[newIndex] = verts1[oldIndex];
-                                uv2[newIndex] = uv1[oldIndex];
-                                tang2[newIndex] = tang1[oldIndex];
-                                normal2[newIndex] = normal1[oldIndex];
-                            }
-
-                            meshLowPoly.vertices = verts2;
-                            meshLowPoly.uv = uv2;
-                            meshLowPoly.tangents = tang2;
-                            meshLowPoly.normals = normal2;
-                            meshLowPoly.triangles = tris2;
-                        }
-                    }
-                }
-            }
-        }
-        
-        void UpdateMeshBoundsAndNormals()
-        {
-            swellMesh.Mesh.RecalculateBounds();
-            if (calculateNormals)
-            {
-                swellMesh.Mesh.RecalculateNormals();
-            }
-        }
-
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
             if (!Application.isPlaying)
             {
-                if (!customSwellMesh)
+                if (!UseCustomSwellMesh)
                 {
-                    float fullSize = meshSize;
+                    float fullSize = MeshSize;
                     Gizmos.color = new Color(.6f, .6f, .8f);
                     Gizmos.DrawWireCube(transform.position, new Vector3(fullSize, 0, fullSize));
                 }

@@ -24,55 +24,54 @@ namespace Swell
             RANDOM = 2, //perlin noise
             CUSTOM = 6
         }
-
-        [Separator("Basic Settings")] 
-        [SerializeField] private bool waveEnabled = true; //!< TODO
-        [SerializeField] private Type waveType = Type.ROUNDED; //!< TODO
-        [SerializeField, ConditionalField(nameof(waveType), false, Type.CUSTOM)] private AnimationCurve customWave = new AnimationCurve(new Keyframe[]
-        {
+        
+        [field: Separator("Basic Settings")]
+        [field: SerializeField] public bool WaveEnabled { get; set; } = true; //!< Whether the wave is enabled or not. We use this instead of "Component.enabled" because when disabled we interpolate the wave height back to 0, if interpolation is enabled.
+        [field: SerializeField] public Type WaveType { get; set; } = Type.ROUNDED; //!< The type of wave curve algorithm
+        [field: SerializeField, ConditionalField(nameof(WaveType), false, Type.CUSTOM)] public AnimationCurve CustomWave { get; set; } = new(
             new Keyframe(0, 0, 0, 0, 0, 0),
             new Keyframe(.25f, -1, 0, 0, .5f, .5f),
             new Keyframe(.5f, 0, 0, 0, 0, 0),
             new Keyframe(.75f, 1, 0, 0, .5f, .5f),
-            new Keyframe(1, 0, 0, 0, 0, 0),
-        }); //!< TODO
-        [SerializeField] private float waveHeight = 1; //!< TODO
-        [SerializeField] private Vector2 waveScale = Vector2.one; //!< TODO
-        [SerializeField] private Vector2 waveOffset = Vector2.zero; //!< TODO
-        [SerializeField] private Vector2 waveSpeed = Vector2.one * .1f; //!< TODO
-        [SerializeField, Range(0, 360)] private float waveRotation = 0; //!< TODO
-
-        [Separator("Spread")]
-        [OverrideLabel("")]
-        [SerializeField] private bool spread = false; //!< TODO
-        [FormerlySerializedAs("spread")] [SerializeField, ConditionalField(nameof(spread))] private float spreadRadius = 10; //!< TODO
-        [SerializeField, ConditionalField(nameof(spread))] private AnimationCurve spreadCurve = new AnimationCurve(new Keyframe[]
-        {
+            new Keyframe(1, 0, 0, 0, 0, 0)
+        ); //!< If the WaveType is set to CUSTOM, this this AnimationCurve is used to set the curvature of the wave. 
+        [field: SerializeField] public float WaveHeight { get; set; } = 1; //!< The height of the wave from origin to to peak. The lenght from valley to peak is double this for some wave types
+        [SerializeField] private Vector2 waveScale = Vector2.one; 
+        public Vector2 WaveScale { get => waveScale; set => waveScale = value; } //!< The phase of the wave. A larger number means closer peaks.
+        [SerializeField] private Vector2 waveOffset = Vector2.zero;
+        public Vector2 WaveOffset { get => waveOffset; set => waveOffset = value; } //!< An offset to the time component of the wave.
+        [SerializeField] private Vector2 waveSpeed = Vector2.one * .1f;
+        public Vector2 WaveSpeed { get => waveSpeed; set => waveSpeed = value; } //!< A multiplier to the rate of change in the offset of the wave.  
+        [field: SerializeField, Range(0, 360)] public float WaveRotation { get; set; } = 0; //!< Degrees offset of the rotation of the wave. This can be expensive! 
+        
+        [field: Separator("Spread")] 
+        [field: OverrideLabel(""), SerializeField] private bool spread = false;
+        public bool Spread { get => spread; set => spread = value; } //!< When true a spread multiplier is calculated for each point adjusting the range of the wave.  
+        [field: SerializeField, ConditionalField(nameof(spread))] public float SpreadRadius { get; set; } = 10; //!< The area of affect of the wave.
+        [field: SerializeField, ConditionalField(nameof(spread))] public AnimationCurve SpreadCurve { get; set; } = new (
             new Keyframe(0, 1, 0, 0, .5f, .5f),
-            new Keyframe(1, 0, 0, 0, .5f, .5f),
-        }); //!< TODO
+            new Keyframe(1, 0, 0, 0, .5f, .5f)
+        ); //!< The rate at which the spread is adjusted.
 
         [Separator("Interpolate")]
-        [OverrideLabel("")]
-        [SerializeField] private bool interpolate = true; //!< TODO
-        [SerializeField, ConditionalField(nameof(interpolate))] private float interpolationTime = 10; //!< TODO
-        [SerializeField, ConditionalField(nameof(interpolate))] private AnimationCurve interpolationCurve = new AnimationCurve(new Keyframe[]
-        {
+        [OverrideLabel(""), SerializeField] private bool interpolate = true;
+        public bool Interpolate { get => interpolate; set => interpolate = value; } //!< When true the waves height is interpolated on Start() and when WaveEnabled is changed. 
+        [field: SerializeField, ConditionalField(nameof(interpolate))] public float InterpolationTime { get; set; } = 10; //!< The time in seconds it takes to interpolate to full height.
+        [field: SerializeField, ConditionalField(nameof(interpolate))] public AnimationCurve InterpolationCurve { get; set; } = new(
             new Keyframe(0, 0, 0, 0, .5f, .5f),
-            new Keyframe(1, 1, 0, 0, .5f, .5f),
-        }); //!< TODO
- 
+            new Keyframe(1, 1, 0, 0, .5f, .5f)
+        ); //!< The rate at which interpolation is applied.
+
         [Separator("Fluctuate")]
-        [OverrideLabel("")] //!< TODO
-        [SerializeField] private bool fluctuate = false; //!< TODO
-        [SerializeField, ConditionalField(nameof(fluctuate))] private float fluctuatePeriodTime = 10; //!< TODO
-        [SerializeField, ConditionalField(nameof(fluctuate)), Range(0, 1)] private float fluctuateOffset = 0; //!< TODO
-        [SerializeField, ConditionalField(nameof(fluctuate))] private AnimationCurve fluctuateCurve = new AnimationCurve(new Keyframe[]
-        {
+        [OverrideLabel(""), SerializeField] private bool fluctuate = false;
+        public bool Fluctuate { get => fluctuate; set => fluctuate = value; } //!< When true the waves's height fluctuates between WaveHeight and -WaveHeight.
+        [field: SerializeField, ConditionalField(nameof(fluctuate))] public float FluctuatePeriodTime { get; set; } = 10; //!< The time in seconds it takes do one fluctuate loop.
+        [field: SerializeField, ConditionalField(nameof(fluctuate)), Range(0, 1)] public float FluctuateOffset { get; set; } = 0; //!< An offset to the time component of fluctuate.
+        [field: SerializeField, ConditionalField(nameof(fluctuate))] public AnimationCurve FluctuateCurve { get; set; } = new (
             new Keyframe(0, -1, 0, 0, .5f, .5f),
             new Keyframe(.5f, 1, 0, 0, .5f, .5f),
             new Keyframe(1, -1, 0, 0, .5f, .5f)
-        }); //!< TODO
+        ); //!< The rate at which the height fluctuates.
 
         private float adjustedWaveHeight;
         private bool previousWaveEnabled;
@@ -91,19 +90,19 @@ namespace Swell
             UpdateActive();
         }
 
-        void Start()
+        private void Start()
         {
             this.Register();
 
-            if (interpolate && waveEnabled)
+            if (interpolate && WaveEnabled)
             {
                 previousInterpolate = interpolate;
-                previousWaveEnabled = waveEnabled;
+                previousWaveEnabled = WaveEnabled;
                 interpolateStartTime = startTime;
             }
         }
 
-        void Initialize()
+        private void Initialize()
         {
             if (!initialized)
             {
@@ -144,9 +143,9 @@ namespace Swell
             this.UnRegister();
         }
 
-        public void UpdateAdjustedWaveHeight()
+        private void UpdateAdjustedWaveHeight()
         {
-            float tempWaveHeight = waveEnabled || interpolate ? waveHeight : 0;
+            float tempWaveHeight = WaveEnabled || interpolate ? WaveHeight : 0;
             adjustedWaveHeight = tempWaveHeight * GetInterpolateRatio() * GetFluctuateRatio();
         }
 
@@ -156,8 +155,8 @@ namespace Swell
 
             if (fluctuate)
             {
-                fluctuateRatio = fluctuateCurve.Evaluate((time / fluctuatePeriodTime + fluctuateOffset) %
-                                                         fluctuateCurve.keys[fluctuateCurve.length - 1].time);
+                fluctuateRatio = FluctuateCurve.Evaluate((time / FluctuatePeriodTime + FluctuateOffset) %
+                                                         FluctuateCurve.keys[FluctuateCurve.length - 1].time);
             }
             else
             {
@@ -177,25 +176,25 @@ namespace Swell
                 if (interpolate)
                 {
                     interpolateStartTime = startTime;
-                    if (waveHeight != 0)
+                    if (WaveHeight != 0)
                     {
-                        float currentHeightRatio = adjustedWaveHeight / waveHeight;
-                        currentHeightRatio = waveEnabled ? currentHeightRatio : 1 - currentHeightRatio;
-                        interpolateStartTime = startTime - interpolationTime * currentHeightRatio;
+                        float currentHeightRatio = adjustedWaveHeight / WaveHeight;
+                        currentHeightRatio = WaveEnabled ? currentHeightRatio : 1 - currentHeightRatio;
+                        interpolateStartTime = startTime - InterpolationTime * currentHeightRatio;
                     }
                 }
             }
 
-            if (waveEnabled != previousWaveEnabled)
+            if (WaveEnabled != previousWaveEnabled)
             {
-                previousWaveEnabled = waveEnabled;
+                previousWaveEnabled = WaveEnabled;
 
                 if (interpolate)
                 {
                     float timeSinceStart = time - interpolateStartTime;
-                    if (timeSinceStart < interpolationTime)
+                    if (timeSinceStart < InterpolationTime)
                     {
-                        interpolateStartTime = time - (interpolationTime - timeSinceStart);
+                        interpolateStartTime = time - (InterpolationTime - timeSinceStart);
                     }
                     else
                     {
@@ -207,61 +206,39 @@ namespace Swell
             if (interpolate)
             {
                 float timeSinceStart = time - interpolateStartTime;
-                float curveRatio = interpolationTime == 0 ? 1 : timeSinceStart / interpolationTime;
-                curveRatio = waveEnabled ? curveRatio : 1 - curveRatio;
-                interpolateRatio = interpolationCurve.Evaluate(curveRatio);
+                float curveRatio = InterpolationTime == 0 ? 1 : timeSinceStart / InterpolationTime;
+                curveRatio = WaveEnabled ? curveRatio : 1 - curveRatio;
+                interpolateRatio = InterpolationCurve.Evaluate(curveRatio);
             }
 
             return interpolateRatio;
         }
 
-        public float[] GetNormal(float x, float y)
-        {
-            float[] normal = new[] {0f, 0f};
-            if (waveType == Type.ROUNDED)
-            {
-                // TODO calculate tangent from curve instead of using the geometry.
-                //1. Create derivative function for each wave type. Example: dx/dy sin(x) = cos(x)
-                //   https://www.derivative-calculator.net/
-                //2. The derivitive gives you the slope (tangent) at each position
-                //3. Use the slope to calculate normal
-                //4. Return normal vector.
-
-                //?? Is this easier or faster than sampling more points to get slope? That method would also work for
-                //perlin where the above method does not. 
-            }
-            else if (waveType == Type.RIPPLE)
-            {
-            }
-            else if (waveType == Type.BELL)
-            {
-            }
-            else if (waveType == Type.RANDOM)
-            {
-            }
-            else if (waveType == Type.CUSTOM)
-            {
-            }
-
-            return normal;
-        }
-
-        public float GetSpread(float spreadPositionX, float spreadPositionY)
+        private float GetSpread(float spreadPositionX, float spreadPositionY)
         {
             spreadPositionX -= 1;
             spreadPositionY -= 1;
             
-            float xSpradRatio = (spreadPositionX * spreadPositionX) / (spreadRadius * spreadRadius);
-            float ySpradRatio = (spreadPositionY * spreadPositionY) / (spreadRadius * spreadRadius);
+            float xSpradRatio = (spreadPositionX * spreadPositionX) / (SpreadRadius * SpreadRadius);
+            float ySpradRatio = (spreadPositionY * spreadPositionY) / (SpreadRadius * SpreadRadius);
             xSpradRatio = xSpradRatio > 1 ? 1 : xSpradRatio;
             ySpradRatio = ySpradRatio > 1 ? 1 : ySpradRatio;
             
             float curveTime = 1 - (1 - xSpradRatio) * (1 - ySpradRatio);
-            return spreadCurve.Evaluate(curveTime);
+            return SpreadCurve.Evaluate(curveTime);
         }
-
-        // TODO: Possible optimization: If for each wave we figured out the phase we can calculate the height only across the
-        // phase once then use mod to lookup the height on repeated patterns. Still would have to calculate spread.  
+          
+        /**
+         * @brief Returns the height of this wave at the given position. 
+         * 
+         * Optionally allows ignoring of interpolation.
+         * 
+         * @param x The x position to be used in our height check
+         * @param y The x position to be used in our height check
+         * @param ignoreInterpolation Optional param that when set to true will return the true height ignoring time passed and interpolation. 
+         * 
+         * TODO: Possible optimization: If for each wave we figured out the phase we can calculate the height only across the phase once then use mod to lookup the height on repeated patterns. Still would have to calculate spread.
+         */
         public float GetHeight(float x, float y, bool ignoreInterpolation = false)
         {
             if (!activeAndEnabled)
@@ -280,11 +257,11 @@ namespace Swell
                 spreadMultiplier = GetSpread(spreadPositionX, spreadPositionY);
             }
             
-            if (waveRotation != 0)
+            if (WaveRotation != 0)
             {
                 // TODO: Should consider rotating grids in bulk earlier with unit quaternion
                 // https://stackoverflow.com/questions/62974296/rotating-multiple-points-around-axis-using-quaternion
-                Vector3 rotatedPosition = Quaternion.AngleAxis(-waveRotation, Vector3.up) *
+                Vector3 rotatedPosition = Quaternion.AngleAxis(-WaveRotation, Vector3.up) *
                                           new Vector3(position.x - x, 0, position.z - y);
                 x = rotatedPosition.x + position.x;
                 y = rotatedPosition.z + position.z;
@@ -293,7 +270,7 @@ namespace Swell
             float height = 0;
             if (spreadMultiplier > 0)
             {
-                if (waveType == Type.ROUNDED)
+                if (WaveType == Type.ROUNDED)
                 {
                     //https://www.wolframalpha.com/input/?i=sin%28x%29%2C+x%3D-5+to+5+y%3D-5+to+5
 
@@ -305,7 +282,7 @@ namespace Swell
                     height = Mathf.Sin((x * waveScale.x / 10 + adjustedOffset.x) * Mathf.PI + 1) *
                              Mathf.Sin((y * waveScale.y / 10 + adjustedOffset.y) * Mathf.PI + 1);
                 }
-                else if (waveType == Type.POINTED)
+                else if (WaveType == Type.POINTED)
                 {
                     adjustedOffset = new Vector2(
                         waveOffset.x + waveSpeed.x * time,
@@ -325,7 +302,7 @@ namespace Swell
                                        Mathf.PI)
                         ) / maxHeight - 1);
                 }
-                else if (waveType == Type.RIPPLE)
+                else if (WaveType == Type.RIPPLE)
                 {
                     //https://www.wolframalpha.com/input/?i=sin%283+*+%28+sqrt%28x*x+%2B+y*y%29+%2F+10+%29+*+pi*2+%2B+1%29%2C+x%3D-5+to+5+y%3D-5+to5
 
@@ -347,7 +324,7 @@ namespace Swell
                     height = Mathf.Sin(Mathf.Sqrt(delta.x * delta.x + delta.y * delta.y) / 10 * Mathf.PI * 2 +
                                        adjustedOffset.x);
                 }
-                else if (waveType == Type.BELL)
+                else if (WaveType == Type.BELL)
                 {
                     waveSpeed = Vector2.zero;
 
@@ -364,7 +341,7 @@ namespace Swell
                         -delta.x * delta.x / (2 * distance * distance)
                         - delta.y * delta.y / (2 * distance * distance));
                 }
-                else if (waveType == Type.RANDOM)
+                else if (WaveType == Type.RANDOM)
                 {
                     Vector2 offset = time * waveSpeed + waveOffset;
                     //Noise reflects at 0 so we offset as much as possible. 
@@ -378,7 +355,7 @@ namespace Swell
                         delta.y
                     ) - 1;
                 }
-                else if (waveType == Type.CUSTOM)
+                else if (WaveType == Type.CUSTOM)
                 {
                     adjustedOffset.x = waveOffset.x + waveSpeed.x * time;
                     adjustedOffset.y = waveOffset.y + waveSpeed.y * time;
@@ -399,8 +376,8 @@ namespace Swell
                     }
 
                     height =
-                        (customWave.Evaluate(adjustedPosition.x) +
-                         customWave.Evaluate(adjustedPosition.y)) / 2;
+                        (CustomWave.Evaluate(adjustedPosition.x) +
+                         CustomWave.Evaluate(adjustedPosition.y)) / 2;
                 }
             }
 
@@ -436,98 +413,6 @@ namespace Swell
 #endif
                 return Time.time;
             }
-        }
-
-        /// <summary>
-        ///   <para>Weather the wave is enabled or not. We use this instead of "Component.enabled" because when disabled
-        ///   we interpolate the wave height back to 0, if interpolation is enabled.</para>
-        /// </summary>
-        public bool WaveEnabled
-        {
-            get => waveEnabled;
-            set => waveEnabled = value;
-        }
-
-        /// <summary>
-        ///   <para>The type of wave curve algorithm.</para>
-        /// </summary>
-        public Type WaveType
-        {
-            get => waveType;
-            set => waveType = value;
-        }
-
-        /// <summary>
-        ///   <para>The height of the wave from origin to to peak. The lenght from valley to peak is double this for some
-        ///   wave types.</para>
-        /// </summary>
-        public float WaveHeight
-        {
-            get => waveHeight;
-            set => waveHeight = value;
-        }
-
-        /// <summary>
-        ///   <para></para>
-        /// </summary>
-        public Vector2 WaveScale
-        {
-            get => waveScale;
-            set => waveScale = value;
-        }
-
-        /// <summary>
-        ///   <para></para>
-        /// </summary>
-        public Vector2 WaveOffset
-        {
-            get => waveOffset;
-            set => waveOffset = value;
-        }
-
-        /// <summary>
-        ///   <para></para>
-        /// </summary>
-        public Vector2 WaveSpeed
-        {
-            get => waveSpeed;
-            set => waveSpeed = value;
-        }
-
-        /// <summary>
-        ///   <para></para>
-        /// </summary>
-        public bool Interpolate
-        {
-            get => interpolate;
-            set => interpolate = value;
-        }
-
-        /// <summary>
-        ///   <para></para>
-        /// </summary>
-        public bool Fluctuate
-        {
-            get => fluctuate;
-            set => fluctuate = value;
-        }
-
-        /// <summary>
-        ///   <para></para>
-        /// </summary>
-        public float FluctuatePeriodTime
-        {
-            get => fluctuatePeriodTime;
-            set => fluctuatePeriodTime = value;
-        }
-
-        /// <summary>
-        ///   <para></para>
-        /// </summary>
-        public float FluctuateOffset
-        {
-            get => fluctuateOffset;
-            set => fluctuateOffset = value;
         }
     }
 }

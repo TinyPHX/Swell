@@ -4,7 +4,7 @@
 [![GitHub](https://img.shields.io/github/license/jothepro/doxygen-awesome-css)](https://github.com/jothepro/doxygen-awesome-css/blob/main/LICENSE)
 ![GitHub Repo stars](https://img.shields.io/github/stars/jothepro/doxygen-awesome-css)
 
-![](docs/images/banner.png)
+![](https://imgur.com/htcJB5A.png)
 
 ## Motivation
 
@@ -40,7 +40,7 @@ There are 4 main components that hold %Swell together:
 
 %Swell water is a dynamically sizeable water surface that pairs with a material  
 
-![](docs/images/component_swell_water.png)
+![](https://imgur.com/cLlb6vx.png)
 
 ![](docs/images/swell_mesh_icon_22.png) **SwellMesh**
 
@@ -48,19 +48,19 @@ SwellMesh is completely managed by SwellWater but can exists on it's own as an i
 component. It's main feature is that you can create a large water mesh with a more granular 
 grid at the cent 
 
-![](docs/images/component_swell_mesh.png)
+![](https://imgur.com/HecvMXT.png)
 
 ![](docs/images/swell_wave_icon_22.png) **SwellWave**
 
 SwellWave lets you add any of several types of waves. They are all real time and fully customizable. 
 
-![](docs/images/component_swell_wave.png)
+![](https://imgur.com/7x7ehMg.png)
 
 ![](docs/images/swell_floater_icon_22.png) **SwellFloater**
 
 Floaters can be attached to any regular Unity RigidBody3D to make it float!
 
-![](docs/images/component_swell_floater.png)
+![](https://imgur.com/kyqzE4U.png)
 
 [//]: # (###Scripting Interface)
 
