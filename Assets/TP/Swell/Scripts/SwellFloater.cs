@@ -26,6 +26,7 @@ namespace Swell
         [OverrideLabel(""), SerializeField] private bool showAdvanced; //!< Show advanced settings in inspector.
         [field: SerializeField, ConditionalField(nameof(showAdvanced))] public Method DepthMethod { get; set; } = Method.ACCURATE; //!< Method to use to calculate depth. One is more accurate and the second is faster.
         [field: SerializeField, ConditionalField(nameof(showAdvanced))] public Method FloatMethod { get; set; } = Method.ACCURATE; //!< Method to use to calculate float physics. One is more accurate and the second is faster.
+        [field: SerializeField, ConditionalField(nameof(showAdvanced))] public float DepthAdjust { get; set; } = 0; //!< Added to current depth. Useful for adjusting positioning on floater relatively to depth. 
         [field: SerializeField, ConditionalField(nameof(showAdvanced))] public bool Stabilize { get; set; } = false; //!< Experimental feature for rigidbodies with multiple floaters. When enabled this makes adjustments that consider all attached floaters.
 
         [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private new Rigidbody rigidbody;
@@ -165,11 +166,11 @@ namespace Swell
             {
                 if (DepthMethod == Method.FAST)
                 {
-                    Depth = Position.y - Water.GetWaterHeightOptimized(Position) - Water.Position.y;
+                    Depth = Position.y - Water.GetWaterHeightOptimized(Position) - Water.Position.y + DepthAdjust;
                 }
                 else
                 {
-                    Depth = Position.y - Water.GetWaterHeight(Position) - Water.Position.y;
+                    Depth = Position.y - Water.GetWaterHeight(Position) - Water.Position.y + DepthAdjust;
                 }
 
                 if (float.IsNaN(Depth))
@@ -202,10 +203,19 @@ namespace Swell
 
         private void OnDrawGizmosSelected()
         {
+            Vector3 gizmoPosition  = transform.position + transform.rotation * Vector3.Scale(Center, transform.lossyScale);
+            Vector3 depthAdjust = Vector3.up * DepthAdjust;
+            Vector3 gizmoPositionAdjusted  = gizmoPosition + depthAdjust;
+
+            if (DepthAdjust != 0)
+            {
+                Gizmos.color = Color.white;
+                DrawUnlitSphere(gizmoPosition, .03f);
+                Gizmos.DrawWireSphere(gizmoPosition, Mathf.Abs(DepthAdjust));
+            }
+
             Gizmos.color = Color.magenta;
-            Vector3 gizmoPosition =  gizmoPosition = transform.position + transform.rotation * Vector3.Scale(Center, transform.lossyScale);
-            
-            DrawUnlitSphere(gizmoPosition, .05f);
+            DrawUnlitSphere(gizmoPositionAdjusted, .05f);
             Vector3 force = Vector3.one;
             if (FloatMethod == Method.ACCURATE)
             {
@@ -222,8 +232,8 @@ namespace Swell
                 
                 force = Vector3.up * (Buoyancy / mass);                
             }
-            Gizmos.DrawRay(gizmoPosition, force);
-            DrawUnlitSphere(gizmoPosition + force, .05f);
+            Gizmos.DrawRay(gizmoPositionAdjusted, force);
+            DrawUnlitSphere(gizmoPositionAdjusted + force, .05f);
         }
 
         void DrawUnlitSphere(Vector3 origin, float radius)

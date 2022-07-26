@@ -10,7 +10,8 @@ using UnityEditor;
 public class SmoothFollow : MonoBehaviour
 {
     [SerializeField] Transform target;
-    [SerializeField] float smoothTime = 0.1f;
+    [SerializeField] float moveSpeed = 0.02f;
+    [SerializeField] float rotateSpeed = 0.06f;
     
     private Vector3 velocity = Vector3.zero;
     
@@ -26,9 +27,9 @@ public class SmoothFollow : MonoBehaviour
         {
             float cameraDistance = Vector3.Distance(transform.position, target.transform.position);
             transform.position =
-                Vector3.MoveTowards(transform.position, target.transform.position, cameraDistance * smoothTime);
+                Vector3.MoveTowards(transform.position, target.transform.position, cameraDistance * moveSpeed);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, target.transform.rotation,
-                cameraDistance * smoothTime * 10);
+                rotateSpeed * 10);
         }
     }
 

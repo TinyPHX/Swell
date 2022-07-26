@@ -2,12 +2,14 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using MyBox;
-using NWH.DWP2.DefaultWater;
 using TP.ExtensionMethods;
 using UnityEngine;
 using UnityEngine.Rendering;
 using Random = System.Random;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Swell
 {
@@ -23,7 +25,9 @@ namespace Swell
         [field: SerializeField] public Material BottomMaterial { get; set; } //!< The material applied to the bottom side of the mesh.
         [field: SerializeField, Min(0)] public int MeshGridSize { get; set; } = 1; //!< The distance between vertices in your mesh grid.  
         [field: SerializeField, Min(0)] public int MeshSize { get; set; } = 40; //!< The full width of your mesh. If this number is not divisible by MeshGridSize then the actual size will be slightly smaller. 
+        [field: Tooltip("Setting this to 0 stops it from modifying the material at all.")]
         [field: SerializeField, OverrideLabel("Texture Size (Main)"), Min(0)] public float MainTextureSize { get; set; } = 0; //!< A constant size to scale the main texture by. This only applies to the Unity standard shader. 
+        [field: Tooltip("Setting this to 0 stops it from modifying the material at all.")]
         [field: SerializeField, OverrideLabel("Texture Size (Secondary)"), Min(0)] public float SecondaryTextureSize { get; set; } = 0; //!< A constant size to scale the secondary texture by. This only applies to the Unity standard shader. 
         [field: SerializeField] public ShadowCastingMode CastingMode { get; set; } = ShadowCastingMode.Off; //!< Whether or not this mesh casts shadows.
         [field: SerializeField] public bool ReceiveShadows { get; set; } = false; //!< Whether or not this mesh receives shadows.
@@ -45,9 +49,10 @@ namespace Swell
         [Separator("Optimize")] 
         [OverrideLabel(""), SerializeField] private bool optimize;
         public bool Optimize { get => optimize; set => optimize = value; } //!< When true, water fps throttling is applied to keep SwellWater from hogging resources. 
-        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(AutoThrottle))] public float WaterFps { get; private set; } = 60; //!< The number of time the water is updated per frame.  
-        [field: SerializeField, ConditionalField(nameof(optimize))] public bool AutoThrottle { get; set; } = true; //!< Then true we'll automatically throttle when the FPS falls below 60.
-        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(AutoThrottle), true)] public float ThrottleFps { get; set; } = 60; //!< When the game FPS falls below this number start reducing the WaterFps. 
+        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(autoThrottle))] public float WaterFps { get; private set; } = 60; //!< The number of time the water is updated per frame.
+        [SerializeField, ConditionalField(nameof(optimize))] private bool autoThrottle = true;
+        public bool AutoThrottle { get => autoThrottle; set => autoThrottle = value; } //!< Then true we'll automatically throttle when the FPS falls below 60.
+        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(autoThrottle), true)] public float ThrottleFps { get; set; } = 60; //!< When the game FPS falls below this number start reducing the WaterFps. 
 
         private Dictionary<long, float> heightMapDict;
         private bool useHeightMapArray = true; //This was created for debugging and is almost always faster to be set to true.
@@ -118,7 +123,7 @@ namespace Swell
                 }
             }
             
-            Initialize(true);
+            Initialize(!Application.isPlaying);
             Update();
 
             foreach (SwellMesh childSwellMesh in GetComponentsInChildren<SwellMesh>())
@@ -159,18 +164,37 @@ namespace Swell
             if (ShouldUpdate())
             {
                 lastUpdate = Time.time;
+                Vector3 currentPosition = transform.position;
+                bool positionChanged = false;
                 if (usePositionAnchor && PositionAnchor)
                 {
                     Vector3 anchor = PositionAnchor.transform.position;
+                    Vector3 delta = anchor - currentPosition;
 
-                    transform.position = new Vector3(
-                        anchor.x - anchor.x % PositionStep.x,
-                        transform.position.y,
-                        anchor.z - anchor.z % PositionStep.y
-                    );
+                    if (Mathf.Abs(delta.x) > PositionStep.x)
+                    {
+                        currentPosition.x += PositionStep.x * (int)(delta.x / PositionStep.x);
+                        positionChanged = true;
+                    }
+                    
+                    if (Mathf.Abs(delta.z) > PositionStep.y)
+                    {
+                        currentPosition.z += PositionStep.y * (int)(delta.z / PositionStep.y);
+                        positionChanged = true;
+                    }
                 }
 
-                position = transform.position;
+                if (positionChanged)
+                {
+                    transform.position = currentPosition;
+                    position = currentPosition;
+                    
+                    foreach (Material material in SwellMesh.Materials)
+                    {
+                        UpdateTexture(material);
+                    }
+                }
+
                 Initialize();
                 UpdateWater();
             }
@@ -198,39 +222,20 @@ namespace Swell
                 SwellMesh.transform.parent = transform;
                 SwellMesh.transform.localPosition = Vector3.zero;
                 SwellMesh.Material = new Material(Shader.Find("Standard"));
-
-                setDefaults = true;
             }
+
+            UpdateMaterials();
 
             SwellMesh.Water = this;
 
-            // if (setDefaults || !UseCustomSwellMesh)
-            {
-                if (MeshSize > 0) SwellMesh.MaxSize = MeshSize;
-                if (MeshGridSize > 0) SwellMesh.StartGridSize = MeshGridSize;
-                SwellMesh.Renderer.shadowCastingMode = CastingMode;
-                SwellMesh.Renderer.receiveShadows = ReceiveShadows;
-                SwellMesh.LowPolyNormals = LowPolyNormals;
-                SwellMesh.Top = Material != null;
-                SwellMesh.Bottom = BottomMaterial != null;
+            if (MeshSize > 0) SwellMesh.MaxSize = MeshSize;
+            if (MeshGridSize > 0) SwellMesh.StartGridSize = MeshGridSize;
+            SwellMesh.Renderer.shadowCastingMode = CastingMode;
+            SwellMesh.Renderer.receiveShadows = ReceiveShadows;
+            SwellMesh.LowPolyNormals = LowPolyNormals;
+            SwellMesh.Top = Material != null;
+            SwellMesh.Bottom = BottomMaterial != null;
 
-                List<Material> materials = new List<Material>();
-                if (Material)
-                {
-                    UpdateTexture(Material);
-                    materials.Add(Material);
-                }
-
-                if (BottomMaterial)
-                {
-                    UpdateTexture(BottomMaterial);
-                    materials.Add(BottomMaterial);
-                }
-
-                SwellMesh.Materials = materials.ToArray();
-
-                // SwellMesh.Materials = new[] { Material, BottomMaterial };
-            }
             
             if (!useCustomSwellMesh)
             {
@@ -238,6 +243,22 @@ namespace Swell
             }
 
             SwellMesh.GenerateMesh();
+        }
+
+        private void UpdateMaterials()
+        {
+            List<Material> materials = new List<Material>();
+            if (Material)
+            {
+                UpdateTexture(Material);
+                materials.Add(Material);
+            }
+            if (BottomMaterial)
+            {
+                UpdateTexture(BottomMaterial);
+                materials.Add(BottomMaterial);
+            }
+            SwellMesh.Materials = materials.ToArray();
         }
 
         private void UpdateTexture(Material material)
@@ -257,7 +278,9 @@ namespace Swell
                         newOffset += new Vector2(
                             SwellMesh.Renderer.transform.position.x - MeshAlbedoPosition?.position.x ?? 0,
                             SwellMesh.Renderer.transform.position.z - MeshAlbedoPosition?.position.z ?? 0
-                        ) / newScale / 2;
+                        ) / 2;
+                        newOffset /= MainTextureSize / 2;
+                        newOffset += Vector2.one * (MainTextureSize - SwellMesh.Size) / MainTextureSize / 2;
                     }
                     
                     material.mainTextureOffset = newOffset;
@@ -369,7 +392,7 @@ namespace Swell
                 float minY = gridY;
                 float maxY = gridY + levelStep;
 
-                //Get corners. TODO: We probably interpolate between 3 vectors instead of 4.
+                //Get corners.
                 float cc = GetHeight(maxX, maxY);
                 float ff = GetHeight(minX, minY);
                 float cf = GetHeight(maxX, minY);
@@ -675,6 +698,7 @@ namespace Swell
             mesh.vertices = vertices;
             
             mesh.RecalculateNormals();
+            mesh.RecalculateTangents();
         }
 
         void OnDrawGizmosSelected()

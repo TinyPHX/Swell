@@ -9,6 +9,8 @@ var class_swell_1_1_swell_mesh =
     [ "Bottom", "class_swell_1_1_swell_mesh.html#af34806138a86771cce9de8d847ffe319", null ],
     [ "LowPolyNormals", "class_swell_1_1_swell_mesh.html#a01a90e9e47bc4308ebecb6e361771dfc", null ],
     [ "Mesh", "class_swell_1_1_swell_mesh.html#a12d8c7e307cf93c3a77fa9d17f2941f2", null ],
+    [ "Renderer", "class_swell_1_1_swell_mesh.html#a9a107de44399d22d480b00749057bac6", null ],
+    [ "MeshFilter", "class_swell_1_1_swell_mesh.html#a7756132a2a9b3baf244ef5d0037524e4", null ],
     [ "Materials", "class_swell_1_1_swell_mesh.html#aecbfad73707af61127d73fdf19975d7f", null ],
     [ "Material", "class_swell_1_1_swell_mesh.html#aad57f09c4a032c800e2d8a0c85ac21cf", null ],
     [ "Offset", "class_swell_1_1_swell_mesh.html#a1f882028b72a9275c38654e463083eb8", null ],
