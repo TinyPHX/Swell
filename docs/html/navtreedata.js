@@ -30,6 +30,7 @@ var NAVTREE =
     [ "Quick Start Guide", "index.html#autotoc_md3", null ],
     [ "Components", "index.html#autotoc_md4", null ],
     [ "Credits", "index.html#autotoc_md5", null ],
+    [ "Credit", "md__s___workspace_unity__swell__assets__t_p__swell__demo__scenes__demo__assets__credit.html", null ],
     [ "Unity Demo Scenes", "md_demos.html", [
       [ "SwellFloater", "md_demos.html#autotoc_md11", [
         [ "Algorithm", "md_demos.html#autotoc_md12", null ],

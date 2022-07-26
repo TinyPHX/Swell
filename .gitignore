@@ -6,6 +6,7 @@
 /[Ll]ogs/
 /UserSettings/
 [Ii]gnore*
+.[Ii]gnore*
 [Rr]esources*
 [Pp]lugins*
 /Assets/AssetStoreTools*

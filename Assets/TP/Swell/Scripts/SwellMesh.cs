@@ -58,6 +58,7 @@ namespace Swell
         private MeshVectors bottomMeshVectors = new ();
         private float maxLevelSize;
         private const int MAX_VERT_COUNT = 65535; //https://docs.unity3d.com/ScriptReference/Mesh-indexFormat.html
+        private bool meshInitialized = false;
         
         //Previous state
         private MeshLevel[] previousLevels;
@@ -345,8 +346,10 @@ namespace Swell
                 }
             }
 
-            if (valueChanged && valid)
+            if ((!meshInitialized || valueChanged) && valid)
             {
+                meshInitialized = true;
+                
                 previousStartGridSize = StartGridSize;
                 previousMaxSize = MaxSize;
                 previousLevels = levelsCopy.ToArray();
@@ -633,7 +636,7 @@ namespace Swell
         
                 return meshRenderer;
             }
-        } //Renderer being used by SwellMesh
+        } //!< Renderer being used by SwellMesh
         
         public MeshFilter MeshFilter
         {
@@ -646,7 +649,7 @@ namespace Swell
         
                 return meshFilter;
             }
-        } //MeshFilter being used by SwellMesh.
+        } //!< MeshFilter being used by SwellMesh.
 
         public Material[] Materials
         {
