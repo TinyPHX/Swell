@@ -54,7 +54,7 @@ namespace TP {
         private static List<string> supportedTags = new List<string>() {"b", "i", "color", "size"};
 
         private string previousRichText = "";
-        private string text = "";
+        private string text = "t";
         [SerializeField] private ReadmeData readmeData = new ReadmeData();
         private string lastSavedFileName = "";
 
