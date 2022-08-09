@@ -12,6 +12,7 @@ namespace TP
     {
         public string name;
         public string id;
+        public string skin;
         public string path;
         public string fileName;
         public bool redistributable;
@@ -22,10 +23,11 @@ namespace TP
         public static string FILE_TAG = "Settings_";
         public static string DEFAULT_TYPE = "json";
 
-        public ReadmeSettings(string path, string fileName = "New", bool redistributable = true, bool lite = true, int priority = 1000)
+        public ReadmeSettings(string path, string fileName = "New", bool redistributable = true, bool lite = true, int priority = 1000, string skin = "Default")
         {
             name = fileName;
             id = Guid.NewGuid().ToString();
+            this.skin = skin;
             this.path = path;
             this.fileName = fileName;
             this.redistributable = redistributable;
@@ -63,6 +65,24 @@ namespace TP
             }
 
             return loadedSettings;
+        }
+
+        public static GUISkin GetSkin(string path, string fileName)
+        {
+            GUISkin guiSkin = default;
+            
+            string file = fileName + ".guiskin";
+            string filePath = Path.Combine(path, file).Replace("\\Editor\\..", "");
+            if (File.Exists(Path.GetFullPath(filePath)))
+            {
+                guiSkin = (GUISkin)AssetDatabase.LoadAssetAtPath(filePath, typeof(GUISkin));
+            }
+            else
+            {
+                Debug.LogWarning("GetSkin file not found.");
+            }
+
+            return guiSkin;
         }
     }
 }

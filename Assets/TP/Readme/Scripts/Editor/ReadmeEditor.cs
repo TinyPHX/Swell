@@ -75,6 +75,7 @@ namespace TP
         private int labelPaddingLeft = 3;
         private int labelPaddingTop = 2;
         private float availableWidth;
+        private GUISkin skin;
         
         //Scrolling
         private bool scrollEnabled = true;
@@ -120,6 +121,7 @@ namespace TP
             readme.Initialize();
             readme.ConnectManager();
             readme.UpdateSettings(GetSettingsPath());
+            skin = ReadmeSettings.GetSkin(GetSkinsPath(), "Custom");
             
             liteEditor = readme.ActiveSettings.lite;
             UpdateGuiStyles(readme);
@@ -266,12 +268,12 @@ namespace TP
             EditorGUILayout.EndScrollView();
             ScrollAreaRect = GUILayoutUtility.GetLastRect();
             
-            if (autoSetEditorRect && TextEditor != null)
-            {
-                autoSetEditorRect = false;
-                TextEditor.position = TextAreaRect;
-                TextEditor.style = activeTextAreaStyle;
-            }
+            // if (autoSetEditorRect && TextEditor != null)
+            // {
+            //     autoSetEditorRect = false;
+            //     TextEditor.position = TextAreaRect;
+            //     TextEditor.style = activeTextAreaStyle;
+            // }
         }
 
         private void EditorGuiToolbar()
@@ -566,6 +568,15 @@ namespace TP
             return path;
         }
 
+        private string GetSkinsPath()
+        {
+            MonoScript monoScript = MonoScript.FromScriptableObject(this);
+            string path = Path.GetDirectoryName(AssetDatabase.GetAssetPath(monoScript)) ?? "";
+            path = Path.Combine(path, "..");
+            path = Path.Combine(path, "Skins");
+            return path;
+        }
+
         private void UpdateGuiStyles(Readme readmeTarget)
         {
             textAreaEmptyName = "readme_text_editor_empty_" + readme.GetInstanceID();
@@ -599,7 +610,8 @@ namespace TP
                 font = readmeTarget.font,
                 fontSize = readmeTarget.fontSize,
                 wordWrap = true,
-                padding = new RectOffset(textPadding, textPadding, textPadding, textPadding)
+                padding = new RectOffset(textPadding, textPadding, textPadding, textPadding),
+                border = new RectOffset(20, 20, 20, 20),
             };
 
             editableText = new GUIStyle(GUI.skin.textArea)
@@ -716,20 +728,15 @@ namespace TP
                     ForceTextAreaRefresh();
                 }
 
-                //Force fields values
-                if (TextEditor != null && GUI.GetNameOfFocusedControl() == activeTextAreaName)
-                {
-                    if (scrollEnabled)
-                    {
-                        TextEditor.scrollOffset = scroll;
-                    }
-
-                    TextEditor.position = TextAreaRect;
-
-                    TextEditor.text = ActiveText;
-                    
-                    // TextEditor.
-                }
+                // if (TextEditor != null && GUI.GetNameOfFocusedControl() == activeTextAreaName)
+                // {
+                //     if (scrollEnabled)
+                //     {
+                //         TextEditor.scrollOffset = scroll;
+                //     }
+                //     TextEditor.position = TextAreaRect;
+                //     TextEditor.text = ActiveText;
+                // }
                 
                 // TextEditor newTextEditor = GetTextEditor();
                 //
@@ -822,7 +829,7 @@ namespace TP
             EditorGuiTextAreaObjectFields();
         }
 
-        void ForceTextAreaRefresh(int selectIndex = -1, int cursorIndex = -1, int delay = 1)
+        void ForceTextAreaRefresh(int selectIndex = -1, int cursorIndex = -1, int delay = 3)
         {
             if (!textAreaRefreshPending)
             {
@@ -1009,7 +1016,7 @@ namespace TP
                     int readonlyOffset = 2;
                     foreach (TextAreaObjectField textAreaObjectField in TextAreaObjectFields)
                     {
-                        textAreaObjectField.Draw(TextEditor, readonlyOffset - (scroll.y * 2), ScrollAreaRect);
+                        textAreaObjectField.Draw(TextEditor, readonlyOffset - scroll.y, ScrollAreaRect);
                     }
                     EditorGUI.EndDisabledGroup();
                 }
@@ -1017,7 +1024,7 @@ namespace TP
                 {
                     foreach (TextAreaObjectField textAreaObjectField in TextAreaObjectFields)
                     {
-                        textAreaObjectField.Draw(TextEditor, -scroll.y * 2, ScrollAreaRect);
+                        textAreaObjectField.Draw(TextEditor, -scroll.y, ScrollAreaRect);
                     }
                 }
             }
