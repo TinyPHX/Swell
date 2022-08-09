@@ -60,7 +60,7 @@ namespace TP
                    this.objectRef == otherTextAreaObject.ObjectRef;
         }
 
-        public void Draw(TextEditor textEditor = null, int yOffset = 0)
+        public void Draw(TextEditor textEditor = null, float yOffset = 0, Rect bounds = default)
         {
             Rect fieldBounds = FieldRect;
             if (yOffset != 0)
@@ -73,10 +73,26 @@ namespace TP
             rectBounds.height -= 1;
 
             textBoxBackgroundColor = EditorGUIUtility.isProSkin ? Readme.darkBackgroundColor : Readme.lightBackgroundColor;
-
+            
+            //Only draw if in bounds
+            if (bounds != default)
+            {
+                fieldBounds.yMin += Mathf.Min(Mathf.Max(bounds.yMin - fieldBounds.yMin, 0), fieldBounds.height);
+                fieldBounds.yMax -= Mathf.Min(Mathf.Max(fieldBounds.yMax - bounds.yMax, 0), fieldBounds.height);
+                rectBounds.yMin += Mathf.Min(Mathf.Max(bounds.yMin - rectBounds.yMin, 0), rectBounds.height);
+                rectBounds.yMax -= Mathf.Min(Mathf.Max(rectBounds.yMax - bounds.yMax, 0), rectBounds.height);
+                if (fieldBounds.height <= 0)
+                {
+                    //Hack to hide these off screen because putting their draw in a condition statement causes a redraw we don't want. 
+                    Rect offscreen = new Rect(99999, 99999, 0, 0);
+                    fieldBounds = offscreen;
+                    rectBounds = offscreen;
+                }
+            }
+            
             EditorGUI.DrawRect(rectBounds, textBoxBackgroundColor);
             Object obj = EditorGUI.ObjectField(fieldBounds, ObjectRef, typeof(Object), true);
-            
+
             if (IdInSync && ObjectRef != obj)
             {
                 ObjectRef = obj;
