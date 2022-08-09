@@ -604,7 +604,7 @@ namespace TP
                 padding = new RectOffset(textPadding + labelPaddingLeft, textPadding, textPadding + labelPaddingTop, textPadding)
             };
 
-            editableRichText = new GUIStyle(GUI.skin.textArea)
+            editableRichText = new GUIStyle(ActiveSkin.textArea)
             {
                 richText = true,
                 font = readmeTarget.font,
@@ -614,7 +614,7 @@ namespace TP
                 border = new RectOffset(20, 20, 20, 20),
             };
 
-            editableText = new GUIStyle(GUI.skin.textArea)
+            editableText = new GUIStyle(ActiveSkin.textArea)
             {
                 richText = false,
                 wordWrap = true,
@@ -1924,6 +1924,14 @@ namespace TP
                     
                     textAreaRect = value;
                 }
+            }
+        }
+
+        private GUISkin ActiveSkin
+        {
+            get
+            {
+                return skin != null ? skin : GUI.skin;
             }
         }
 
