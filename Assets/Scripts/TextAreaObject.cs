@@ -60,17 +60,10 @@ namespace TP
                    this.objectRef == otherTextAreaObject.ObjectRef;
         }
 
-        public void Draw(TextEditor textEditor = null, float yOffset = 0, Rect bounds = default)
+        public void Draw(TextEditor textEditor = null, Vector2 offset = default, Rect bounds = default)
         {
             Rect fieldBounds = FieldRect;
-            if (yOffset != 0)
-            {
-                fieldBounds.y += yOffset;
-            }
-
-            Rect rectBounds = fieldBounds;
-            rectBounds.y += 1;
-            rectBounds.height -= 1;
+            fieldBounds.position += offset;
 
             textBoxBackgroundColor = EditorGUIUtility.isProSkin ? Readme.darkBackgroundColor : Readme.lightBackgroundColor;
             
@@ -79,18 +72,14 @@ namespace TP
             {
                 fieldBounds.yMin += Mathf.Min(Mathf.Max(bounds.yMin - fieldBounds.yMin, 0), fieldBounds.height);
                 fieldBounds.yMax -= Mathf.Min(Mathf.Max(fieldBounds.yMax - bounds.yMax, 0), fieldBounds.height);
-                rectBounds.yMin += Mathf.Min(Mathf.Max(bounds.yMin - rectBounds.yMin, 0), rectBounds.height);
-                rectBounds.yMax -= Mathf.Min(Mathf.Max(rectBounds.yMax - bounds.yMax, 0), rectBounds.height);
                 if (fieldBounds.height <= 0)
                 {
-                    //Hack to hide these off screen because putting their draw in a condition statement causes a redraw we don't want. 
                     Rect offscreen = new Rect(99999, 99999, 0, 0);
                     fieldBounds = offscreen;
-                    rectBounds = offscreen;
                 }
             }
             
-            EditorGUI.DrawRect(rectBounds, textBoxBackgroundColor);
+            EditorGUI.DrawRect(fieldBounds, textBoxBackgroundColor);
             Object obj = EditorGUI.ObjectField(fieldBounds, ObjectRef, typeof(Object), true);
 
             if (IdInSync && ObjectRef != obj)
@@ -102,7 +91,7 @@ namespace TP
 
             if (textEditor != null && IsSelected(textEditor))
             {
-                EditorGUI.DrawRect(rectBounds, selectedColor);
+                EditorGUI.DrawRect(fieldBounds, selectedColor);
             }
         }
 
