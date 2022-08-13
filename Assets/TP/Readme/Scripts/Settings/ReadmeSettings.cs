@@ -66,6 +66,15 @@ namespace TP
 
             return loadedSettings;
         }
+        
+        public static string GetPath(ScriptableObject script)
+        {
+            MonoScript monoScript = MonoScript.FromScriptableObject(script);
+            string path = Path.GetDirectoryName(AssetDatabase.GetAssetPath(monoScript)) ?? "";
+            path = Path.Combine(path, "..");
+            path = Path.Combine(path, "Settings");
+            return path;
+        }
     }
 }
 #endif

@@ -311,28 +311,28 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: "test\n\n <o=\"6352848\"></o> aaaaaa<b>aaaaaaa</b>aaaaaaaaa  <o=\"0000582\"></o>
+    richText: "test\n\n <o=\"2195604\"></o> aaaaaa<b>aaaaaaa</b>aaaaaaaaa  <o=\"1132491\"></o>
       aaaaaaaaaaaaaaaaaaaaaa\n\nThis is dumb!"
     textAreaObjectFields:
-    - name: Readme (6352848)
-      objectId: 6352848
+    - name: Readme (2195604)
+      objectId: 2195604
       objectRef: {fileID: 1111943948}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 47
-        width: 123
+        x: 30
+        y: 51
+        width: 119
         height: 15
       index: 7
       length: 17
-    - name: Swell Wave Samples (582)
-      objectId: 582
+    - name: Swell Wave Samples (1132491)
+      objectId: 1132491
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
-        x: 309
-        y: 47
-        width: 125
+        x: 30
+        y: 66
+        width: 114
         height: 15
       index: 56
       length: 17
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000
+  richTextTagMap: 000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010000000000000000000000000000000000000000000000000000000000000000
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
@@ -452,42 +452,31 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: "dtewsatestasd <o=\"6556384\"></o> \n\n\nafesfas\n\nasefgase\nf\n\n\nThis
-      is dume\n\n\n\n\n\nwdad\n <o=\"6556384\"></o> \ndwa'\n\n\n\n\n\nwda\nSICK\n\n\n\n\n\nwdad\n
-      <o=\"6556384\"></o> \n\n\ndwadadwadwadawsdasd\n\n\n\ndwadaw"
+    richText: "dtewsatestasd <o=\"1132491\"></o> \n\n\nafesfas\n\nasefgase\nf\n\n\nThis
+      is dume\n\n\n\n\n\nwdad\n <o=\"1132491\"></o> \ndwa'\n\n\n\n\n\nwda\nSICK\n\n\n\n\n\nwdad\n
+      <o=86774624\"></o> \n\n\ndwadadwadwadawsdasd\n\n\n\ndwadaw"
     textAreaObjectFields:
-    - name: Swell Wave Samples (6556384)
-      objectId: 6556384
+    - name: Swell Wave Samples (1132491)
+      objectId: 1132491
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
-        x: 109
-        y: 17
-        width: 123
+        x: 112
+        y: 21
+        width: 117
         height: 15
       index: 14
       length: 17
-    - name: Swell Wave Samples (6556384)
-      objectId: 6556384
+    - name: Swell Wave Samples (1132491)
+      objectId: 1132491
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 257
-        width: 123
+        x: 30
+        y: 261
+        width: 117
         height: 15
       index: 81
-      length: 17
-    - name: Swell Wave Samples (6556384)
-      objectId: 6556384
-      objectRef: {fileID: 792790614}
-      fieldRect:
-        serializedVersion: 2
-        x: 27
-        y: 482
-        width: 123
-        height: 15
-      index: 130
       length: 17
     objectIdPairs: []
   managerConnected: 1
@@ -545,7 +534,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -555,7 +544,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -564,7 +553,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -573,7 +562,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -582,7 +571,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -926,7 +915,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -936,7 +925,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -945,7 +934,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -954,7 +943,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -963,7 +952,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1083,17 +1072,17 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n <o=\"7295039\"></o>
+    richText: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n <o=\"5029529\"></o>
       \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     textAreaObjectFields:
-    - name: Readme (675854)
-      objectId: 7295039
+    - name: Readme (1232605)
+      objectId: 5029529
       objectRef: {fileID: 585562211}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 452
-        width: 120
+        x: 30
+        y: 456
+        width: 119
         height: 15
       index: 30
       length: 17
@@ -1159,7 +1148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101
+  richTextTagMap: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
@@ -1214,39 +1203,28 @@ MonoBehaviour:
     type: json
   readmeData:
     richText: "dwadwa\n\n\n\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||      
-      <o=\"6917628\"></o>      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\ndwa\n\n\ndwa\n
-      <o=\"5028078\"></o> \n\n\n\ntest\n\n\nt\nest\n\n\n\n\n\n\n\n\n\n\n\n <o=\"8700705\"></o> "
+      <o=\"4461989\"></o>      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\ndwa\n\n\ndwa\n
+      <o=83356038\"></o> \n\n\n\ntest\n\n\nt\nest\n\n\n\n\n\n\n\n\n\n\n\n <o=\"7355295\"></o> "
     textAreaObjectFields:
-    - name: Readme (6917628)
-      objectId: 6917628
+    - name: Readme (4461989)
+      objectId: 4461989
       objectRef: {fileID: 734215989}
       fieldRect:
         serializedVersion: 2
-        x: 429
-        y: 92
-        width: 120
+        x: 84
+        y: 126
+        width: 119
         height: 15
       index: 244
       length: 17
-    - name: Readme (5028078)
-      objectId: 5028078
-      objectRef: {fileID: 48108459}
-      fieldRect:
-        serializedVersion: 2
-        x: 27
-        y: 197
-        width: 123
-        height: 15
-      index: 485
-      length: 17
-    - name: Readme (8700705)
-      objectId: 8700705
+    - name: Readme (7355295)
+      objectId: 7355295
       objectRef: {fileID: 1258261397}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 497
-        width: 124
+        x: 30
+        y: 561
+        width: 119
         height: 15
       index: 532
       length: 17
@@ -1401,7 +1379,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &662738542
 GameObject:
@@ -1664,7 +1642,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1674,7 +1652,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -1683,7 +1661,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -1692,7 +1670,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -1701,7 +1679,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1850,7 +1828,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 35
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1008766180
 GameObject:
@@ -1924,7 +1902,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1934,7 +1912,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -1943,7 +1921,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -1952,7 +1930,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -1961,7 +1939,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1979,8 +1957,8 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 24
-        y: 45
+        x: 30
+        y: 51
         width: 118
         height: 15
       index: 3
@@ -1990,8 +1968,8 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 78
-        y: 75
+        x: 84
+        y: 81
         width: 119
         height: 15
       index: 42
@@ -2001,9 +1979,9 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 268
-        y: 75
-        width: 117
+        x: 30
+        y: 96
+        width: 114
         height: 15
       index: 83
       length: 17
@@ -2012,8 +1990,8 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 24
-        y: 90
+        x: 30
+        y: 111
         width: 119
         height: 15
       index: 115
@@ -2023,8 +2001,8 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 148
-        y: 90
+        x: 154
+        y: 111
         width: 118
         height: 15
       index: 134
@@ -2034,8 +2012,8 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 44
-        y: 120
+        x: 50
+        y: 141
         width: 122
         height: 15
       index: 161
@@ -2045,8 +2023,8 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 68
-        y: 150
+        x: 74
+        y: 171
         width: 118
         height: 15
       index: 204
@@ -2334,7 +2312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 000000000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010000000001010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  richTextTagMap: 0000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100000000010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   font: {fileID: 0}
   fontSize: 11
   iconBeingUsed: 1
@@ -2343,7 +2321,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2353,7 +2331,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -2362,7 +2340,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -2371,7 +2349,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -2380,7 +2358,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2388,20 +2366,20 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: "This is a neat tool\n\n\n <o=\"5053473\"></o> \n\nI want to pay this
+    richText: "This is a neat tool\n\n\n <o=\"9137123\"></o> \n\nI want to pay this
       dev a lot of money :D I want to pay this dev a lot of money :D I want to pay
       this dev a lot of money :D I want to pay this dev a lot of money :D  vI want
-      to pay <i><b>this</i></b> dev a lot of money :D I want to pay this dev a lot
-      of money :D \n"
+      to pay <b>this</b> dev a lot of money :D I want to pay this dev a lot of money
+      :D \n"
     textAreaObjectFields:
-    - name: Swell Mesh (5053473)
-      objectId: 5053473
+    - name: Swell Mesh (9137123)
+      objectId: 9137123
       objectRef: {fileID: 8515328486482458088}
       fieldRect:
         serializedVersion: 2
-        x: 24
-        y: 56
-        width: 110
+        x: 30
+        y: 60
+        width: 106
         height: 15
       index: 23
       length: 17
@@ -2509,16 +2487,16 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: " <o=\"7072017\"></o> \n\n<i><b>test</b></i>"
+    richText: " <o=\"2376601\"></o> \n\n<i><b>test</b></i>"
     textAreaObjectFields:
-    - name: Readme (7072017)
-      objectId: 7072017
+    - name: Readme (2376601)
+      objectId: 2376601
       objectRef: {fileID: 1101006903}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 17
-        width: 122
+        x: 30
+        y: 21
+        width: 119
         height: 15
       index: 1
       length: 17
@@ -2636,16 +2614,16 @@ MonoBehaviour:
     type: json
   readmeData:
     richText: "asdafsdfa\n\nwhat ever yo what ever yo what ever yo what ever yo what
-      ever yo what ever yo what ever  <o=\"0356258\"></o> yo what ever yo what ever
+      ever yo what ever yo what ever  <o=\"2347007\"></o> yo what ever yo what ever
       yo what ever yo what ever yo what ever yo what ever yo what ever yo what ever
       yo what ever yo what ever yo what ever yo what ever yo what ever yo what ever
       yo what ever yo what ever yo what ever yo what ever yo \n\nthis is dope this
-      is dope this is dope this is dope this <o=\"9491759\"></o>  is dope <b>this</b>
+      is dope this is dope this is dope this <o=\"7234027\"></o>  is dope <b>this</b>
       is dope this is <i>dope</i> this is dope this is dope this is dope this is
       dope \n\n\n\n\nwdwasdwasdwa\n\n\nwdwasd\n\nwdwad\n\nd\n\n\n\n\n\nwdwasdwasdwa\n\n\nwdwasd\n\nwdwad\n\nd\n\n\n\n\nthis
       is dope this is dope this is dope this is dope this is dope this is dope this
       is dope this is dope this is dope this is dope this is dope this is dope this
-      is d <o=\"0836188\"></o> ope this is dope t <o=\"6932534\"></o> his is dope
+      is d <o=\"1132491\"></o> ope this is dope t <o=\"8652860\"></o> his is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
@@ -2653,7 +2631,7 @@ MonoBehaviour:
       this is dope this is dope                                                                                                                      
       \n\n\n\n\nthis is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
-      this is dope this is d <o=\"0836188\"></o> ope this is dope t <o=\"6932534\"></o>
+      this is dope this is d <o=\"1132491\"></o> ope this is dope t <o=\"8652860\"></o>
       his is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
@@ -2662,69 +2640,69 @@ MonoBehaviour:
       a                                                                                                                                                                      
       a aa\n        aa\n\ndwadwadwadwad\n\nawd\n\nawd\nawd\n\n\n"
     textAreaObjectFields:
-    - name: MeshAlbedoOrigin (356258)
-      objectId: 356258
+    - name: MeshAlbedoOrigin (2347007)
+      objectId: 2347007
       objectRef: {fileID: 1437867721}
       fieldRect:
         serializedVersion: 2
-        x: 542
-        y: 47
-        width: 120
+        x: 210
+        y: 66
+        width: 122
         height: 15
       index: 100
       length: 17
-    - name: Swell Mesh (9491759)
-      objectId: 9491759
+    - name: Swell Mesh (7234027)
+      objectId: 7234027
       objectRef: {fileID: 8515328486482458088}
       fieldRect:
         serializedVersion: 2
-        x: 311
-        y: 92
+        x: 30
+        y: 171
         width: 118
         height: 15
       index: 414
       length: 17
-    - name: Swell Wave Samples (836188)
-      objectId: 836188
+    - name: Swell Wave Samples (1132491)
+      objectId: 1132491
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
-        x: 861
-        y: 542
-        width: 119
+        x: 169
+        y: 666
+        width: 117
         height: 15
       index: 777
       length: 17
-    - name: README (6932534)
-      objectId: 6932534
+    - name: README (8652860)
+      objectId: 8652860
       objectRef: {fileID: 1687639724}
       fieldRect:
         serializedVersion: 2
-        x: 62
-        y: 557
-        width: 121
+        x: 34
+        y: 681
+        width: 119
         height: 15
       index: 814
       length: 17
-    - name: Swell Wave Samples (836188)
-      objectId: 836188
+    - name: Swell Wave Samples (1132491)
+      objectId: 1132491
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
-        x: 861
-        y: 647
-        width: 119
+        x: 169
+        y: 861
+        width: 117
         height: 15
       index: 1471
       length: 17
-    - name: README (6932534)
-      objectId: 6932534
+    - name: README (8652860)
+      objectId: 8652860
       objectRef: {fileID: 1687639724}
       fieldRect:
         serializedVersion: 2
-        x: 62
-        y: 662
-        width: 121
+        x: 34
+        y: 876
+        width: 119
         height: 15
       index: 1508
       length: 17
@@ -2790,7 +2768,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2800,7 +2778,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -2809,7 +2787,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -2818,7 +2796,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -2827,7 +2805,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3211,17 +3189,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 
-  font: {fileID: 0}
-  fontSize: 12
+  fontColor: {r: 1, g: 0, b: 0, a: 1}
+  richTextTagMap: 01010100000000000000000000000001010101000000
+  font: {fileID: 12800000, guid: 7526ab2b2f320194dadaa7b6ee4580b0, type: 3}
+  fontSize: 72
   iconBeingUsed: 1
   useTackIcon: 1
   readonlyMode: 0
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3231,7 +3209,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -3240,7 +3218,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -3249,7 +3227,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -3258,7 +3236,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3266,7 +3244,7 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: 
+    richText: <b>YOU ARE DUMB</b> ;)
     textAreaObjectFields: []
     objectIdPairs: []
   managerConnected: 1
@@ -3487,7 +3465,7 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: 'dwadwa <i> <o="8023847"></o> dsadw</i> <o="1430660"></o> asdwasdw
+    richText: 'dwadwa <i> <o="9180854"></o> dsadw</i> <o="4461989"></o> asdwasdw
       wadwadwadfgsdfgdasdfasdfasdfasdfasdfasdf alkijhasdflkjasd;flkjas
 
 
@@ -3496,25 +3474,25 @@ MonoBehaviour:
 
       l;kajsd;lkfj'
     textAreaObjectFields:
-    - name: Readme (8023847)
-      objectId: 8023847
+    - name: Readme (9180854)
+      objectId: 9180854
       objectRef: {fileID: 1010333737}
       fieldRect:
         serializedVersion: 2
-        x: 78
-        y: 17
-        width: 121
+        x: 81
+        y: 21
+        width: 119
         height: 15
       index: 11
       length: 17
-    - name: Readme (1430660)
-      objectId: 1430660
+    - name: Readme (4461989)
+      objectId: 4461989
       objectRef: {fileID: 734215989}
       fieldRect:
         serializedVersion: 2
-        x: 241
-        y: 17
-        width: 121
+        x: 242
+        y: 21
+        width: 119
         height: 15
       index: 39
       length: 17
@@ -3925,127 +3903,127 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: " <o=\"3391419\"></o> \n\n        private TextEditor GetTextEditor()\r\n       
+    richText: " <o=\"1132491\"></o> \n\n        private TextEditor GetTextEditor()\r\n       
       {\r\n            TextEditor privateTextEditor = GetPrivateTextEditor;\r\n\r\n           
       if (privateTextEditor == null)\r\n            {\r\n                FocusOnInspe
-      <o=\"2575167\"></o> ctorWindow();\r\n                EditorGUI.FocusTextInControl(activeTextAreaName);\r\n\r\n               
-      privateTextEditor = GetPrivateTex <o=\"2321275\"></o> tEditor;\r\n           
-      }\r\n\r\n            return privateTextEditor;\r\n        }\n\n\n <o=\"6733440\"></o>
-      \n\n <o=\"3391419\"></o>  <o=\"7969403\"></o> \n\n        private TextEditor
-      GetTextEditor()\r\n        {\r <o=\"2575167\"></o>  <o=\"2619882\"></o>  <o=\"7824168\"></o>
+      <o=\"5518581\"></o> ctorWindow();\r\n                EditorGUI.FocusTextInControl(activeTextAreaName);\r\n\r\n               
+      privateTextEditor = GetPrivateTex <o=\"9545688\"></o> tEditor;\r\n           
+      }\r\n\r\n            return privateTextEditor;\r\n        }\n\n\n <o=\"1415035\"></o>
+      \n\n <o=\"1132491\"></o>  <o=\"4688672\"></o> \n\n        private TextEditor
+      GetTextEditor()\r\n        {\r <o=\"5518581\"></o>  <o=\"0128613\"></o>  <o=\"4512039\"></o>
       \n            TextEditor privateTextEditor = GetPrivateTextEditor;\r\n\r\n           
       if (privateTextEditor == null)\r\n            {\r\n                FocusOnInspectorWindow();\r\n               
       EditorGUI.FocusTextInControl(activeTextAreaName);\r\n\r\n                privateTextEditor
       = GetPrivateTextEditor;\r\n            }\r\n\r\n            return privateTextEditor;\r\n       
-      }\n\n\n <o=\"6733440\"></o> \n\n\n\n\n\n\n"
+      }\n\n\n <o=\"1415035\"></o> \n\n\n\n\n\n\n"
     textAreaObjectFields:
-    - name: Swell Wave Samples (3391419)
-      objectId: 3391419
+    - name: Swell Wave Samples (1132491)
+      objectId: 1132491
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
         x: 30
         y: 21
-        width: 119
+        width: 117
         height: 15
       index: 1
       length: 17
-    - name: Readme (2575167)
-      objectId: 2575167
+    - name: Readme (5518581)
+      objectId: 5518581
       objectRef: {fileID: 1413872804}
       fieldRect:
         serializedVersion: 2
         x: 158
         y: 141
-        width: 117
+        width: 116
         height: 15
       index: 232
       length: 17
-    - name: Readme (2321275)
-      objectId: 2321275
+    - name: Readme (9545688)
+      objectId: 9545688
       objectRef: {fileID: 1189274565}
       fieldRect:
         serializedVersion: 2
-        x: 269
-        y: 186
-        width: 118
+        x: 30
+        y: 201
+        width: 116
         height: 15
       index: 384
       length: 17
-    - name: River (6733440)
-      objectId: 6733440
+    - name: River (1415035)
+      objectId: 1415035
       objectRef: {fileID: 662738542}
       fieldRect:
         serializedVersion: 2
         x: 30
-        y: 291
-        width: 123
+        y: 306
+        width: 119
         height: 15
       index: 481
       length: 17
-    - name: Swell Wave Samples (3391419)
-      objectId: 3391419
+    - name: Swell Wave Samples (1132491)
+      objectId: 1132491
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
         x: 30
-        y: 321
-        width: 119
+        y: 336
+        width: 117
         height: 15
       index: 502
       length: 17
-    - name: Readme (7969403)
-      objectId: 7969403
+    - name: Readme (4688672)
+      objectId: 4688672
       objectRef: {fileID: 417381432}
       fieldRect:
         serializedVersion: 2
-        x: 154
-        y: 321
-        width: 121
+        x: 152
+        y: 336
+        width: 119
         height: 15
       index: 521
       length: 17
-    - name: Readme (2575167)
-      objectId: 2575167
+    - name: Readme (5518581)
+      objectId: 5518581
       objectRef: {fileID: 1413872804}
       fieldRect:
         serializedVersion: 2
         x: 58
-        y: 366
-        width: 117
+        y: 381
+        width: 116
         height: 15
       index: 596
       length: 17
-    - name: Readme (2619882)
-      objectId: 2619882
+    - name: Readme (128613)
+      objectId: 128613
       objectRef: {fileID: 1062958050}
       fieldRect:
         serializedVersion: 2
-        x: 180
-        y: 366
-        width: 117
+        x: 179
+        y: 381
+        width: 118
         height: 15
       index: 615
       length: 17
-    - name: Readme (7824168)
-      objectId: 7824168
+    - name: Readme (4512039)
+      objectId: 4512039
       objectRef: {fileID: 1456088580}
       fieldRect:
         serializedVersion: 2
-        x: 302
-        y: 366
-        width: 118
+        x: 30
+        y: 396
+        width: 117
         height: 15
       index: 634
       length: 17
-    - name: River (6733440)
-      objectId: 6733440
+    - name: River (1415035)
+      objectId: 1415035
       objectRef: {fileID: 662738542}
       fieldRect:
         serializedVersion: 2
         x: 30
-        y: 591
-        width: 123
+        y: 621
+        width: 119
         height: 15
       index: 1020
       length: 17
@@ -4287,9 +4265,9 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 154
-        y: 17
-        width: 124
+        x: 157
+        y: 21
+        width: 121
         height: 15
       index: 34
       length: 17
@@ -4298,9 +4276,9 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 112
-        y: 32
-        width: 125
+        x: 115
+        y: 36
+        width: 122
         height: 15
       index: 72
       length: 17
@@ -4639,7 +4617,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -4649,7 +4627,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -4658,7 +4636,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -4667,7 +4645,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -4676,7 +4654,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -4793,31 +4771,31 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: " some pickles\nfffffffffffffffffffffffffffffffffffffff  <o=\"8225789\"></o>
-      fffffffffffffffffffff aaaaaaa aaaaaaaaa<b> </b>\n <o=\"4848688\"></o> \naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-      <o=\"0000000\"></o> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa <o=\"4848688\"></o>
-      \n\n <o=\"9316839\"></o> \n\n\ntest test test test\n\n <o=\"3023922\"></o> 
-      <o=\"2095172\"></o> \n\n <o=\"0000000\"></o> \n\n <o=\"8057572\"></o> \n\nhhhhhhhhh\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    richText: " some pickles\nfffffffffffffffffffffffffffffffffffffff  <o=\"9434867\"></o>
+      fffffffffffffffffffff aaaaaaa aaaaaaaaa<b> </b>\n <o=\"1132491\"></o> \naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      <o=\"0000000\"></o> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa <o=\"1132491\"></o>
+      \n\n <o=\"4461989\"></o> \n\n\ntest test test test\n\n <o=\"9601743\"></o> 
+      <o=\"6651526\"></o> \n\n <o=\"0000000\"></o> \n\n <o=\"1977774\"></o> \n\nhhhhhhhhh\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     textAreaObjectFields:
-    - name: Readme (8225789)
-      objectId: 8225789
+    - name: Readme (9434867)
+      objectId: 9434867
       objectRef: {fileID: 179042979}
       fieldRect:
         serializedVersion: 2
-        x: 186
-        y: 32
-        width: 118
+        x: 189
+        y: 36
+        width: 121
         height: 15
       index: 55
       length: 17
-    - name: Swell Wave Samples (4848688)
-      objectId: 4848688
+    - name: Swell Wave Samples (1132491)
+      objectId: 1132491
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 47
-        width: 120
+        x: 30
+        y: 66
+        width: 117
         height: 15
       index: 122
       length: 17
@@ -4826,53 +4804,53 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 643
-        y: 62
-        width: 125
+        x: 30
+        y: 111
+        width: 122
         height: 15
       index: 230
       length: 17
-    - name: Swell Wave Samples (4848688)
-      objectId: 4848688
+    - name: Swell Wave Samples (1132491)
+      objectId: 1132491
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
-        x: 314
-        y: 77
-        width: 120
+        x: 30
+        y: 141
+        width: 114
         height: 15
       index: 290
       length: 17
-    - name: Readme (9316839)
-      objectId: 9316839
+    - name: Readme (4461989)
+      objectId: 4461989
       objectRef: {fileID: 734215989}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 107
+        x: 30
+        y: 171
         width: 119
         height: 15
       index: 311
       length: 17
-    - name: Readme (3023922)
-      objectId: 3023922
+    - name: Readme (9601743)
+      objectId: 9601743
       objectRef: {fileID: 1393940360}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 182
-        width: 121
+        x: 30
+        y: 246
+        width: 120
         height: 15
       index: 354
       length: 17
-    - name: Canvas (2095172)
-      objectId: 2095172
+    - name: Canvas (6651526)
+      objectId: 6651526
       objectRef: {fileID: 2130433938}
       fieldRect:
         serializedVersion: 2
-        x: 153
-        y: 182
-        width: 118
+        x: 155
+        y: 246
+        width: 117
         height: 15
       index: 373
       length: 17
@@ -4881,20 +4859,20 @@ MonoBehaviour:
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 212
+        x: 30
+        y: 276
         width: 125
         height: 15
       index: 394
       length: 17
-    - name: Readme (8057572)
-      objectId: 8057572
+    - name: Readme (1977774)
+      objectId: 1977774
       objectRef: {fileID: 1470137753}
       fieldRect:
         serializedVersion: 2
-        x: 27
-        y: 242
-        width: 119
+        x: 30
+        y: 306
+        width: 118
         height: 15
       index: 415
       length: 17
@@ -5057,7 +5035,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -5067,7 +5045,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -5076,7 +5054,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -5085,7 +5063,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -5094,7 +5072,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -5160,7 +5138,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -5170,7 +5148,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -5179,7 +5157,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -5188,7 +5166,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -5197,7 +5175,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -5755,16 +5733,16 @@ MonoBehaviour:
 
 
 
-      asdddwa <o="3179660"></o> '
+      asdddwa <o="4688672"></o> '
     textAreaObjectFields:
-    - name: Readme (3179660)
-      objectId: 3179660
+    - name: Readme (4688672)
+      objectId: 4688672
       objectRef: {fileID: 417381432}
       fieldRect:
         serializedVersion: 2
-        x: 78
-        y: 632
-        width: 122
+        x: 81
+        y: 636
+        width: 119
         height: 15
       index: 54
       length: 17
