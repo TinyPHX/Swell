@@ -1,6 +1,6 @@
 namespace TP
 {
-    public class TpTextEditor
+    public class ReadmeTextEditor
     {
         
     }

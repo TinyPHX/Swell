@@ -3,14 +3,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.WebPages;
-using System.Windows.Forms.VisualStyles;
 using UnityEngine;
 using UnityEditor;
 using Application = UnityEngine.Application;
@@ -19,10 +17,6 @@ using TheArtOfDev.HtmlRenderer.PdfSharp;
 using PdfSharp;
 using PdfSharp.Pdf;
 using HtmlAgilityPack;
-using NUnit.Framework.Internal;
-using Unity.Plastic.Newtonsoft.Json;
-using Unity.Plastic.Newtonsoft.Json.Converters;
-using UnityEngine.UI;
 
 namespace TP 
 {
@@ -31,6 +25,7 @@ namespace TP
     {
         public static ReadmeEditor ActiveReadmeEditor;
 
+        #region private vars
         private Readme readme;
 
         private bool verbose = false;
@@ -78,18 +73,16 @@ namespace TP
         private GUIStyle selectableRichText;
         private GUIStyle editableRichText;
         private GUIStyle editableText;
+        private GUISkin skinDefault;
+        private GUISkin skinStyle;
+        private GUISkin skinSource;
         private int textPadding = 5;
         private int labelPaddingLeft = 3;
         private int labelPaddingTop = 2;
         private float availableWidth;
-        private GUISkin skin;
         private Dictionary<int, string> controlIdToName = new Dictionary<int, string>();
         private Dictionary<string, int> controlNameToId = new Dictionary<string, int>();
-        private int scrollAreaControlId;
-        private int textAreaEmptyControlId;
-        private int textAreaReadonlyControlId;
-        private int textAreaSourceControlId;
-        private int textAreaStyleControlId;
+        private int activeTextAreaControlId;
 
         //Scrolling
         private bool scrollEnabled = true;
@@ -107,6 +100,7 @@ namespace TP
         private int focusSelectIndex = -1;
         private bool autoFocus = true;
         private bool autoSetEditorRect = false;
+        private Rect doneEditButtonRect;
 
         // Drag and drop object fields
         private Object[] objectsToDrop;
@@ -121,8 +115,14 @@ namespace TP
 
         private Event currentEvent;
 
+        private int frame = 0;
+        #endregion 
+
         public override void OnInspectorGUI()
         {
+            Debug.Log("OnInspectorGUI");
+            frame++;
+            
             currentEvent = new Event(Event.current);
 
             Readme readmeTarget = (Readme)target;
@@ -135,7 +135,6 @@ namespace TP
             readme.Initialize();
             readme.ConnectManager();
             readme.UpdateSettings(GetSettingsPath());
-            // skin = ReadmeSettings.GetSkin(GetSkinsPath(), "Custom");
 
             liteEditor = readme.ActiveSettings.lite;
             UpdateGuiStyles(readme);
@@ -144,8 +143,9 @@ namespace TP
             #region Editor GUI
 
             UpdateAvailableWidth();
-
+            StopInvalidTextAreaEvents();
             EditorGuiTextAreaObjectFields();
+            
             if (!editing)
             {
                 //Text Area
@@ -180,11 +180,13 @@ namespace TP
                     if (GUILayout.Button("Edit"))
                     {
                         editing = true;
-                        autoFocus = true;
-                        autoSetEditorRect = true;
+                        NewRepaint(focusText:true);
                     }
 
-                    controlIdToName[GetLastControlId] = "Button: Edit";
+                    if (Event.current.type == EventType.Repaint)
+                    {
+                        doneEditButtonRect = GUILayoutUtility.GetLastRect();
+                    }
 
                     if (IsPrefab(readme.gameObject))
                     {
@@ -223,7 +225,12 @@ namespace TP
                 if (GUILayout.Button("Done"))
                 {
                     editing = false;
-                    ForceTextAreaRefresh();
+                    NewRepaint(focusText:true);
+                }
+                
+                if (Event.current.type == EventType.Repaint)
+                {
+                    doneEditButtonRect = GUILayoutUtility.GetLastRect();
                 }
 
                 EditorGuiToolbar();
@@ -239,51 +246,113 @@ namespace TP
             DragAndDropObjectField();
             CheckKeyboardShortCuts();
             FixCursorBug();
-            // AutoFocus();
-            // UpdateFocus();
-            // FixCopyBuffer();
+            ScrollToCursor();
 
-            // Test();
-
-        }
-
-        private void Test()
-        {
-            if (TextEditor != null)
+            NewFocus();
+            NewSetCursor();
+            
+            if (frame < focusFrame || frame < setCursorFrame)
             {
-                if (TextEditor.controlID == 0)
-                {
-                    bool unityInFocus = UnityEditorInternal.InternalEditorUtility.isApplicationActive;
-                    if (unityInFocus)
-                    {
-                        FocusTextArea(false);
-                        ForceTextAreaRefresh();
-                        Debug.Log("Test - ForceTextAreaRefresh");
-                    }
-                }
+                TriggerOnInspectorGUI();
+            }
 
-                if (textEditor.scrollOffset != scroll)
-                {
-                    FocusTextArea(false);
-                    ForceTextAreaRefresh();
-                    Debug.Log("Test - ForceTextAreaRefresh for scroll");
-                }
-
-                // if (GUI.GetNameOfFocusedControl() == activeTextAreaName)
-                // {
-                //     if (scrollEnabled)
-                //     {
-                //         TextEditor.scrollOffset = scroll;
-                //     }
-                //
-                //     TextEditor.position = TextAreaRect;
-                //     TextEditor.text = ActiveText;
-                // }
+            if (!firstFocus && textEditor != null)
+            {
+                firstFocus = true;
+                NewRepaint(0, 0, focusText: true);
             }
         }
+
+        private int focusFrame = -1;
+        private int setCursorFrame = -1;
+        private (int, int) savedCursor;
+        private bool firstFocus = false;
+
+        private void NewRepaint(int newCursorIndex = -1, int newSelectIndex = -1, bool focusText = false)
+        {
+            TriggerOnInspectorGUI();
+            SetText(ActiveText);
+            SetCursors((newCursorIndex, newSelectIndex));
+            
+            bool textAlreadyFocused = textEditor != null && GetControlId(ExpectedTextAreaName()) == textEditor.controlID;
+            if (focusText && !textAlreadyFocused)
+            {
+                focusFrame = frame + 2;
+                setCursorFrame = frame + 4;
+                savedCursor = GetCursors();
+            }
+        }
+
+        private void NewFocus()
+        {
+            if (frame == focusFrame)
+            {
+                FocusEditorWindow("Inspector");
+                EditorGUI.FocusTextInControl(activeTextAreaName);
+                GUI.FocusControl(activeTextAreaName);
+            }
+        }
+
+        private void NewSetCursor()
+        {
+            if (frame == setCursorFrame)
+            {
+                if (textEditor != null)
+                {
+                    SetCursors(savedCursor);
+                 
+                    savedCursor = (-1, -1);
+                }
+            }
+        }
+
+        private void SetText(string text)
+        {
+            if (textEditor != null)
+            {
+                textEditor.text = text;
+            }
+        }
+
+        private void SetCursors((int, int) cursors)
+        {
+            if (textEditor != null)
+            {
+                (int cursorIndex, int selectIndex) = cursors;
+                if (cursorIndex != -1)
+                {
+                    textEditor.cursorIndex = cursorIndex;
+                }
+
+                if (selectIndex != -1)
+                {
+                    textEditor.selectIndex = selectIndex;
+                }
+            }
+        }
+
+        private (int, int)  GetCursors()
+        {
+            return textEditor == null ? (-1, -1) : (textEditor.cursorIndex, textEditor.selectIndex);
+        }
+
+        private void TriggerOnInspectorGUI()
+        {
+            EditorUtility.SetDirty(readme); //Trigger OnInspectorGUI() call
+        }
+
+        private string ExpectedTextAreaName()
+        {
+            string expectedTextAreaName = "";
+            if (sourceOn) { expectedTextAreaName = textAreaSourceName; }
+            else if (!editing) { expectedTextAreaName = textAreaReadonlyName; }
+            else if (!RichText.IsEmpty()) { expectedTextAreaName = textAreaStyleName; }
+            if (sourceOn) { expectedTextAreaName = textAreaEmptyName; }
+
+            return expectedTextAreaName;
+        }
         
-        private void EditorGuiTextArea(bool canEdit, string content, string controlName, GUIStyle style,
-            bool selectable = true)
+        private void EditorGuiTextArea(bool canEdit, string content, string controlName, GUIStyle style, bool selectable=true)
         {
             activeTextAreaName = controlName;
             activeTextAreaStyle = style;
@@ -319,7 +388,6 @@ namespace TP
             }
             else
             {
-                options = new[] { GUILayout.Width(size.x + labelPaddingLeft), GUILayout.Height(size.y) };
                 if (selectable)
                 {
                     EditorGUILayout.SelectableLabel(content, style, options);
@@ -331,18 +399,161 @@ namespace TP
             }
 
             AddControl(controlName, GetLastControlId);
-            TextAreaRect = GUILayoutUtility.GetLastRect();
+            activeTextAreaControlId = GetLastControlId;
+            textAreaRect = GetLastRect(textAreaRect);
             EditorGUILayout.EndScrollView();
-            ScrollAreaRect = GUILayoutUtility.GetLastRect();
-
-            // if (autoSetEditorRect && TextEditor != null)
-            // {
-            //     autoSetEditorRect = false;
-            //     TextEditor.position = TextAreaRect;
-            //     TextEditor.style = activeTextAreaStyle;
-            // }
+            scrollAreaRect = GetLastRect(scrollAreaRect);
         }
+        
+        private void EditorGuiTextAreaObjectFields()
+        {
+            if (RichText != null)
+            {
+                UpdateTextAreaObjectFieldArray();
+                DrawTextAreaObjectFields();
+                UpdateTextAreaObjectFieldIds();
+            }
 
+            void UpdateTextAreaObjectFieldArray()
+            {
+                if (textEditor != null)
+                {
+                    string objectTagPattern = "<o=\"[-,a-zA-Z0-9]*\"></o>";
+                    MatchCollection matches = Regex.Matches(RichText, objectTagPattern, RegexOptions.None);
+                    TextAreaObjectField[] newTextAreaObjectFields = new TextAreaObjectField[matches.Count];
+                    for (int i = matches.Count - 1; i >= 0; i--)
+                    {
+                        Match match = matches[i];
+
+                        if (match.Success)
+                        {
+                            string idValue = match.Value.Replace("<o=\"", "").Replace("\"></o>", "");
+                            int objectId = 0;
+                            bool parseSuccess = int.TryParse(idValue, out objectId);
+
+                            if (!parseSuccess && verbose)
+                            {
+                                Debug.Log("Unable to parse id: " + idValue);
+                            }
+
+                            int startIndex = match.Index;
+                            int endIndex = match.Index + match.Value.Length;
+
+                            if (endIndex == RichText.Length || RichText[endIndex] != ' ')
+                            {
+                                RichText = RichText.Insert(endIndex, " ");
+                            }
+
+                            if (startIndex == 0 || RichText[startIndex - 1] != ' ')
+                            {
+                                RichText = RichText.Insert(startIndex, " ");
+                            }
+
+                            Rect rect = GetRect(startIndex - 1, endIndex + 1);
+                            rect.position += textAreaRect.position;
+
+                            Rect rectWithCorrectHeight = GetRect(startIndex - 1, endIndex); // Have to do this for when a space is moved to the next line.
+                            rect.height = rectWithCorrectHeight.height;
+                            rect.width = rectWithCorrectHeight.width;
+
+                            if (rect.x > 0 && rect.y > 0 && rect.width > 0 && rect.height > 0)
+                            {
+                                TextAreaObjectField matchedField =
+                                    TextAreaObjectFields.FirstOrDefault(item => item.ObjectId == objectId);
+                                if (matchedField != null && !matchedField.IdInSync)
+                                {
+                                    matchedField.UpdateId();
+                                    objectId = matchedField.ObjectId;
+
+                                    int idStartIndex = match.Index + 4;
+                                    RichText = RichText
+                                        .Remove(idStartIndex, idValue.Length)
+                                        .Insert(idStartIndex, GetFixedLengthId(objectId.ToString()));
+                                }
+
+                                if (matchedField != null && !matchedField.IdInSync)
+                                {
+                                    ReadmeManager.AddObjectIdPair(matchedField.ObjectRef, objectId);
+                                }
+
+                                TextAreaObjectField newField = new TextAreaObjectField(rect, objectId, startIndex,
+                                    endIndex - startIndex);
+                                newTextAreaObjectFields[i] = newField;
+                                newTextAreaObjectFields[i].OnChangeHandler += SetTargetDirty;
+                            }
+                            else
+                            {
+                                return; //Abort everything. Position is incorrect! Probably no textEditor found.
+                            }
+                        }
+                    }
+
+                    if (!TextAreaObjectFields.SequenceEqual(newTextAreaObjectFields))
+                    {
+                        TextAreaObjectFields = newTextAreaObjectFields;
+                    }
+                }
+            }
+
+            void DrawTextAreaObjectFields()
+            {
+                if (!sourceOn)
+                {
+                    Vector2 offset = -scroll;
+                    // offset += (editing ? new Vector2(-3, -3) : new Vector2(0, 0)); //TODO Better offsetting
+                    EditorGUI.BeginDisabledGroup(!editing);
+                    foreach (TextAreaObjectField textAreaObjectField in TextAreaObjectFields)
+                    {
+                        textAreaObjectField.Draw(textEditor, offset, scrollAreaRect);
+                    }
+
+                    EditorGUI.EndDisabledGroup();
+                }
+            }
+
+            void UpdateTextAreaObjectFieldIds()
+            {
+                StringBuilder newRichText = new StringBuilder(RichText);
+                string objectTagPattern = "<o=\"[-,a-zA-Z0-9]*\"></o>";
+                int startTagLength = "<o=\"".Length;
+                int endTagLength = "\"></o>".Length;
+                int expectedFieldCount = Regex.Matches(RichText, "<o=\"[-,a-zA-Z0-9]*\"></o>", RegexOptions.None).Count;
+
+                if (expectedFieldCount != TextAreaObjectFields.Length)
+                {
+                    return;
+                }
+
+                for (int i = TextAreaObjectFields.Length - 1; i >= 0; i--)
+                {
+                    TextAreaObjectField textAreaObjectField = TextAreaObjectFields[i];
+
+                    if (RichText.Length > textAreaObjectField.Index)
+                    {
+                        Match match =
+                            Regex.Match(RichText.Substring(Mathf.Max(0, textAreaObjectField.Index - 1)),
+                                objectTagPattern, RegexOptions.None);
+
+                        if (match.Success)
+                        {
+                            string textAreaId =
+                                GetFixedLengthId(match.Value.Replace("<o=\"", "").Replace("\"></o>", ""));
+                            string objectFieldId = GetFixedLengthId(textAreaObjectField.ObjectId.ToString());
+
+                            if (textAreaId != objectFieldId)
+                            {
+                                int idStartIndex = textAreaObjectField.Index + match.Index + startTagLength;
+                                newRichText.Remove(idStartIndex - 1, textAreaId.Length);
+                                newRichText.Insert(idStartIndex - 1, objectFieldId);
+                            }
+                        }
+                    }
+                }
+
+                RichText = newRichText.ToString();
+            }
+        }
+        
         private void EditorGuiToolbar()
         {
             float smallButtonWidth = EditorGUIUtility.singleLineHeight * 2;
@@ -493,15 +704,13 @@ namespace TP
                         objectIdPairListString == null)
                     {
                         objectIdPairListString = ReadmeManager.GetObjectIdPairListString();
-                        ForceTextAreaRefresh();
-                        Repaint();
+                        NewRepaint();
                     }
 
                     if (GUILayout.Button("Clear Pairs", GUILayout.Width(smallButtonWidth * 4)))
                     {
                         ReadmeManager.Clear();
-                        ForceTextAreaRefresh();
-                        Repaint();
+                        NewRepaint();
                     }
 
                     GUILayout.EndHorizontal();
@@ -518,10 +727,10 @@ namespace TP
                         "mouseOverWindow: " + EditorWindow.mouseOverWindow + "\n" +
                         "FocusedControl: " + GUI.GetNameOfFocusedControl() + "\n" +
                         "Event Type: " + Event.current.ToString() + "\n" +
-                        "textAreaRect: " + TextAreaRect + "\n" +
-                        "scrollAreaRect: " + ScrollAreaRect + "\n" +
+                        "textAreaRect: " + textAreaRect + "\n" +
+                        "scrollAreaRect: " + scrollAreaRect + "\n" +
                         "scroll: " + scroll + "\n" +
-                        "Calc Cursor Position: " + (Event.current.mousePosition - TextAreaRect.position) + "\n" +
+                        "Calc Cursor Position: " + (Event.current.mousePosition - textAreaRect.position) + "\n" +
                         "Text Editor Active: " + TextEditorActive + "\n" +
                         "cursorIndex: " + (!TextEditorActive ? "" : CursorIndex.ToString()) + "\n" +
                         "selectIndex: " + (!TextEditorActive ? "" : SelectIndex.ToString()) + "\n" +
@@ -538,7 +747,7 @@ namespace TP
                         ""
                         , MessageType.Info);
 
-                    MessageType messageType = TextEditor != null ? MessageType.Info : MessageType.Warning;
+                    MessageType messageType = textEditor != null ? MessageType.Info : MessageType.Warning;
 
                     EditorGUILayout.HelpBox(
                         "Toggle Bold: alt+b\n" +
@@ -547,7 +756,7 @@ namespace TP
                         "Show Advanced Options: alt+a\n"
                         , MessageType.Info);
 
-                    if (TextEditor != null)
+                    if (textEditor != null)
                     {
                         EditorGUILayout.HelpBox(
                             "ControlIds" +
@@ -560,25 +769,25 @@ namespace TP
 
                         EditorGUILayout.HelpBox(
                             "TEXT EDITOR VALUES" +
-                            // "\n\t" + "text: " + TextEditor.text +
-                            // "\n\t" + "SelectedText: " + TextEditor.SelectedText +
-                            "\n\t" + "multiline: " + TextEditor.multiline +
-                            "\n\t" + "position: " + TextEditor.position +
-                            "\n\t" + "style: " + TextEditor.style +
-                            "\n\t" + "cursorIndex: " + TextEditor.cursorIndex +
-                            "\n\t" + "hasSelection: " + TextEditor.hasSelection +
-                            "\n\t" + "scrollOffset: " + TextEditor.scrollOffset +
-                            "\n\t" + "selectIndex: " + TextEditor.selectIndex +
-                            "\n\t" + "altCursorPosition: " + TextEditor.altCursorPosition +
-                            "\n\t" + "controlID: " + GetControlName(TextEditor.controlID) +
-                            "\n\t" + "controlID_Event: " + Event.current.GetTypeForControl(TextEditor.controlID) +
-                            "\n\t" + "doubleClickSnapping: " + TextEditor.doubleClickSnapping +
-                            "\n\t" + "graphicalCursorPos: " + TextEditor.graphicalCursorPos +
-                            "\n\t" + "isPasswordField: " + TextEditor.isPasswordField +
-                            "\n\t" + "isPasswordField: " + TextEditor.isPasswordField +
-                            "\n\t" + "keyboardOnScreen: " + TextEditor.keyboardOnScreen +
-                            "\n\t" + "graphicalSelectCursorPos: " + TextEditor.graphicalSelectCursorPos +
-                            "\n\t" + "hasHorizontalCursorPos: " + TextEditor.hasHorizontalCursorPos
+                            // "\n\t" + "text: " + textEditor.text +
+                            // "\n\t" + "SelectedText: " + textEditor.SelectedText +
+                            "\n\t" + "multiline: " + textEditor.multiline +
+                            "\n\t" + "position: " + textEditor.position +
+                            "\n\t" + "style: " + textEditor.style +
+                            "\n\t" + "cursorIndex: " + textEditor.cursorIndex +
+                            "\n\t" + "hasSelection: " + textEditor.hasSelection +
+                            "\n\t" + "scrollOffset: " + textEditor.scrollOffset +
+                            "\n\t" + "selectIndex: " + textEditor.selectIndex +
+                            "\n\t" + "altCursorPosition: " + textEditor.altCursorPosition +
+                            "\n\t" + "controlID: " + GetControlName(textEditor.controlID) +
+                            "\n\t" + "controlID_Event: " + Event.current.GetTypeForControl(textEditor.controlID) +
+                            "\n\t" + "doubleClickSnapping: " + textEditor.doubleClickSnapping +
+                            "\n\t" + "graphicalCursorPos: " + textEditor.graphicalCursorPos +
+                            "\n\t" + "isPasswordField: " + textEditor.isPasswordField +
+                            "\n\t" + "isPasswordField: " + textEditor.isPasswordField +
+                            "\n\t" + "keyboardOnScreen: " + textEditor.keyboardOnScreen +
+                            "\n\t" + "graphicalSelectCursorPos: " + textEditor.graphicalSelectCursorPos +
+                            "\n\t" + "hasHorizontalCursorPos: " + textEditor.hasHorizontalCursorPos
                             , MessageType.Info);
 
                         EditorGUILayout.HelpBox(
@@ -586,9 +795,9 @@ namespace TP
                             "\n\t" + "hotControl: " + GUIUtility.hotControl +
                             "\n\t" + "keyboardControl: " + GUIUtility.keyboardControl +
                             "\n\t" + "GetStateObject: " +
-                            GUIUtility.GetStateObject(typeof(TextEditor), TextEditor.controlID) +
+                            GUIUtility.GetStateObject(typeof(TextEditor), textEditor.controlID) +
                             "\n\t" + "QueryStateObject: " +
-                            GUIUtility.QueryStateObject(typeof(TextEditor), TextEditor.controlID)
+                            GUIUtility.QueryStateObject(typeof(TextEditor), textEditor.controlID)
                             , MessageType.Info);
 
                         EditorGUILayout.HelpBox(
@@ -611,7 +820,7 @@ namespace TP
                     }
                     else
                     {
-                        EditorGUILayout.HelpBox("No TextEditor Found", MessageType.Warning);
+                        EditorGUILayout.HelpBox("No textEditor Found", MessageType.Warning);
                     }
 
 
@@ -660,9 +869,9 @@ namespace TP
                             TestHtmlAgilityPack();
                         }
 
-                        if (GUILayout.Button("ForceTextAreaRefresh", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("Repaint", GUILayout.Width(debugButtonWidth)))
                         {
-                            ForceTextAreaRefresh();
+                            NewRepaint();
                         }
 
                         if (GUILayout.Button("GUI.FocusControl", GUILayout.Width(debugButtonWidth)))
@@ -733,34 +942,42 @@ namespace TP
 
         private void UpdateGuiStyles(Readme readmeTarget)
         {
+            skinDefault = GUI.skin;
+            skinStyle = GUI.skin;
+            skinSource = GUI.skin;
+            skinStyle = skinStyle != null ? skinStyle : ReadmeUtil.GetSkin(GetSkinsPath(), "Style");
+            skinSource = skinSource != null ? skinSource : ReadmeUtil.GetSkin(GetSkinsPath(), "Source");
+            
             textAreaEmptyName = "readme_text_editor_empty_" + readme.GetInstanceID();
             textAreaReadonlyName = "readme_text_editor_readonly_" + readme.GetInstanceID();
             textAreaSourceName = "readme_text_editor_source_" + readme.GetInstanceID();
             textAreaStyleName = "readme_text_editor_style_" + readme.GetInstanceID();
-
-            emptyRichText = new GUIStyle
+            
+            emptyRichText = new GUIStyle(skinDefault.label)
             {
                 focused = { textColor = Color.gray },
                 normal = { textColor = Color.gray },
                 font = readmeTarget.font,
                 fontSize = readmeTarget.fontSize,
                 wordWrap = true,
-                padding = new RectOffset(textPadding + labelPaddingLeft, textPadding, textPadding + labelPaddingTop,
-                    textPadding)
+                padding = new RectOffset(textPadding, textPadding, textPadding,
+                    textPadding),
+                margin = new RectOffset(3, 3, 3, 3)
             };
 
-            selectableRichText = new GUIStyle
+            selectableRichText = new GUIStyle(skinDefault.label)
             {
                 focused = { textColor = readmeTarget.fontColor },
                 normal = { textColor = readmeTarget.fontColor },
                 font = readmeTarget.font,
                 fontSize = readmeTarget.fontSize,
                 wordWrap = true,
-                padding = new RectOffset(textPadding + labelPaddingLeft, textPadding, textPadding + labelPaddingTop,
-                    textPadding)
+                padding = new RectOffset(textPadding, textPadding, textPadding,
+                    textPadding),
+                margin = new RectOffset(3, 3, 3, 3)
             };
 
-            editableRichText = new GUIStyle(ActiveSkin.textArea)
+            editableRichText = new GUIStyle(skinStyle.textArea)
             {
                 richText = true,
                 font = readmeTarget.font,
@@ -770,7 +987,7 @@ namespace TP
                 margin = new RectOffset(3, 3, 3, 3)
             };
 
-            editableText = new GUIStyle(ActiveSkin.textArea)
+            editableText = new GUIStyle(skinSource.textArea)
             {
                 richText = false,
                 wordWrap = true,
@@ -803,13 +1020,18 @@ namespace TP
         private void UpdateAvailableWidth()
         {
             EditorGUILayout.Space();
-            if (Event.current.type == EventType.Repaint) //GetLastRect returns dummy values except on repaint. 
+            float defaultWidth = availableWidth != 0 ? availableWidth : EditorGUIUtility.currentViewWidth - 20;
+            availableWidth = GetLastRect(new Rect(0, 0, defaultWidth, 0)).width;
+        }
+
+        private void StopInvalidTextAreaEvents()
+        {
+            //Stop button clicks from being used by text
+            if (currentEvent.type == EventType.MouseDown
+                && textAreaRect.Contains(currentEvent.mousePosition)
+                && !scrollAreaRect.Contains(currentEvent.mousePosition))
             {
-                availableWidth = GUILayoutUtility.GetLastRect().width;
-            }
-            else if (availableWidth == 0)
-            {
-                availableWidth = EditorGUIUtility.currentViewWidth - 20;
+                currentEvent.Use();
             }
         }
 
@@ -846,9 +1068,7 @@ namespace TP
 
             if (privateTextEditor == null)
             {
-                FocusOnInspectorWindow();
-                EditorGUI.FocusTextInControl(activeTextAreaName);
-
+                // EditorGUI.FocusTextInControl(activeTextAreaName);
                 privateTextEditor = GetPrivateTextEditor;
             }
 
@@ -859,87 +1079,16 @@ namespace TP
         {
             if (readme.Text.Length > 0 || editing)
             {
-
                 TextEditor newTextEditor = GetTextEditor();
 
-                if (newTextEditor != null && TextEditor != newTextEditor)
+                if (newTextEditor != null && textEditor != newTextEditor)
                 {
-                    TextEditor = newTextEditor;
+                    textEditor = newTextEditor;
 
                     if (verbose)
                     {
                         Debug.Log("README: Text Editor assigned!");
                     }
-
-                    // if (TextEditorActive)
-                    // {
-                    //     ForceTextAreaRefresh();
-                    // }
-                }
-
-                // if (TextEditor == null)
-                // {
-                //     if (verbose)
-                //     {
-                //         Debug.Log("README: Text Editor not found!");
-                //     }
-                //
-                //     ForceTextAreaRefresh();
-                // }
-
-                // TextEditor newTextEditor = GetTextEditor();
-                //
-                // if (newTextEditor != null)
-                // {
-                //     if (TextEditor != newTextEditor)
-                //     {
-                //         TextEditor = newTextEditor;
-                //         if (verbose)
-                //         {
-                //             Debug.Log("README: Text Editor assigned!");
-                //         }
-                //
-                //         if (TextEditorActive)
-                //         {
-                //             ForceTextAreaRefresh();
-                //         }
-                //     }
-                //     else if (TextEditor == null)
-                //     {
-                //         if (verbose)
-                //         {
-                //             Debug.Log("README: Text Editor not found!");
-                //         }
-                //
-                //         ForceTextAreaRefresh();
-                //     }
-                // }
-            }
-        }
-
-        private void FocusOnInspectorWindow()
-        {
-            if (EditorWindow.focusedWindow != null)
-            {
-                bool unityInFocus = UnityEditorInternal.InternalEditorUtility.isApplicationActive;
-                string currentFocusedWindow = EditorWindow.focusedWindow.titleContent.text;
-                // if (currentFocusedWindow == "Hierarchy")
-                // if (unityInFocus && currentFocusedWindow is "Hierarchy" or "Inspector")
-                if (unityInFocus && currentFocusedWindow == "Hierarchy")
-                    // if (unityInFocus)
-                {
-                    GUI.UnfocusWindow();
-                    // FocusEditorWindow("");
-                    FocusEditorWindow("Inspector");
-
-                    // Debug.Log();
-
-                    previousFocusedWindow = currentFocusedWindow;
-                    windowFocusModified = true;
-
-                    string focusedControl = GUI.GetNameOfFocusedControl();
-                    Debug.Log("focus update. currentFocusedWindow: " + currentFocusedWindow + ", focusedControl: " +
-                              focusedControl);
                 }
             }
         }
@@ -962,7 +1111,7 @@ namespace TP
             }
         }
 
-        public void SetTargetDirty()
+        private void SetTargetDirty()
         {
             if (!Application.isPlaying)
             {
@@ -975,285 +1124,7 @@ namespace TP
             }
         }
 
-        void ForceGuiRedraw()
-        {
-            // EditorGuiTextAreaObjectFields();
-        }
-
-        void ForceTextAreaRefresh(int selectIndex = -1, int cursorIndex = -1, int delay = 3)
-        {
-            // if (!textAreaRefreshPending)
-            // {
-            //     if (verbose)
-            //     {
-            //         Debug.Log("README: ForceTextAreaRefresh, selectIndex: " + selectIndex + " cursorIndex: " +
-            //                   cursorIndex);
-            //     }
-            //
-            //     textAreaRefreshPending = true;
-            //
-            //     focusSelectIndex = selectIndex == -1 && TextEditorActive ? SelectIndex : selectIndex;
-            //     focusCursorIndex = cursorIndex == -1 && TextEditorActive ? CursorIndex : cursorIndex;
-            //
-            //     string focusedControl = GUI.GetNameOfFocusedControl();
-            //     if (focusedControl != textAreaReadonlyName && focusedControl != "")
-            //     {
-            //         EditorGUI.FocusTextInControl("");
-            //         GUI.FocusControl("");
-            //     }
-            //
-            //     focusDelay = delay;
-            //     ForceGuiRedraw();
-            // }
-        }
-
-        private void FocusTextArea(bool clearRefresh = true)
-        {
-            if (clearRefresh)
-            {
-                textAreaRefreshPending = false;
-            }
-
-            EditorGUI.FocusTextInControl(activeTextAreaName);
-            GUI.FocusControl(activeTextAreaName);
-            ForceGuiRedraw();
-        }
-
-        private void UpdateFocus()
-        {
-            if (textAreaRefreshPending)
-            {
-                if (verbose)
-                {
-                    Debug.Log("README: textAreaNeedsFocus, focusDelay: " + focusDelay);
-                }
-
-                if (focusDelay <= 0)
-                {
-                    if (verbose)
-                    {
-                        Debug.Log("README: FocusTextArea: " + activeTextAreaName + " selectIndex: " + focusSelectIndex +
-                                  " cursorIndex: " + focusCursorIndex);
-                    }
-
-                    FocusTextArea();
-                }
-                else
-                {
-                    focusDelay--;
-                    ForceGuiRedraw();
-                }
-            }
-            else
-            {
-                if (focusCursorIndex != -1)
-                {
-                    CursorIndex = focusCursorIndex;
-                    focusCursorIndex = -1;
-                }
-
-                if (focusSelectIndex != -1)
-                {
-                    SelectIndex = focusSelectIndex;
-                    focusSelectIndex = -1;
-                }
-            }
-
-            if (windowFocusModified && textEditor != null)
-            {
-                windowFocusModified = false;
-                FocusEditorWindow(previousFocusedWindow);
-                Debug.Log("Focusing on previous window");
-            }
-        }
-
-        private void AutoFocus()
-        {
-            bool unityInFocus = UnityEditorInternal.InternalEditorUtility.isApplicationActive;
-            if (autoFocus && unityInFocus)
-            {
-                FocusTextArea(false);
-
-                if (TextEditor != null && TextEditor.controlID > 0 &&
-                    GUI.GetNameOfFocusedControl() == activeTextAreaName)
-                {
-                    autoFocus = false;
-                    Debug.Log("Auto focused on text area! TextEditor.controlID: " + TextEditor.controlID);
-                }
-                
-                ForceTextAreaRefresh();
-            }
-        }
-
-        private void EditorGuiTextAreaObjectFields()
-        {
-            if (RichText != null)
-            {
-                UpdateTextAreaObjectFieldArray();
-                DrawTextAreaObjectFields();
-                UpdateTextAreaObjectFieldIds();
-            }
-
-            void UpdateTextAreaObjectFieldArray()
-            {
-                if (TextEditor != null)
-                {
-                    string objectTagPattern = "<o=\"[-,a-zA-Z0-9]*\"></o>";
-                    MatchCollection matches = Regex.Matches(RichText, objectTagPattern, RegexOptions.None);
-                    TextAreaObjectField[] newTextAreaObjectFields = new TextAreaObjectField[matches.Count];
-                    for (int i = matches.Count - 1; i >= 0; i--)
-                    {
-                        Match match = matches[i];
-
-                        if (match.Success)
-                        {
-                            string idValue = match.Value.Replace("<o=\"", "").Replace("\"></o>", "");
-                            int objectId = 0;
-                            bool parseSuccess = int.TryParse(idValue, out objectId);
-
-                            if (!parseSuccess && verbose)
-                            {
-                                Debug.Log("Unable to parse id: " + idValue);
-                            }
-
-                            int startIndex = match.Index;
-                            int endIndex = match.Index + match.Value.Length;
-
-                            if (endIndex == RichText.Length || RichText[endIndex] != ' ')
-                            {
-                                RichText = RichText.Insert(endIndex, " ");
-                            }
-
-                            if (startIndex == 0 || RichText[startIndex - 1] != ' ')
-                            {
-                                RichText = RichText.Insert(startIndex, " ");
-                            }
-
-                            Rect rect = GetRect(startIndex - 1, endIndex + 1);
-                            rect.position += TextAreaRect.position;
-
-                            Rect rectWithCorrectHeight = GetRect(startIndex - 1, endIndex);
-                            rect.height = rectWithCorrectHeight.height;
-                            rect.width = rectWithCorrectHeight.width;
-
-                            // if (!editing) { rect.y -= 2; } //Fixes slight offset between TextArea and Label EditorGui Layouts.
-
-                            if (rect.x > 0 && rect.y > 0 && rect.width > 0 && rect.height > 0)
-                            {
-                                TextAreaObjectField matchedField =
-                                    TextAreaObjectFields.FirstOrDefault(item => item.ObjectId == objectId);
-                                if (matchedField != null && !matchedField.IdInSync)
-                                {
-                                    matchedField.UpdateId();
-                                    objectId = matchedField.ObjectId;
-
-                                    int idStartIndex = match.Index + 4;
-                                    RichText = RichText
-                                        .Remove(idStartIndex, idValue.Length)
-                                        .Insert(idStartIndex, GetFixedLengthId(objectId.ToString()));
-
-                                    ForceTextAreaRefresh();
-                                }
-
-                                if (matchedField != null && !matchedField.IdInSync)
-                                {
-                                    ReadmeManager.AddObjectIdPair(matchedField.ObjectRef, objectId);
-                                }
-
-                                TextAreaObjectField newField = new TextAreaObjectField(rect, objectId, startIndex,
-                                    endIndex - startIndex);
-                                newTextAreaObjectFields[i] = newField;
-                                newTextAreaObjectFields[i].OnChangeHandler += SetTargetDirty;
-                            }
-                            else
-                            {
-                                return; //Abort everything. Position is incorrect! Probably no TextEditor found.
-                            }
-                        }
-                    }
-
-                    if (!TextAreaObjectFields.SequenceEqual(newTextAreaObjectFields))
-                    {
-                        TextAreaObjectFields = newTextAreaObjectFields;
-                    }
-                }
-            }
-
-            void DrawTextAreaObjectFields()
-            {
-                if (!sourceOn)
-                {
-                    Vector2 editOffset = new Vector2(-3, -3);
-                    Vector2 readOffset = new Vector2(0, 0);
-                    Vector2 offset = (editing ? editOffset : readOffset);
-                    // if (TextEditor != null && textEditor.controlID == 0)
-                    // {
-                    //     offset -= scroll; //Bug fix when text editor doens't have control but can still scroll.
-                    // }
-                    // else
-                    // {
-                    //     offset -= scroll * 2;
-                    // }
-                    offset -= scroll;
-                    EditorGUI.BeginDisabledGroup(!editing);
-                    foreach (TextAreaObjectField textAreaObjectField in TextAreaObjectFields)
-                    {
-                        textAreaObjectField.Draw(TextEditor, offset, ScrollAreaRect);
-                    }
-
-                    EditorGUI.EndDisabledGroup();
-                }
-            }
-
-            void UpdateTextAreaObjectFieldIds()
-            {
-                StringBuilder newRichText = new StringBuilder(RichText);
-                string objectTagPattern = "<o=\"[-,a-zA-Z0-9]*\"></o>";
-                int startTagLength = "<o=\"".Length;
-                int endTagLength = "\"></o>".Length;
-                int expectedFieldCount = Regex.Matches(RichText, "<o=\"[-,a-zA-Z0-9]*\"></o>", RegexOptions.None).Count;
-
-                if (expectedFieldCount != TextAreaObjectFields.Length)
-                {
-                    return;
-                }
-
-                for (int i = TextAreaObjectFields.Length - 1; i >= 0; i--)
-                {
-                    TextAreaObjectField textAreaObjectField = TextAreaObjectFields[i];
-
-                    if (RichText.Length > textAreaObjectField.Index)
-                    {
-                        Match match =
-                            Regex.Match(RichText.Substring(Mathf.Max(0, textAreaObjectField.Index - 1)),
-                                objectTagPattern, RegexOptions.None);
-
-                        if (match.Success)
-                        {
-                            string textAreaId =
-                                GetFixedLengthId(match.Value.Replace("<o=\"", "").Replace("\"></o>", ""));
-                            string objectFieldId = GetFixedLengthId(textAreaObjectField.ObjectId);
-
-                            if (textAreaId != objectFieldId)
-                            {
-                                int idStartIndex = textAreaObjectField.Index + match.Index + startTagLength;
-                                newRichText.Remove(idStartIndex - 1, textAreaId.Length);
-                                newRichText.Insert(idStartIndex - 1, objectFieldId);
-                            }
-                        }
-                    }
-                }
-
-                RichText = newRichText.ToString();
-            }
-        }
-
-        string GetFixedLengthId(int id, int length = 7)
-        {
-            return GetFixedLengthId(id.ToString(), length);
-        }
-
-        string GetFixedLengthId(string id, int length = 7)
+        private string GetFixedLengthId(string id, int length = 7)
         {
             string fixedLengthId = id;
             bool isNegative = id[0] == '-';
@@ -1275,7 +1146,7 @@ namespace TP
             return fixedLengthId;
         }
 
-        void ShowLiteVersionDialog(string feature = "This")
+        private void ShowLiteVersionDialog(string feature = "This")
         {
             string title = "Paid Feature Only";
             string message = feature +
@@ -1290,24 +1161,22 @@ namespace TP
             }
         }
 
-        void DragAndDropObjectField()
+        private void DragAndDropObjectField()
         {
             if (editing)
             {
-                Event evt = Event.current;
-
-                switch (evt.type)
+                switch (currentEvent.type)
                 {
                     case EventType.DragUpdated:
                     case EventType.DragPerform:
-                        if (!TextAreaRect.Contains(evt.mousePosition))
+                        if (!scrollAreaRect.Contains(currentEvent.mousePosition))
                         {
                             return; // Ignore drag and drop outside of textArea
                         }
 
                         foreach (TextAreaObjectField textAreaObjectField in TextAreaObjectFields)
                         {
-                            if (textAreaObjectField.FieldRect.Contains(evt.mousePosition))
+                            if (textAreaObjectField.FieldRect.Contains(currentEvent.mousePosition))
                             {
                                 return; // Ignore drag and drop over current Object Fields
                             }
@@ -1315,7 +1184,7 @@ namespace TP
 
                         DragAndDrop.visualMode = DragAndDropVisualMode.Link;
 
-                        if (evt.type == EventType.DragPerform && objectsToDrop == null)
+                        if (currentEvent.type == EventType.DragPerform && objectsToDrop == null)
                         {
                             DragAndDrop.AcceptDrag();
 
@@ -1326,25 +1195,18 @@ namespace TP
                         break;
                 }
 
-                if (objectsToDrop != null)
+                if (objectsToDrop != null && textEditor != null)
                 {
-                    if (!TextEditorActive)
-                    {
-                        ForceTextAreaRefresh();
-                    }
-                    else
-                    {
-                        int dropIndex = GetNearestPoorTextIndex(PositionToIndex(objectDropPosition));
-                        InsertObjectFields(objectsToDrop, dropIndex);
-                        objectsToDrop = null;
-                        objectDropPosition = Vector2.zero;
-                        Undo.RecordObject(readme, "object field added");
-                    }
+                    int dropIndex = GetNearestPoorTextIndex(PositionToIndex(objectDropPosition));
+                    InsertObjectFields(objectsToDrop, dropIndex);
+                    objectsToDrop = null;
+                    objectDropPosition = Vector2.zero;
+                    Undo.RecordObject(readme, "object field added");
                 }
             }
         }
 
-        void InsertObjectFields(Object[] objects, int index)
+        private void InsertObjectFields(Object[] objects, int index)
         {
             if (liteEditor)
             {
@@ -1360,7 +1222,7 @@ namespace TP
             }
         }
 
-        void AddObjectField(int index = -1, string id = "0000000")
+        private void AddObjectField(int index = -1, string id = "0000000")
         {
             if (TextEditorActive)
             {
@@ -1373,7 +1235,7 @@ namespace TP
                 RichText = RichText.Insert(index, objectString);
 
                 int newIndex = GetNearestPoorTextIndex(index + objectString.Length);
-                ForceTextAreaRefresh(newIndex, newIndex);
+                NewRepaint(newIndex, newIndex);
 
                 SetTargetDirty();
             }
@@ -1381,12 +1243,12 @@ namespace TP
 
         private Rect GetRect(int startIndex, int endIndex, bool autoAdjust = true)
         {
-            Rect textEditorRect = TextEditor != null ? TextEditor.position : new Rect();
+            Rect textEditorRect = textEditor != null ? textEditor.position : new Rect();
 
-            if (TextEditor != null && TextEditor.text != readme.RichText && TextEditorActive)
+            if (textEditor != null && textEditor.text != readme.RichText && TextEditorActive)
             {
                 Debug.Log("TestEditor text out of sync. Forcing text update.");
-                TextEditor.text = readme.RichText;
+                textEditor.text = readme.RichText;
             }
 
             int textSize = 12; //Todo get size from size map
@@ -1427,23 +1289,23 @@ namespace TP
 
             Rect rect = new Rect(startPosition, size);
 
-            if (autoAdjust)
-            {
-                if (rect.width <= 0)
-                {
-                    rect = GetRect(startIndex + 1, endIndex, false);
-                }
-
-                if (rect.width <= 0)
-                {
-                    rect = GetRect(startIndex, endIndex - 1, false);
-                }
-
-                if (rect.width <= 0)
-                {
-                    rect = GetRect(startIndex + 1, endIndex - 1, false);
-                }
-            }
+            // if (autoAdjust)
+            // {
+            //     if (rect.width <= 0)
+            //     {
+            //         rect = GetRect(startIndex + 1, endIndex, false);
+            //     }
+            //
+            //     if (rect.width <= 0)
+            //     {
+            //         rect = GetRect(startIndex, endIndex - 1, false);
+            //     }
+            //
+            //     if (rect.width <= 0)
+            //     {
+            //         rect = GetRect(startIndex + 1, endIndex - 1, false);
+            //     }
+            // }
 
             return rect;
         }
@@ -1471,6 +1333,7 @@ namespace TP
                 //     allowSelectAll = false;
                 // }
 
+                //TODO probably dont need this
                 if (SelectIndex == 0 && CursorIndex == 0 &&
                     (currentCursorIndex != CursorIndex || currentSelectIndex != SelectIndex))
                 {
@@ -1667,7 +1530,6 @@ namespace TP
                 int poorStyleLength = styleEndIndex - styleStartIndex;
 
                 readme.ToggleStyle(tag, styleStartIndex, poorStyleLength);
-                TextEditor.text = RichText;
 
                 if (TagsError(RichText))
                 {
@@ -1677,14 +1539,14 @@ namespace TP
 
                 UpdateStyleState();
 
-                int newCursorIndex = GetNearestPoorTextIndex(readme.GetRichIndex(styleStartIndex));
-                int newSelectIndex = GetNearestPoorTextIndex(readme.GetRichIndex(styleEndIndex));
+                int newCursorIndex = GetNearestPoorTextIndex(readme.GetRichIndex(styleStartIndex+1)-1);
+                int newSelectIndex = GetNearestPoorTextIndex(readme.GetRichIndex(styleEndIndex+1)-1);
 
-                ForceTextAreaRefresh(newCursorIndex, newSelectIndex);
+                NewRepaint(newCursorIndex, newSelectIndex);
             }
         }
 
-        void UpdateStyleState()
+        private void UpdateStyleState()
         {
             if (TextEditorActive)
             {
@@ -1748,13 +1610,35 @@ namespace TP
             richTextChanged = false;
         }
 
-        public void FixMouseCursor()
+        private void ScrollToCursor()
+        {
+            if (TextEditorActive)
+            {
+                if ((currentEvent.isKey || currentEvent.isMouse) && !AllTextSelected())
+                {
+                    int index = GetCursors().Item1;
+                    Rect cursorRect = GetRect(index, index);
+                    cursorRect.position -= scroll;
+                    if (cursorRect.yMax > scrollAreaRect.yMax)
+                    {
+                        scroll.y += cursorRect.height;
+                    }
+
+                    if (cursorRect.yMin < scrollAreaRect.yMin)
+                    {
+                        scroll.y -= cursorRect.height;
+                    }
+                }
+            }
+        }
+
+        private void FixMouseCursor()
         {
             bool mouseEvent =
                 new EventType[] { EventType.MouseDown, EventType.MouseDrag, EventType.MouseUp }.Contains(currentEvent
                     .type);
 
-            if (currentEvent.type == EventType.MouseDown && TextAreaRect.Contains(currentEvent.mousePosition))
+            if (currentEvent.type == EventType.MouseDown && scrollAreaRect.Contains(currentEvent.mousePosition))
             {
                 mouseCaptured = true;
             }
@@ -1784,13 +1668,13 @@ namespace TP
             }
         }
 
-        public void FixArrowCursor()
+        private void FixArrowCursor()
         {
             bool isKeyboard =
                 new KeyCode[] { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.LeftArrow }.Contains(
                     Event.current.keyCode);
             bool isDoubleClick = Event.current.clickCount == 2;
-            bool clickInTextArea = TextAreaRect.Contains(currentEvent.mousePosition);
+            bool clickInTextArea = scrollAreaRect.Contains(currentEvent.mousePosition);
             if (isKeyboard || isDoubleClick || richTextChanged || AllTextSelected())
             {
                 int direction = isDoubleClick ? 1 : 0;
@@ -1816,7 +1700,7 @@ namespace TP
                 if (isDoubleClick && clickInTextArea && readme.RichText.Length > 0)
                 {
                     int mouseIndex = MousePositionToIndex;
-                    char characterClicked = readme.RichText[Math.Min(mouseIndex, readme.RichText.Length - 1)];
+                    char characterClicked = readme.RichText[Mathf.Clamp(mouseIndex, 0, readme.RichText.Length - 1)];
                     if (!char.IsWhiteSpace(characterClicked)) //Dont fix word select if clicked character is a a space
                     {
                         SelectIndex = mouseIndex;
@@ -1830,9 +1714,9 @@ namespace TP
 
         public void CopyRichText()
         {
-            if (TextEditor != null)
+            if (textEditor != null)
             {
-                string textToCopy = TextEditor.SelectedText.Length > 0 ? TextEditor.SelectedText : readme.RichText;
+                string textToCopy = textEditor.SelectedText.Length > 0 ? textEditor.SelectedText : readme.RichText;
                 EditorGUIUtility.systemCopyBuffer = textToCopy;
                 FixCopyBuffer();
             }
@@ -1844,7 +1728,7 @@ namespace TP
             ForceCopyBufferToPoorText();
         }
 
-        public void FixCopyBuffer()
+        private void FixCopyBuffer()
         {
             if ((!(editing && sourceOn) && !TagsError(RichText)))
             {
@@ -1876,7 +1760,7 @@ namespace TP
             }
         }
 
-        public void ForceCopyBufferToPoorText()
+        private void ForceCopyBufferToPoorText()
         {
             string newCopyBuffer = EditorGUIUtility.systemCopyBuffer;
             if (TextEditorActive && (!sourceOn && !TagsError(RichText)))
@@ -1888,49 +1772,32 @@ namespace TP
             previousCopyBuffer = newCopyBuffer;
         }
 
-        public int GetNearestPoorTextIndex(int index, int direction = 0)
+        private int GetNearestPoorTextIndex(int index, int direction = 0)
         {
-            int nearestPoorTextIndex = index;
-
-            if (IsOnTag(index) && index <= RichText.Length)
+            index = Mathf.Clamp(index, 0, RichText.Length);
+            
+            int maxRight = ActiveText.Length - index;
+            for (int i = 0; direction >= 0 && i < maxRight; i++)
             {
-                SaveCursorIndex();
-
-                int attempts = readme.richTextTagMap.Count * 2;
-
-                for (int i = 0; i < attempts && IsOnTag(index); i++)
+                if (!IsInTag(index + i))
                 {
-                    if (index == 0)
-                    {
-                        direction = 1;
-                    }
-
-                    if (index == TextEditor.text.Length)
-                    {
-                        break; //end of text always not rich text.
-                    }
-
-                    if (direction >= 0)
-                    {
-                        TextEditor.MoveRight();
-                        index++;
-                    }
-                    else
-                    {
-                        TextEditor.MoveLeft();
-                        index--;
-                    }
+                    return (index + i);
                 }
-
-                nearestPoorTextIndex = index;
-
-                LoadCursorIndex();
+            }
+            
+            int maxLeft = index + 1;
+            for (int i = 0; direction <= 0 && i < maxLeft; i++)
+            {
+                if (!IsInTag(index - i))
+                {
+                    return (index - i);
+                }
             }
 
-            return nearestPoorTextIndex;
+            return index;
         }
 
-        public bool TagsError(string richText)
+        private bool TagsError(string richText)
         {
             bool tagsError = true;
 //            bool hasTags = readme.richTextTagMap.Find(isTag => isTag);
@@ -1971,7 +1838,17 @@ namespace TP
             return tagsError;
         }
 
-        public bool IsOnTag(int index)
+        private bool IsInTag(int index)
+        {
+            if (index == 0 || index == RichText.Length)
+            {
+                return false;
+            }
+
+            return IsOnTag(index) && IsOnTag(index - 1); 
+        }
+
+        private bool IsOnTag(int index)
         {
             bool isOnTag = false;
 
@@ -1990,17 +1867,14 @@ namespace TP
             return isOnTag;
         }
 
-        public int MousePositionToIndex
-        {
-            get { return PositionToIndex(currentEvent.mousePosition); }
-        }
+        private int MousePositionToIndex => PositionToIndex(currentEvent.mousePosition);
 
-        public int PositionToIndex(Vector2 position)
+        private int PositionToIndex(Vector2 position)
         {
             int index = -1;
             SaveCursorIndex();
 
-            Vector2 goalPosition = position - TextAreaRect.position + scroll;
+            Vector2 goalPosition = position - textAreaRect.position + scroll;
 
             float cursorYOffset = activeTextAreaStyle.lineHeight;
 
@@ -2020,17 +1894,17 @@ namespace TP
                 }
 
                 //TODO: Check for end of word wrapped line.
-                bool isEndOfLine = RichText.Length > currentIndex ? RichText[currentIndex] == '\n' : true;
+                bool isEndOfLine = RichText.Length <= currentIndex || RichText[currentIndex] == '\n';
 
                 if (currentGraphicalPosition.y < goalPosition.y - cursorYOffset)
                 {
-                    TextEditor.MoveRight();
+                    textEditor.MoveRight();
                     textEditor.cursorIndex = GetNearestPoorTextIndex(CursorIndex);
                     textEditor.selectIndex = GetNearestPoorTextIndex(CursorIndex);
                 }
                 else if (currentGraphicalPosition.x < goalPosition.x && !isEndOfLine)
                 {
-                    TextEditor.MoveRight();
+                    textEditor.MoveRight();
                     textEditor.cursorIndex = GetNearestPoorTextIndex(CursorIndex);
                     textEditor.selectIndex = GetNearestPoorTextIndex(CursorIndex);
 
@@ -2057,13 +1931,13 @@ namespace TP
             return index;
         }
 
-        public int WordStartIndex
+        private int WordStartIndex
         {
             get
             {
                 SaveCursorIndex();
 
-                TextEditor.MoveWordLeft();
+                textEditor.MoveWordLeft();
                 int wordStartIndex = SelectIndex;
 
                 LoadCursorIndex();
@@ -2072,13 +1946,13 @@ namespace TP
             }
         }
 
-        public int WordEndIndex
+        private int WordEndIndex
         {
             get
             {
                 SaveCursorIndex();
 
-                TextEditor.MoveWordRight();
+                textEditor.MoveWordRight();
                 int wordStartIndex = SelectIndex;
 
                 LoadCursorIndex();
@@ -2095,46 +1969,21 @@ namespace TP
 
         private void LoadCursorIndex()
         {
-            TextEditor.cursorIndex = (int)tempCursorIndex.Pop();
-            TextEditor.selectIndex = (int)tempSelectIndex.Pop();
+            textEditor.cursorIndex = (int)tempCursorIndex.Pop();
+            textEditor.selectIndex = (int)tempSelectIndex.Pop();
         }
 
-        public Rect ScrollAreaRect
+        private Rect GetLastRect(Rect defaultRect)
         {
-            get { return scrollAreaRect; }
-            set
+            if (Event.current.type == EventType.Repaint) //GetLastRect returns dummy values except on repaint. 
             {
-                if (Event.current.type == EventType.Repaint) //GetLastRect returns dummy values except on repaint. 
-                {
-                    scrollAreaRect = value;
-                }
+                return GUILayoutUtility.GetLastRect();
             }
+
+            return defaultRect;
         }
 
-        public Rect TextAreaRect
-        {
-            get { return textAreaRect; }
-            set
-            {
-                if (Event.current.type == EventType.Repaint) //GetLastRect returns dummy values except on repaint. 
-                {
-                    // if (textAreaRect.width != value.width)
-                    if (textAreaRect != value)
-                    {
-                        ForceTextAreaRefresh();
-                    }
-
-                    textAreaRect = value;
-                }
-            }
-        }
-
-        private GUISkin ActiveSkin
-        {
-            get { return skin != null ? skin : GUI.skin; }
-        }
-
-        public Vector2 GetGraphicalCursorPos(int cursorIndex = -1, bool useScroll = true)
+        private Vector2 GetGraphicalCursorPos(int cursorIndex = -1, bool useScroll = true)
         {
             if (!TextEditorActive)
             {
@@ -2142,13 +1991,8 @@ namespace TP
             }
 
             cursorIndex = cursorIndex == -1 ? CursorIndex : cursorIndex;
-            Vector2 position = activeTextAreaStyle.GetCursorPixelPosition(TextAreaRect, new GUIContent(RichText), cursorIndex);
-            position += ScrollAreaRect.position;
-            
-            // if (useScroll)
-            // {
-            //     position -= scroll;
-            // }
+            Vector2 position = activeTextAreaStyle.GetCursorPixelPosition(textAreaRect, new GUIContent(RichText), cursorIndex);
+            position += scrollAreaRect.position;
             
             return position;
         }
@@ -2176,7 +2020,6 @@ namespace TP
             bool isPrefab = gameObject != null && (gameObject.scene.name == null ||
                                                    gameObject.gameObject != null &&
                                                    gameObject.gameObject.scene.name == null);
-
             return isPrefab;
         }
 
@@ -2214,7 +2057,7 @@ namespace TP
 
         private int CursorIndex
         {
-            get => textEditor != null ? TextEditor.cursorIndex : 0;
+            get => textEditor != null ? textEditor.cursorIndex : 0;
             set
             {
                 if (textEditor != null)
@@ -2231,7 +2074,7 @@ namespace TP
                         currentCursorIndex = value;
                     }
 
-                    TextEditor.cursorIndex = value;
+                    textEditor.cursorIndex = value;
                 }
 
                 ;
@@ -2240,7 +2083,7 @@ namespace TP
 
         private int SelectIndex
         {
-            get => textEditor != null ? TextEditor.selectIndex : 0;
+            get => textEditor != null ? textEditor.selectIndex : 0;
             set
             {
                 if (textEditor != null)
@@ -2257,17 +2100,11 @@ namespace TP
                         currentSelectIndex = value;
                     }
 
-                    TextEditor.selectIndex = value;
+                    textEditor.selectIndex = value;
                 }
 
                 ;
             }
-        }
-
-        private TextEditor TextEditor
-        {
-            get => textEditor;
-            set => textEditor = value;
         }
 
         private int GetLastControlId
@@ -2310,23 +2147,8 @@ namespace TP
         }
 
         private string ActiveText => readme.RichText;
-        public bool UnityInFocus => UnityEditorInternal.InternalEditorUtility.isApplicationActive;
-        
-        // public bool TextEditorInSync
-        // {
-        //     get { return textEditor != null && textEditor.position == textAreaRect && textEditor.text == RichText; }
-        // }
-        //
-        //
-        // public bool TextEditorActive
-        // {
-        //     get { return textEditor != null; }
-        //     // get { return textEditor != null && (textEditor.position == textAreaRect || textEditor.text == RichText); }
-        //     // get { return textEditor != null && textEditor.position == textAreaRect && textEditor.text == RichText; }
-        // }
         
         private bool TextEditorActive =>
-            // get { return textEditor != null && textEditor.position == textAreaRect && textEditor.text == RichText; }
             textEditor != null && activeTextAreaName != "" && GUI.GetNameOfFocusedControl() == activeTextAreaName;
 
         private TextAreaObjectField[] TextAreaObjectFields

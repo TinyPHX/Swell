@@ -97,8 +97,10 @@ namespace TP
 
         public bool IsSelected(TextEditor textEditor)
         {
-            bool isSelected = Mathf.Min(textEditor.selectIndex, textEditor.cursorIndex) <= index &&
-                              Mathf.Max(textEditor.selectIndex, textEditor.cursorIndex) >= (index + length);
+            bool isSelected = 
+                textEditor.controlID != 0 &&
+                Mathf.Min(textEditor.selectIndex, textEditor.cursorIndex) <= index &&
+                Mathf.Max(textEditor.selectIndex, textEditor.cursorIndex) >= (index + length);
 
             return isSelected;
         }

@@ -163,7 +163,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -173,7 +173,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -182,7 +182,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -200,7 +200,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -226,6 +226,285 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &50357786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 50357788}
+  - component: {fileID: 50357787}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &50357787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50357786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 000000000000000101010101010101010101010101010101010000000000000101010000000000000001010101000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: "test\n\n <o=\"6352848\"></o> aaaaaa<b>aaaaaaa</b>aaaaaaaaa  <o=\"0000582\"></o>
+      aaaaaaaaaaaaaaaaaaaaaa\n\nThis is dumb!"
+    textAreaObjectFields:
+    - name: Readme (6352848)
+      objectId: 6352848
+      objectRef: {fileID: 1111943948}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 47
+        width: 123
+        height: 15
+      index: 7
+      length: 17
+    - name: Swell Wave Samples (582)
+      objectId: 582
+      objectRef: {fileID: 792790614}
+      fieldRect:
+        serializedVersion: 2
+        x: 309
+        y: 47
+        width: 125
+        height: 15
+      index: 56
+      length: 17
+    objectIdPairs:
+    - name: README (UnityEngine.GameObject) (6932534)
+      id: 6932534
+      objectRef: {fileID: 1687639724}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (836188)
+      id: 836188
+      objectRef: {fileID: 792790614}
+    - name: Swell Mesh (UnityEngine.GameObject) (9491759)
+      id: 9491759
+      objectRef: {fileID: 8515328486482458088}
+    - name: MeshAlbedoOrigin (UnityEngine.GameObject... (356258)
+      id: 356258
+      objectRef: {fileID: 1437867721}
+    - name: Readme (UnityEngine.GameObject) (26024)
+      id: 26024
+      objectRef: {fileID: 1111943948}
+  managerConnected: 1
+--- !u!4 &50357788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50357786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 42
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &127323939
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 127323941}
+  - component: {fileID: 127323940}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &127323940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127323939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: "dtewsatestasd <o=\"6556384\"></o> \n\n\nafesfas\n\nasefgase\nf\n\n\nThis
+      is dume\n\n\n\n\n\nwdad\n <o=\"6556384\"></o> \ndwa'\n\n\n\n\n\nwda\nSICK\n\n\n\n\n\nwdad\n
+      <o=\"6556384\"></o> \n\n\ndwadadwadwadawsdasd\n\n\n\ndwadaw"
+    textAreaObjectFields:
+    - name: Swell Wave Samples (6556384)
+      objectId: 6556384
+      objectRef: {fileID: 792790614}
+      fieldRect:
+        serializedVersion: 2
+        x: 109
+        y: 17
+        width: 123
+        height: 15
+      index: 14
+      length: 17
+    - name: Swell Wave Samples (6556384)
+      objectId: 6556384
+      objectRef: {fileID: 792790614}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 257
+        width: 123
+        height: 15
+      index: 81
+      length: 17
+    - name: Swell Wave Samples (6556384)
+      objectId: 6556384
+      objectRef: {fileID: 792790614}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 482
+        width: 123
+        height: 15
+      index: 130
+      length: 17
+    objectIdPairs: []
+  managerConnected: 1
+--- !u!4 &127323941
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127323939}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &179042979
 GameObject:
@@ -484,6 +763,130 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 347475034}
   m_CullTransparentMesh: 1
+--- !u!1 &371959994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 371959996}
+  - component: {fileID: 371959995}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &371959995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371959994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: 
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: River (UnityEngine.GameObject) (6733440)
+      id: 6733440
+      objectRef: {fileID: 662738542}
+    - name: Readme (UnityEngine.GameObject) (7824168)
+      id: 7824168
+      objectRef: {fileID: 1456088580}
+    - name: Readme (UnityEngine.GameObject) (2619882)
+      id: 2619882
+      objectRef: {fileID: 1062958050}
+    - name: Readme (UnityEngine.GameObject) (2575167)
+      id: 2575167
+      objectRef: {fileID: 1413872804}
+    - name: Readme (UnityEngine.GameObject) (7969403)
+      id: 7969403
+      objectRef: {fileID: 417381432}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (3391419)
+      id: 3391419
+      objectRef: {fileID: 792790614}
+    - name: Readme (UnityEngine.GameObject) (2321275)
+      id: 2321275
+      objectRef: {fileID: 1189274565}
+  managerConnected: 1
+--- !u!4 &371959996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371959994}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 37
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417381432
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,17 +1083,17 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n <o=\"1701590\"></o>
+    richText: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n <o=\"7295039\"></o>
       \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     textAreaObjectFields:
-    - name: Readme (1701590)
-      objectId: 1701590
+    - name: Readme (675854)
+      objectId: 7295039
       objectRef: {fileID: 585562211}
       fieldRect:
         serializedVersion: 2
-        x: 9
-        y: 440
-        width: 118
+        x: 27
+        y: 452
+        width: 120
         height: 15
       index: 30
       length: 17
@@ -724,7 +1127,281 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &597714054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 597714056}
+  - component: {fileID: 597714055}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &597714055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597714054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: "dwadwa\n\n\n\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||      
+      <o=\"6917628\"></o>      ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\ndwa\n\n\ndwa\n
+      <o=\"5028078\"></o> \n\n\n\ntest\n\n\nt\nest\n\n\n\n\n\n\n\n\n\n\n\n <o=\"8700705\"></o> "
+    textAreaObjectFields:
+    - name: Readme (6917628)
+      objectId: 6917628
+      objectRef: {fileID: 734215989}
+      fieldRect:
+        serializedVersion: 2
+        x: 429
+        y: 92
+        width: 120
+        height: 15
+      index: 244
+      length: 17
+    - name: Readme (5028078)
+      objectId: 5028078
+      objectRef: {fileID: 48108459}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 197
+        width: 123
+        height: 15
+      index: 485
+      length: 17
+    - name: Readme (8700705)
+      objectId: 8700705
+      objectRef: {fileID: 1258261397}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 497
+        width: 124
+        height: 15
+      index: 532
+      length: 17
+    objectIdPairs:
+    - name: README (UnityEngine.GameObject) (2690974)
+      id: 2690974
+      objectRef: {fileID: 1687639724}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (7792206)
+      id: 7792206
+      objectRef: {fileID: 792790614}
+    - name: Readme (UnityEngine.GameObject) (3763467)
+      id: 3763467
+      objectRef: {fileID: 417381432}
+    - name: Readme (UnityEngine.GameObject) (9191959)
+      id: 9191959
+      objectRef: {fileID: 734215989}
+  managerConnected: 1
+--- !u!4 &597714056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597714054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &662016651
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 662016653}
+  - component: {fileID: 662016652}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &662016652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662016651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 
+  font: {fileID: 0}
+  fontSize: 0
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: 
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: River (UnityEngine.GameObject) (6733440)
+      id: 6733440
+      objectRef: {fileID: 662738542}
+    - name: Readme (UnityEngine.GameObject) (7824168)
+      id: 7824168
+      objectRef: {fileID: 1456088580}
+    - name: Readme (UnityEngine.GameObject) (2619882)
+      id: 2619882
+      objectRef: {fileID: 1062958050}
+    - name: Readme (UnityEngine.GameObject) (2575167)
+      id: 2575167
+      objectRef: {fileID: 1413872804}
+    - name: Readme (UnityEngine.GameObject) (7969403)
+      id: 7969403
+      objectRef: {fileID: 417381432}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (3391419)
+      id: 3391419
+      objectRef: {fileID: 792790614}
+    - name: Readme (UnityEngine.GameObject) (2321275)
+      id: 2321275
+      objectRef: {fileID: 1189274565}
+  managerConnected: 1
+--- !u!4 &662016653
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662016651}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &662738542
 GameObject:
@@ -849,7 +1526,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -859,7 +1536,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -868,7 +1545,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -877,7 +1554,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -886,7 +1563,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1050,6 +1727,130 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &990943503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990943505}
+  - component: {fileID: 990943504}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &990943504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990943503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 
+  font: {fileID: 0}
+  fontSize: 0
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: 
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: River (UnityEngine.GameObject) (6733440)
+      id: 6733440
+      objectRef: {fileID: 662738542}
+    - name: Readme (UnityEngine.GameObject) (7824168)
+      id: 7824168
+      objectRef: {fileID: 1456088580}
+    - name: Readme (UnityEngine.GameObject) (2619882)
+      id: 2619882
+      objectRef: {fileID: 1062958050}
+    - name: Readme (UnityEngine.GameObject) (2575167)
+      id: 2575167
+      objectRef: {fileID: 1413872804}
+    - name: Readme (UnityEngine.GameObject) (7969403)
+      id: 7969403
+      objectRef: {fileID: 417381432}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (3391419)
+      id: 3391419
+      objectRef: {fileID: 792790614}
+    - name: Readme (UnityEngine.GameObject) (2321275)
+      id: 2321275
+      objectRef: {fileID: 1189274565}
+  managerConnected: 1
+--- !u!4 &990943505
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990943503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1008766180
 GameObject:
@@ -1376,6 +2177,133 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1062958050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1062958052}
+  - component: {fileID: 1062958051}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1062958051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062958050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 00000000000000000000
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: dwadwasdwa
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: Readme (UnityEngine.GameObject) (3307689)
+      id: 3307689
+      objectRef: {fileID: 585562211}
+    - name: Readme (UnityEngine.GameObject) (1430660)
+      id: 1430660
+      objectRef: {fileID: 734215989}
+    - name: Readme (UnityEngine.GameObject) (8023847)
+      id: 8023847
+      objectRef: {fileID: 1010333737}
+    - name: README (UnityEngine.GameObject) (4866782)
+      id: 4866782
+      objectRef: {fileID: 1687639724}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (1510260)
+      id: 1510260
+      objectRef: {fileID: 792790614}
+    - name: Swell Mesh (UnityEngine.GameObject) (6857040)
+      id: 6857040
+      objectRef: {fileID: 8515328486482458088}
+    - name: MeshAlbedoOrigin (UnityEngine.GameObject... (2195019)
+      id: 2195019
+      objectRef: {fileID: 1437867721}
+    - name: Readme (UnityEngine.GameObject) (9448497)
+      id: 9448497
+      objectRef: {fileID: 417381432}
+  managerConnected: 1
+--- !u!4 &1062958052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062958050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 29
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1093905965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,7 +2464,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1546,7 +2474,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -1555,7 +2483,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -1564,7 +2492,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -1573,7 +2501,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1581,16 +2509,16 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: " <o=\"1143258\"></o> \n\n<i><b>test</b></i>"
+    richText: " <o=\"7072017\"></o> \n\n<i><b>test</b></i>"
     textAreaObjectFields:
-    - name: Readme (1143258)
-      objectId: 1143258
+    - name: Readme (7072017)
+      objectId: 7072017
       objectRef: {fileID: 1101006903}
       fieldRect:
         serializedVersion: 2
-        x: 24
+        x: 27
         y: 17
-        width: 118
+        width: 122
         height: 15
       index: 1
       length: 17
@@ -1653,7 +2581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  richTextTagMap: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000101010000000001010101000000000000000000000000000000000001010100000000010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
@@ -1662,7 +2590,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1672,7 +2600,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -1681,7 +2609,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -1690,7 +2618,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -1699,7 +2627,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1708,15 +2636,16 @@ MonoBehaviour:
     type: json
   readmeData:
     richText: "asdafsdfa\n\nwhat ever yo what ever yo what ever yo what ever yo what
-      ever yo what ever yo what ever  <o=\"7098273\"></o> yo what ever yo what ever
+      ever yo what ever yo what ever  <o=\"0356258\"></o> yo what ever yo what ever
       yo what ever yo what ever yo what ever yo what ever yo what ever yo what ever
       yo what ever yo what ever yo what ever yo what ever yo what ever yo what ever
       yo what ever yo what ever yo what ever yo what ever yo \n\nthis is dope this
-      is dope this is dope this is dope this <o=\"8228613\"></o>  is dope this is
-      dope this is dope this is dope this is dope this is dope this is dope \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nthis
+      is dope this is dope this is dope this <o=\"9491759\"></o>  is dope <b>this</b>
+      is dope this is <i>dope</i> this is dope this is dope this is dope this is
+      dope \n\n\n\n\nwdwasdwasdwa\n\n\nwdwasd\n\nwdwad\n\nd\n\n\n\n\n\nwdwasdwasdwa\n\n\nwdwasd\n\nwdwad\n\nd\n\n\n\n\nthis
       is dope this is dope this is dope this is dope this is dope this is dope this
       is dope this is dope this is dope this is dope this is dope this is dope this
-      is d <o=\"1480637\"></o> ope this is dope t <o=\"1730285\"></o> his is dope
+      is d <o=\"0836188\"></o> ope this is dope t <o=\"6932534\"></o> his is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
@@ -1724,80 +2653,80 @@ MonoBehaviour:
       this is dope this is dope                                                                                                                      
       \n\n\n\n\nthis is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
-      this is dope this is d <o=\"1480637\"></o> ope this is dope t <o=\"1730285\"></o>
+      this is dope this is d <o=\"0836188\"></o> ope this is dope t <o=\"6932534\"></o>
       his is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope this is dope this is dope this is dope
       this is dope this is dope this is dope \n\nSome fields!\n\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa                          
       a                                                                                                                                                                      
-      a aa\n        aa\n\ndwadwadwadwad\n\nawd\n\nawd\nawd\n"
+      a aa\n        aa\n\ndwadwadwadwad\n\nawd\n\nawd\nawd\n\n\n"
     textAreaObjectFields:
-    - name: MeshAlbedoOrigin (7098273)
-      objectId: 7098273
+    - name: MeshAlbedoOrigin (356258)
+      objectId: 356258
       objectRef: {fileID: 1437867721}
       fieldRect:
         serializedVersion: 2
-        x: 144
-        y: 52
+        x: 542
+        y: 47
         width: 120
         height: 15
       index: 100
       length: 17
-    - name: Swell Mesh (8228613)
-      objectId: 8228613
+    - name: Swell Mesh (9491759)
+      objectId: 9491759
       objectRef: {fileID: 8515328486482458088}
       fieldRect:
         serializedVersion: 2
-        x: 9
-        y: 157
-        width: 115
+        x: 311
+        y: 92
+        width: 118
         height: 15
       index: 414
       length: 17
-    - name: Swell Wave Samples (1480637)
-      objectId: 1480637
+    - name: Swell Wave Samples (836188)
+      objectId: 836188
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
-        x: 51
-        y: 442
-        width: 120
+        x: 861
+        y: 542
+        width: 119
         height: 15
-      index: 701
+      index: 777
       length: 17
-    - name: README (1730285)
-      objectId: 1730285
+    - name: README (6932534)
+      objectId: 6932534
       objectRef: {fileID: 1687639724}
       fieldRect:
         serializedVersion: 2
-        x: 270
-        y: 442
-        width: 119
+        x: 62
+        y: 557
+        width: 121
         height: 15
-      index: 738
+      index: 814
       length: 17
-    - name: Swell Wave Samples (1480637)
-      objectId: 1480637
+    - name: Swell Wave Samples (836188)
+      objectId: 836188
       objectRef: {fileID: 792790614}
       fieldRect:
         serializedVersion: 2
-        x: 51
-        y: 622
-        width: 120
+        x: 861
+        y: 647
+        width: 119
         height: 15
-      index: 1395
+      index: 1471
       length: 17
-    - name: README (1730285)
-      objectId: 1730285
+    - name: README (6932534)
+      objectId: 6932534
       objectRef: {fileID: 1687639724}
       fieldRect:
         serializedVersion: 2
-        x: 270
-        y: 622
-        width: 119
+        x: 62
+        y: 662
+        width: 121
         height: 15
-      index: 1432
+      index: 1508
       length: 17
     objectIdPairs:
     - name: Readme (UnityEngine.GameObject) (1290029)
@@ -1820,7 +2749,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1131947010
 GameObject:
@@ -2039,7 +2968,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2049,7 +2978,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -2058,7 +2987,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -2067,7 +2996,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -2076,7 +3005,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2142,7 +3071,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2152,7 +3081,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -2161,7 +3090,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -2170,7 +3099,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -2179,7 +3108,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2235,7 +3164,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1218369554
 Transform:
@@ -2356,6 +3285,124 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1255217188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1255217190}
+  - component: {fileID: 1255217189}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1255217189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255217188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 
+  font: {fileID: 0}
+  fontSize: 0
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: 
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: README (UnityEngine.GameObject) (6932534)
+      id: 6932534
+      objectRef: {fileID: 1687639724}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (836188)
+      id: 836188
+      objectRef: {fileID: 792790614}
+    - name: Swell Mesh (UnityEngine.GameObject) (9491759)
+      id: 9491759
+      objectRef: {fileID: 8515328486482458088}
+    - name: MeshAlbedoOrigin (UnityEngine.GameObject... (356258)
+      id: 356258
+      objectRef: {fileID: 1437867721}
+    - name: Readme (UnityEngine.GameObject) (26024)
+      id: 26024
+      objectRef: {fileID: 1111943948}
+  managerConnected: 1
+--- !u!4 &1255217190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255217188}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 41
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1258261397
 GameObject:
   m_ObjectHideFlags: 0
@@ -2395,7 +3442,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2405,7 +3452,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -2414,7 +3461,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -2423,7 +3470,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -2432,7 +3479,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2440,7 +3487,7 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: 'dwadwa <i> <o="3310309"></o> dsadw</i> <o="6515136"></o> asdwasdw
+    richText: 'dwadwa <i> <o="8023847"></o> dsadw</i> <o="1430660"></o> asdwasdw
       wadwadwadfgsdfgdasdfasdfasdfasdfasdfasdf alkijhasdflkjasd;flkjas
 
 
@@ -2449,25 +3496,25 @@ MonoBehaviour:
 
       l;kajsd;lkfj'
     textAreaObjectFields:
-    - name: Readme (3310309)
-      objectId: 3310309
+    - name: Readme (8023847)
+      objectId: 8023847
       objectRef: {fileID: 1010333737}
       fieldRect:
         serializedVersion: 2
-        x: 60
-        y: 5
-        width: 122
+        x: 78
+        y: 17
+        width: 121
         height: 15
       index: 11
       length: 17
-    - name: Readme (6515136)
-      objectId: 6515136
+    - name: Readme (1430660)
+      objectId: 1430660
       objectRef: {fileID: 734215989}
       fieldRect:
         serializedVersion: 2
-        x: 224
-        y: 5
-        width: 117
+        x: 241
+        y: 17
+        width: 121
         height: 15
       index: 39
       length: 17
@@ -2801,6 +3848,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1393940362}
   - component: {fileID: 1393940361}
+  - component: {fileID: 1393940365}
+  - component: {fileID: 1393940364}
+  - component: {fileID: 1393940363}
   m_Layer: 0
   m_Name: Readme
   m_TagString: Untagged
@@ -2821,7 +3871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 000000000000000000000000000000
+  richTextTagMap: 00010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000010101010101010101010101010101010101000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010001010101010101010101010101010101010100010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
@@ -2875,24 +3925,130 @@ MonoBehaviour:
     priority: 5
     type: json
   readmeData:
-    richText: '
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'
-    textAreaObjectFields: []
+    richText: " <o=\"3391419\"></o> \n\n        private TextEditor GetTextEditor()\r\n       
+      {\r\n            TextEditor privateTextEditor = GetPrivateTextEditor;\r\n\r\n           
+      if (privateTextEditor == null)\r\n            {\r\n                FocusOnInspe
+      <o=\"2575167\"></o> ctorWindow();\r\n                EditorGUI.FocusTextInControl(activeTextAreaName);\r\n\r\n               
+      privateTextEditor = GetPrivateTex <o=\"2321275\"></o> tEditor;\r\n           
+      }\r\n\r\n            return privateTextEditor;\r\n        }\n\n\n <o=\"6733440\"></o>
+      \n\n <o=\"3391419\"></o>  <o=\"7969403\"></o> \n\n        private TextEditor
+      GetTextEditor()\r\n        {\r <o=\"2575167\"></o>  <o=\"2619882\"></o>  <o=\"7824168\"></o>
+      \n            TextEditor privateTextEditor = GetPrivateTextEditor;\r\n\r\n           
+      if (privateTextEditor == null)\r\n            {\r\n                FocusOnInspectorWindow();\r\n               
+      EditorGUI.FocusTextInControl(activeTextAreaName);\r\n\r\n                privateTextEditor
+      = GetPrivateTextEditor;\r\n            }\r\n\r\n            return privateTextEditor;\r\n       
+      }\n\n\n <o=\"6733440\"></o> \n\n\n\n\n\n\n"
+    textAreaObjectFields:
+    - name: Swell Wave Samples (3391419)
+      objectId: 3391419
+      objectRef: {fileID: 792790614}
+      fieldRect:
+        serializedVersion: 2
+        x: 30
+        y: 21
+        width: 119
+        height: 15
+      index: 1
+      length: 17
+    - name: Readme (2575167)
+      objectId: 2575167
+      objectRef: {fileID: 1413872804}
+      fieldRect:
+        serializedVersion: 2
+        x: 158
+        y: 141
+        width: 117
+        height: 15
+      index: 232
+      length: 17
+    - name: Readme (2321275)
+      objectId: 2321275
+      objectRef: {fileID: 1189274565}
+      fieldRect:
+        serializedVersion: 2
+        x: 269
+        y: 186
+        width: 118
+        height: 15
+      index: 384
+      length: 17
+    - name: River (6733440)
+      objectId: 6733440
+      objectRef: {fileID: 662738542}
+      fieldRect:
+        serializedVersion: 2
+        x: 30
+        y: 291
+        width: 123
+        height: 15
+      index: 481
+      length: 17
+    - name: Swell Wave Samples (3391419)
+      objectId: 3391419
+      objectRef: {fileID: 792790614}
+      fieldRect:
+        serializedVersion: 2
+        x: 30
+        y: 321
+        width: 119
+        height: 15
+      index: 502
+      length: 17
+    - name: Readme (7969403)
+      objectId: 7969403
+      objectRef: {fileID: 417381432}
+      fieldRect:
+        serializedVersion: 2
+        x: 154
+        y: 321
+        width: 121
+        height: 15
+      index: 521
+      length: 17
+    - name: Readme (2575167)
+      objectId: 2575167
+      objectRef: {fileID: 1413872804}
+      fieldRect:
+        serializedVersion: 2
+        x: 58
+        y: 366
+        width: 117
+        height: 15
+      index: 596
+      length: 17
+    - name: Readme (2619882)
+      objectId: 2619882
+      objectRef: {fileID: 1062958050}
+      fieldRect:
+        serializedVersion: 2
+        x: 180
+        y: 366
+        width: 117
+        height: 15
+      index: 615
+      length: 17
+    - name: Readme (7824168)
+      objectId: 7824168
+      objectRef: {fileID: 1456088580}
+      fieldRect:
+        serializedVersion: 2
+        x: 302
+        y: 366
+        width: 118
+        height: 15
+      index: 634
+      length: 17
+    - name: River (6733440)
+      objectId: 6733440
+      objectRef: {fileID: 662738542}
+      fieldRect:
+        serializedVersion: 2
+        x: 30
+        y: 591
+        width: 123
+        height: 15
+      index: 1020
+      length: 17
     objectIdPairs:
     - name: Readme (UnityEngine.GameObject) (6347109)
       id: 6347109
@@ -2929,8 +4085,114 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1393940363
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393940360}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1393940364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393940360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -745406591, guid: 220224b43fc464c28bc0e8de8f54a432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Trigger:
+    m_IsTriggerExpanded: 1
+    m_Type: 0
+    m_LifecycleEvent: 0
+    m_ApplyRules: 0
+    m_Rules:
+      m_Rules: []
+    m_TriggerBool: 0
+    m_InitTime: 5
+    m_RepeatTime: 5
+    m_Repetitions: 0
+    repetitionCount: 0
+  m_EventPayload:
+    m_IsEventExpanded: 1
+    m_StandardEventType: CustomEvent
+    m_Parameters:
+      m_Parameters: []
+    m_Name: 
+--- !u!218 &1393940365
+Terrain:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393940360}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 0}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 1
+  m_StaticShadowCaster: 0
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 0}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ScaleInLightmap: 1
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 0
 --- !u!1 &1413872804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2970,7 +4232,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -2980,7 +4242,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -2989,7 +4251,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -2998,7 +4260,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -3007,7 +4269,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3020,25 +4282,25 @@ MonoBehaviour:
       asdgfasdgasdg
       <o="3372332"></o> '
     textAreaObjectFields:
-    - name: Readme (3305626)
+    - name: null (3305626)
       objectId: 3305626
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 151
+        x: 154
         y: 17
-        width: 121
+        width: 124
         height: 15
       index: 34
       length: 17
-    - name: Readme (3372332)
+    - name: null (3372332)
       objectId: 3372332
       objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
-        x: 109
+        x: 112
         y: 32
-        width: 122
+        width: 125
         height: 15
       index: 72
       length: 17
@@ -3058,6 +4320,254 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1414071820
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1414071822}
+  - component: {fileID: 1414071821}
+  m_Layer: 0
+  m_Name: w
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1414071821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414071820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 000000000000000000
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: dwadadwad
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: River (UnityEngine.GameObject) (6733440)
+      id: 6733440
+      objectRef: {fileID: 662738542}
+    - name: Readme (UnityEngine.GameObject) (7824168)
+      id: 7824168
+      objectRef: {fileID: 1456088580}
+    - name: Readme (UnityEngine.GameObject) (2619882)
+      id: 2619882
+      objectRef: {fileID: 1062958050}
+    - name: Readme (UnityEngine.GameObject) (2575167)
+      id: 2575167
+      objectRef: {fileID: 1413872804}
+    - name: Readme (UnityEngine.GameObject) (7969403)
+      id: 7969403
+      objectRef: {fileID: 417381432}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (3391419)
+      id: 3391419
+      objectRef: {fileID: 792790614}
+    - name: Readme (UnityEngine.GameObject) (2321275)
+      id: 2321275
+      objectRef: {fileID: 1189274565}
+  managerConnected: 1
+--- !u!4 &1414071822
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414071820}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 39
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1417251369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1417251371}
+  - component: {fileID: 1417251370}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1417251370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417251369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: 
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: River (UnityEngine.GameObject) (6733440)
+      id: 6733440
+      objectRef: {fileID: 662738542}
+    - name: Readme (UnityEngine.GameObject) (7824168)
+      id: 7824168
+      objectRef: {fileID: 1456088580}
+    - name: Readme (UnityEngine.GameObject) (2619882)
+      id: 2619882
+      objectRef: {fileID: 1062958050}
+    - name: Readme (UnityEngine.GameObject) (2575167)
+      id: 2575167
+      objectRef: {fileID: 1413872804}
+    - name: Readme (UnityEngine.GameObject) (7969403)
+      id: 7969403
+      objectRef: {fileID: 417381432}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (3391419)
+      id: 3391419
+      objectRef: {fileID: 792790614}
+    - name: Readme (UnityEngine.GameObject) (2321275)
+      id: 2321275
+      objectRef: {fileID: 1189274565}
+  managerConnected: 1
+--- !u!4 &1417251371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417251369}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1437867721
 GameObject:
@@ -3199,6 +4709,212 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1470137752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1470137754}
+  - component: {fileID: 1470137753}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1470137753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470137752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000001010100010101010000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000101010101010101010101010101010101010001010101010101010101010101010101010100000001010101010101010101010101010101010100000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: " some pickles\nfffffffffffffffffffffffffffffffffffffff  <o=\"8225789\"></o>
+      fffffffffffffffffffff aaaaaaa aaaaaaaaa<b> </b>\n <o=\"4848688\"></o> \naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      <o=\"0000000\"></o> aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa <o=\"4848688\"></o>
+      \n\n <o=\"9316839\"></o> \n\n\ntest test test test\n\n <o=\"3023922\"></o> 
+      <o=\"2095172\"></o> \n\n <o=\"0000000\"></o> \n\n <o=\"8057572\"></o> \n\nhhhhhhhhh\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    textAreaObjectFields:
+    - name: Readme (8225789)
+      objectId: 8225789
+      objectRef: {fileID: 179042979}
+      fieldRect:
+        serializedVersion: 2
+        x: 186
+        y: 32
+        width: 118
+        height: 15
+      index: 55
+      length: 17
+    - name: Swell Wave Samples (4848688)
+      objectId: 4848688
+      objectRef: {fileID: 792790614}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 47
+        width: 120
+        height: 15
+      index: 122
+      length: 17
+    - name: null (0)
+      objectId: 0
+      objectRef: {fileID: 0}
+      fieldRect:
+        serializedVersion: 2
+        x: 643
+        y: 62
+        width: 125
+        height: 15
+      index: 230
+      length: 17
+    - name: Swell Wave Samples (4848688)
+      objectId: 4848688
+      objectRef: {fileID: 792790614}
+      fieldRect:
+        serializedVersion: 2
+        x: 314
+        y: 77
+        width: 120
+        height: 15
+      index: 290
+      length: 17
+    - name: Readme (9316839)
+      objectId: 9316839
+      objectRef: {fileID: 734215989}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 107
+        width: 119
+        height: 15
+      index: 311
+      length: 17
+    - name: Readme (3023922)
+      objectId: 3023922
+      objectRef: {fileID: 1393940360}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 182
+        width: 121
+        height: 15
+      index: 354
+      length: 17
+    - name: Canvas (2095172)
+      objectId: 2095172
+      objectRef: {fileID: 2130433938}
+      fieldRect:
+        serializedVersion: 2
+        x: 153
+        y: 182
+        width: 118
+        height: 15
+      index: 373
+      length: 17
+    - name: null (0)
+      objectId: 0
+      objectRef: {fileID: 0}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 212
+        width: 125
+        height: 15
+      index: 394
+      length: 17
+    - name: Readme (8057572)
+      objectId: 8057572
+      objectRef: {fileID: 1470137753}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 242
+        width: 119
+        height: 15
+      index: 415
+      length: 17
+    objectIdPairs: []
+  managerConnected: 1
+--- !u!4 &1470137754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470137752}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 43
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1497052419
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,7 +4954,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3248,7 +4964,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -3257,7 +4973,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -3266,7 +4982,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -3275,7 +4991,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3508,6 +5224,133 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1552442850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1552442852}
+  - component: {fileID: 1552442851}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1552442851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552442850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 0000000000000000000000
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: dwasdwasdwa
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: Readme (UnityEngine.GameObject) (3307689)
+      id: 3307689
+      objectRef: {fileID: 585562211}
+    - name: Readme (UnityEngine.GameObject) (1430660)
+      id: 1430660
+      objectRef: {fileID: 734215989}
+    - name: Readme (UnityEngine.GameObject) (8023847)
+      id: 8023847
+      objectRef: {fileID: 1010333737}
+    - name: README (UnityEngine.GameObject) (4866782)
+      id: 4866782
+      objectRef: {fileID: 1687639724}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (1510260)
+      id: 1510260
+      objectRef: {fileID: 792790614}
+    - name: Swell Mesh (UnityEngine.GameObject) (6857040)
+      id: 6857040
+      objectRef: {fileID: 8515328486482458088}
+    - name: MeshAlbedoOrigin (UnityEngine.GameObject... (2195019)
+      id: 2195019
+      objectRef: {fileID: 1437867721}
+    - name: Readme (UnityEngine.GameObject) (9448497)
+      id: 9448497
+      objectRef: {fileID: 417381432}
+  managerConnected: 1
+--- !u!4 &1552442852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552442850}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 31
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1592219112
 GameObject:
   m_ObjectHideFlags: 0
@@ -3623,6 +5466,349 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1595060955
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1595060957}
+  - component: {fileID: 1595060956}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1595060956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595060955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: 
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: Swell Waves - Wave Types Demo (UnityEngi... (714997)
+      id: 714997
+      objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
+    - name: Swell Water - River Demo (UnityEngine.Sc... (3805975)
+      id: 3805975
+      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
+    - name: Swell Water - Realistic Water Demo (Unit... (6211288)
+      id: 6211288
+      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
+    - name: Swell Water - Ocean Demo (UnityEngine.Sc... (9910309)
+      id: 9910309
+      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
+    - name: Swell Water - Matrial Demo (UnityEngine.... (3485233)
+      id: 3485233
+      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
+    - name: Swell Floater - Stress Test (UnityEngine... (6744838)
+      id: 6744838
+      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
+    - name: Swell Floater - Props Demo (UnityEngine.... (3384274)
+      id: 3384274
+      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
+    - name: Swell Floater - Buoyancy Demo (UnityEngi... (8489858)
+      id: 8489858
+      objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
+    - name: Swell Floater - Algorithm Demo (UnityEng... (9898802)
+      id: 9898802
+      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
+    - name: MeshAlbedoOrigin (UnityEngine.GameObject... (6588078)
+      id: 6588078
+      objectRef: {fileID: 1437867721}
+    - name: Albedo (River) (UnityEngine.Texture2D) (8242558)
+      id: 8242558
+      objectRef: {fileID: 2800000, guid: f5cf112b439949241b1c76b1ab1d33ef, type: 3}
+    - name: Water - E (River Demo) (UnityEngine.Mate... (6428046)
+      id: 6428046
+      objectRef: {fileID: 2100000, guid: cfcef8fb51de24f4293ea90271ef0692, type: 2}
+    - name: Swell Water (Track Player) (UnityEngine.... (7232312)
+      id: 7232312
+      objectRef: {fileID: 701894903}
+    - name: Readme (TP.Readme) (2385531)
+      id: 2385531
+      objectRef: {fileID: 1470137753}
+    - name: Canvas (UnityEngine.GameObject) (828820)
+      id: 828820
+      objectRef: {fileID: 2130433938}
+    - name: Readme (UnityEngine.GameObject) (8069288)
+      id: 8069288
+      objectRef: {fileID: 1393940360}
+    - name: Readme (UnityEngine.GameObject) (7498427)
+      id: 7498427
+      objectRef: {fileID: 734215989}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (137414)
+      id: 137414
+      objectRef: {fileID: 792790614}
+    - name: Readme (UnityEngine.GameObject) (5499407)
+      id: 5499407
+      objectRef: {fileID: 179042979}
+    - name: Readme (UnityEngine.GameObject) (3179660)
+      id: 3179660
+      objectRef: {fileID: 417381432}
+  managerConnected: 1
+--- !u!4 &1595060957
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595060955}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 44
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1668239457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668239459}
+  - component: {fileID: 1668239458}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1668239458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668239457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: 'dwadw
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      asdddwa <o="3179660"></o> '
+    textAreaObjectFields:
+    - name: Readme (3179660)
+      objectId: 3179660
+      objectRef: {fileID: 417381432}
+      fieldRect:
+        serializedVersion: 2
+        x: 78
+        y: 632
+        width: 122
+        height: 15
+      index: 54
+      length: 17
+    objectIdPairs:
+    - name: Readme (UnityEngine.GameObject) (3307689)
+      id: 3307689
+      objectRef: {fileID: 585562211}
+    - name: Readme (UnityEngine.GameObject) (1430660)
+      id: 1430660
+      objectRef: {fileID: 734215989}
+    - name: Readme (UnityEngine.GameObject) (8023847)
+      id: 8023847
+      objectRef: {fileID: 1010333737}
+    - name: README (UnityEngine.GameObject) (4866782)
+      id: 4866782
+      objectRef: {fileID: 1687639724}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (1510260)
+      id: 1510260
+      objectRef: {fileID: 792790614}
+    - name: Swell Mesh (UnityEngine.GameObject) (6857040)
+      id: 6857040
+      objectRef: {fileID: 8515328486482458088}
+    - name: MeshAlbedoOrigin (UnityEngine.GameObject... (2195019)
+      id: 2195019
+      objectRef: {fileID: 1437867721}
+    - name: Readme (UnityEngine.GameObject) (9448497)
+      id: 9448497
+      objectRef: {fileID: 417381432}
+  managerConnected: 1
+--- !u!4 &1668239459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668239457}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 32
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1687639724
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,7 +5848,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3672,7 +5858,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -3681,7 +5867,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -3690,7 +5876,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -3699,7 +5885,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3708,160 +5894,160 @@ MonoBehaviour:
     type: json
   readmeData:
     richText: "<b>RIVER DEMO README</b>\n\nThis is how you go about creating a river
-      with Swell!\n\n<b>1</b>. Create a  <o=\"7472302\"></o> \n<b>2</b>. Create a
-      Standard Shader material to use for your water, like this  <o=\"1028362\"></o>
-      .\n<b>3</b>. Set the albedo to a material with transparency like this  <o=\"4221600\"></o>
-      , to mask your water. \n<b>4</b>. Add a Tranform  <o=\"5575235\"></o> . This
+      with Swell!\n\n<b>1</b>. Create a  <o=\"7232312\"></o> \n<b>2</b>. Create a
+      Standard Shader material to use for your water, like this  <o=\"6428046\"></o>
+      .\n<b>3</b>. Set the albedo to a material with transparency like this  <o=\"8242558\"></o>
+      , to mask your water. \n<b>4</b>. Add a Tranform  <o=\"6588078\"></o> . This
       will be the offset for your river mask.\n<b>5</b>. In your SwellWater, turn
       on \"Position Anchoring.\"\n<b>6</b>. Set \"Mesh Albedo Anchoring\" to our
       new transform.\n\n<b>OTHER DEMO SCENES</b> \n\n<b>Floaters</b>:\n \u2022 Algorithm
-      Demo  <o=\"2490595\"></o> \n \u2022 Buoyancy Demo  <o=\"0404827\"></o> \n \u2022
-      Props Demo  <o=\"6534255\"></o> \n \u2022 Stress Test  <o=\"8692750\"></o>
-      \n<b>Waters</b>:\n \u2022 Matrial Demo  <o=\"8385624\"></o> \n \u2022 Ocean
-      Demo  <o=\"9577060\"></o> \n \u2022 Realistic Water Demo  <o=\"0814359\"></o>
-      \n \u2022 River Demo  <o=\"3835968\"></o> \n<b>Waves</b>:\n \u2022 Wave Types
-      Demo  <o=\"7354495\"></o> "
+      Demo  <o=\"9898802\"></o> \n \u2022 Buoyancy Demo  <o=\"8489858\"></o> \n \u2022
+      Props Demo  <o=\"3384274\"></o> \n \u2022 Stress Test  <o=\"6744838\"></o>
+      \n<b>Waters</b>:\n \u2022 Matrial Demo  <o=\"3485233\"></o> \n \u2022 Ocean
+      Demo  <o=\"9910309\"></o> \n \u2022 Realistic Water Demo  <o=\"6211288\"></o>
+      \n \u2022 River Demo  <o=\"3805975\"></o> \n<b>Waves</b>:\n \u2022 Wave Types
+      Demo  <o=\"0714997\"></o> "
     textAreaObjectFields:
-    - name: Swell Water (Track Player) (7472302)
-      objectId: 7472302
+    - name: Swell Water (Track Player) (7232312)
+      objectId: 7232312
       objectRef: {fileID: 701894903}
       fieldRect:
         serializedVersion: 2
-        x: 87
+        x: 90
         y: 77
-        width: 121
+        width: 122
         height: 15
       index: 101
       length: 17
-    - name: Water - E (River Demo) (1028362)
-      objectId: 1028362
+    - name: Water - E (River Demo) (6428046)
+      objectId: 6428046
       objectRef: {fileID: 2100000, guid: cfcef8fb51de24f4293ea90271ef0692, type: 2}
       fieldRect:
         serializedVersion: 2
-        x: 47
-        y: 107
-        width: 119
+        x: 403
+        y: 92
+        width: 124
         height: 15
       index: 198
       length: 17
-    - name: Albedo (River) (4221600)
-      objectId: 4221600
+    - name: Albedo (River) (8242558)
+      objectId: 8242558
       objectRef: {fileID: 2800000, guid: f5cf112b439949241b1c76b1ab1d33ef, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 24
-        y: 137
-        width: 117
+        x: 347
+        y: 107
+        width: 122
         height: 15
       index: 286
       length: 17
-    - name: MeshAlbedoOrigin (5575235)
-      objectId: 5575235
+    - name: MeshAlbedoOrigin (6588078)
+      objectId: 6588078
       objectRef: {fileID: 1437867721}
       fieldRect:
         serializedVersion: 2
-        x: 127
-        y: 152
-        width: 119
+        x: 130
+        y: 122
+        width: 122
         height: 15
       index: 353
       length: 17
-    - name: Swell Floater - Algorithm Demo (2490595)
-      objectId: 2490595
+    - name: Swell Floater - Algorithm Demo (9898802)
+      objectId: 9898802
       objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 129
-        y: 272
-        width: 120
+        x: 132
+        y: 227
+        width: 122
         height: 15
       index: 602
       length: 17
-    - name: Swell Floater - Buoyancy Demo (404827)
-      objectId: 404827
+    - name: Swell Floater - Buoyancy Demo (8489858)
+      objectId: 8489858
       objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 133
-        y: 287
+        x: 136
+        y: 242
         width: 122
         height: 15
       index: 639
       length: 17
-    - name: Swell Floater - Props Demo (6534255)
-      objectId: 6534255
+    - name: Swell Floater - Props Demo (3384274)
+      objectId: 3384274
       objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 108
-        y: 302
-        width: 120
+        x: 111
+        y: 257
+        width: 125
         height: 15
       index: 673
       length: 17
-    - name: Swell Floater - Stress Test (8692750)
-      objectId: 8692750
+    - name: Swell Floater - Stress Test (6744838)
+      objectId: 6744838
       objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 103
-        y: 317
-        width: 119
+        x: 106
+        y: 272
+        width: 124
         height: 15
       index: 708
       length: 17
-    - name: Swell Water - Matrial Demo (8385624)
-      objectId: 8385624
+    - name: Swell Water - Matrial Demo (3485233)
+      objectId: 3485233
       objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 115
-        y: 347
-        width: 120
+        x: 118
+        y: 302
+        width: 125
         height: 15
       index: 759
       length: 17
-    - name: Swell Water - Ocean Demo (9577060)
-      objectId: 9577060
+    - name: Swell Water - Ocean Demo (9910309)
+      objectId: 9910309
       objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 113
-        y: 362
-        width: 120
+        x: 116
+        y: 317
+        width: 123
         height: 15
       index: 793
       length: 17
-    - name: Swell Water - Realistic Water Demo (814359)
-      objectId: 814359
+    - name: Swell Water - Realistic Water Demo (6211288)
+      objectId: 6211288
       objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 160
-        y: 377
-        width: 120
+        x: 163
+        y: 332
+        width: 119
         height: 15
       index: 837
       length: 17
-    - name: Swell Water - River Demo (3835968)
-      objectId: 3835968
+    - name: Swell Water - River Demo (3805975)
+      objectId: 3805975
       objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 105
-        y: 392
-        width: 120
+        x: 108
+        y: 347
+        width: 123
         height: 15
       index: 871
       length: 17
-    - name: Swell Waves - Wave Types Demo (7354495)
-      objectId: 7354495
+    - name: Swell Waves - Wave Types Demo (714997)
+      objectId: 714997
       objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 146
-        y: 422
-        width: 121
+        x: 149
+        y: 377
+        width: 122
         height: 15
       index: 924
       length: 17
@@ -3896,6 +6082,167 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1753577008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1753577010}
+  - component: {fileID: 1753577009}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1753577009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753577008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: '
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: README (UnityEngine.GameObject) (3330443)
+      id: 3330443
+      objectRef: {fileID: 1687639724}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (3054722)
+      id: 3054722
+      objectRef: {fileID: 792790614}
+    - name: Swell Mesh (UnityEngine.GameObject) (6807182)
+      id: 6807182
+      objectRef: {fileID: 8515328486482458088}
+    - name: MeshAlbedoOrigin (UnityEngine.GameObject... (1999870)
+      id: 1999870
+      objectRef: {fileID: 1437867721}
+  managerConnected: 1
+--- !u!4 &1753577010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1753577008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1913150768
 GameObject:
@@ -4142,7 +6489,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -4152,7 +6499,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -4161,7 +6508,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -4170,7 +6517,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -4179,7 +6526,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -4285,7 +6632,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -4295,7 +6642,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -4304,7 +6651,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -4313,7 +6660,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -4322,7 +6669,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
-    skin: 
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -4348,6 +6695,133 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2083307169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2083307171}
+  - component: {fileID: 2083307170}
+  m_Layer: 0
+  m_Name: Readme
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2083307170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083307169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dac210a80c64f089652dec17dda8e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  richTextTagMap: 000000000000
+  font: {fileID: 0}
+  fontSize: 12
+  iconBeingUsed: 1
+  useTackIcon: 1
+  readonlyMode: 0
+  activeSettings:
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  allSettings:
+  - name: Free
+    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Free
+    redistributable: 1
+    lite: 0
+    priority: 10
+    type: json
+  - name: Lite
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: Lite
+    redistributable: 0
+    lite: 1
+    priority: 7
+    type: json
+  - name: New
+    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Settings
+    fileName: New
+    redistributable: 0
+    lite: 0
+    priority: 1000
+    type: json
+  - name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
+    redistributable: 0
+    lite: 0
+    priority: 5
+    type: json
+  readmeData:
+    richText: dwadwa
+    textAreaObjectFields: []
+    objectIdPairs:
+    - name: Readme (UnityEngine.GameObject) (3307689)
+      id: 3307689
+      objectRef: {fileID: 585562211}
+    - name: Readme (UnityEngine.GameObject) (1430660)
+      id: 1430660
+      objectRef: {fileID: 734215989}
+    - name: Readme (UnityEngine.GameObject) (8023847)
+      id: 8023847
+      objectRef: {fileID: 1010333737}
+    - name: README (UnityEngine.GameObject) (4866782)
+      id: 4866782
+      objectRef: {fileID: 1687639724}
+    - name: Swell Wave Samples (UnityEngine.GameObje... (1510260)
+      id: 1510260
+      objectRef: {fileID: 792790614}
+    - name: Swell Mesh (UnityEngine.GameObject) (6857040)
+      id: 6857040
+      objectRef: {fileID: 8515328486482458088}
+    - name: MeshAlbedoOrigin (UnityEngine.GameObject... (2195019)
+      id: 2195019
+      objectRef: {fileID: 1437867721}
+    - name: Readme (UnityEngine.GameObject) (9448497)
+      id: 9448497
+      objectRef: {fileID: 417381432}
+  managerConnected: 1
+--- !u!4 &2083307171
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083307169}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15.692184, y: -71.8866, z: -1.7805595}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2130433938
 GameObject:
