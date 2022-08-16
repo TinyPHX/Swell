@@ -73,6 +73,7 @@ namespace TP
             string path = Path.GetDirectoryName(AssetDatabase.GetAssetPath(monoScript)) ?? "";
             path = Path.Combine(path, "..");
             path = Path.Combine(path, "Settings");
+            path = path.Replace("\\Editor\\..", "");
             return path;
         }
     }

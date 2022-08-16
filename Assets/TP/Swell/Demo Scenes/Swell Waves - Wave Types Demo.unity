@@ -723,7 +723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 0101010000000000000000000000000000000000010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010000000000000001010101000000000000000000000000000000000101010000000000000001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100000000000001010101000000000000000000000000000000000000000000000001010100000000010101010000000000000000000000000000000000000000000101010000000000000101010100000000000000000000000000000000000000010101000000000000010101010000000000000000000000000000000000000000010101000000000000000000000000000000000001010101000001010100000000000000000101010100000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000010101010101010101010101010101010101000101010000000000000101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010001010100000000000101010100000000000000000000000000000000000000000000010101010101010101010101010101010101
+  richTextTagMap: 010101000000000000000000000000000000000001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100000000000000010101010000000000000000000000000000000001010100000000000000010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101000000000000010101010000000000000000000000000000000000000000000000010101000000000101010100000000000000000000000000000000000000000001010100000000000001010101000000000000000000000000000000000000000101010000000000000101010100000000000000000000000000000000000000000101010000000000000000000000000000000000010101010000010101000000000000000001010101000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000010101010101010101010101010101010101000101010000000000000101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010001010100000000000101010100000000000000000000000000000000000000000000010101010101010101010101010101010101
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
@@ -732,6 +732,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -741,6 +742,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -749,6 +751,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -757,6 +760,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -765,6 +769,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -776,116 +781,116 @@ MonoBehaviour:
       you can create waves. All ways are additive and can be stacked until the computer
       can't handle it!\n\nEach way type uses math and the SwellWave component settings
       to determind the water height. However, the Custom wave type allows you to
-      use a Unity AnimationCurve to adjust the wave however you'd like!\n\nWave Types:\n
-      \u2022 <b>Rounded</b> - sin curve\n \u2022 <b>Pointed</b> - sin curve with
-      some trickyness applied. \n \u2022 <b>Ripple</b> - radial sin curve\n \u2022
-      <b>Bell</b> - gaussian curve\n \u2022 <b>Random</b> - Perlin Noise\n \u2022
-      <b>Custom</b> - Animation curve\n\n<b>OTHER DEMO SCENES</b>\n\n<b>Floaters</b>:\n
-      \u2022 Algorithm Demo  <o=\"5916551\"></o> \n \u2022 Buoyancy Demo  <o=\"0316266\"></o>
-      \n \u2022 Props Demo  <o=\"9471766\"></o> \n \u2022 Stress Test  <o=\"4579011\"></o>
-      \n<b>Waters</b>:\n \u2022 Matrial Demo  <o=\"2452490\"></o> \n \u2022 Ocean
-      Demo  <o=\"4958824\"></o> \n \u2022 Realistic Water Demo  <o=\"8593815\"></o>
-      \n \u2022 River Demo  <o=\"0072211\"></o> \n<b>Waves</b>:\n \u2022 Wave Types
-      Demo  <o=\"3693450\"></o> "
+      use a Unity AnimationCurve to adjust the wave however you'd like!\n\nWave Types:\n\u2022
+      <b>Rounded</b> - sin curve\n \u2022 <b>Pointed</b> - sin curve with some trickyness
+      applied. \n \u2022 <b>Ripple</b> - radial sin curve\n \u2022 <b>Bell</b> -
+      gaussian curve\n \u2022 <b>Random</b> - Perlin Noise\n \u2022 <b>Custom</b>
+      - Animation curve\n\n<b>OTHER DEMO SCENES</b>\n\n<b>Floaters</b>:\n\u2022 Algorithm
+      Demo  <o=\"5916551\"></o> \n \u2022 Buoyancy Demo  <o=\"3493260\"></o> \n \u2022
+      Props Demo  <o=\"2836886\"></o> \n \u2022 Stress Test  <o=\"8327582\"></o>
+      \n<b>Waters</b>:\n \u2022 Matrial Demo  <o=\"3029873\"></o> \n \u2022 Ocean
+      Demo  <o=\"6800995\"></o> \n \u2022 Realistic Water Demo  <o=\"9125201\"></o>
+      \n \u2022 River Demo  <o=\"3635665\"></o> \n<b>Waves</b>:\n \u2022 Wave Types
+      Demo  <o=\"6655946\"></o> "
     textAreaObjectFields:
-    - name: Swell Floater - Algorithm Demo (5916551)
+    - name: null (5916551)
       objectId: 5916551
-      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
+      objectRef: {fileID: 0}
       fieldRect:
         serializedVersion: 2
         x: 129
-        y: 345
+        y: 318
         width: 116
         height: 15
-      index: 670
+      index: 668
       length: 17
-    - name: Swell Floater - Buoyancy Demo (316266)
-      objectId: 316266
+    - name: Swell Floater - Algorithm Demo (3493260)
+      objectId: 3493260
+      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 136
+        y: 333
+        width: 122
+        height: 15
+      index: 705
+      length: 17
+    - name: Swell Floater - Buoyancy Demo (2836886)
+      objectId: 2836886
       objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 133
-        y: 360
+        x: 111
+        y: 348
         width: 119
         height: 15
-      index: 707
+      index: 739
       length: 17
-    - name: Swell Floater - Props Demo (9471766)
-      objectId: 9471766
+    - name: Swell Floater - Props Demo (8327582)
+      objectId: 8327582
       objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 108
-        y: 375
-        width: 118
+        x: 106
+        y: 363
+        width: 119
         height: 15
-      index: 741
+      index: 774
       length: 17
-    - name: Swell Floater - Stress Test (4579011)
-      objectId: 4579011
+    - name: Swell Floater - Stress Test (3029873)
+      objectId: 3029873
       objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 103
-        y: 390
-        width: 118
+        x: 118
+        y: 393
+        width: 121
         height: 15
-      index: 776
+      index: 825
       length: 17
-    - name: Swell Water - Matrial Demo (2452490)
-      objectId: 2452490
+    - name: Swell Water - Matrial Demo (6800995)
+      objectId: 6800995
       objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 115
-        y: 420
-        width: 121
+        x: 116
+        y: 408
+        width: 120
         height: 15
-      index: 827
+      index: 859
       length: 17
-    - name: Swell Water - Ocean Demo (4958824)
-      objectId: 4958824
+    - name: Swell Water - Ocean Demo (9125201)
+      objectId: 9125201
       objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 113
-        y: 435
-        width: 120
+        x: 163
+        y: 423
+        width: 117
         height: 15
-      index: 861
+      index: 903
       length: 17
-    - name: Swell Water - Realistic Water Demo (8593815)
-      objectId: 8593815
+    - name: Swell Water - Realistic Water Demo (3635665)
+      objectId: 3635665
       objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 160
-        y: 450
-        width: 118
+        x: 108
+        y: 438
+        width: 120
         height: 15
-      index: 905
+      index: 937
       length: 17
-    - name: Swell Water - River Demo (72211)
-      objectId: 72211
+    - name: Swell Water - River Demo (6655946)
+      objectId: 6655946
       objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 105
-        y: 465
-        width: 118
+        x: 149
+        y: 468
+        width: 119
         height: 15
-      index: 939
-      length: 17
-    - name: Swell Waves - Wave Types Demo (3693450)
-      objectId: 3693450
-      objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 146
-        y: 495
-        width: 122
-        height: 15
-      index: 992
+      index: 990
       length: 17
     objectIdPairs:
     - name: None (9088779)
