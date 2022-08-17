@@ -42,6 +42,8 @@ namespace TP
         
         #endregion
         
+        public static bool UnityInFocus => UnityEditorInternal.InternalEditorUtility.isApplicationActive;
+        
         public static void FocusEditorWindow(string windowTitle)
         {
             EditorWindow inspectorWindow = GetEditorWindow(windowTitle);
@@ -80,6 +82,19 @@ namespace TP
             fixedLengthId = prepend + fixedLengthId;
 
             return fixedLengthId;
+        }
+
+        public static Rect GetLastRect(Rect defaultRect = default, Vector2 offset = default)
+        {
+            Rect lastRect = defaultRect;
+                
+            if (Event.current.type == EventType.Repaint) //GetLastRect returns dummy values except on repaint. 
+            {
+                lastRect = new Rect(GUILayoutUtility.GetLastRect());
+                lastRect.position += offset;
+            }
+
+            return lastRect;
         }
     }
 }
