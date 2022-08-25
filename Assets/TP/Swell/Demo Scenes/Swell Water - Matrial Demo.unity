@@ -3385,7 +3385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 010101000000000000000000000000000000000000000001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100000000000000000101010100000000000001010101010101010101010101010101010100000000000101010101010101010101010101010101010000000000010101010101010101010101010101010101000001010100000000000101010100000000000001010101010101010101010101010101010100000000000101010101010101010101010101010101010000000000010101010101010101010101010101010101000001010100000000000000000001010101000000000000010101010101010101010101010101010101000000000001010101010101010101010101010101010100000000000101010101010101010101010101010101010000010101000000000000000000000000000000000001010101000001010100000000000000000101010100000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000010101010101010101010101010101010101000101010000000000000101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010001010100000000000101010100000000000000000000000000000000000000000000010101010101010101010101010101010101
+  richTextTagMap: 01010100000000000000000000000000000000000000000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010000000000000000010101010000000001010101010101010101010101010101010101000000010101010101010101010101010101010101010000000101010101010101010101010101010101010100000101010000000000010101010000000001010101010101010101010101010101010101000000010101010101010101010101010101010101010000000101010101010101010101010101010101010100000101010000000000000000000101010100000000010101010101010101010101010101010101010000000101010101010101010101010101010101010100000001010101010101010101010101010101010101000001010100000000000000000000000000000000000101010100000001010100000000000000000001010101000000000000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010100000101010000000000000001010101000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000001010101010101010101010101010101010101000001010100000000000001010101000000000000000000000000000000000000000101010101010101010101010101010101010100
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
@@ -3394,6 +3394,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3403,6 +3404,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -3411,6 +3413,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -3419,6 +3422,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -3427,6 +3431,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -3436,94 +3441,127 @@ MonoBehaviour:
   readmeData:
     richText: "<b>MATERIAL DEMO README</b>\n\nSwell is not a material library, but
       we have included some materials that can be used with the default unity render
-      pipeline. \n\nHere are the materials included:\n\n<b>Low Poly</b>:\n \u2022 
-      <o=\"0023471\"></o> \n \u2022  <o=\"4825858\"></o> \n \u2022  <o=\"1517901\"></o>
-      \n\n<b>Toony</b>:\n \u2022  <o=\"0494958\"></o> \n \u2022  <o=\"3019846\"></o>
-      \n \u2022  <o=\"2250947\"></o> \n\n<b>Realistic</b>:\n \u2022  <o=\"5931861\"></o>
-      \n \u2022  <o=\"1450122\"></o> \n \u2022  <o=\"2805575\"></o> \n\n<b>OTHER
-      DEMO SCENES</b>\n\n<b>Floaters</b>:\n \u2022 Algorithm Demo  <o=\"0587571\"></o>
-      \n \u2022 Buoyancy Demo  <o=\"8818412\"></o> \n \u2022 Props Demo  <o=\"4245930\"></o>
-      \n \u2022 Stress Test  <o=\"7924699\"></o> \n<b>Waters</b>:\n \u2022 Matrial
-      Demo  <o=\"4774274\"></o> \n \u2022 Ocean Demo  <o=\"2717535\"></o> \n \u2022
-      Realistic Water Demo  <o=\"7665852\"></o> \n \u2022 River Demo  <o=\"6288508\"></o>
-      \n<b>Waves</b>:\n \u2022 Wave Types Demo  <o=\"6709940\"></o> "
+      pipeline. \n\nHere are the materials included:\n\n<b>Low Poly</b>:\n\u2022 
+      <o=\"0023471\"></o> \n\u2022  <o=\"4825858\"></o> \n\u2022  <o=\"1517901\"></o>
+      \n\n<b>Toony</b>:\n\u2022  <o=\"0494958\"></o> \n\u2022  <o=\"3019846\"></o>
+      \n\u2022  <o=\"2250947\"></o> \n\n<b>Realistic</b>:\n\u2022  <o=\"5931861\"></o>
+      \n\u2022  <o=\"1450122\"></o> \n\u2022  <o=\"2805575\"></o> \n\n<b>OTHER DEMO
+      SCENES</b> \n\n<b>Floaters:</b>\n\u2022 Algorithm Demo  <o=\"8256079\"></o> 
+      \n\u2022 Buoyancy Demo  <o=\"6019483\"></o>  \n\u2022 Props Demo  <o=\"9798996\"></o> 
+      \n\u2022 Stress Test  <o=\"6018113\"></o>  \n<b>Waters:</b>\n\u2022 Matrial
+      Demo  <o=\"4752279\"></o>  \n\u2022 Ocean Demo  <o=\"6745852\"></o>  \n\u2022
+      Realistic Water Demo  <o=\"5578919\"></o>  \n\u2022 River Demo  <o=\"7526349\"></o> 
+      \n<b>Waves:</b>\n\u2022 Wave Types Demo  <o=\"9609145\"></o>  "
     textAreaObjectFields:
-    - name: Water (Low Poly 10x10) (23471)
-      objectId: 23471
-      objectRef: {fileID: 5036984197067093440}
+    - name: Swell Waves - Wave Types Demo (9609145)
+      objectId: 9609145
+      objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 37
-        y: 135
-        width: 121
+        x: 146
+        y: 543
+        width: 122
         height: 15
-      index: 212
+      index: 826
       length: 17
-    - name: Water ((Low Poly 4x4) (4825858)
-      objectId: 4825858
-      objectRef: {fileID: 2138348582469012719}
+    - name: Swell Water - River Demo (7526349)
+      objectId: 7526349
+      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 37
-        y: 150
-        width: 119
+        x: 105
+        y: 513
+        width: 123
         height: 15
-      index: 235
+      index: 773
       length: 17
-    - name: Water (Low Poly 1x1) (1517901)
-      objectId: 1517901
-      objectRef: {fileID: 4679254931879625107}
+    - name: Swell Water - Realistic Water Demo (5578919)
+      objectId: 5578919
+      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 37
-        y: 165
-        width: 116
-        height: 15
-      index: 258
-      length: 17
-    - name: Water (Real Standard) (494958)
-      objectId: 494958
-      objectRef: {fileID: 2735814335128320444}
-      fieldRect:
-        serializedVersion: 2
-        x: 37
-        y: 210
-        width: 121
-        height: 15
-      index: 296
-      length: 17
-    - name: Water (Toon Rosan) (3019846)
-      objectId: 3019846
-      objectRef: {fileID: 705400865483331815}
-      fieldRect:
-        serializedVersion: 2
-        x: 37
-        y: 225
+        x: 160
+        y: 498
         width: 120
         height: 15
-      index: 319
+      index: 739
       length: 17
-    - name: Water (Toon Standard) (2250947)
-      objectId: 2250947
-      objectRef: {fileID: 7657330807456951177}
+    - name: Swell Water - Ocean Demo (6745852)
+      objectId: 6745852
+      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 37
-        y: 240
+        x: 113
+        y: 483
+        width: 122
+        height: 15
+      index: 695
+      length: 17
+    - name: Swell Water - Matrial Demo (4752279)
+      objectId: 4752279
+      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 115
+        y: 468
+        width: 122
+        height: 15
+      index: 661
+      length: 17
+    - name: Swell Floater - Stress Test (6018113)
+      objectId: 6018113
+      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 103
+        y: 438
         width: 120
         height: 15
-      index: 342
+      index: 610
       length: 17
-    - name: Water (Real Opaque) (5931861)
-      objectId: 5931861
-      objectRef: {fileID: 6779142503831649875}
+    - name: Swell Floater - Props Demo (9798996)
+      objectId: 9798996
+      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 37
-        y: 285
-        width: 117
+        x: 108
+        y: 423
+        width: 121
         height: 15
-      index: 384
+      index: 575
+      length: 17
+    - name: Swell Floater - Buoyancy Demo (6019483)
+      objectId: 6019483
+      objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 133
+        y: 408
+        width: 123
+        height: 15
+      index: 541
+      length: 17
+    - name: Swell Floater - Algorithm Demo (8256079)
+      objectId: 8256079
+      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 129
+        y: 393
+        width: 122
+        height: 15
+      index: 504
+      length: 17
+    - name: Water (Real Animated Normals) (2805575)
+      objectId: 2805575
+      objectRef: {fileID: 3057023653347803870}
+      fieldRect:
+        serializedVersion: 2
+        x: 40
+        y: 318
+        width: 122
+        height: 15
+      index: 422
       length: 17
     - name: Water (Real Translucent) (1450122)
       objectId: 1450122
@@ -3531,198 +3569,89 @@ MonoBehaviour:
       fieldRect:
         serializedVersion: 2
         x: 37
-        y: 300
-        width: 118
+        y: 303
+        width: 121
         height: 15
-      index: 407
+      index: 399
       length: 17
-    - name: Water (Real Animated Normals) (2805575)
-      objectId: 2805575
-      objectRef: {fileID: 3057023653347803870}
+    - name: Water (Real Opaque) (5931861)
+      objectId: 5931861
+      objectRef: {fileID: 6779142503831649875}
       fieldRect:
         serializedVersion: 2
         x: 37
-        y: 315
+        y: 288
+        width: 120
+        height: 15
+      index: 377
+      length: 17
+    - name: Water (Toon Standard) (2250947)
+      objectId: 2250947
+      objectRef: {fileID: 7657330807456951177}
+      fieldRect:
+        serializedVersion: 2
+        x: 37
+        y: 243
+        width: 123
+        height: 15
+      index: 336
+      length: 17
+    - name: Water (Toon Rosan) (3019846)
+      objectId: 3019846
+      objectRef: {fileID: 705400865483331815}
+      fieldRect:
+        serializedVersion: 2
+        x: 37
+        y: 228
+        width: 123
+        height: 15
+      index: 314
+      length: 17
+    - name: Water (Real Standard) (494958)
+      objectId: 494958
+      objectRef: {fileID: 2735814335128320444}
+      fieldRect:
+        serializedVersion: 2
+        x: 37
+        y: 213
+        width: 124
+        height: 15
+      index: 292
+      length: 17
+    - name: Water (Low Poly 1x1) (1517901)
+      objectId: 1517901
+      objectRef: {fileID: 4679254931879625107}
+      fieldRect:
+        serializedVersion: 2
+        x: 37
+        y: 168
         width: 119
         height: 15
-      index: 430
+      index: 255
       length: 17
-    - name: Swell Floater - Algorithm Demo (587571)
-      objectId: 587571
-      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
+    - name: Water ((Low Poly 4x4) (4825858)
+      objectId: 4825858
+      objectRef: {fileID: 2138348582469012719}
       fieldRect:
         serializedVersion: 2
-        x: 129
-        y: 390
-        width: 118
-        height: 15
-      index: 512
-      length: 17
-    - name: Swell Floater - Buoyancy Demo (8818412)
-      objectId: 8818412
-      objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 133
-        y: 405
-        width: 117
-        height: 15
-      index: 549
-      length: 17
-    - name: Swell Floater - Props Demo (4245930)
-      objectId: 4245930
-      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 108
-        y: 420
+        x: 37
+        y: 153
         width: 122
         height: 15
-      index: 583
+      index: 233
       length: 17
-    - name: Swell Floater - Stress Test (7924699)
-      objectId: 7924699
-      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
+    - name: Water (Low Poly 10x10) (23471)
+      objectId: 23471
+      objectRef: {fileID: 5036984197067093440}
       fieldRect:
         serializedVersion: 2
-        x: 103
-        y: 435
-        width: 119
+        x: 37
+        y: 138
+        width: 124
         height: 15
-      index: 618
+      index: 211
       length: 17
-    - name: Swell Water - Matrial Demo (4774274)
-      objectId: 4774274
-      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 115
-        y: 465
-        width: 121
-        height: 15
-      index: 669
-      length: 17
-    - name: Swell Water - Ocean Demo (2717535)
-      objectId: 2717535
-      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 113
-        y: 480
-        width: 118
-        height: 15
-      index: 703
-      length: 17
-    - name: Swell Water - Realistic Water Demo (7665852)
-      objectId: 7665852
-      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 160
-        y: 495
-        width: 118
-        height: 15
-      index: 747
-      length: 17
-    - name: Swell Water - River Demo (6288508)
-      objectId: 6288508
-      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 105
-        y: 510
-        width: 119
-        height: 15
-      index: 781
-      length: 17
-    - name: Swell Waves - Wave Types Demo (6709940)
-      objectId: 6709940
-      objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 146
-        y: 540
-        width: 121
-        height: 15
-      index: 834
-      length: 17
-    objectIdPairs:
-    - name: Floater FA (UnityEngine.GameObject) (3910832)
-      id: 3910832
-      objectRef: {fileID: 0}
-    - name: Floater AF (UnityEngine.GameObject) (2775141)
-      id: 2775141
-      objectRef: {fileID: 0}
-    - name: Floater AA (UnityEngine.GameObject) (8142414)
-      id: 8142414
-      objectRef: {fileID: 0}
-    - name: Floater FF (UnityEngine.GameObject) (3428471)
-      id: 3428471
-      objectRef: {fileID: 0}
-    - name: Swell Wave (Sin) (UnityEngine.GameObject... (6277036)
-      id: 6277036
-      objectRef: {fileID: 0}
-    - name: Swell Water (UnityEngine.GameObject) (1024708)
-      id: 1024708
-      objectRef: {fileID: 0}
-    - name: Floater FA (UnityEngine.GameObject) (8767555)
-      id: 8767555
-      objectRef: {fileID: 0}
-    - name: Floater AF (UnityEngine.GameObject) (3534116)
-      id: 3534116
-      objectRef: {fileID: 0}
-    - name: Floater AA (UnityEngine.GameObject) (3719202)
-      id: 3719202
-      objectRef: {fileID: 0}
-    - name: Floater FF (UnityEngine.GameObject) (6428822)
-      id: 6428822
-      objectRef: {fileID: 0}
-    - name: Swell Wave (Sin) (UnityEngine.GameObject... (8179736)
-      id: 8179736
-      objectRef: {fileID: 0}
-    - name: Swell Water (UnityEngine.GameObject) (8885747)
-      id: 8885747
-      objectRef: {fileID: 0}
-    - name: Floater (Driftwood) (UnityEngine.GameObj... (4173605)
-      id: 4173605
-      objectRef: {fileID: 0}
-    - name: Floater (Buoy) (UnityEngine.GameObject) (2042219)
-      id: 2042219
-      objectRef: {fileID: 0}
-    - name: Floater (Boogey Board) (UnityEngine.Game... (4003701)
-      id: 4003701
-      objectRef: {fileID: 0}
-    - name: Floater (Driftwood) (UnityEngine.GameObj... (7233382)
-      id: 7233382
-      objectRef: {fileID: 0}
-    - name: Floater (Buoy) (UnityEngine.GameObject) (6501348)
-      id: 6501348
-      objectRef: {fileID: 0}
-    - name: Floater (Boogey Board) (UnityEngine.Game... (1038124)
-      id: 1038124
-      objectRef: {fileID: 0}
-    - name: Floater FA (UnityEngine.GameObject) (2133969)
-      id: 2133969
-      objectRef: {fileID: 0}
-    - name: Floater AF (UnityEngine.GameObject) (3651981)
-      id: 3651981
-      objectRef: {fileID: 0}
-    - name: Floater AA (UnityEngine.GameObject) (1749812)
-      id: 1749812
-      objectRef: {fileID: 0}
-    - name: Floater FF (UnityEngine.GameObject) (8057273)
-      id: 8057273
-      objectRef: {fileID: 0}
-    - name: Swell Wave (Sin) (UnityEngine.GameObject... (1862675)
-      id: 1862675
-      objectRef: {fileID: 0}
-    - name: Swell Water (UnityEngine.GameObject) (9157128)
-      id: 9157128
-      objectRef: {fileID: 0}
-    - name: Floaters (UnityEngine.GameObject) (9930509)
-      id: 9930509
-      objectRef: {fileID: 0}
-  managerConnected: 1
+    objectIdPairs: []
 --- !u!4 &1569288144
 Transform:
   m_ObjectHideFlags: 0

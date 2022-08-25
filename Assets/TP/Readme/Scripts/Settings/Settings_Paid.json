@@ -7,5 +7,6 @@
     "redistributable": false,
     "lite": false,
     "priority": 5.0,
-    "type": "json"
+    "type": "json",
+    "lastPopupDate": "1/1/2000 12:00:00 AM"
 }

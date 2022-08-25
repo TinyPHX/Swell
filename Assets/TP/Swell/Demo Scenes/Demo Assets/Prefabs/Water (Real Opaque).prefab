@@ -64,7 +64,7 @@ MonoBehaviour:
   <MeshAlbedoPosition>k__BackingField: {fileID: 0}
   optimize: 0
   <WaterFps>k__BackingField: 60
-  <AutoThrottle>k__BackingField: 1
+  autoThrottle: 0
   <ThrottleFps>k__BackingField: 60
 --- !u!1 &8472267061961528729
 GameObject:

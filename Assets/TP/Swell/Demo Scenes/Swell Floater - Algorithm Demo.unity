@@ -1336,21 +1336,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 01010100000000000000000000000000000000000000000001010101000001010100000000000000000000010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101000000000000000000000000000000000001010101000000010101000000000000000001010101000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000010101010101010101010101010101010101000101010000000000000101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010001010100000000000101010100000000000000000000000000000000000000000000010101010101010101010101010101010101
+  richTextTagMap: 01010100000000000000000000000000000000000000000001010101000001010100000000000000000000010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100000000010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101000000000000000001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101000000000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100000000000000000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100000000000000000000000000000000000101010100000001010100000000000000000001010101000000000000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010100000101010000000000000001010101000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000001010101010101010101010101010101010101000001010100000000000001010101000000000000000000000000000000000000000101010101010101010101010101010101010100
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
   useTackIcon: 1
   readonlyMode: 0
   activeSettings:
-    name: Lite
-    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    name: Paid
+    id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
     skin: Custom
-    path: Assets/Packages/TP/Readme/Settings
-    fileName: Lite
+    path: Assets/Packages/TP/Readme/Editor\..\Settings
+    fileName: Paid
     redistributable: 0
-    lite: 1
-    priority: 7
+    lite: 0
+    priority: 5
     type: json
   allSettings:
   - name: Free
@@ -1391,215 +1391,193 @@ MonoBehaviour:
     type: json
   readmeData:
     richText: "<b>ALGORITHM DEMO README</b>\n\n<b>Components</b>:\nIn this scene
-      we're using the following components:\n\nWaters:\n \u2022  <o=\"6325315\"></o>
-      - Renders our water mesh\n\nWaves:\n \u2022  <o=\"8072878\"></o> - Creates
+      we're using the following components:\n\nWaters:\n\u2022  <o=\"8794569\"></o> 
+      - Renders our water mesh\n\nWaves:\n\u2022  <o=\"7608309\"></o>  - Creates
       a simple sign wave to give out water some fluctuation. We're using the speed.x
-      setting to move the wave to the right. \n\nFloaters:\n \u2022  <o=\"2143094\"></o>
-      - Fast Depth, Fast Float\n \u2022  <o=\"4067634\"></o> - Accurate Depth, Accurate
-      Float\n \u2022  <o=\"9631552\"></o> - Accurate Depth, Fast Float\n \u2022 
-      <o=\"4873858\"></o> - Fast Depth, Accurate Float\n\nThe floaters are demonstrating
+      setting to move the wave to the right. \n\nFloaters:\n \u2022  <o=\"9833398\"></o> 
+      - Fast Depth, Fast Float\n \u2022  <o=\"3569941\"></o>  - Accurate Depth, Accurate
+      Float\n \u2022  <o=\"8775748\"></o>  - Accurate Depth, Fast Float\n \u2022 
+      <o=\"5362619\"></o>  - Fast Depth, Accurate Float\n\nThe floaters are demonstrating
       the different ways we find depth and then the different ways we physically
-      float the object.\n\nFloater Depth:\n - Fast: We use the depth of the nearest
-      vector.\n - Accurate: We get the position of the 4 surrounding vectors and
-      interpolate the depth to find the midpoint.\n\nFloater Float (buoyancy): \n-
-      Fast: We set the y position to the y position of the water surface.\n - Accurate:
-      We apply a relative force to the object at the floaters position, directly
-      upwards, and relative to the depth.\n\n<b>OTHER DEMO SCENES</b> \n\n<b>Floaters</b>:\n\u2022
-      Algorithm Demo  <o=\"3600893\"></o> \n \u2022 Buoyancy Demo  <o=\"2465362\"></o>
-      \n \u2022 Props Demo  <o=\"6057066\"></o> \n \u2022 Stress Test  <o=\"6815495\"></o>
-      \n<b>Waters</b>:\n \u2022 Matrial Demo  <o=\"7137382\"></o> \n \u2022 Ocean
-      Demo  <o=\"3501960\"></o> \n \u2022 Realistic Water Demo  <o=\"5642944\"></o>
-      \n \u2022 River Demo  <o=\"0413734\"></o> \n<b>Waves</b>:\n \u2022 Wave Types
-      Demo  <o=\"8037902\"></o> "
+      float the object.\n\nFloater Depth:\n\u2022 <i>Fast</i>: We use the depth of
+      the nearest vector.\n\u2022 <i>Accurate</i>: We get the position of the 4 surrounding
+      vectors and interpolate the depth to find the midpoint.\n\nFloater Float (buoyancy):
+      \n\u2022 <i>Fast</i>: We set the y position to the y position of the water
+      surface.\n\u2022 <i>Accurate</i>: We apply a relative force to the object at
+      the floaters position, directly upwards, and relative to the depth.\n\n<b>OTHER
+      DEMO SCENES</b> \n\n<b>Floaters:</b>\n\u2022 Algorithm Demo  <o=\"8256079\"></o> 
+      \n\u2022 Buoyancy Demo  <o=\"6019483\"></o>  \n\u2022 Props Demo  <o=\"9798996\"></o> 
+      \n\u2022 Stress Test  <o=\"6018113\"></o>  \n<b>Waters:</b>\n\u2022 Matrial
+      Demo  <o=\"4752279\"></o>  \n\u2022 Ocean Demo  <o=\"6745852\"></o>  \n\u2022
+      Realistic Water Demo  <o=\"5578919\"></o>  \n\u2022 River Demo  <o=\"7526349\"></o> 
+      \n<b>Waves:</b>\n\u2022 Wave Types Demo  <o=\"9609145\"></o>  "
     textAreaObjectFields:
-    - name: null (6325315)
-      objectId: 6325315
-      objectRef: {fileID: 0}
+    - name: Swell Waves - Wave Types Demo (9609145)
+      objectId: 9609145
+      objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 40
-        y: 108
-        width: 119
-        height: 15
-      index: 114
-      length: 17
-    - name: null (8072878)
-      objectId: 8072878
-      objectRef: {fileID: 0}
-      fieldRect:
-        serializedVersion: 2
-        x: 40
-        y: 153
-        width: 119
-        height: 15
-      index: 169
-      length: 17
-    - name: null (2143094)
-      objectId: 2143094
-      objectRef: {fileID: 0}
-      fieldRect:
-        serializedVersion: 2
-        x: 40
-        y: 228
-        width: 121
-        height: 15
-      index: 331
-      length: 17
-    - name: null (4067634)
-      objectId: 4067634
-      objectRef: {fileID: 0}
-      fieldRect:
-        serializedVersion: 2
-        x: 40
-        y: 243
+        x: 146
+        y: 693
         width: 122
         height: 15
-      index: 378
+      index: 1467
       length: 17
-    - name: null (9631552)
-      objectId: 9631552
-      objectRef: {fileID: 0}
+    - name: Swell Water - River Demo (7526349)
+      objectId: 7526349
+      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 40
-        y: 258
-        width: 118
+        x: 105
+        y: 663
+        width: 123
         height: 15
-      index: 433
+      index: 1414
       length: 17
-    - name: null (4873858)
-      objectId: 4873858
-      objectRef: {fileID: 0}
+    - name: Swell Water - Realistic Water Demo (5578919)
+      objectId: 5578919
+      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 40
-        y: 273
+        x: 160
+        y: 648
         width: 120
         height: 15
-      index: 484
+      index: 1380
       length: 17
-    - name: null (3600893)
-      objectId: 3600893
-      objectRef: {fileID: 0}
+    - name: Swell Water - Ocean Demo (6745852)
+      objectId: 6745852
+      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 113
+        y: 633
+        width: 122
+        height: 15
+      index: 1336
+      length: 17
+    - name: Swell Water - Matrial Demo (4752279)
+      objectId: 4752279
+      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 115
+        y: 618
+        width: 122
+        height: 15
+      index: 1302
+      length: 17
+    - name: Swell Floater - Stress Test (6018113)
+      objectId: 6018113
+      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 103
+        y: 588
+        width: 120
+        height: 15
+      index: 1251
+      length: 17
+    - name: Swell Floater - Props Demo (9798996)
+      objectId: 9798996
+      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 108
+        y: 573
+        width: 121
+        height: 15
+      index: 1216
+      length: 17
+    - name: Swell Floater - Buoyancy Demo (6019483)
+      objectId: 6019483
+      objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 133
+        y: 558
+        width: 123
+        height: 15
+      index: 1182
+      length: 17
+    - name: Swell Floater - Algorithm Demo (8256079)
+      objectId: 8256079
+      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 129
         y: 543
         width: 122
         height: 15
-      index: 1116
+      index: 1145
       length: 17
-    - name: null (2465362)
-      objectId: 2465362
-      objectRef: {fileID: 0}
+    - name: Floater FA (5362619)
+      objectId: 5362619
+      objectRef: {fileID: 1035391920091754}
       fieldRect:
         serializedVersion: 2
-        x: 136
-        y: 558
-        width: 120
-        height: 15
-      index: 1153
-      length: 17
-    - name: null (6057066)
-      objectId: 6057066
-      objectRef: {fileID: 0}
-      fieldRect:
-        serializedVersion: 2
-        x: 111
-        y: 573
-        width: 120
-        height: 15
-      index: 1187
-      length: 17
-    - name: null (6815495)
-      objectId: 6815495
-      objectRef: {fileID: 0}
-      fieldRect:
-        serializedVersion: 2
-        x: 106
-        y: 588
-        width: 118
-        height: 15
-      index: 1222
-      length: 17
-    - name: null (7137382)
-      objectId: 7137382
-      objectRef: {fileID: 0}
-      fieldRect:
-        serializedVersion: 2
-        x: 118
-        y: 618
-        width: 119
-        height: 15
-      index: 1273
-      length: 17
-    - name: null (3501960)
-      objectId: 3501960
-      objectRef: {fileID: 0}
-      fieldRect:
-        serializedVersion: 2
-        x: 116
-        y: 633
-        width: 120
-        height: 15
-      index: 1307
-      length: 17
-    - name: null (5642944)
-      objectId: 5642944
-      objectRef: {fileID: 0}
-      fieldRect:
-        serializedVersion: 2
-        x: 163
-        y: 648
+        x: 40
+        y: 273
         width: 121
         height: 15
-      index: 1351
+      index: 487
       length: 17
-    - name: null (413734)
-      objectId: 413734
-      objectRef: {fileID: 0}
+    - name: Floater AF (8775748)
+      objectId: 8775748
+      objectRef: {fileID: 1035390713016132}
       fieldRect:
         serializedVersion: 2
-        x: 108
-        y: 663
+        x: 40
+        y: 258
         width: 122
         height: 15
-      index: 1385
+      index: 435
       length: 17
-    - name: null (8037902)
-      objectId: 8037902
-      objectRef: {fileID: 0}
+    - name: Floater AA (3569941)
+      objectId: 3569941
+      objectRef: {fileID: 1035390887809209}
       fieldRect:
         serializedVersion: 2
-        x: 149
-        y: 693
-        width: 121
+        x: 40
+        y: 243
+        width: 122
         height: 15
-      index: 1438
+      index: 379
       length: 17
-    objectIdPairs:
-    - name: Swell Water (Swell.SwellWater) (3931279)
-      id: 3931279
-      objectRef: {fileID: 1596894360}
-    - name: Swell Water (UnityEngine.GameObject) (9870302)
-      id: 9870302
-      objectRef: {fileID: 1596894359}
-    - name: Swell Wave (Sin) (UnityEngine.GameObject... (3838627)
-      id: 3838627
-      objectRef: {fileID: 365298214}
-    - name: Floater FF (UnityEngine.GameObject) (4610128)
-      id: 4610128
+    - name: Floater FF (9833398)
+      objectId: 9833398
       objectRef: {fileID: 1035391393878826}
-    - name: Floater AA (UnityEngine.GameObject) (982623)
-      id: 982623
-      objectRef: {fileID: 1035390887809209}
-    - name: Floater AF (UnityEngine.GameObject) (8136562)
-      id: 8136562
-      objectRef: {fileID: 1035390713016132}
-    - name: Floater FA (UnityEngine.GameObject) (8208032)
-      id: 8208032
-      objectRef: {fileID: 1035391920091754}
-  managerConnected: 1
+      fieldRect:
+        serializedVersion: 2
+        x: 40
+        y: 228
+        width: 124
+        height: 15
+      index: 331
+      length: 17
+    - name: Swell Wave (Sin) (7608309)
+      objectId: 7608309
+      objectRef: {fileID: 365298214}
+      fieldRect:
+        serializedVersion: 2
+        x: 37
+        y: 153
+        width: 124
+        height: 15
+      index: 168
+      length: 17
+    - name: Swell Water (8794569)
+      objectId: 8794569
+      objectRef: {fileID: 1596894359}
+      fieldRect:
+        serializedVersion: 2
+        x: 37
+        y: 108
+        width: 122
+        height: 15
+      index: 113
+      length: 17
+    objectIdPairs: []
 --- !u!4 &785252563
 Transform:
   m_ObjectHideFlags: 0

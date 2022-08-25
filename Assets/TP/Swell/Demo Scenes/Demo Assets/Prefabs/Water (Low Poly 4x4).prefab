@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2138348582040129583}
   - component: {fileID: 2138348582040129582}
   m_Layer: 0
-  m_Name: Water ((Low Poly 4x4)
+  m_Name: Water (Low Poly 4x4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
   <MeshAlbedoPosition>k__BackingField: {fileID: 0}
   optimize: 0
   <WaterFps>k__BackingField: 60
-  <AutoThrottle>k__BackingField: 1
+  autoThrottle: 1
   <ThrottleFps>k__BackingField: 60
 --- !u!1 &7167066849226045691
 GameObject:

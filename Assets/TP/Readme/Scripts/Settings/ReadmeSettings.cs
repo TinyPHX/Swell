@@ -1,9 +1,11 @@
 #if UNITY_EDITOR
 using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TP
 {
@@ -19,6 +21,7 @@ namespace TP
         public bool lite;
         public float priority;
         public string type;
+        public string lastPopupDate;
         
         public static string FILE_TAG = "Settings_";
         public static string DEFAULT_TYPE = "json";
@@ -34,18 +37,20 @@ namespace TP
             this.lite = lite;
             this.priority = priority;
             type = DEFAULT_TYPE;
+            lastPopupDate = DateTime.Parse("1/1/2000 12:00:00 AM").ToString();
         }
 
-        private string FilePath
+        private string FileName => FILE_TAG + fileName + "." + type;
+        private string FilePath => path + "/" + FileName;
+
+        public void SaveSettings(string path)
         {
-            get { return path + "/" + FILE_TAG + fileName + "." + type; }
-        }
-        
-        public void SaveSettings()
-        {
+            // string this.path +=  "/" + FILE_TAG + fileName + "." + type;
+            string filePath = Path.Combine(path, FileName);
+            
             string jsonReadmeSettingsData = JsonUtility.ToJson(this, true);
-            File.WriteAllText (FilePath, jsonReadmeSettingsData);
-            Debug.Log("Settings saved to file: " + FilePath);
+            File.WriteAllText (filePath, jsonReadmeSettingsData);
+            Debug.Log("Settings saved to file: " + filePath);
         }
 
         public static ReadmeSettings LoadSettings(string path, string fileName)
@@ -67,7 +72,7 @@ namespace TP
             return loadedSettings;
         }
         
-        public static string GetPath(ScriptableObject script)
+        public static string GetFolder(ScriptableObject script)
         {
             MonoScript monoScript = MonoScript.FromScriptableObject(script);
             string path = Path.GetDirectoryName(AssetDatabase.GetAssetPath(monoScript)) ?? "";
@@ -76,6 +81,16 @@ namespace TP
             path = path.Replace("\\Editor\\..", "");
             return path;
         }
+        
+        // public static string GetFolder(Object obj)
+        // {
+        //     // MonoScript monoScript = MonoScript.FromScriptableObject(script);
+        //     string path = Path.GetDirectoryName(AssetDatabase.GetAssetPath(obj)) ?? "";
+        //     path = Path.Combine(path, "..");
+        //     path = Path.Combine(path, "Settings");
+        //     path = path.Replace("\\Editor\\..", "");
+        //     return path;
+        // }
     }
 }
 #endif

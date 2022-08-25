@@ -1400,7 +1400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 010101000000000000000000000000000000000000000001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010100000000000000000000010101010101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  richTextTagMap: 010101000000000000000000000000000000000000000001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010100000000000000000000010101010001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100000000000000000000000000000000000101010100000001010100000000000000000001010101000000000000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010100000101010000000000000001010101000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000001010101010101010101010101010101010101000001010100000000000001010101000000000000000000000000000000000000000101010101010101010101010101010101010100
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
@@ -1409,6 +1409,7 @@ MonoBehaviour:
   activeSettings:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1418,6 +1419,7 @@ MonoBehaviour:
   allSettings:
   - name: Free
     id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Free
     redistributable: 1
@@ -1426,6 +1428,7 @@ MonoBehaviour:
     type: json
   - name: Lite
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: Lite
     redistributable: 0
@@ -1434,6 +1437,7 @@ MonoBehaviour:
     type: json
   - name: New
     id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
+    skin: Custom
     path: Assets/Packages/TP/Readme/Settings
     fileName: New
     redistributable: 0
@@ -1442,6 +1446,7 @@ MonoBehaviour:
     type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
+    skin: Custom
     path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
@@ -1452,54 +1457,119 @@ MonoBehaviour:
     richText: "<b>BUOYANCY DEMO README</b>\n\nIn this scene we're demonstrating how
       exactly fload corresponds to depth by showing many floaters underneath the
       surface of the water float with different masses, float force (buoyancy), and
-      drags.\n\nHere are some <b><i>key points</i></b>:\n \u2022 Equilibrium point
+      drags.\n\nHere are some <b><i>key points</i>:</b>\n\u2022 Equilibrium point
       underneath the water is going to be mass / float. That means a floater with
       mass of 1 and float of 1 will float perfectly in place at 1 unit under the
-      surface, because 1 / 1 = 1.\n \u2022 With no drag a floater will bob forever.
-      \n \u2022 If you want something to float perfectly on the surface of the water,
-      check out Floater.DepthAdjust in the float advanced settings. "
-    textAreaObjectFields: []
-    objectIdPairs:
-    - name: Swell Water (Swell.SwellWater) (3931279)
-      id: 3931279
-      objectRef: {fileID: 0}
-    - name: Swell Water (UnityEngine.GameObject) (9870302)
-      id: 9870302
-      objectRef: {fileID: 0}
-    - name: Swell Wave (Sin) (UnityEngine.GameObject... (3838627)
-      id: 3838627
-      objectRef: {fileID: 0}
-    - name: Floater FF (UnityEngine.GameObject) (4610128)
-      id: 4610128
-      objectRef: {fileID: 0}
-    - name: Floater AA (UnityEngine.GameObject) (982623)
-      id: 982623
-      objectRef: {fileID: 0}
-    - name: Floater AF (UnityEngine.GameObject) (8136562)
-      id: 8136562
-      objectRef: {fileID: 0}
-    - name: Floater FA (UnityEngine.GameObject) (8208032)
-      id: 8208032
-      objectRef: {fileID: 0}
-    - name: Floater FA (UnityEngine.GameObject) (6946428)
-      id: 6946428
-      objectRef: {fileID: 0}
-    - name: Floater AF (UnityEngine.GameObject) (9261574)
-      id: 9261574
-      objectRef: {fileID: 0}
-    - name: Floater AA (UnityEngine.GameObject) (5143174)
-      id: 5143174
-      objectRef: {fileID: 0}
-    - name: Floater FF (UnityEngine.GameObject) (9895825)
-      id: 9895825
-      objectRef: {fileID: 0}
-    - name: Swell Wave (Sin) (UnityEngine.GameObject... (2380288)
-      id: 2380288
-      objectRef: {fileID: 0}
-    - name: Swell Water (UnityEngine.GameObject) (3045139)
-      id: 3045139
-      objectRef: {fileID: 0}
-  managerConnected: 1
+      surface, because 1 / 1 = 1.\n\u2022 With no drag a floater will bob forever.
+      \n\u2022 If you want something to float perfectly on the surface of the water,
+      check out Floater.DepthAdjust in the float advanced settings. \n\n<b>OTHER
+      DEMO SCENES</b> \n\n<b>Floaters:</b>\n\u2022 Algorithm Demo  <o=\"8256079\"></o> 
+      \n\u2022 Buoyancy Demo  <o=\"6019483\"></o>  \n\u2022 Props Demo  <o=\"9798996\"></o> 
+      \n\u2022 Stress Test  <o=\"6018113\"></o>  \n<b>Waters:</b>\n\u2022 Matrial
+      Demo  <o=\"4752279\"></o>  \n\u2022 Ocean Demo  <o=\"6745852\"></o>  \n\u2022
+      Realistic Water Demo  <o=\"5578919\"></o>  \n\u2022 River Demo  <o=\"7526349\"></o> 
+      \n<b>Waves:</b>\n\u2022 Wave Types Demo  <o=\"9609145\"></o>  "
+    textAreaObjectFields:
+    - name: Swell Waves - Wave Types Demo (9609145)
+      objectId: 9609145
+      objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 146
+        y: 423
+        width: 122
+        height: 15
+      index: 1031
+      length: 17
+    - name: Swell Water - River Demo (7526349)
+      objectId: 7526349
+      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 105
+        y: 393
+        width: 123
+        height: 15
+      index: 978
+      length: 17
+    - name: Swell Water - Realistic Water Demo (5578919)
+      objectId: 5578919
+      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 160
+        y: 378
+        width: 120
+        height: 15
+      index: 944
+      length: 17
+    - name: Swell Water - Ocean Demo (6745852)
+      objectId: 6745852
+      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 113
+        y: 363
+        width: 122
+        height: 15
+      index: 900
+      length: 17
+    - name: Swell Water - Matrial Demo (4752279)
+      objectId: 4752279
+      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 115
+        y: 348
+        width: 122
+        height: 15
+      index: 866
+      length: 17
+    - name: Swell Floater - Stress Test (6018113)
+      objectId: 6018113
+      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 103
+        y: 318
+        width: 120
+        height: 15
+      index: 815
+      length: 17
+    - name: Swell Floater - Props Demo (9798996)
+      objectId: 9798996
+      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 108
+        y: 303
+        width: 121
+        height: 15
+      index: 780
+      length: 17
+    - name: Swell Floater - Buoyancy Demo (6019483)
+      objectId: 6019483
+      objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 133
+        y: 288
+        width: 123
+        height: 15
+      index: 746
+      length: 17
+    - name: Swell Floater - Algorithm Demo (8256079)
+      objectId: 8256079
+      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 129
+        y: 273
+        width: 122
+        height: 15
+      index: 709
+      length: 17
+    objectIdPairs: []
 --- !u!4 &759658453
 Transform:
   m_ObjectHideFlags: 0

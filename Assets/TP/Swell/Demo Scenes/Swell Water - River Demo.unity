@@ -1018,7 +1018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 01010100000000000000000000000000000000000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100010101010000000000000000000000000101010101010101010101010101010101010001010100010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010100000101010001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000000000000000001010100010101010000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010000000000000000000000000000000000010101010000000001010100000000000000000101010100000000000000000000000000000000000000000001010101010101010101010101010101010100000000000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000010101010101010101010101010101010101000101010000000000000101010100000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010000000000000000000000000000000000000000000000000000010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010001010100000000000101010100000000000000000000000000000000000000000000010101010101010101010101010101010101
+  richTextTagMap: 01010100000000000000000000000000000000000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010100010101010000000000000000000000010101010101010101010101010101010101010001010100010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010100000101010001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000000000000000001010100010101010000000000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010000000000000000000000000000000000010101010000000001010100000000000000000101010100000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000000001010101010101010101010101010101010101000101010000000000000101010100000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000010101010101010101010101010101010101010001010100000000000101010100000000000000000000000000000000000000000001010101010101010101010101010101010101
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
@@ -1073,154 +1073,22 @@ MonoBehaviour:
     type: json
   readmeData:
     richText: "<b>RIVER DEMO README</b>\n\nThis is how you go about creating a river
-      with Swell!\n\n<b>1</b>. Create a  <o=\"8626444\"></o> \n<b>2</b>. Create a
-      Standard Shader material to use for your water, like this  <o=\"9577928\"></o>
-      .\n<b>3</b>. Set the albedo to a material with transparency like this  <o=\"9121271\"></o>
-      , to mask your water. \n<b>4</b>. Add a Tranform  <o=\"0499947\"></o> . This
+      with Swell!\n\n<b>1</b>. Create a  <o=\"2293518\"></o> \n<b>2</b>. Create a
+      Standard Shader material to use for your water, like this  <o=\"8848266\"></o>
+      .\n<b>3</b>. Set the albedo to a material with transparency like this  <o=\"9199326\"></o>
+      , to mask your water. \n<b>4</b>. Add a Tranform  <o=\"2232186\"></o> . This
       will be the offset for your river mask.\n<b>5</b>. In your SwellWater, turn
       on \"Position Anchoring.\"\n<b>6</b>. Set \"Mesh Albedo Anchoring\" to our
       new transform.\n\n<b>OTHER DEMO SCENES</b>  \n\n<b>Floaters</b>:\n \u2022 Algorithm
-      Demo  <o=\"8760262\"></o>  \n \u2022 Buoyancy Demo  <o=\"6863087\"></o> \n\u2022
-      Props Demo  <o=\"1922648\"></o> \n \u2022 Stress Test  <o=\"6073516\"></o>
-      \n<b>Waters</b>:\n \u2022 Matrial Demo  <o=\"3503549\"></o> \n \u2022 Ocean
-      Demo  <o=\"1099046\"></o> \n \u2022 Realistic Water Demo  <o=\"6483327\"></o>
-      \n \u2022 River Demo  <o=\"5591554\"></o> \n<b>Waves</b>:\n \u2022 Wave Types
-      Demo  <o=\"2305405\"></o> "
+      Demo  <o=\"8256079\"></o>  \n \u2022 Buoyancy Demo  <o=\"6019483\"></o> \n\u2022
+      Props Demo  <o=\"9798996\"></o> \n \u2022 Stress Test  <o=\"6018113\"></o>
+      \n<b>Waters</b>:\n \u2022 Matrial Demo  <o=\"4752279\"></o> \n \u2022 Ocean
+      Demo  <o=\"6745852\"></o> \n \u2022 Realistic Water Demo  <o=\"5578919\"></o>
+      \n \u2022 River Demo  <o=\"7526349\"></o> \n<b>Waves</b>:\n \u2022 Wave Types
+      Demo  <o=\"9609145\"></o> "
     textAreaObjectFields:
-    - name: Swell Water (Track Player) (8626444)
-      objectId: 8626444
-      objectRef: {fileID: 701894903}
-      fieldRect:
-        serializedVersion: 2
-        x: 90
-        y: 78
-        width: 121
-        height: 15
-      index: 101
-      length: 17
-    - name: Water - E (River Demo) (9577928)
-      objectId: 9577928
-      objectRef: {fileID: 2100000, guid: cfcef8fb51de24f4293ea90271ef0692, type: 2}
-      fieldRect:
-        serializedVersion: 2
-        x: 27
-        y: 108
-        width: 115
-        height: 15
-      index: 198
-      length: 17
-    - name: Albedo (River) (9121271)
-      objectId: 9121271
-      objectRef: {fileID: 2800000, guid: f5cf112b439949241b1c76b1ab1d33ef, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 27
-        y: 138
-        width: 112
-        height: 15
-      index: 286
-      length: 17
-    - name: MeshAlbedoOrigin (499947)
-      objectId: 499947
-      objectRef: {fileID: 1437867721}
-      fieldRect:
-        serializedVersion: 2
-        x: 130
-        y: 153
-        width: 121
-        height: 15
-      index: 353
-      length: 17
-    - name: Swell Floater - Algorithm Demo (8760262)
-      objectId: 8760262
-      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 132
-        y: 273
-        width: 119
-        height: 15
-      index: 603
-      length: 17
-    - name: Swell Floater - Buoyancy Demo (6863087)
-      objectId: 6863087
-      objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 136
-        y: 288
-        width: 120
-        height: 15
-      index: 641
-      length: 17
-    - name: Swell Floater - Props Demo (1922648)
-      objectId: 1922648
-      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 108
-        y: 303
-        width: 118
-        height: 15
-      index: 674
-      length: 17
-    - name: Swell Floater - Stress Test (6073516)
-      objectId: 6073516
-      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 106
-        y: 318
-        width: 119
-        height: 15
-      index: 709
-      length: 17
-    - name: Swell Water - Matrial Demo (3503549)
-      objectId: 3503549
-      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 118
-        y: 348
-        width: 122
-        height: 15
-      index: 760
-      length: 17
-    - name: Swell Water - Ocean Demo (1099046)
-      objectId: 1099046
-      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 116
-        y: 363
-        width: 120
-        height: 15
-      index: 794
-      length: 17
-    - name: Swell Water - Realistic Water Demo (6483327)
-      objectId: 6483327
-      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 163
-        y: 378
-        width: 121
-        height: 15
-      index: 838
-      length: 17
-    - name: Swell Water - River Demo (5591554)
-      objectId: 5591554
-      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 108
-        y: 393
-        width: 118
-        height: 15
-      index: 872
-      length: 17
-    - name: Swell Waves - Wave Types Demo (2305405)
-      objectId: 2305405
+    - name: Swell Waves - Wave Types Demo (9609145)
+      objectId: 9609145
       objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
       fieldRect:
         serializedVersion: 2
@@ -1230,23 +1098,139 @@ MonoBehaviour:
         height: 15
       index: 925
       length: 17
-    objectIdPairs:
-    - name: Swell Mesh  (UnityEngine.GameObject) (7630660)
-      id: 7630660
-      objectRef: {fileID: 0}
-    - name: Example - Waves (Realistic) (UnityEngine... (9088779)
-      id: 9088779
-      objectRef: {fileID: 0}
-    - name: Swell Water (Track Player) (UnityEngine.... (1451274)
-      id: 1451274
-      objectRef: {fileID: 701894903}
-    - name: MeshAlbedoOrigin (UnityEngine.GameObject... (5137561)
-      id: 5137561
+    - name: Swell Water - River Demo (7526349)
+      objectId: 7526349
+      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 108
+        y: 393
+        width: 123
+        height: 15
+      index: 872
+      length: 17
+    - name: Swell Water - Realistic Water Demo (5578919)
+      objectId: 5578919
+      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 163
+        y: 378
+        width: 120
+        height: 15
+      index: 838
+      length: 17
+    - name: Swell Water - Ocean Demo (6745852)
+      objectId: 6745852
+      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 116
+        y: 363
+        width: 122
+        height: 15
+      index: 794
+      length: 17
+    - name: Swell Water - Matrial Demo (4752279)
+      objectId: 4752279
+      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 118
+        y: 348
+        width: 122
+        height: 15
+      index: 760
+      length: 17
+    - name: Swell Floater - Stress Test (6018113)
+      objectId: 6018113
+      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 106
+        y: 318
+        width: 120
+        height: 15
+      index: 709
+      length: 17
+    - name: Swell Floater - Props Demo (9798996)
+      objectId: 9798996
+      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 108
+        y: 303
+        width: 121
+        height: 15
+      index: 674
+      length: 17
+    - name: Swell Floater - Buoyancy Demo (6019483)
+      objectId: 6019483
+      objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 136
+        y: 288
+        width: 123
+        height: 15
+      index: 641
+      length: 17
+    - name: Swell Floater - Algorithm Demo (8256079)
+      objectId: 8256079
+      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 132
+        y: 273
+        width: 122
+        height: 15
+      index: 603
+      length: 17
+    - name: MeshAlbedoOrigin (2232186)
+      objectId: 2232186
       objectRef: {fileID: 1437867721}
-    - name: Albedo (River) (UnityEngine.Texture2D) (4598834)
-      id: 4598834
+      fieldRect:
+        serializedVersion: 2
+        x: 130
+        y: 153
+        width: 121
+        height: 15
+      index: 353
+      length: 17
+    - name: Albedo (River) (9199326)
+      objectId: 9199326
       objectRef: {fileID: 2800000, guid: f5cf112b439949241b1c76b1ab1d33ef, type: 3}
-  managerConnected: 1
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 138
+        width: 118
+        height: 15
+      index: 286
+      length: 17
+    - name: Water - E (River Demo) (8848266)
+      objectId: 8848266
+      objectRef: {fileID: 2100000, guid: cfcef8fb51de24f4293ea90271ef0692, type: 2}
+      fieldRect:
+        serializedVersion: 2
+        x: 27
+        y: 108
+        width: 119
+        height: 15
+      index: 198
+      length: 17
+    - name: Swell Water (Track Player) (2293518)
+      objectId: 2293518
+      objectRef: {fileID: 701894903}
+      fieldRect:
+        serializedVersion: 2
+        x: 90
+        y: 78
+        width: 121
+        height: 15
+      index: 101
+      length: 17
+    objectIdPairs: []
 --- !u!4 &1687639726
 Transform:
   m_ObjectHideFlags: 0

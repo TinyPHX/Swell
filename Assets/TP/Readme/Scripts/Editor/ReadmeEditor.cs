@@ -1,14 +1,10 @@
 #if UNITY_EDITOR
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Web.WebPages;
 using UnityEngine;
 using UnityEditor;
 using Application = UnityEngine.Application;
@@ -17,6 +13,7 @@ using TheArtOfDev.HtmlRenderer.PdfSharp;
 using PdfSharp;
 using PdfSharp.Pdf;
 using HtmlAgilityPack;
+using UnityEditor.Rendering;
 
 namespace TP 
 {
@@ -49,14 +46,11 @@ namespace TP
         private GUISkin skinDefault;
         private GUISkin skinStyle;
         private GUISkin skinSource;
-
-
+        
         // Text area focus
         private Rect doneEditButtonRect;
-
-        // Drag and drop object fields
-        private Object[] objectsToDrop;
-        private Vector2 objectDropPosition;
+        
+        //Advanced Options
         private string objectIdPairListString;
 
         //Copy buffer fix
@@ -69,17 +63,6 @@ namespace TP
         
         public ReadmeTextEditor textEditor => ReadmeTextEditor.Instance;
 
-        private void Initialize()
-        {
-            if (!initialized)
-            {
-                initialized = true;
-
-                readmeTextArea = new ReadmeTextArea(readme.GetInstanceID(), OnTextChanged, "Click \"Edit\" to add your readme!");
-                readmeTextArea.Update(this);
-            }
-        }
-
         public override void OnInspectorGUI()
         {
             currentEvent = new Event(Event.current);
@@ -91,10 +74,12 @@ namespace TP
                 ActiveReadmeEditor = this;
             }
 
-            Initialize();
+            // Initialize();
             readme.Initialize();
             readme.ConnectManager();
-            readme.UpdateSettings(ReadmeSettings.GetPath(this));
+            readme.UpdateSettings(ReadmeSettings.GetFolder(this));
+            
+            readmeTextArea ??= new ReadmeTextArea(this, readme, TextAreaObjectFields, OnTextAreaChange,"Click \"Edit\" to add your readme!");
 
             liteEditor = readme.ActiveSettings.lite;
             UpdateGuiStyles(readme);
@@ -103,21 +88,19 @@ namespace TP
             #region Editor GUI
 
             StopInvalidTextAreaEvents();
-            EditorGuiTextAreaObjectFields();
             UpdateStyleState();
             
             readmeTextArea.Draw(editing, sourceOn, readme.RichText);
             
             if (!editing)
             {
-                //Controls
                 if (!readme.readonlyMode || Readme.disableAllReadonlyMode)
                 {
                     EditorGUILayout.Space();
                     if (GUILayout.Button("Edit"))
                     {
                         editing = true;
-                        readmeTextArea.RepaintTextArea(this, focusText:true);
+                        readmeTextArea.RepaintTextArea(focusText:true);
                     }
 
                     doneEditButtonRect = ReadmeUtil.GetLastRect(doneEditButtonRect);
@@ -133,12 +116,12 @@ namespace TP
             }
             else
             {
-                //Controls
                 EditorGUILayout.Space();
                 if (GUILayout.Button("Done"))
                 {
                     editing = false;
-                    readmeTextArea.RepaintTextArea(this, focusText:true);
+                    readmeTextArea.RepaintTextArea(focusText:true);
+                    FreeVersionDialogue();
                 }
                 
                 doneEditButtonRect = ReadmeUtil.GetLastRect(doneEditButtonRect);
@@ -147,179 +130,25 @@ namespace TP
             }
 
             EditorGuiAdvancedDropdown();
-            // UpdateTextEditor();
-            EditorGuiTextAreaObjectFields();
 
             #endregion Editor GUI
 
             AfterOnInspectorGUI();
         }
 
-        private void OnTextChanged(string newText, string oldText)
+        private void OnTextAreaChange(string newText, TextAreaObjectField[] newTextAreaObjectFields)
         {
-            RichText = newText;
             SetTargetDirty();
+            RichText = newText;
+            TextAreaObjectFields = newTextAreaObjectFields;
         }
 
         private void AfterOnInspectorGUI()
         {
-            if (ReadmeUtil.UnityInFocus || readmeTextArea.AwaitingTrigger)
-            {
-                //Post gui draw update
-                DragAndDropObjectField();
-                CheckKeyboardShortCuts();
-            }
+            CheckKeyboardShortCuts();
 
-            textEditor.Update(this);
-            readmeTextArea.Update(this);
-
-        }
-        
-        private void EditorGuiTextAreaObjectFields()
-        {
-            if (RichText != null)
-            {
-                UpdateTextAreaObjectFieldArray();
-                DrawTextAreaObjectFields();
-                UpdateTextAreaObjectFieldIds();
-            }
-
-            void UpdateTextAreaObjectFieldArray()
-            {
-                if (textEditor != null)
-                {
-                    string objectTagPattern = "<o=\"[-,a-zA-Z0-9]*\"></o>";
-                    MatchCollection matches = Regex.Matches(RichText, objectTagPattern, RegexOptions.None);
-                    TextAreaObjectField[] newTextAreaObjectFields = new TextAreaObjectField[matches.Count];
-                    for (int i = matches.Count - 1; i >= 0; i--)
-                    {
-                        Match match = matches[i];
-
-                        if (match.Success)
-                        {
-                            string idValue = match.Value.Replace("<o=\"", "").Replace("\"></o>", "");
-                            int objectId = 0;
-                            bool parseSuccess = int.TryParse(idValue, out objectId);
-
-                            if (!parseSuccess && verbose)
-                            {
-                                Debug.Log("Unable to parse id: " + idValue);
-                            }
-
-                            int startIndex = match.Index;
-                            int endIndex = match.Index + match.Value.Length;
-
-                            if (endIndex == RichText.Length || RichText[endIndex] != ' ')
-                            {
-                                RichText = RichText.Insert(endIndex, " ");
-                            }
-
-                            if (startIndex == 0 || RichText[startIndex - 1] != ' ')
-                            {
-                                RichText = RichText.Insert(startIndex, " ");
-                            }
-
-                            Rect rect = textEditor.GetRect(startIndex - 1, endIndex + 1);
-
-                            Rect rectWithCorrectHeight = textEditor.GetRect(startIndex - 1, endIndex); // Have to do this for when a space is moved to the next line.
-                            rect.height = rectWithCorrectHeight.height;
-                            rect.width = rectWithCorrectHeight.width;
-
-                            if (rect.x > 0 && rect.y > 0 && rect.width > 0 && rect.height > 0)
-                            {
-                                TextAreaObjectField matchedField =
-                                    TextAreaObjectFields.FirstOrDefault(item => item.ObjectId == objectId);
-                                if (matchedField != null && !matchedField.IdInSync)
-                                {
-                                    matchedField.UpdateId();
-                                    objectId = matchedField.ObjectId;
-
-                                    int idStartIndex = match.Index + 4;
-                                    RichText = RichText
-                                        .Remove(idStartIndex, idValue.Length)
-                                        .Insert(idStartIndex, ReadmeUtil.GetFixedLengthId(objectId.ToString()));
-                                }
-
-                                if (matchedField != null && !matchedField.IdInSync)
-                                {
-                                    ReadmeManager.AddObjectIdPair(matchedField.ObjectRef, objectId);
-                                }
-
-                                TextAreaObjectField newField = new TextAreaObjectField(rect, objectId, startIndex,
-                                    endIndex - startIndex);
-                                newTextAreaObjectFields[i] = newField;
-                                newTextAreaObjectFields[i].OnChangeHandler += SetTargetDirty;
-                            }
-                            else
-                            {
-                                return; //Abort everything. Position is incorrect! Probably no textEditor found.
-                            }
-                        }
-                    }
-
-                    if (!TextAreaObjectFields.SequenceEqual(newTextAreaObjectFields))
-                    {
-                        TextAreaObjectFields = newTextAreaObjectFields;
-                    }
-                }
-            }
-
-            void DrawTextAreaObjectFields()
-            {
-                if (!sourceOn || !editing)
-                {
-                    Vector2 offset = -readmeTextArea.Scroll;
-                    EditorGUI.BeginDisabledGroup(!editing);
-                    foreach (TextAreaObjectField textAreaObjectField in TextAreaObjectFields)
-                    {
-                        textAreaObjectField.Draw(textEditor.TextEditor, offset, readmeTextArea.Bounds);
-                    }
-
-                    EditorGUI.EndDisabledGroup();
-                }
-            }
-
-            void UpdateTextAreaObjectFieldIds()
-            {
-                StringBuilder newRichText = new StringBuilder(RichText);
-                string objectTagPattern = "<o=\"[-,a-zA-Z0-9]*\"></o>";
-                int startTagLength = "<o=\"".Length;
-                int endTagLength = "\"></o>".Length;
-                int expectedFieldCount = Regex.Matches(RichText, "<o=\"[-,a-zA-Z0-9]*\"></o>", RegexOptions.None).Count;
-
-                if (expectedFieldCount != TextAreaObjectFields.Length)
-                {
-                    return;
-                }
-
-                for (int i = TextAreaObjectFields.Length - 1; i >= 0; i--)
-                {
-                    TextAreaObjectField textAreaObjectField = TextAreaObjectFields[i];
-
-                    if (RichText.Length > textAreaObjectField.Index)
-                    {
-                        Match match =
-                            Regex.Match(RichText.Substring(Mathf.Max(0, textAreaObjectField.Index - 1)),
-                                objectTagPattern, RegexOptions.None);
-
-                        if (match.Success)
-                        {
-                            string textAreaId =
-                                ReadmeUtil.GetFixedLengthId(match.Value.Replace("<o=\"", "").Replace("\"></o>", ""));
-                            string objectFieldId = ReadmeUtil.GetFixedLengthId(textAreaObjectField.ObjectId.ToString());
-
-                            if (textAreaId != objectFieldId)
-                            {
-                                int idStartIndex = textAreaObjectField.Index + match.Index + startTagLength;
-                                newRichText.Remove(idStartIndex - 1, textAreaId.Length);
-                                newRichText.Insert(idStartIndex - 1, objectFieldId);
-                            }
-                        }
-                    }
-                }
-
-                RichText = newRichText.ToString();
-            }
+            textEditor.Update();
+            readmeTextArea.Update();
         }
         
         private void EditorGuiToolbar()
@@ -373,7 +202,7 @@ namespace TP
             if (GUILayout.Button(new GUIContent("Obj", "Insert Object Field (alt+o)"), objButtonStyle,
                     GUILayout.Width(smallButtonWidth)))
             {
-                AddObjectField();
+                readmeTextArea.AddObjectField();
             }
 
             GUIStyle sourceButtonStyle = new GUIStyle(EditorStyles.toolbarButton);
@@ -406,6 +235,7 @@ namespace TP
         private void EditorGuiAdvancedDropdown()
         {
             float smallButtonWidth = EditorGUIUtility.singleLineHeight * 2;
+            float buttonWidth = smallButtonWidth * 4;
             float textAreaWidth = readmeTextArea.GetTextAreaSize().x;
 
             if (editing || showAdvancedOptions)
@@ -435,6 +265,11 @@ namespace TP
                 Readme.disableAllReadonlyMode =
                     EditorGUILayout.Toggle(disableAllReadonlyModeTooltip, Readme.disableAllReadonlyMode);
 
+                if (GUILayout.Button("Open Backups Location", GUILayout.Width(buttonWidth)))
+                {
+                    EditorUtility.RevealInFinder(readme.BackupsLocation);
+                }
+
                 showCursorPosition = EditorGUILayout.Foldout(showCursorPosition, "Cursor Position");
                 if (showCursorPosition)
                 {
@@ -450,10 +285,8 @@ namespace TP
                     }
 
                     richTextWithCursor = richTextWithCursor.Replace("\n", " \\n\n");
-                    float adjustedTextAreaHeight =
-                        readmeTextArea.CalcHeight(new GUIContent(richTextWithCursor), textAreaWidth - 50);
-                    EditorGUILayout.SelectableLabel(richTextWithCursor,
-                        GUILayout.Height(adjustedTextAreaHeight));
+                    float adjustedTextAreaHeight = readmeTextArea.CalcHeight(richTextWithCursor, textAreaWidth - 50);
+                    EditorGUILayout.SelectableLabel(richTextWithCursor, GUILayout.Height(adjustedTextAreaHeight));
                     EditorGUI.indentLevel--;
                 }
 
@@ -463,21 +296,19 @@ namespace TP
                     EditorGUI.indentLevel++;
                     EditorGUILayout.Toggle("Manager Connected", readme.managerConnected);
                     EditorGUILayout.LabelField("Object Id Pairs");
-                    float objectDictHeight =
-                        readmeTextArea.CalcHeight(new GUIContent(objectIdPairListString), textAreaWidth - 50);
+                    float objectDictHeight = readmeTextArea.CalcHeight(objectIdPairListString, textAreaWidth - 50);
                     EditorGUILayout.LabelField(objectIdPairListString, GUILayout.Height(objectDictHeight));
                     GUILayout.BeginHorizontal();
-                    if (GUILayout.Button("Refresh Pairs", GUILayout.Width(smallButtonWidth * 4)) ||
-                        objectIdPairListString == null)
+                    if (GUILayout.Button("Refresh Pairs", GUILayout.Width(buttonWidth)) || objectIdPairListString == null)
                     {
                         objectIdPairListString = ReadmeManager.GetObjectIdPairListString();
-                        readmeTextArea.RepaintTextArea(this);
+                        readmeTextArea.RepaintTextArea();
                     }
 
-                    if (GUILayout.Button("Clear Pairs", GUILayout.Width(smallButtonWidth * 4)))
+                    if (GUILayout.Button("Clear Pairs", GUILayout.Width(buttonWidth)))
                     {
                         ReadmeManager.Clear();
-                        readmeTextArea.RepaintTextArea(this);
+                        readmeTextArea.RepaintTextArea();
                     }
 
                     GUILayout.EndHorizontal();
@@ -590,12 +421,12 @@ namespace TP
 
                     GUILayout.BeginHorizontal();
 
-                    if (GUILayout.Button("Save to File", GUILayout.Width(smallButtonWidth * 4)))
+                    if (GUILayout.Button("Save to File", GUILayout.Width(buttonWidth)))
                     {
                         readme.Save();
                     }
 
-                    if (GUILayout.Button("Load from File", GUILayout.Width(smallButtonWidth * 4)))
+                    if (GUILayout.Button("Load from File", GUILayout.Width(buttonWidth)))
                     {
                         readme.LoadLastSave();
                         Repaint();
@@ -605,16 +436,16 @@ namespace TP
 
                     GUILayout.BeginHorizontal();
 
-                    if (GUILayout.Button("New Settings File", GUILayout.Width(smallButtonWidth * 4)))
+                    if (GUILayout.Button("New Settings File", GUILayout.Width(buttonWidth)))
                     {
-                        ReadmeSettings newSettings = new ReadmeSettings(ReadmeSettings.GetPath(this));
-                        newSettings.SaveSettings();
+                        ReadmeSettings newSettings = new ReadmeSettings(ReadmeSettings.GetFolder(this));
+                        newSettings.SaveSettings(ReadmeSettings.GetFolder(this));
                         Repaint();
                     }
 
-                    if (GUILayout.Button("Reload Settings", GUILayout.Width(smallButtonWidth * 4)))
+                    if (GUILayout.Button("Reload Settings", GUILayout.Width(buttonWidth)))
                     {
-                        readme.UpdateSettings(ReadmeSettings.GetPath(this), true, verbose);
+                        readme.UpdateSettings(ReadmeSettings.GetFolder(this), true, verbose);
                         Repaint();
                     }
 
@@ -626,54 +457,47 @@ namespace TP
                     showDebugButtons = EditorGUILayout.Foldout(showDebugButtons, "Debug Buttons");
                     if (showDebugButtons)
                     {
-                        float debugButtonWidth = smallButtonWidth * 6;
-
-                        if (GUILayout.Button("TestHtmlAgilityPack", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("TestHtmlAgilityPack", GUILayout.Width(buttonWidth)))
                         {
                             TestHtmlAgilityPack();
                         }
 
-                        if (GUILayout.Button("Repaint", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("Repaint", GUILayout.Width(buttonWidth)))
                         {
-                            readmeTextArea.RepaintTextArea(this);
+                            readmeTextArea.RepaintTextArea();
                         }
 
-                        if (GUILayout.Button("GUI.FocusControl", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("GUI.FocusControl", GUILayout.Width(buttonWidth)))
                         {
                             GUI.FocusControl(readmeTextArea.ActiveName); //readme_text_editor_style
                         }
 
-                        if (GUILayout.Button("OnGui", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("OnGui", GUILayout.Width(buttonWidth)))
                         {
                             EditorUtility.SetDirty(readme.gameObject);
                         }
 
-                        // if (GUILayout.Button("AssignTextEditor", GUILayout.Width(debugButtonWidth)))
-                        // {
-                        //     // UpdateTextEditor();
-                        // }
-
-                        if (GUILayout.Button("SetDirty", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("SetDirty", GUILayout.Width(buttonWidth)))
                         {
                             EditorUtility.SetDirty(readme);
                         }
 
-                        if (GUILayout.Button("Repaint", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("Repaint", GUILayout.Width(buttonWidth)))
                         {
                             Repaint();
                         }
 
-                        if (GUILayout.Button("RecordObject", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("RecordObject", GUILayout.Width(buttonWidth)))
                         {
                             Undo.RecordObject(readme, "Force update!");
                         }
 
-                        if (GUILayout.Button("FocusTextInControl", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("FocusTextInControl", GUILayout.Width(buttonWidth)))
                         {
                             EditorGUI.FocusTextInControl(readmeTextArea.ActiveName);
                         }
 
-                        if (GUILayout.Button("Un-FocusTextInControl", GUILayout.Width(debugButtonWidth)))
+                        if (GUILayout.Button("Un-FocusTextInControl", GUILayout.Width(buttonWidth)))
                         {
                             EditorGUI.FocusTextInControl("");
                         }
@@ -697,7 +521,7 @@ namespace TP
             RectOffset padding = new RectOffset(5, 5, 5, 5);
             RectOffset margin = new RectOffset(3, 3, 3, 3);
 
-            readmeTextArea?.UpdateGuiStyles(
+            readmeTextArea.UpdateGuiStyles(
                 new GUIStyle(skinDefault.label)
                 {
                     richText = true,
@@ -720,7 +544,7 @@ namespace TP
                     padding = padding,
                     margin = margin
                 },
-                new GUIStyle(skinDefault.label)
+                new GUIStyle(skinStyle.textArea)
                 {
                     richText = true,
                     font = readmeTarget.font,
@@ -729,7 +553,7 @@ namespace TP
                     padding = padding,
                     margin = margin
                 },
-                new GUIStyle(skinDefault.label)
+                new GUIStyle(skinSource.textArea)
                 {
                     richText = false,
                     wordWrap = true,
@@ -785,144 +609,101 @@ namespace TP
             }
         }
 
-        private void ShowLiteVersionDialog(string feature = "This")
+        public bool LiteVersionPaywall(string feature = "This")
         {
-            string title = "Paid Feature Only";
-            string message = feature +
-                             " is a paid feature. To use this feature please purchase a copy of Readme from the Unity Asset Store.";
-            string ok = "Go to Asset Store";
-            string cancel = "Nevermind";
-            bool result = EditorUtility.DisplayDialog(title, message, ok, cancel);
-
-            if (result)
-            {
-                Application.OpenURL("https://assetstore.unity.com/packages/slug/152336");
-            }
+            return false; //Disabling this in favor of less intrusive FreeVersionDialogue.
+            
+            // if (liteEditor)
+            // {
+            //     string title = "Paid Feature Only";
+            //     string message = feature +
+            //                      " is a paid feature. To use this feature please purchase a copy of Readme from the Unity Asset Store.";
+            //     string ok = "Go to Asset Store";
+            //     string cancel = "Nevermind";
+            //     bool result = EditorUtility.DisplayDialog(title, message, ok, cancel);
+            //
+            //     if (result)
+            //     {
+            //         Application.OpenURL("https://assetstore.unity.com/packages/slug/152336");
+            //     }
+            // }
+            //
+            // return liteEditor;
         }
 
-        private void DragAndDropObjectField()
-        {
-            if (editing)
-            {
-                switch (currentEvent.type)
-                {
-                    case EventType.DragUpdated:
-                    case EventType.DragPerform:
-                        if (!readmeTextArea.Contains(currentEvent.mousePosition))
-                        {
-                            return; // Ignore drag and drop outside of textArea
-                        }
-
-                        foreach (TextAreaObjectField textAreaObjectField in TextAreaObjectFields)
-                        {
-                            if (textAreaObjectField.FieldRect.Contains(currentEvent.mousePosition))
-                            {
-                                return; // Ignore drag and drop over current Object Fields
-                            }
-                        }
-
-                        DragAndDrop.visualMode = DragAndDropVisualMode.Link;
-
-                        if (currentEvent.type == EventType.DragPerform && objectsToDrop == null)
-                        {
-                            DragAndDrop.AcceptDrag();
-
-                            objectsToDrop = DragAndDrop.objectReferences;
-                            objectDropPosition = currentEvent.mousePosition;
-                        }
-
-                        break;
-                }
-
-                if (objectsToDrop != null && textEditor != null)
-                {
-                    int dropIndex = textEditor.PositionToIndex(objectDropPosition);
-                    if (dropIndex == -1) //dropped on last line away from last character.
-                    {
-                        dropIndex = ActiveText.Length;
-                    }
-                    dropIndex = readmeTextArea.GetNearestPoorTextIndex(dropIndex);
-                    InsertObjectFields(objectsToDrop, dropIndex);
-                    objectsToDrop = null;
-                    objectDropPosition = Vector2.zero;
-                    Undo.RecordObject(readme, "object field added");
-                }
-            }
-        }
-
-        private void InsertObjectFields(Object[] objects, int index)
+        private void FreeVersionDialogue()
         {
             if (liteEditor)
             {
-                ShowLiteVersionDialog("Dragging and dropping object fields");
-                return;
-            }
+                ReadmeSettings activeSettings = readme.ActiveSettings;
+                
+                DateTime lastPopupDate = DateTime.Parse(activeSettings.lastPopupDate);
+                double daysSincePopup = (DateTime.Now - lastPopupDate).TotalDays;
 
-            for (int i = objects.Length - 1; i >= 0; i--)
-            {
-                Object objectDragged = objects[i];
-
-                AddObjectField(index, ReadmeManager.GetIdFromObject(objectDragged).ToString());
-            }
-        }
-
-        private void AddObjectField(int index = -1, string id = "0000000")
-        {
-            if (textEditor != null)
-            {
-                if (index == -1)
+                if (daysSincePopup > 7)
                 {
-                    index = textEditor.CursorIndex;
+                    activeSettings.lastPopupDate = DateTime.Now.ToString();
+                    activeSettings.SaveSettings(ReadmeSettings.GetFolder(this));
+                    readme.UpdateSettings(ReadmeSettings.GetFolder(this), force:true);
+                    
+                    string title = "Tiny PHX Games - Readme (Free Version)";
+                    string message =
+                        "Hello! Thank you for trying out Readme.\n\n" +
+                        "This is the free version of Readme, and it can be used indefinitely. If you love it and can afford to to purchase a copy, every sale means a lot to me.\n\n" +
+                        "Would you like to purchase the asset now?";
+                    string ok = "Purchase";
+                    string cancel = "Cancel";
+                    bool result = EditorUtility.DisplayDialog(title, message, ok, cancel);
+
+                    if (result)
+                    {
+                        Application.OpenURL("https://assetstore.unity.com/packages/slug/152336");
+                    }
                 }
-
-                string objectString = " <o=\"" + ReadmeUtil.GetFixedLengthId(id) + "\"></o> ";
-                RichText = RichText.Insert(index, objectString);
-
-                int newIndex = readmeTextArea.GetNearestPoorTextIndex(index + objectString.Length);
-                readmeTextArea.RepaintTextArea(this, newIndex, newIndex, true);
-
-                SetTargetDirty();
             }
         }
 
         private void CheckKeyboardShortCuts()
         {
-            //Alt + a for toggle advanced mode
-            if (currentEvent.type == EventType.KeyDown && currentEvent.alt && currentEvent.keyCode == KeyCode.A)
+            if (ReadmeUtil.UnityInFocus)
             {
-                showAdvancedOptions = !showAdvancedOptions;
-                Event.current.Use();
-                Repaint();
-            }
-
-            if (editing)
-            {
-                //Alt + b for bold
-                if (currentEvent.type == EventType.KeyDown && currentEvent.alt && currentEvent.keyCode == KeyCode.B)
+                //Alt + a for toggle advanced mode
+                if (currentEvent.type == EventType.KeyDown && currentEvent.alt && currentEvent.keyCode == KeyCode.A)
                 {
-                    ToggleStyle("b");
+                    showAdvancedOptions = !showAdvancedOptions;
                     Event.current.Use();
+                    Repaint();
                 }
 
-                //Alt + i for italic
-                if (currentEvent.type == EventType.KeyDown && currentEvent.alt && currentEvent.keyCode == KeyCode.I)
+                if (editing)
                 {
-                    ToggleStyle("i");
-                    Event.current.Use();
+                    //Alt + b for bold
+                    if (currentEvent.type == EventType.KeyDown && currentEvent.alt && currentEvent.keyCode == KeyCode.B)
+                    {
+                        ToggleStyle("b");
+                        Event.current.Use();
+                    }
+
+                    //Alt + i for italic
+                    if (currentEvent.type == EventType.KeyDown && currentEvent.alt && currentEvent.keyCode == KeyCode.I)
+                    {
+                        ToggleStyle("i");
+                        Event.current.Use();
+                    }
+
+                    //Alt + o for object
+                    if (currentEvent.type == EventType.KeyDown && currentEvent.alt && currentEvent.keyCode == KeyCode.O)
+                    {
+                        readmeTextArea.AddObjectField();
+                        Event.current.Use();
+                    }
                 }
 
-                //Alt + o for object
-                if (currentEvent.type == EventType.KeyDown && currentEvent.alt && currentEvent.keyCode == KeyCode.O)
+                //Ctrl + v for paste
+                if (currentEvent.type == EventType.KeyDown && currentEvent.control && currentEvent.keyCode == KeyCode.V)
                 {
-                    AddObjectField();
-                    Event.current.Use();
+                    //TODO review why this is empty
                 }
-            }
-
-            //Ctrl + v for paste
-            if (currentEvent.type == EventType.KeyDown && currentEvent.control && currentEvent.keyCode == KeyCode.V)
-            {
-                //TODO review why this is empty
             }
         }
 
@@ -933,9 +714,8 @@ namespace TP
                 return;
             }
 
-            if (liteEditor)
+            if (LiteVersionPaywall("Setting the font color"))
             {
-                ShowLiteVersionDialog("Setting the font color");
                 return;
             }
 
@@ -949,13 +729,13 @@ namespace TP
                 return;
             }
 
-            if (liteEditor)
+            if (LiteVersionPaywall("Setting the font style"))
             {
-                ShowLiteVersionDialog("Setting the font style");
                 return;
             }
 
             readme.font = font;
+            readmeTextArea.RepaintTextArea(focusText:true);
         }
 
         private void SetFontSize(int size)
@@ -967,21 +747,20 @@ namespace TP
                     return;
                 }
 
-                if (liteEditor)
+                if (LiteVersionPaywall("Setting the font size"))
                 {
-                    ShowLiteVersionDialog("Setting the font size");
                     return;
                 }
             }
 
             readme.fontSize = size;
+            readmeTextArea.RepaintTextArea();
         }
 
         private void ToggleStyle(string tag)
         {
-            if (liteEditor)
+            if (LiteVersionPaywall("Rich text shortcuts"))
             {
-                ShowLiteVersionDialog("Rich text shortcuts");
                 return;
             }
 
@@ -1010,7 +789,7 @@ namespace TP
                 int newCursorIndex = readmeTextArea.GetNearestPoorTextIndex(readme.GetRichIndex(styleStartIndex+1)-1);
                 int newSelectIndex = readmeTextArea.GetNearestPoorTextIndex(readme.GetRichIndex(styleEndIndex+1)-1);
 
-                readmeTextArea.RepaintTextArea(this, newCursorIndex, newSelectIndex);
+                readmeTextArea.RepaintTextArea(newCursorIndex, newSelectIndex);
             }
         }
 
@@ -1038,13 +817,12 @@ namespace TP
 
         private void ExportToPdf()
         {
-            if (liteEditor)
+            if (LiteVersionPaywall("Export to PDF"))
             {
-                ShowLiteVersionDialog("Export to PDF");
                 return;
             }
 
-            EditorGuiTextAreaObjectFields();
+            // EditorGuiTextAreaObjectFields();
             string currentPath = AssetDatabase.GetAssetPath(readme);
             string pdfSavePath = EditorUtility.SaveFilePanel(
                 "Save Readme",
@@ -1058,6 +836,11 @@ namespace TP
                 pdf.Save(pdfSavePath);
                 AssetDatabase.Refresh();
             }
+        }
+
+        public void SelectAll()
+        {
+            textEditor?.SelectAll();
         }
 
         public void CopyRichText()

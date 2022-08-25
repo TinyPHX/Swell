@@ -18,14 +18,17 @@ namespace TP
         [SerializeField] private int index;
         [SerializeField] private int length;
 
-        public delegate void OnChangeDelegate();
-        public OnChangeDelegate OnChangeHandler { get; set; }
-        private void OnChange() { }
+        // public delegate void OnChangeDelegate();
+        // public OnChangeDelegate OnChangeHandler { get; set; }
+        // private void OnChange() { }
+        private Action<TextAreaObjectField> OnChange;
+        
+        
 
         private static Color textBoxBackgroundColor;
         private static readonly Color selectedColor = new Color(0f / 255, 130f / 255, 255f / 255, .6f);
 
-        public TextAreaObjectField(Rect fieldRect, int objectId, int index, int length)
+        public TextAreaObjectField(Rect fieldRect, int objectId, int index, int length, Action<TextAreaObjectField> onChangeCallback)
         {
             this.fieldRect = fieldRect;
             this.index = index;
@@ -36,7 +39,7 @@ namespace TP
             
             name = (ObjectRef ? ObjectRef.name : "null") + " (" + ObjectId + ")";
 
-            OnChangeHandler += OnChange;
+            OnChange = onChangeCallback;
         }
 
         public int GetIdFromObject()
@@ -58,6 +61,11 @@ namespace TP
                    this.length == otherTextAreaObject.length &&
                    this.objectId == otherTextAreaObject.ObjectId &&
                    this.objectRef == otherTextAreaObject.ObjectRef;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public void Draw(TextEditor textEditor = null, Vector2 offset = default, Rect bounds = default)
@@ -86,7 +94,7 @@ namespace TP
             {
                 ObjectRef = obj;
                 UpdateId();
-                OnChangeHandler();
+                OnChange(this);
             }
 
             if (textEditor != null && IsSelected(textEditor))
@@ -135,6 +143,11 @@ namespace TP
         public int Index
         {
             get { return index; }
+        }
+
+        public int IdIndex
+        {
+            get { return index+4; } // +4 for the characters <o="
         }
     }
 }

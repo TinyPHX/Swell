@@ -32,24 +32,22 @@ namespace TP
         
         private Action<int> onCursorChangedCallback;
 
-        // Cursor Fix 
         public bool ApplyCursorBugFix { get; set; } = true;
-
-        private readonly List<ReadmeTextArea> RegisteredTextAreas = new ();
-
+        
         private ReadmeTextEditor()
         {
             textEditor = TextEditor;
         }
 
+        private ReadmeTextArea readmeTextArea;
         public void RegisterTextArea(ReadmeTextArea readmeTextArea)
         {
-            RegisteredTextAreas.AddUnique(readmeTextArea);
+            this.readmeTextArea = readmeTextArea;
         }
 
-        public ReadmeTextArea ActiveTextArea => 
-            RegisteredTextAreas.FirstOrDefault(readmeTextArea =>
-                readmeTextArea.HasControl(controlID) || readmeTextArea.HasControl(GUI.GetNameOfFocusedControl()));
+        private bool HasTextArea => readmeTextArea != null;
+
+        private bool TextAreaActive => readmeTextArea != null && (readmeTextArea.HasTextEditorFocus || readmeTextArea.HasGuiFocus);
 
         private TextEditor GetPrivateTextEditor =>
             typeof(EditorGUI)
@@ -58,7 +56,7 @@ namespace TP
         
         private Event currentEvent => new Event(Event.current);
 
-        public void Update(Editor editor)
+        public void Update()
         {
             FixCursorBug();
         }
@@ -68,10 +66,7 @@ namespace TP
 
         public void SetText(string text)
         {
-            if (textEditor != null)
-            {
-                textEditor.text = text;
-            }
+            this.text = text;
         }
 
         public void SetCursors((int, int) cursors)
@@ -98,7 +93,7 @@ namespace TP
         
         public void BeforeTextAreaChange(ReadmeTextArea readmeTextArea)
         {
-            if (!readmeTextArea.TagsError())
+            if (!readmeTextArea.TagsError() && !readmeTextArea.SourceOn)
             {
                 if (currentEvent.type == EventType.KeyDown &&
                     new KeyCode[] { KeyCode.Backspace, KeyCode.Delete }.Contains(currentEvent.keyCode) &&
@@ -136,7 +131,7 @@ namespace TP
                             SelectIndex = newIndex;
                             Event.current.Use();
                         }
-                        else if (readmeTextArea.IsOnTag(charIndex))
+                        else if (readmeTextArea.IsInTag(charIndex))
                         {
                             CursorIndex += direction == 1 ? 1 : -1;
                             SelectIndex += direction == 1 ? 1 : -1;
@@ -150,14 +145,17 @@ namespace TP
 
         public void AfterTextAreaChange(ReadmeTextArea readmeTextArea)
         {
-            int direction = currentEvent.keyCode == KeyCode.Backspace ? -1 : 0;
-            CursorIndex = readmeTextArea.GetNearestPoorTextIndex(CursorIndex, -direction);
-            SelectIndex = readmeTextArea.GetNearestPoorTextIndex(SelectIndex, -direction);
+            if (!readmeTextArea.TagsError() && !readmeTextArea.SourceOn)
+            {
+                int direction = currentEvent.keyCode == KeyCode.Backspace ? -1 : 0;
+                CursorIndex = readmeTextArea.GetNearestPoorTextIndex(CursorIndex, -direction);
+                SelectIndex = readmeTextArea.GetNearestPoorTextIndex(SelectIndex, -direction);
+            }
         }
         
         private void FixCursorBug()
         {
-            if (ApplyCursorBugFix && TextEditorActive && ActiveTextArea.RichTextDisplayed)
+            if (ApplyCursorBugFix && TextEditorActive && readmeTextArea.RichTextDisplayed)
             {
                 editorSelectIndexChanged = currentSelectIndex != SelectIndex;
                 editorCursorIndexChanged = currentCursorIndex != CursorIndex;
@@ -179,7 +177,7 @@ namespace TP
                 new EventType[] { EventType.MouseDown, EventType.MouseDrag, EventType.MouseUp }.Contains(currentEvent
                     .type);
 
-            if (currentEvent.type == EventType.MouseDown && ActiveTextArea.Contains(currentEvent.mousePosition))
+            if (currentEvent.type == EventType.MouseDown && readmeTextArea.Contains(currentEvent.mousePosition))
             {
                 mouseCaptured = true;
             }
@@ -189,7 +187,7 @@ namespace TP
                 int rawMousePositionIndex = MousePositionToIndex;
                 if (rawMousePositionIndex != -1)
                 {
-                    int mousePositionIndex = ActiveTextArea.GetNearestPoorTextIndex(rawMousePositionIndex);
+                    int mousePositionIndex = readmeTextArea.GetNearestPoorTextIndex(rawMousePositionIndex);
 
                     if (editorSelectIndexChanged)
                     {
@@ -215,7 +213,7 @@ namespace TP
                 new KeyCode[] { KeyCode.UpArrow, KeyCode.DownArrow, KeyCode.RightArrow, KeyCode.LeftArrow }.Contains(
                     Event.current.keyCode);
             bool isDoubleClick = Event.current.clickCount == 2;
-            bool clickInTextArea = ActiveTextArea.Contains(currentEvent.mousePosition);
+            bool clickInTextArea = readmeTextArea.Contains(currentEvent.mousePosition);
             if (isKeyboard || isDoubleClick || richTextChanged || AllTextSelected())
             {
                 int direction = isDoubleClick ? 1 : 0;
@@ -231,8 +229,8 @@ namespace TP
 
                 if (editorSelectIndexChanged || editorCursorIndexChanged || richTextChanged)
                 {
-                    CursorIndex = ActiveTextArea.GetNearestPoorTextIndex(CursorIndex, direction);
-                    SelectIndex = ActiveTextArea.GetNearestPoorTextIndex(SelectIndex, direction);
+                    CursorIndex = readmeTextArea.GetNearestPoorTextIndex(CursorIndex, direction);
+                    SelectIndex = readmeTextArea.GetNearestPoorTextIndex(SelectIndex, direction);
                     cursorIndexChanged = false;
                     selectIndexChanged = false;
                 }
@@ -246,8 +244,8 @@ namespace TP
                     {
                         SelectIndex = mouseIndex;
                         CursorIndex = mouseIndex;
-                        SelectIndex = ActiveTextArea.GetNearestPoorTextIndex(WordStartIndex, -1);
-                        CursorIndex = ActiveTextArea.GetNearestPoorTextIndex(WordEndIndex, 1);
+                        SelectIndex = readmeTextArea.GetNearestPoorTextIndex(WordStartIndex, -1);
+                        CursorIndex = readmeTextArea.GetNearestPoorTextIndex(WordEndIndex, 1);
                     }
                 }
             }
@@ -255,11 +253,6 @@ namespace TP
 
         public bool AllTextSelected(string text = "", int cursorIndex = -1, int selectIndex = -1)
         {
-            // if (string.IsNullOrEmpty(text))
-            // {
-            //     text = RichText;
-            // }
-
             int startIndex = -1;
             int endIndex = -1;
 
@@ -271,21 +264,21 @@ namespace TP
             return TextEditorActive && (startIndex == 0 && endIndex == text.Length);
         }
 
-        public Rect GetRect(int startIndex, int endIndex)
+        public Rect GetRect(int startIndex, int endIndex, string text = null)
         {
+            text ??= this.text;
             Rect textEditorRect = textEditor?.position ?? new Rect();
 
-            if (textEditor != null && ActiveTextArea != null && text != ActiveTextArea.Text && TextEditorActive)
-            {
-                textEditor.text = ActiveTextArea.Text;
-            }
+            // if (text == null && TextEditorActive && readmeTextArea.HasTextEditorFocus && text != readmeTextArea.Text)
+            // {
+            //     text = readmeTextArea.Text;
+            // }
 
-            int textSize = 12; //Todo get size from size map
             float padding = 1;
-            string sizeWrapper = "<size={0}>{1}</size>";
+            int fontSize = 12; //Todo get size from size map
 
-            Vector2 startPositionIndex1 = GetGraphicalCursorPos(startIndex);
-            Vector2 startPositionIndex2 = GetGraphicalCursorPos(startIndex + 1);
+            Vector2 startPositionIndex1 = GetGraphicalCursorPosition(startIndex, text);
+            Vector2 startPositionIndex2 = GetGraphicalCursorPosition(startIndex + 1, text);
             Vector2 startPosition;
 
             if (startPositionIndex1.y != startPositionIndex2.y && startIndex != endIndex)
@@ -297,8 +290,9 @@ namespace TP
                 startPosition = startPositionIndex1 + new Vector2(padding, 0);
             }
 
-            Vector2 endPosition = GetGraphicalCursorPos(endIndex) + new Vector2(-padding, 0);
-            float height = (ActiveTextArea?.Style ?? new GUIStyle()).CalcHeight(new GUIContent(string.Format(sizeWrapper, textSize, " ")), 100) - 10;
+            Vector2 endPosition = GetGraphicalCursorPosition(endIndex, text) + new Vector2(-padding, 0);
+            // float height = readmeTextArea?.Style ?? new GUIStyle()).CalcHeight(new GUIContent(string.Format(sizeWrapper, textSize, " ")), 100) - 10;
+            float height = readmeTextArea.CalcHeight(fontSize: fontSize) - 10;
 
             if (startPosition.y != endPosition.y)
             {
@@ -314,15 +308,23 @@ namespace TP
             return rect;
         }
 
-        private Vector2 GetGraphicalCursorPos(int cursorIndex = -1)
+        private Vector2 GetGraphicalCursorPosition(int cursorIndex = -1, string text = null)
         {
-            if (!TextEditorActive)
+            text ??= this.text;
+            
+            Vector2 graphicalCursorPosition = Vector2.zero;
+            
+            if (HasTextEditor && cursorIndex == -1)
             {
-                return Vector2.zero;
+                cursorIndex = CursorIndex;
             }
 
-            cursorIndex = cursorIndex == -1 ? CursorIndex : cursorIndex;
-            return ActiveTextArea.GetCursorPixelPosition(cursorIndex);
+            if (HasTextArea && cursorIndex != -1)
+            {
+                graphicalCursorPosition = readmeTextArea.GetCursorPixelPosition(cursorIndex, text);
+            }
+
+            return graphicalCursorPosition;
         }
 
         private int MousePositionToIndex => PositionToIndex(currentEvent.mousePosition);
@@ -332,15 +334,15 @@ namespace TP
             int index = -1;
             SaveCursorIndex();
 
-            Vector2 goalPosition = position + ActiveTextArea.Scroll;
+            Vector2 goalPosition = position + readmeTextArea.Scroll;
 
-            float cursorYOffset = ActiveTextArea.lineHeight;
+            float cursorYOffset = readmeTextArea.lineHeight;
 
             textEditor.cursorIndex = 0;
             textEditor.selectIndex = 0;
             int maxAttempts = text.Length;
-            textEditor.cursorIndex = ActiveTextArea.GetNearestPoorTextIndex(CursorIndex);
-            Vector2 currentGraphicalPosition = GetGraphicalCursorPos();
+            textEditor.cursorIndex = readmeTextArea.GetNearestPoorTextIndex(CursorIndex);
+            Vector2 currentGraphicalPosition = GetGraphicalCursorPosition();
             int attempts = 0;
             for (int currentIndex = CursorIndex; index == -1; currentIndex = CursorIndex)
             {
@@ -356,16 +358,16 @@ namespace TP
                 if (currentGraphicalPosition.y < goalPosition.y - cursorYOffset)
                 {
                     textEditor.MoveRight();
-                    textEditor.cursorIndex = ActiveTextArea.GetNearestPoorTextIndex(CursorIndex);
-                    textEditor.selectIndex = ActiveTextArea.GetNearestPoorTextIndex(CursorIndex);
+                    textEditor.cursorIndex = readmeTextArea.GetNearestPoorTextIndex(CursorIndex);
+                    textEditor.selectIndex = readmeTextArea.GetNearestPoorTextIndex(CursorIndex);
                 }
                 else if (currentGraphicalPosition.x < goalPosition.x && !isEndOfLine)
                 {
                     textEditor.MoveRight();
-                    textEditor.cursorIndex = ActiveTextArea.GetNearestPoorTextIndex(CursorIndex);
-                    textEditor.selectIndex = ActiveTextArea.GetNearestPoorTextIndex(CursorIndex);
+                    textEditor.cursorIndex = readmeTextArea.GetNearestPoorTextIndex(CursorIndex);
+                    textEditor.selectIndex = readmeTextArea.GetNearestPoorTextIndex(CursorIndex);
 
-                    if (GetGraphicalCursorPos().x < currentGraphicalPosition.x)
+                    if (GetGraphicalCursorPosition().x < currentGraphicalPosition.x)
                     {
                         index = CursorIndex;
                     }
@@ -380,7 +382,7 @@ namespace TP
                     index = CursorIndex;
                 }
 
-                currentGraphicalPosition = GetGraphicalCursorPos();
+                currentGraphicalPosition = GetGraphicalCursorPosition();
             }
 
             LoadCursorIndex();
@@ -501,7 +503,15 @@ namespace TP
         
 
         // private bool TextEditorActive => controlID == ActiveControl.id && GUI.GetNameOfFocusedControl() == ActiveControl.name;
-        public bool TextEditorActive => HasTextEditor && ActiveTextArea != null;
+        
+        // public ReadmeTextArea ActiveTextArea => RegisteredTextAreas.FirstOrDefault(readmeTextArea => readmeTextArea.HasControl(controlID));
+        
+        // public ReadmeTextArea ActiveTextArea => 
+        //     RegisteredTextAreas.FirstOrDefault(readmeTextArea =>
+        //         readmeTextArea.HasControl(controlID) || readmeTextArea.HasControl(GUI.GetNameOfFocusedControl()));
+
+        public bool TextEditorActive => HasTextEditor && TextAreaActive;
+        // RegisteredTextAreas.FirstOrDefault(readmeTextArea => readmeTextArea.HasControl(GUI.GetNameOfFocusedControl())) != default;
         
         #region Passthrough to public TextEditor interface
         
@@ -528,6 +538,8 @@ namespace TP
         public void MoveLeft() => TextEditor.MoveLeft();
         public void MoveWordRight() => TextEditor.MoveWordRight();
         public void MoveWordLeft() => TextEditor.MoveWordLeft();
+
+        public void SelectAll() => textEditor.SelectAll();
 
         #endregion
     }

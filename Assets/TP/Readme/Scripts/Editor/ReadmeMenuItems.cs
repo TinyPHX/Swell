@@ -56,12 +56,14 @@ namespace TP
         [MenuItem("CONTEXT/Readme/Readme: Copy Plain Text", false, 200)]
         static void CopyPlainText()
         {
+            ReadmeEditor.ActiveReadmeEditor.SelectAll();
             ReadmeEditor.ActiveReadmeEditor.CopyPlainText();
         }
         
         [MenuItem("CONTEXT/Readme/Readme: Copy Rich Text", false, 201)]
         static void CopyRichText()
         {
+            ReadmeEditor.ActiveReadmeEditor.SelectAll();
             ReadmeEditor.ActiveReadmeEditor.CopyRichText();
         }
         
