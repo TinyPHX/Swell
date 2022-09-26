@@ -19,19 +19,19 @@ namespace Swell
     {
         public enum Method { FAST, ACCURATE };
 
-        [field: Separator("Basic Settings"), SerializeField] public float Buoyancy { get; set; } = 5; //!< Upwards force that grows the deeper under water this floater is. 
-        [field: SerializeField] public Vector3 Center { get; set; } = Vector3.zero; //!< Position offset to apply depth check and force to rigidbody.
+        [field: Separator("Basic Settings"), SerializeField, UsePropertyName] public float Buoyancy { get; set; } = 5; //!< Upwards force that grows the deeper under water this floater is. 
+        [field: SerializeField, UsePropertyName] public Vector3 Center { get; set; } = Vector3.zero; //!< Position offset to apply depth check and force to rigidbody.
 
         [Separator("Advanced")] 
         [OverrideLabel(""), SerializeField] private bool showAdvanced; //!< Show advanced settings in inspector.
-        [field: SerializeField, ConditionalField(nameof(showAdvanced))] public Method DepthMethod { get; set; } = Method.ACCURATE; //!< Method to use to calculate depth. One is more accurate and the second is faster.
-        [field: SerializeField, ConditionalField(nameof(showAdvanced))] public Method FloatMethod { get; set; } = Method.ACCURATE; //!< Method to use to calculate float physics. One is more accurate and the second is faster.
-        [field: SerializeField, ConditionalField(nameof(showAdvanced))] public float DepthAdjust { get; set; } = 0; //!< Added to current depth. Useful for adjusting positioning on floater relatively to depth. 
-        [field: SerializeField, ConditionalField(nameof(showAdvanced))] public bool Stabilize { get; set; } = false; //!< Experimental feature for rigidbodies with multiple floaters. When enabled this makes adjustments that consider all attached floaters.
+        [field: SerializeField, ConditionalField(nameof(showAdvanced)), UsePropertyName] public Method DepthMethod { get; set; } = Method.ACCURATE; //!< Method to use to calculate depth. One is more accurate and the second is faster.
+        [field: SerializeField, ConditionalField(nameof(showAdvanced)), UsePropertyName] public Method FloatMethod { get; set; } = Method.ACCURATE; //!< Method to use to calculate float physics. One is more accurate and the second is faster.
+        [field: SerializeField, ConditionalField(nameof(showAdvanced)), UsePropertyName] public float DepthAdjust { get; set; } = 0; //!< Added to current depth. Useful for adjusting positioning on floater relatively to depth. 
+        [field: SerializeField, ConditionalField(nameof(showAdvanced)), UsePropertyName] public bool Stabilize { get; set; } = false; //!< Experimental feature for rigidbodies with multiple floaters. When enabled this makes adjustments that consider all attached floaters.
 
-        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] private new Rigidbody rigidbody;
-        [field: SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] public SwellWater Water { get; private set; } //!< The water actively being used to get depth.
-        [field: SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] public float Depth { get; private set; } //!< The active depth of this floater under the water.
+        [SerializeField, ReadOnly, ConditionalField(nameof(showAdvanced))] public new Rigidbody rigidbody;
+        [field: SerializeField, ConditionalField(nameof(showAdvanced)), UsePropertyName(true)] public SwellWater Water { get; private set; } //!< The water actively being used to get depth.
+        [field: SerializeField, ConditionalField(nameof(showAdvanced)), UsePropertyName(true)] public float Depth { get; private set; } //!< The active depth of this floater under the water.
 
         private float attachedWeight = 1;
         private static Dictionary<Rigidbody, List<SwellFloater>> attachedFloaters = new Dictionary<Rigidbody, List<SwellFloater>>();

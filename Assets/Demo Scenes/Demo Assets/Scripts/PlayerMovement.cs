@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateControllsKeyboard()
     {
-        input_rotate = Input.GetAxis("Horizontal_Move");
-        input_throttle = Input.GetAxis("Vertical_Move");
+        input_rotate = Input.GetAxis("Horizontal");
+        input_throttle = Input.GetAxis("Vertical");
         input_altRoll = Input.GetAxis("Jump") > 0;
         input_verticalRoll = input_throttle;
         input_horizontalRoll = input_rotate;

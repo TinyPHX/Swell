@@ -21,38 +21,38 @@ namespace Swell
     public class SwellWater : MonoBehaviour
     {
         [field: Separator("Basic Settings")]
-        [field: SerializeField] public Material Material { get; set; } //!< The material applied to the top side of the mesh.
-        [field: SerializeField] public Material BottomMaterial { get; set; } //!< The material applied to the bottom side of the mesh.
-        [field: SerializeField, Min(0)] public int MeshGridSize { get; set; } = 1; //!< The distance between vertices in your mesh grid.  
-        [field: SerializeField, Min(0)] public int MeshSize { get; set; } = 40; //!< The full width of your mesh. If this number is not divisible by MeshGridSize then the actual size will be slightly smaller. 
+        [field: SerializeField, UsePropertyName] public Material Material { get; set; } //!< The material applied to the top side of the mesh.
+        [field: SerializeField, UsePropertyName] public Material BottomMaterial { get; set; } //!< The material applied to the bottom side of the mesh.
+        [field: SerializeField, UsePropertyName, Min(0)] public int MeshGridSize { get; set; } = 1; //!< The distance between vertices in your mesh grid.  
+        [field: SerializeField, UsePropertyName, Min(0)] public int MeshSize { get; set; } = 40; //!< The full width of your mesh. If this number is not divisible by MeshGridSize then the actual size will be slightly smaller. 
         [field: Tooltip("Setting this to 0 stops it from modifying the material at all.")]
         [field: SerializeField, OverrideLabel("Texture Size (Main)"), Min(0)] public float MainTextureSize { get; set; } = 0; //!< A constant size to scale the main texture by. This only applies to the Unity standard shader. 
         [field: Tooltip("Setting this to 0 stops it from modifying the material at all.")]
         [field: SerializeField, OverrideLabel("Texture Size (Secondary)"), Min(0)] public float SecondaryTextureSize { get; set; } = 0; //!< A constant size to scale the secondary texture by. This only applies to the Unity standard shader. 
-        [field: SerializeField] public ShadowCastingMode CastingMode { get; set; } = ShadowCastingMode.Off; //!< Whether or not this mesh casts shadows.
-        [field: SerializeField] public bool ReceiveShadows { get; set; } = false; //!< Whether or not this mesh receives shadows.
-        [field: SerializeField] public bool LowPolyNormals { get; set; } = false; //!< Apply low poly normals to this mesh while generating it. 
+        [field: SerializeField, UsePropertyName] public ShadowCastingMode CastingMode { get; set; } = ShadowCastingMode.Off; //!< Whether or not this mesh casts shadows.
+        [field: SerializeField, UsePropertyName] public bool ReceiveShadows { get; set; } = false; //!< Whether or not this mesh receives shadows.
+        [field: SerializeField, UsePropertyName] public bool LowPolyNormals { get; set; } = false; //!< Apply low poly normals to this mesh while generating it. 
         
         [field: Separator("Custom Swell Mesh")]
         [field: OverrideLabel(""), SerializeField] private bool useCustomSwellMesh = false; 
         public bool UseCustomSwellMesh { get => useCustomSwellMesh; set => useCustomSwellMesh = value; } //!< When true, the SwellMesh is accessible in the Unity hierarchy giving you access to add custom leveling.
-        [field: SerializeField, ConditionalField(nameof(useCustomSwellMesh))] public SwellMesh SwellMesh { get; set; } //!< The SwellMesh being controlled by this SwellWater.
+        [field: SerializeField, ConditionalField(nameof(useCustomSwellMesh)), UsePropertyName] public SwellMesh SwellMesh { get; set; } //!< The SwellMesh being controlled by this SwellWater.
 
         [Separator("Position Anchoring")]
         [OverrideLabel(""), SerializeField] private bool usePositionAnchor = false;
         public bool UsePositionAnchor { get => usePositionAnchor; set => usePositionAnchor = value; } //!< When true, this can be used to have the SwellMesh follow a target.
-        [field: SerializeField, ConditionalField(nameof(usePositionAnchor))] public GameObject PositionAnchor { get; set; } //!< The target for the SwellMesh to anchor to. 
-        [field: SerializeField, ConditionalField(nameof(usePositionAnchor))] public Vector2 PositionStep { get; set; } = Vector2.one * 10; //!< The smallest size step the mesh will move at a time. This is useful if your material has texture to it. 
-        [field: SerializeField, ConditionalField(nameof(usePositionAnchor))] public bool LockAlbedoPosition { get; set; } //!< When true, this will adjust the standard shader albedo offset to keep a texture in relative place. This is useful for rendering rivers.
-        [field: SerializeField, ConditionalField(nameof(usePositionAnchor))] public Transform MeshAlbedoPosition { get; set; } //!< When set this is the the position the albedo will lock to instead of (0, 0).
+        [field: SerializeField, ConditionalField(nameof(usePositionAnchor)), UsePropertyName] public GameObject PositionAnchor { get; set; } //!< The target for the SwellMesh to anchor to. 
+        [field: SerializeField, ConditionalField(nameof(usePositionAnchor)), UsePropertyName] public Vector2 PositionStep { get; set; } = Vector2.one * 10; //!< The smallest size step the mesh will move at a time. This is useful if your material has texture to it. 
+        [field: SerializeField, ConditionalField(nameof(usePositionAnchor)), UsePropertyName] public bool LockAlbedoPosition { get; set; } //!< When true, this will adjust the standard shader albedo offset to keep a texture in relative place. This is useful for rendering rivers.
+        [field: SerializeField, ConditionalField(nameof(usePositionAnchor)), UsePropertyName] public Transform MeshAlbedoPosition { get; set; } //!< When set this is the the position the albedo will lock to instead of (0, 0).
 
         [Separator("Optimize")] 
         [OverrideLabel(""), SerializeField] private bool optimize;
         public bool Optimize { get => optimize; set => optimize = value; } //!< When true, water fps throttling is applied to keep SwellWater from hogging resources. 
-        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(autoThrottle))] public float WaterFps { get; private set; } = 60; //!< The number of time the water is updated per frame.
+        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(autoThrottle)), UsePropertyName] public float WaterFps { get; private set; } = 60; //!< The number of time the water is updated per frame.
         [SerializeField, ConditionalField(nameof(optimize))] private bool autoThrottle = true;
         public bool AutoThrottle { get => autoThrottle; set => autoThrottle = value; } //!< Then true we'll automatically throttle when the FPS falls below 60.
-        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(autoThrottle), true)] public float ThrottleFps { get; set; } = 60; //!< When the game FPS falls below this number start reducing the WaterFps. 
+        [field: SerializeField, ConditionalField(nameof(optimize)), ReadOnly(nameof(autoThrottle), true), UsePropertyName] public float ThrottleFps { get; set; } = 60; //!< When the game FPS falls below this number start reducing the WaterFps. 
 
         private Dictionary<long, float> heightMapDict;
         private bool useHeightMapArray = true; //This was created for debugging and is almost always faster to be set to true.
@@ -200,7 +200,7 @@ namespace Swell
             }
         }
 
-        void InitializeWaterMesh(bool setDefaults=false)
+        private void InitializeWaterMesh(bool setDefaults=false)
         {
             if (SwellMesh == null)
             {
@@ -236,7 +236,6 @@ namespace Swell
             SwellMesh.Top = Material != null;
             SwellMesh.Bottom = BottomMaterial != null;
 
-            
             if (!useCustomSwellMesh)
             {
                 SwellMesh.Levels = new SwellMesh.MeshLevel[] { };

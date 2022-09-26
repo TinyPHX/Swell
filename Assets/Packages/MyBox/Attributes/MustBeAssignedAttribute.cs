@@ -35,7 +35,7 @@ namespace MyBox.Internal
 			MyEditorEvents.OnSave += AssertComponentsInScene;
 			UnityEditor.SceneManagement.PrefabStage.prefabSaved += AssertComponentsInPrefab;
 			#else
-			Debug.LogWarning("Function not in Unity versions older than 2021.1");
+			// Debug.LogWarning("Function not in Unity versions older than 2021.1");
 			#endif
 		}
 

@@ -26,29 +26,29 @@ namespace Swell
         }
         
         [field: Separator("Basic Settings")]
-        [field: SerializeField] public bool WaveEnabled { get; set; } = true; //!< Whether the wave is enabled or not. We use this instead of "Component.enabled" because when disabled we interpolate the wave height back to 0, if interpolation is enabled.
-        [field: SerializeField] public Type WaveType { get; set; } = Type.ROUNDED; //!< The type of wave curve algorithm
-        [field: SerializeField, ConditionalField(nameof(WaveType), false, Type.CUSTOM)] public AnimationCurve CustomWave { get; set; } = new AnimationCurve(
+        [field: SerializeField, UsePropertyName] public bool WaveEnabled { get; set; } = true; //!< Whether the wave is enabled or not. We use this instead of "Component.enabled" because when disabled we interpolate the wave height back to 0, if interpolation is enabled.
+        [field: SerializeField, UsePropertyName] public Type WaveType { get; set; } = Type.ROUNDED; //!< The type of wave curve algorithm
+        [field: SerializeField, ConditionalField(nameof(WaveType), false, Type.CUSTOM), UsePropertyName] public AnimationCurve CustomWave { get; set; } = new AnimationCurve(
             new Keyframe(0, 0, 0, 0, 0, 0),
             new Keyframe(.25f, -1, 0, 0, .5f, .5f),
             new Keyframe(.5f, 0, 0, 0, 0, 0),
             new Keyframe(.75f, 1, 0, 0, .5f, .5f),
             new Keyframe(1, 0, 0, 0, 0, 0)
         ); //!< If the WaveType is set to CUSTOM, this this AnimationCurve is used to set the curvature of the wave. 
-        [field: SerializeField] public float WaveHeight { get; set; } = 1; //!< The height of the wave from origin to to peak. The lenght from valley to peak is double this for some wave types
+        [field: SerializeField, UsePropertyName] public float WaveHeight { get; set; } = 1; //!< The height of the wave from origin to to peak. The lenght from valley to peak is double this for some wave types
         [SerializeField] private Vector2 waveScale = Vector2.one; 
         public Vector2 WaveScale { get => waveScale; set => waveScale = value; } //!< The phase of the wave. A larger number means closer peaks.
         [SerializeField] private Vector2 waveOffset = Vector2.zero;
         public Vector2 WaveOffset { get => waveOffset; set => waveOffset = value; } //!< An offset to the time component of the wave.
         [SerializeField] private Vector2 waveSpeed = Vector2.one * .1f;
         public Vector2 WaveSpeed { get => waveSpeed; set => waveSpeed = value; } //!< A multiplier to the rate of change in the offset of the wave.  
-        [field: SerializeField, Range(0, 360)] public float WaveRotation { get; set; } = 0; //!< Degrees offset of the rotation of the wave. This can be expensive! 
+        [field: SerializeField, UsePropertyName, Range(0, 360)] public float WaveRotation { get; set; } = 0; //!< Degrees offset of the rotation of the wave. This can be expensive! 
         
         [field: Separator("Spread")] 
-        [field: OverrideLabel(""), SerializeField] private bool spread = false;
+        [field: OverrideLabel(""), SerializeField, UsePropertyName] private bool spread = false;
         public bool Spread { get => spread; set => spread = value; } //!< When true a spread multiplier is calculated for each point adjusting the range of the wave.  
-        [field: SerializeField, ConditionalField(nameof(spread))] public float SpreadRadius { get; set; } = 10; //!< The area of affect of the wave.
-        [field: SerializeField, ConditionalField(nameof(spread))] public AnimationCurve SpreadCurve { get; set; } = new AnimationCurve(
+        [field: SerializeField, ConditionalField(nameof(spread)), UsePropertyName] public float SpreadRadius { get; set; } = 10; //!< The area of affect of the wave.
+        [field: SerializeField, ConditionalField(nameof(spread)), UsePropertyName] public AnimationCurve SpreadCurve { get; set; } = new AnimationCurve(
             new Keyframe(0, 1, 0, 0, .5f, .5f),
             new Keyframe(1, 0, 0, 0, .5f, .5f)
         ); //!< The rate at which the spread is adjusted.
@@ -56,8 +56,8 @@ namespace Swell
         [Separator("Interpolate")]
         [OverrideLabel(""), SerializeField] private bool interpolate = true;
         public bool Interpolate { get => interpolate; set => interpolate = value; } //!< When true the waves height is interpolated on Start() and when WaveEnabled is changed. 
-        [field: SerializeField, ConditionalField(nameof(interpolate))] public float InterpolationTime { get; set; } = 10; //!< The time in seconds it takes to interpolate to full height.
-        [field: SerializeField, ConditionalField(nameof(interpolate))] public AnimationCurve InterpolationCurve { get; set; } = new AnimationCurve(
+        [field: SerializeField, ConditionalField(nameof(interpolate)), UsePropertyName] public float InterpolationTime { get; set; } = 10; //!< The time in seconds it takes to interpolate to full height.
+        [field: SerializeField, ConditionalField(nameof(interpolate)), UsePropertyName] public AnimationCurve InterpolationCurve { get; set; } = new AnimationCurve(
             new Keyframe(0, 0, 0, 0, .5f, .5f),
             new Keyframe(1, 1, 0, 0, .5f, .5f)
         ); //!< The rate at which interpolation is applied.
@@ -65,9 +65,9 @@ namespace Swell
         [Separator("Fluctuate")]
         [OverrideLabel(""), SerializeField] private bool fluctuate = false;
         public bool Fluctuate { get => fluctuate; set => fluctuate = value; } //!< When true the waves's height fluctuates between WaveHeight and -WaveHeight.
-        [field: SerializeField, ConditionalField(nameof(fluctuate))] public float FluctuatePeriodTime { get; set; } = 10; //!< The time in seconds it takes do one fluctuate loop.
-        [field: SerializeField, ConditionalField(nameof(fluctuate)), Range(0, 1)] public float FluctuateOffset { get; set; } = 0; //!< An offset to the time component of fluctuate.
-        [field: SerializeField, ConditionalField(nameof(fluctuate))] public AnimationCurve FluctuateCurve { get; set; } = new AnimationCurve(
+        [field: SerializeField, ConditionalField(nameof(fluctuate)), UsePropertyName] public float FluctuatePeriodTime { get; set; } = 10; //!< The time in seconds it takes do one fluctuate loop.
+        [field: SerializeField, ConditionalField(nameof(fluctuate)), Range(0, 1), UsePropertyName] public float FluctuateOffset { get; set; } = 0; //!< An offset to the time component of fluctuate.
+        [field: SerializeField, ConditionalField(nameof(fluctuate)), UsePropertyName] public AnimationCurve FluctuateCurve { get; set; } = new AnimationCurve(
             new Keyframe(0, -1, 0, 0, .5f, .5f),
             new Keyframe(.5f, 1, 0, 0, .5f, .5f),
             new Keyframe(1, -1, 0, 0, .5f, .5f)

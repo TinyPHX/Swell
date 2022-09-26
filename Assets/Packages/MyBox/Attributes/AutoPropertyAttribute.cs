@@ -112,7 +112,7 @@ namespace MyBox.Internal
 			UnityEditor.SceneManagement.PrefabStage.prefabSaved += CheckComponentsInPrefab;
 			UnityEditor.SceneManagement.PrefabStage.prefabStageOpened += stage => CheckComponentsInPrefab(stage.prefabContentsRoot);
 			#else
-			Debug.LogWarning("Function not in Unity versions older than 2021.1");
+			// Debug.LogWarning("Function not in Unity versions older than 2021.1");
 			#endif
 		}
 

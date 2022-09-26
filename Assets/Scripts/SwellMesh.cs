@@ -34,14 +34,14 @@ namespace Swell
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public class SwellMesh : MonoBehaviour
     {
-        [field: SerializeField, Min(1)] public int StartGridSize { get; set; } = 1; //!< The Size of the inner most triangles of the mesh. If this is 1, then the shortest distance between any mesh triangle's verts will be 1.
-        [field: SerializeField, Min(0)] public int MaxSize { get; set; } = 10; //!< The largest, this mesh can become in world space. When levels are used, this can be set to 0 to allow the levels to grow boundlessly. 
-        [field: SerializeField, ReadOnly] public float CurrentSize { get; private set; } = 10; //!< The active size of the mesh. This will not always equal the MaxSize because of partially fitting grid spacing.
+        [field: SerializeField, UsePropertyName, Min(1)] public int StartGridSize { get; set; } = 1; //!< The Size of the inner most triangles of the mesh. If this is 1, then the shortest distance between any mesh triangle's verts will be 1.
+        [field: SerializeField, UsePropertyName, Min(0)] public int MaxSize { get; set; } = 10; //!< The largest, this mesh can become in world space. When levels are used, this can be set to 0 to allow the levels to grow boundlessly. 
+        [field: SerializeField, UsePropertyName(true)] public float CurrentSize { get; private set; } = 10; //!< The active size of the mesh. This will not always equal the MaxSize because of partially fitting grid spacing.
         [SerializeField] private MeshLevel[] levels = {};
         public MeshLevel[] Levels { get => usedLevels; set => levels = value; } //!< An alternative to solely using MaxSize. Levels allow a rang of factor increases, creating a grid that gets less dense as it protrudes from it's center.
-        [field: SerializeField] public bool Top { get; set; } = true; //!< If true, vectors and triangles are added to the mesh facing upwards. The first MeshRenderer.Material is applied to this mesh. 
-        [field: SerializeField] public bool Bottom { get; set; } = true; //!< If true, vectors and triangles are added to the mesh facing downwards. The second MeshRenderer.Material is applied to this mesh.
-        [field: SerializeField] public bool LowPolyNormals { get; set; } = false; //!< If true, on generation, vectors are not shared by triangles. This results in a lot of vectors but leaves a cool Low Poly effect that can be used with most Materials. 
+        [field: SerializeField, UsePropertyName] public bool Top { get; set; } = true; //!< If true, vectors and triangles are added to the mesh facing upwards. The first MeshRenderer.Material is applied to this mesh. 
+        [field: SerializeField, UsePropertyName] public bool Bottom { get; set; } = true; //!< If true, vectors and triangles are added to the mesh facing downwards. The second MeshRenderer.Material is applied to this mesh.
+        [field: SerializeField, UsePropertyName] public bool LowPolyNormals { get; set; } = false; //!< If true, on generation, vectors are not shared by triangles. This results in a lot of vectors but leaves a cool Low Poly effect that can be used with most Materials. 
 
         private SwellWater water;
         private MeshFilter meshFilter;

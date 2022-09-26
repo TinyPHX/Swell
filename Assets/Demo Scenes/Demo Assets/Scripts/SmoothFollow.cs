@@ -9,7 +9,7 @@ using UnityEditor;
 /// </summary>
 public class SmoothFollow : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    [SerializeField] private Transform target;
     [SerializeField] float moveSpeed = 0.02f;
     [SerializeField] float rotateSpeed = 0.06f;
     
