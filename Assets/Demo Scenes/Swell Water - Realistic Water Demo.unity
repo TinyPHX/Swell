@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  richTextTagMap: 0101010000000000000000000000000000000000000000000101010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000010101010101010101010101010101010101010000010101000000000000000000000000000000000001010101000000000000010101000000000000000000010101010000000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000000000010101010101010101010101010101010101010000000101010000000000000001010101000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000000010101010101010101010101010101010101010000000101010000000000000101010100000000000000000000000000000000000000000101010101010101010101010101010101010100
+  richTextTagMap: 01010100000000000000000000000000000000000000000001010101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010100000101010101010101010101010101010101010100000000000000010101010101010101010101010101010101010000010101000000000000000000000000000000000001010101000000000000010101000000000000000000010101010000000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000000010101010101010101010101010101010101010000000000000000000000000000000000010101010101010101010101010101010101010000000101010000000000000001010101000000000000000000000000000000000001010101010101010101010101010101010101000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000000000000000000000000000101010101010101010101010101010101010100000000000000000000000000000000010101010101010101010101010101010101010000000101010000000000000101010100000000000000000000000000000000000000000101010101010101010101010101010101010100
   font: {fileID: 0}
   fontSize: 12
   iconBeingUsed: 1
@@ -285,18 +285,18 @@ MonoBehaviour:
     type: json
   readmeData:
     richText: "<b>REALISTIC DEMO README</b>\n\nThis demo features a more complex
-      combination of waves to simulate a more realistic water feel. See:  <o=\"4885996\"></o>
-      \n\n<b>OTHER DEMO SCENES</b>  \r\n\r\n<b>Floaters:</b>\r\n\u2022 Algorithm
-      Demo  <o=\"5916551\"></o>  \r\n\u2022 Buoyancy Demo  <o=\"6719986\"></o>  \r\n\u2022
-      Props Demo  <o=\"5732124\"></o>  \r\n\u2022 Stress Test  <o=\"3483540\"></o> 
-      \r\n<b>Waters:</b>\r\n\u2022 Matrial Demo  <o=\"3185053\"></o>  \r\n\u2022
-      Ocean Demo  <o=\"3621044\"></o>  \r\n\u2022 Realistic Water Demo  <o=\"8661545\"></o> 
-      \r\n\u2022 River Demo  <o=\"1445508\"></o>  \r\n<b>Waves:</b>\r\n\u2022 Wave
-      Types Demo  <o=\"3069406\"></o>  "
+      combination of waves to simulate a more realistic water feel. See:  <o=\"7081095\"></o>
+      ,  <o=\"4602496\"></o>  , and  <o=\"1011706\"></o> \n\n<b>OTHER DEMO SCENES</b> 
+      \r\n\r\n<b>Floaters:</b>\r\n\u2022 Algorithm Demo  <o=\"5916551\"></o>  \r\n\u2022
+      Buoyancy Demo  <o=\"6719986\"></o>  \r\n\u2022 Props Demo  <o=\"5732124\"></o> 
+      \r\n\u2022 Stress Test  <o=\"3483540\"></o>  \r\n<b>Waters:</b>\r\n\u2022 Matrial
+      Demo  <o=\"3185053\"></o>  \r\n\u2022 Ocean Demo  <o=\"3621044\"></o>  \r\n\u2022
+      Realistic Water Demo  <o=\"8661545\"></o>  \r\n\u2022 River Demo  <o=\"1445508\"></o> 
+      \r\n<b>Waves:</b>\r\n\u2022 Wave Types Demo  <o=\"3069406\"></o>  "
     textAreaObjectFields:
-    - name: Wave (Realistic Water Demo) (4885996)
-      objectId: 4885996
-      objectRef: {fileID: 0}
+    - name: Wave (Realistic Water Demo) (7081095)
+      objectId: 7081095
+      objectRef: {fileID: 5954983655886673673}
       fieldRect:
         serializedVersion: 2
         x: 195
@@ -311,22 +311,56 @@ MonoBehaviour:
         height: 15
       index: 132
       length: 17
+    - name: Water (Animated 1) (4602496)
+      objectId: 4602496
+      objectRef: {fileID: 701894903}
+      fieldRect:
+        serializedVersion: 2
+        x: 325
+        y: 63
+        width: 124
+        height: 15
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 325
+        y: 63
+        width: 124
+        height: 15
+      index: 153
+      length: 17
+    - name: Water (Animated 2) (1011706)
+      objectId: 1011706
+      objectRef: {fileID: 2031571618015341050}
+      fieldRect:
+        serializedVersion: 2
+        x: 57
+        y: 78
+        width: 120
+        height: 15
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 57
+        y: 78
+        width: 120
+        height: 15
+      index: 179
+      length: 17
     - name: Swell Floater - Algorithm Demo (5916551)
       objectId: 5916551
       objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 129
-        y: 138
+        y: 153
         width: 119
         height: 15
       absoluteFieldRect:
         serializedVersion: 2
         x: 129
-        y: 138
+        y: 153
         width: 119
         height: 15
-      index: 218
+      index: 265
       length: 17
     - name: Swell Floater - Buoyancy Demo (6719986)
       objectId: 6719986
@@ -334,16 +368,16 @@ MonoBehaviour:
       fieldRect:
         serializedVersion: 2
         x: 133
-        y: 153
+        y: 168
         width: 120
         height: 15
       absoluteFieldRect:
         serializedVersion: 2
         x: 133
-        y: 153
+        y: 168
         width: 120
         height: 15
-      index: 256
+      index: 303
       length: 17
     - name: Swell Floater - Props Demo (5732124)
       objectId: 5732124
@@ -351,16 +385,16 @@ MonoBehaviour:
       fieldRect:
         serializedVersion: 2
         x: 108
-        y: 168
+        y: 183
         width: 122
         height: 15
       absoluteFieldRect:
         serializedVersion: 2
         x: 108
-        y: 168
+        y: 183
         width: 122
         height: 15
-      index: 291
+      index: 338
       length: 17
     - name: Swell Floater - Stress Test (3483540)
       objectId: 3483540
@@ -368,16 +402,16 @@ MonoBehaviour:
       fieldRect:
         serializedVersion: 2
         x: 103
-        y: 183
+        y: 198
         width: 126
         height: 15
       absoluteFieldRect:
         serializedVersion: 2
         x: 103
-        y: 183
+        y: 198
         width: 126
         height: 15
-      index: 327
+      index: 374
       length: 17
     - name: Swell Water - Matrial Demo (3185053)
       objectId: 3185053
@@ -385,16 +419,16 @@ MonoBehaviour:
       fieldRect:
         serializedVersion: 2
         x: 115
-        y: 213
+        y: 228
         width: 123
         height: 15
       absoluteFieldRect:
         serializedVersion: 2
         x: 115
-        y: 213
+        y: 228
         width: 123
         height: 15
-      index: 380
+      index: 427
       length: 17
     - name: Swell Water - Ocean Demo (3621044)
       objectId: 3621044
@@ -402,16 +436,16 @@ MonoBehaviour:
       fieldRect:
         serializedVersion: 2
         x: 113
-        y: 228
+        y: 243
         width: 124
         height: 15
       absoluteFieldRect:
         serializedVersion: 2
         x: 113
-        y: 228
+        y: 243
         width: 124
         height: 15
-      index: 415
+      index: 462
       length: 17
     - name: Swell Water - Realistic Water Demo (8661545)
       objectId: 8661545
@@ -419,16 +453,16 @@ MonoBehaviour:
       fieldRect:
         serializedVersion: 2
         x: 160
-        y: 243
+        y: 258
         width: 121
         height: 15
       absoluteFieldRect:
         serializedVersion: 2
         x: 160
-        y: 243
+        y: 258
         width: 121
         height: 15
-      index: 460
+      index: 507
       length: 17
     - name: Swell Water - River Demo (1445508)
       objectId: 1445508
@@ -436,16 +470,16 @@ MonoBehaviour:
       fieldRect:
         serializedVersion: 2
         x: 105
-        y: 258
+        y: 273
         width: 123
         height: 15
       absoluteFieldRect:
         serializedVersion: 2
         x: 105
-        y: 258
+        y: 273
         width: 123
         height: 15
-      index: 495
+      index: 542
       length: 17
     - name: Swell Waves - Wave Types Demo (3069406)
       objectId: 3069406
@@ -453,16 +487,16 @@ MonoBehaviour:
       fieldRect:
         serializedVersion: 2
         x: 146
-        y: 288
+        y: 303
         width: 125
         height: 15
       absoluteFieldRect:
         serializedVersion: 2
         x: 146
-        y: 288
+        y: 303
         width: 125
         height: 15
-      index: 550
+      index: 597
       length: 17
     objectIdPairs: []
 --- !u!4 &516240895

@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.6246357, g: 0.6948954, b: 0.7887567, a: 1}
+  m_IndirectSpecularColor: {r: 0.6246359, g: 0.6948967, b: 0.788756, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 11
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 0d11edb830032c342bfed3d9550ae7f4,
     type: 2}
-  m_LightingSettings: {fileID: 318062081}
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -119,8 +119,6 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-    maxJobWorkers: 0
-    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -284,7 +282,6 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
-    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -469,75 +466,12 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 74.619736, y: -55.13012, z: -18.662735}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1379618812}
   - {fileID: 1008766181}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!850595691 &318062081
-LightingSettings:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Settings.lighting
-  serializedVersion: 4
-  m_GIWorkflowMode: 0
-  m_EnableBakedLightmaps: 1
-  m_EnableRealtimeLightmaps: 1
-  m_RealtimeEnvironmentLighting: 1
-  m_BounceScale: 1
-  m_AlbedoBoost: 1
-  m_IndirectOutputScale: 1
-  m_UsingShadowmask: 1
-  m_BakeBackend: 0
-  m_LightmapMaxSize: 1024
-  m_BakeResolution: 40
-  m_Padding: 2
-  m_LightmapCompression: 3
-  m_AO: 0
-  m_AOMaxDistance: 1
-  m_CompAOExponent: 1
-  m_CompAOExponentDirect: 0
-  m_ExtractAO: 0
-  m_MixedBakeMode: 2
-  m_LightmapsBakeMode: 1
-  m_FilterMode: 1
-  m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
-  m_ExportTrainingData: 0
-  m_TrainingDataDestination: TrainingData
-  m_RealtimeResolution: 2
-  m_ForceWhiteAlbedo: 0
-  m_ForceUpdates: 0
-  m_FinalGather: 0
-  m_FinalGatherRayCount: 256
-  m_FinalGatherFiltering: 1
-  m_PVRCulling: 1
-  m_PVRSampling: 1
-  m_PVRDirectSampleCount: 32
-  m_PVRSampleCount: 500
-  m_PVREnvironmentSampleCount: 500
-  m_PVREnvironmentReferencePointCount: 2048
-  m_LightProbeSampleCountMultiplier: 4
-  m_PVRBounces: 2
-  m_PVRMinBounces: 2
-  m_PVREnvironmentMIS: 0
-  m_PVRFilteringMode: 2
-  m_PVRDenoiserTypeDirect: 0
-  m_PVRDenoiserTypeIndirect: 0
-  m_PVRDenoiserTypeAO: 0
-  m_PVRFilterTypeDirect: 0
-  m_PVRFilterTypeIndirect: 0
-  m_PVRFilterTypeAO: 0
-  m_PVRFilteringGaussRadiusDirect: 1
-  m_PVRFilteringGaussRadiusIndirect: 5
-  m_PVRFilteringGaussRadiusAO: 2
-  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
-  m_PVRFilteringAtrousPositionSigmaIndirect: 2
-  m_PVRFilteringAtrousPositionSigmaAO: 1
-  m_PVRTiledBaking: 0
 --- !u!1001 &381554617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -733,44 +667,23 @@ MonoBehaviour:
     name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
     skin: Custom
-    path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
     lite: 0
     priority: 5
     type: json
   allSettings:
-  - name: Free
-    id: 817f8bd3-6a31-4b68-a1dc-7c2bb2b78c46
-    skin: Custom
-    path: Assets/Packages/TP/Readme/Settings
-    fileName: Free
-    redistributable: 1
-    lite: 0
-    priority: 10
-    type: json
-  - name: Lite
-    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: Custom
-    path: Assets/Packages/TP/Readme/Settings
-    fileName: Lite
+  - name: Default
+    id: 06d9302a-b288-402f-8f1c-b00178d18860
+    skin: Default
+    fileName: Default
     redistributable: 0
     lite: 1
     priority: 7
     type: json
-  - name: New
-    id: f3de355d-ddb4-4eee-bf3d-388f95ac3ad0
-    skin: Custom
-    path: Assets/Packages/TP/Readme/Settings
-    fileName: New
-    redistributable: 0
-    lite: 0
-    priority: 1000
-    type: json
   - name: Paid
     id: 30c0eca9-01de-41b5-bf2e-1a8e9a1206f7
     skin: Custom
-    path: Assets/Packages/TP/Readme/Editor\..\Settings
     fileName: Paid
     redistributable: 0
     lite: 0
@@ -793,82 +706,22 @@ MonoBehaviour:
       \n\u2022 River Demo  <o=\"7526349\"></o>  \n<b>Waves:</b>\n\u2022 Wave Types
       Demo  <o=\"9609145\"></o>  "
     textAreaObjectFields:
-    - name: Swell Waves - Wave Types Demo (9609145)
-      objectId: 9609145
-      objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
+    - name: Swell Floater - Algorithm Demo (8256079)
+      objectId: 8256079
+      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 146
-        y: 498
+        x: 129
+        y: 348
         width: 122
         height: 15
-      index: 993
-      length: 17
-    - name: Swell Water - River Demo (7526349)
-      objectId: 7526349
-      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
-      fieldRect:
+      absoluteFieldRect:
         serializedVersion: 2
-        x: 105
-        y: 468
-        width: 123
-        height: 15
-      index: 940
-      length: 17
-    - name: Swell Water - Realistic Water Demo (5578919)
-      objectId: 5578919
-      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 160
-        y: 453
-        width: 120
-        height: 15
-      index: 906
-      length: 17
-    - name: Swell Water - Ocean Demo (6745852)
-      objectId: 6745852
-      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 113
-        y: 438
-        width: 122
-        height: 15
-      index: 862
-      length: 17
-    - name: Swell Water - Matrial Demo (4752279)
-      objectId: 4752279
-      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 115
-        y: 423
-        width: 122
-        height: 15
-      index: 828
-      length: 17
-    - name: Swell Floater - Stress Test (6018113)
-      objectId: 6018113
-      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 103
-        y: 393
-        width: 120
-        height: 15
-      index: 777
-      length: 17
-    - name: Swell Floater - Props Demo (9798996)
-      objectId: 9798996
-      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
-      fieldRect:
-        serializedVersion: 2
-        x: 108
-        y: 378
-        width: 121
-        height: 15
-      index: 742
+        x: 99999
+        y: 99999
+        width: 0
+        height: 0
+      index: 671
       length: 17
     - name: Swell Floater - Buoyancy Demo (6019483)
       objectId: 6019483
@@ -879,18 +732,132 @@ MonoBehaviour:
         y: 363
         width: 123
         height: 15
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 99999
+        y: 99999
+        width: 0
+        height: 0
       index: 708
       length: 17
-    - name: Swell Floater - Algorithm Demo (8256079)
-      objectId: 8256079
-      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
+    - name: Swell Floater - Props Demo (9798996)
+      objectId: 9798996
+      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
       fieldRect:
         serializedVersion: 2
-        x: 129
-        y: 348
+        x: 108
+        y: 378
+        width: 121
+        height: 15
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 99999
+        y: 99999
+        width: 0
+        height: 0
+      index: 742
+      length: 17
+    - name: Swell Floater - Stress Test (6018113)
+      objectId: 6018113
+      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 103
+        y: 393
+        width: 120
+        height: 15
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 99999
+        y: 99999
+        width: 0
+        height: 0
+      index: 777
+      length: 17
+    - name: Swell Water - Matrial Demo (4752279)
+      objectId: 4752279
+      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 115
+        y: 423
         width: 122
         height: 15
-      index: 671
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 99999
+        y: 99999
+        width: 0
+        height: 0
+      index: 828
+      length: 17
+    - name: Swell Water - Ocean Demo (6745852)
+      objectId: 6745852
+      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 113
+        y: 438
+        width: 122
+        height: 15
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 99999
+        y: 99999
+        width: 0
+        height: 0
+      index: 862
+      length: 17
+    - name: Swell Water - Realistic Water Demo (5578919)
+      objectId: 5578919
+      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 160
+        y: 453
+        width: 120
+        height: 15
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 99999
+        y: 99999
+        width: 0
+        height: 0
+      index: 906
+      length: 17
+    - name: Swell Water - River Demo (7526349)
+      objectId: 7526349
+      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 105
+        y: 468
+        width: 123
+        height: 15
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 99999
+        y: 99999
+        width: 0
+        height: 0
+      index: 940
+      length: 17
+    - name: Swell Waves - Wave Types Demo (9609145)
+      objectId: 9609145
+      objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
+      fieldRect:
+        serializedVersion: 2
+        x: 146
+        y: 498
+        width: 122
+        height: 15
+      absoluteFieldRect:
+        serializedVersion: 2
+        x: 99999
+        y: 99999
+        width: 0
+        height: 0
+      index: 993
       length: 17
     objectIdPairs: []
 --- !u!4 &386089511
@@ -903,7 +870,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 74.619736, y: -55.13012, z: -18.662735}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1089,7 +1055,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -42.8, y: 0, z: -38.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 651169698}
   - {fileID: 451659925}
@@ -1263,7 +1228,6 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
-    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -1758,7 +1722,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6796078112019046525}
   - {fileID: 5999636609458171269}
@@ -2236,7 +2199,6 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
-    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -2555,7 +2517,6 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
-    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -2585,7 +2546,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -83.70958, y: 60.048088, z: 26.520157}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1052026152}
   m_Father: {fileID: 270101703}
@@ -2751,7 +2711,6 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
-    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -2782,7 +2741,6 @@ Transform:
   m_LocalRotation: {x: 0.44440457, y: -0.83130807, z: 0.11457365, w: 0.31353536}
   m_LocalPosition: {x: 9.066757, y: 5, z: -2.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1008766181}
   m_RootOrder: 0
@@ -2846,7 +2804,6 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 1.02e-43, y: 0, z: 0, w: 1.2846997e-31}
   m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1001 &1062692998
@@ -3164,7 +3121,6 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
-    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -3328,7 +3284,6 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
-    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -3394,7 +3349,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -74.619736, y: 55.13012, z: 18.662735}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 270101703}
   m_RootOrder: 0
@@ -3559,7 +3513,6 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
-    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -3723,7 +3676,6 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
-    serializedVersion: 2
     offset: 0
     size: 0
     path: 
