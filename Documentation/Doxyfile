@@ -51,14 +51,14 @@ PROJECT_BRIEF          = "Water physics for Unity"
 # pixels and the maximum width should not exceed 200 pixels. Doxygen will copy
 # the logo to the output directory.
 
-PROJECT_LOGO           = S:/Workspace/unity/Swell/docs/images/logo.png
+PROJECT_LOGO           = S:/Workspace/unity/Swell/Documentation/images/logo.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) path
 # into which the generated documentation will be written. If a relative path is
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = S:/Workspace/unity/Swell/docs/
+OUTPUT_DIRECTORY       = S:/Workspace/unity/Swell/Documentation/
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
@@ -875,7 +875,7 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = S:/Workspace/unity/Swell \
-                         S:/Workspace/unity/Swell/docs/demos.md
+                         S:/Workspace/unity/Swell/Documentation/demos.md
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -980,7 +980,7 @@ EXCLUDE_SYMLINKS       = NO
 # Note that the wildcards are matched against the file with absolute path, so to
 # exclude all test directories for example use the pattern */test/*
 
-EXCLUDE_PATTERNS       = */docs/* \
+EXCLUDE_PATTERNS       = */Documentation/* \
                          */Library/* \
                          */Logs/* \
                          */obj/* \
@@ -988,12 +988,15 @@ EXCLUDE_PATTERNS       = */docs/* \
                          */Temp/* \
                          */ProjectSettings/* \
                          */UserSettings/* \
-                         */Assets/Ignore/* \
-                         */Assets/Plugins/* \
-                         */Assets/Resources/* \
-                         */Assets/Samples/* \
-                         */Assets/Scenes/* \
-                         */Assets/Scripts/Editor/*
+                         */Runtime/Ignore/* \
+                         */Runtime/Plugins/* \
+                         */Runtime/Resources/* \
+                         */Runtime/Samples/* \
+                         */Runtime/Editor/* \
+                         */Runtime/Attributes/* \
+                         */Runtime/Icons/* \
+                         */Runtime/Packages/* \
+                         */Samples/* \
 
 # The EXCLUDE_SYMBOLS tag can be used to specify one or more symbol names
 # (namespaces, classes, functions, etc.) that should be excluded from the

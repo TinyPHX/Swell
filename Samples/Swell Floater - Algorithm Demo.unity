@@ -1473,13 +1473,13 @@ MonoBehaviour:
         height: 0
       index: 489
       length: 17
-    - name: null (5916551)
+    - name: Swell Floater - Algorithm Demo (5916551)
       objectId: 5916551
-      objectRef: {fileID: 0}
+      objectRef: {fileID: 102900000, guid: 38f316e91e519d94b80cee3871b8ac4c, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 129
-        y: 543
+        y: 573
         width: 119
         height: 15
       absoluteFieldRect:
@@ -1490,13 +1490,13 @@ MonoBehaviour:
         height: 15
       index: 1150
       length: 17
-    - name: null (6719986)
+    - name: Swell Floater - Buoyancy Demo (6719986)
       objectId: 6719986
-      objectRef: {fileID: 0}
+      objectRef: {fileID: 102900000, guid: 39d2784cf84bbc3409ad9d7bc3f6955a, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 133
-        y: 558
+        y: 588
         width: 120
         height: 15
       absoluteFieldRect:
@@ -1507,13 +1507,13 @@ MonoBehaviour:
         height: 15
       index: 1187
       length: 17
-    - name: null (5732124)
+    - name: Swell Floater - Props Demo (5732124)
       objectId: 5732124
-      objectRef: {fileID: 0}
+      objectRef: {fileID: 102900000, guid: 658b12027396d044ab2df6034ba23168, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 108
-        y: 573
+        y: 603
         width: 122
         height: 15
       absoluteFieldRect:
@@ -1524,13 +1524,13 @@ MonoBehaviour:
         height: 15
       index: 1221
       length: 17
-    - name: null (3483540)
+    - name: Swell Floater - Stress Test (3483540)
       objectId: 3483540
-      objectRef: {fileID: 0}
+      objectRef: {fileID: 102900000, guid: 5ff1badc60606bb47a12578ba0367304, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 103
-        y: 588
+        y: 618
         width: 126
         height: 15
       absoluteFieldRect:
@@ -1541,13 +1541,13 @@ MonoBehaviour:
         height: 15
       index: 1256
       length: 17
-    - name: null (3185053)
+    - name: Swell Water - Matrial Demo (3185053)
       objectId: 3185053
-      objectRef: {fileID: 0}
+      objectRef: {fileID: 102900000, guid: 237a413650e9a3040948d6fdf77895da, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 115
-        y: 618
+        y: 648
         width: 123
         height: 15
       absoluteFieldRect:
@@ -1558,13 +1558,13 @@ MonoBehaviour:
         height: 15
       index: 1307
       length: 17
-    - name: null (3621044)
+    - name: Swell Water - Ocean Demo (3621044)
       objectId: 3621044
-      objectRef: {fileID: 0}
+      objectRef: {fileID: 102900000, guid: 251923d8356a20049a6dfa088b4fd105, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 113
-        y: 633
+        y: 663
         width: 124
         height: 15
       absoluteFieldRect:
@@ -1575,13 +1575,13 @@ MonoBehaviour:
         height: 15
       index: 1341
       length: 17
-    - name: null (8661545)
+    - name: Swell Water - Realistic Water Demo (8661545)
       objectId: 8661545
-      objectRef: {fileID: 0}
+      objectRef: {fileID: 102900000, guid: ce639b1658e4693418e23c4877e0926a, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 160
-        y: 648
+        y: 678
         width: 121
         height: 15
       absoluteFieldRect:
@@ -1592,13 +1592,13 @@ MonoBehaviour:
         height: 15
       index: 1385
       length: 17
-    - name: null (1445508)
+    - name: Swell Water - River Demo (1445508)
       objectId: 1445508
-      objectRef: {fileID: 0}
+      objectRef: {fileID: 102900000, guid: baa6f78ccb7c8464ba75a9a19ed23e67, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 105
-        y: 663
+        y: 693
         width: 123
         height: 15
       absoluteFieldRect:
@@ -1609,13 +1609,13 @@ MonoBehaviour:
         height: 15
       index: 1419
       length: 17
-    - name: null (3069406)
+    - name: Swell Waves - Wave Types Demo (3069406)
       objectId: 3069406
-      objectRef: {fileID: 0}
+      objectRef: {fileID: 102900000, guid: 5c64cdee996a00e4dafd3e1b550b16d2, type: 3}
       fieldRect:
         serializedVersion: 2
         x: 146
-        y: 693
+        y: 723
         width: 125
         height: 15
       absoluteFieldRect:
