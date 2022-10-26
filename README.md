@@ -1,8 +1,8 @@
 #  Swell
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jothepro/doxygen-awesome-css)](https://github.com/TinyPHX/Swell/releases/latest)
-[![GitHub](https://img.shields.io/github/license/jothepro/doxygen-awesome-css)](https://github.com/jothepro/doxygen-awesome-css/blob/main/LICENSE)
-![GitHub Repo stars](https://img.shields.io/github/stars/jothepro/doxygen-awesome-css)
+[//]: # ([![GitHub release &#40;latest by date&#41;]&#40;https://img.shields.io/github/v/release/jothepro/doxygen-awesome-css&#41;]&#40;https://github.com/TinyPHX/Swell/releases/latest&#41;)
+[//]: # ([![GitHub]&#40;https://img.shields.io/github/license/jothepro/doxygen-awesome-css&#41;]&#40;https://github.com/jothepro/doxygen-awesome-css/blob/main/LICENSE&#41;)
+[//]: # (![GitHub Repo stars]&#40;https://img.shields.io/github/stars/jothepro/doxygen-awesome-css&#41;)
 
 ![](https://imgur.com/htcJB5A.png)
 
@@ -50,13 +50,13 @@ grid at the cent
 
 ![](https://imgur.com/HecvMXT.png)
 
-![](docs/images/swell_wave_icon_22.png) **SwellWave**
+![](Documentation/images/swell_wave_icon_22.png) **SwellWave**
 
 SwellWave lets you add any of several types of waves. They are all real time and fully customizable. 
 
 ![](https://imgur.com/7x7ehMg.png)
 
-![](docs/images/swell_floater_icon_22.png) **SwellFloater**
+![](Documentation/images/swell_floater_icon_22.png) **SwellFloater**
 
 Floaters can be attached to any regular Unity RigidBody3D to make it float!
 
@@ -91,7 +91,7 @@ Lastly thanks to the Doxigen team and creator of Doxygen Awesome which was a tre
 
 <span class="next_section_button">
 
-Read Next: [Unity Demo Scenes](../../../docs/demos.md)
+Read Next: [Unity Demo Scenes](Documentation/demos.md)
 </span>
 
 
